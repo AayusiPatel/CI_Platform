@@ -1,0 +1,20 @@
+html {
+    box-sizing: border-box;
+}
+
+@media screen and (min-device-width:768px) {
+    .abc {
+        height: 100vh;
+        width: 100%;
+    }
+    .mform {
+        margin-top: auto;
+        margin-bottom: auto;
+        max-height: 100vh;
+    }
+}
+
+.mform {
+    margin-top: auto;
+    margin-bottom: auto;
+}
