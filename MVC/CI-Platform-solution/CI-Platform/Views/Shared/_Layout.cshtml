@@ -9,45 +9,101 @@
     <link rel="stylesheet" href="~/CI_Platform.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+   
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i class="bi bi-menu-button-wide"></i></span>
+          </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 abc">
+
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark" href="#">Stories</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Policy
+                </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="./img/user-img.png" class="profile-nav" alt=""> Evan Donohue
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                    <ul class="dropdown-menu me-5">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
             </div>
-    </nav>
+        </nav>
+        <div class="row  border-top border-bottom">
+            <div class="col-6 ">
+                <form class="d-flex mt-md-3" role="search">
+                    <i class="bi bi-search mt-2 ms-2"></i>
+                    <input class="form-control border-white" type="search" placeholder="Search Mission " aria-label="Search">
+                    </form>
+            </div>
+            <div class="col-6 ">
+                <button class="btn btn-primary d-md-none w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Filter Missions 
+              </button>
+                </p>
+                <div class="collapse d-md-flex " id="collapseExample">
+                    <select class="form-select  border-white xyz" aria-label="Default select example">
+                    <option selected>Country</option>
+                    <option value="1">India</option>
+                    <option value="2">US</option>
+                    <option value="3">UK</option>
+                  </select>
+                    <select class="form-select border-white xyz" aria-label="Default select example">
+                    <option selected>City</option>
+                    <option value="1">Ahemadabad</option>
+                    <option value="2">New York</option>
+                    <option value="3">London</option>
+                  </select>
+                    <select class="form-select  border-white xyz" aria-label="Default select example">
+                    <option selected>Theme</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                    <select class="form-select  border-white xyz" aria-label="Default select example">
+                    <option selected>Skills</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+
+
+            </div>
+        </div>
+       
+      
+         
+          </div>
+
+
+
+    <!--.............Page Body..............-->
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
