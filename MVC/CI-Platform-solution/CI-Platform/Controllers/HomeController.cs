@@ -18,10 +18,24 @@ namespace CI_Platform.Controllers
             return View();
         }
 
+        public IActionResult Gridview()
+        {
+            return View();
+        }
+
+        public IActionResult ListView()
+        {
+            return View();
+        }
+        public IActionResult Volunteering_Mission()
+        {
+            return View();
+        }
         public IActionResult day1()
         {
             return View();
         }
+
         public IActionResult ForgotPwd()
         {
             return View();
