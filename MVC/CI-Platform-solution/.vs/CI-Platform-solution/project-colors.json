@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "53e8cc68-0345-4f1d-af09-e53ab52c5b98": {
+      "ProjectGuid": "53e8cc68-0345-4f1d-af09-e53ab52c5b98",
+      "DisplayName": "CI-Platform",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 1
+}
