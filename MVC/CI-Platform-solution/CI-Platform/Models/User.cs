@@ -25,9 +25,9 @@ public partial class User
 
     public string? Department { get; set; }
 
-    public long CityId { get; set; }
+    public long? CityId { get; set; }
 
-    public long CountryId { get; set; }
+    public long? CountryId { get; set; }
 
     public string? ProfileText { get; set; }
 
@@ -35,11 +35,15 @@ public partial class User
 
     public string? Title { get; set; }
 
-    public bool Status { get; set; }
+    public bool? Status { get; set; }
 
     public byte[] CreatedAt { get; set; } = null!;
 
     public DateTime? UpdatedAt { get; set; }
 
     public DateTime? DeletedAt { get; set; }
+
+    public virtual City? City { get; set; }
+
+    public virtual Country? Country { get; set; }
 }

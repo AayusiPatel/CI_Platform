@@ -10,7 +10,7 @@ namespace CI_Platform.Controllers
 
         public UserController(CiPlatformContext db)
         {
-            _db= db;
+            _db = db;
         }
         public IActionResult Registration()
         {
@@ -22,7 +22,7 @@ namespace CI_Platform.Controllers
         public IActionResult Registration(User obj)
         {
             _db.Users.Add(obj);
-             _db.SaveChanges();
+            _db.SaveChanges();
             return View();
         }
     }

@@ -8,69 +8,69 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CI_Platform
 build_property.RootNamespace = CI_Platform
-build_property.ProjectDir = C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\
+build_property.ProjectDir = c:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform
+build_property.MSBuildProjectDirectory = c:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/day1.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/day1.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxkYXkxLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/ForgotPwd.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/ForgotPwd.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxGb3Jnb3RQd2QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/GridView.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/GridView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxHcmlkVmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/Index.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/ListView.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/ListView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMaXN0Vmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/No_Mission_Found.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/No_Mission_Found.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOb19NaXNzaW9uX0ZvdW5kLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/Privacy.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/ResetPwd.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/ResetPwd.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZXNldFB3ZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/Volunteering_Mission.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/Volunteering_Mission.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxWb2x1bnRlZXJpbmdfTWlzc2lvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Shared/Error.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Shared/_ValidationScriptsPartial.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/User/Registration.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/User/Registration.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxSZWdpc3RyYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/_ViewImports.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/_ViewStart.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Shared/_Layout.cshtml]
+[c:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-z4picm1zyd
