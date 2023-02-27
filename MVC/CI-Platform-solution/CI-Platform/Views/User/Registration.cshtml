@@ -1,4 +1,6 @@
-﻿@{
+﻿@model CI_Platform.Entities.Models.User
+
+@{
     ViewData["Title"] = "Forgot Password Page";
     Layout = null;
 }
@@ -72,24 +74,24 @@
             <form method="post" class="mform" >
                 <div class=" form-group ">
 
-                    <label for="exampleFormControlInput1 ">First Name</label>
-                    <input type="text " class="form-control  " id="exampleFormControlInput1 " placeholder="First Name " required>
+                    <label asp-for="FirstName" for="exampleFormControlInput1 ">First Name</label>
+                    <input asp-for="FirstName" type="text " class="form-control  " id="exampleFormControlInput1 " placeholder="First Name " required>
                 </div>
                 <div class="form-group ">
-                    <label for="exampleFormControlInput1 ">Last Name</label>
-                    <input type="text " class="form-control " id="exampleFormControlInput1 " placeholder="Lastname " required>
+                    <label asp-for="LastName" for="exampleFormControlInput1 ">Last Name</label>
+                    <input asp-for="LastName" type="text " class="form-control " id="exampleFormControlInput1 " placeholder="Lastname " required>
                 </div>
                 <div class="form-group ">
-                    <label for="exampleFormControlInput1 ">Phone Number</label>
-                    <input type="tel " class="form-control " id="phone " placeholder="1234567890" @*pattern="[0-9]{10} " required *@ >
+                    <label asp-for="PhoneNumber" for="exampleFormControlInput1 ">Phone Number</label>
+                    <input asp-for="PhoneNumber"type="tel " class="form-control " id="phone " placeholder="1234567890"  >
                 </div>
                 <div class="form-group ">
-                    <label for="exampleInputEmail1 "> Email address </label>
-                    <input type="email " class="form-control " id="exampleInputEmail1 " aria-label="Large " aria-describedby="emailHelp " placeholder="evan.donohue@gmail.com " required>
+                    <label asp-for="Email"  for="exampleInputEmail1 "> Email address </label>
+                    <input asp-for="Email" type="email " class="form-control " id="exampleInputEmail1 " aria-label="Large " aria-describedby="emailHelp " placeholder="evan.donohue@gmail.com " required>
                 </div>
                 <div class="form-group ">
-                    <label for="exampleInputPassword1 ">Password </label>
-                    <input type="password " class="form-control " id="exampleInputPassword1 " placeholder="********** " required>
+                    <label asp-for="Password" for="exampleInputPassword1 ">Password </label>
+                    <input asp-for="Password" type="password " class="form-control " id="exampleInputPassword1 " placeholder="********** " required>
                 </div>
                 <br>
                 <button type="submit " class="btn btn-outline-danger w-100 rounded-pill "> Register </button>
@@ -103,7 +105,7 @@
                         Already registered? <a href="~/Home/Index" class="text-decoration-none "> Login now </a>
                     </p>
                 </div>
-            </form>
+          </form>
             <a href="# " class="text-reset text-decoration-none ">
                 <p class="text-center">
                     <label for="privacyPolicy ">Privacy Policy </label>

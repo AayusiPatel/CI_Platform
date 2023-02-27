@@ -21,7 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
+    <ProjectReference Include="..\CI_Platform.Entities\CI_Platform.Entities.csproj" />
+    <ProjectReference Include="..\CI_Platform.Repository\CI_Platform.Repository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,12 @@
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\bin\Debug\net6.0\CI_Platform.Repository.deps.json
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\bin\Debug\net6.0\CI_Platform.Repository.dll
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\bin\Debug\net6.0\ref\CI_Platform.Repository.dll
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\bin\Debug\net6.0\CI_Platform.Repository.pdb
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\obj\Debug\net6.0\CI_Platform.Repository.csproj.AssemblyReference.cache
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\obj\Debug\net6.0\CI_Platform.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\obj\Debug\net6.0\CI_Platform.Repository.AssemblyInfoInputs.cache
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\obj\Debug\net6.0\CI_Platform.Repository.AssemblyInfo.cs
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\obj\Debug\net6.0\CI_Platform.Repository.csproj.CoreCompileInputs.cache
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\obj\Debug\net6.0\CI_Platform.Repository.dll
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\obj\Debug\net6.0\ref\CI_Platform.Repository.dll
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\obj\Debug\net6.0\CI_Platform.Repository.pdb

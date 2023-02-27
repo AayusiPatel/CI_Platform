@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using CI_Platform.Models;
+using CI_Platform.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CI_Platform.Data;
+namespace CI_Platform.Entities.Data;
 
 public partial class CiPlatformContext : DbContext
 {
@@ -24,21 +24,21 @@ public partial class CiPlatformContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=PCI116\\SQL2017;DataBase=CI_Platform;User ID=sa;Password=Tatva@123;  Encrypt=False;");
+        => optionsBuilder.UseSqlServer("Data Source=PCI116\\SQL2017;DataBase=CI_Platform;User ID=sa;Password=Tatva@123;Encrypt=False;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<City>(entity =>
         {
-            entity.HasKey(e => e.CityId).HasName("PK__city__031491A8561D210B");
+            entity.HasKey(e => e.CityId).HasName("PK__city__031491A88334DE86");
 
             entity.ToTable("city");
 
             entity.Property(e => e.CityId).HasColumnName("city_id");
             entity.Property(e => e.CountryId).HasColumnName("country_id");
             entity.Property(e => e.CreatedAt)
-                .IsRowVersion()
-                .IsConcurrencyToken()
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
                 .HasColumnName("created_at");
             entity.Property(e => e.DeletedAt)
                 .HasColumnType("datetime")
@@ -53,19 +53,20 @@ public partial class CiPlatformContext : DbContext
 
             entity.HasOne(d => d.Country).WithMany(p => p.Cities)
                 .HasForeignKey(d => d.CountryId)
-                .HasConstraintName("FK__city__country_id__440B1D61");
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_city_country");
         });
 
         modelBuilder.Entity<Country>(entity =>
         {
-            entity.HasKey(e => e.CountryId).HasName("PK__country__7E8CD055E834FE37");
+            entity.HasKey(e => e.CountryId).HasName("PK__country__7E8CD055FE27D3B4");
 
             entity.ToTable("country");
 
             entity.Property(e => e.CountryId).HasColumnName("country_id");
             entity.Property(e => e.CreatedAt)
-                .IsRowVersion()
-                .IsConcurrencyToken()
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
                 .HasColumnName("created_at");
             entity.Property(e => e.DeletedAt)
                 .HasColumnType("datetime")
@@ -85,7 +86,7 @@ public partial class CiPlatformContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__user__B9BE370F6A2E515A");
+            entity.HasKey(e => e.UserId).HasName("PK__user__B9BE370F2175DB69");
 
             entity.ToTable("user");
 
@@ -97,8 +98,8 @@ public partial class CiPlatformContext : DbContext
             entity.Property(e => e.CityId).HasColumnName("city_id");
             entity.Property(e => e.CountryId).HasColumnName("country_id");
             entity.Property(e => e.CreatedAt)
-                .IsRowVersion()
-                .IsConcurrencyToken()
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
                 .HasColumnName("created_at");
             entity.Property(e => e.DeletedAt)
                 .HasColumnType("datetime")
@@ -149,14 +150,6 @@ public partial class CiPlatformContext : DbContext
             entity.Property(e => e.WhyIVolunteer)
                 .HasColumnType("text")
                 .HasColumnName("why_i_volunteer");
-
-            entity.HasOne(d => d.City).WithMany(p => p.Users)
-                .HasForeignKey(d => d.CityId)
-                .HasConstraintName("FK__user__city_id__4E88ABD4");
-
-            entity.HasOne(d => d.Country).WithMany(p => p.Users)
-                .HasForeignKey(d => d.CountryId)
-                .HasConstraintName("FK__user__country_id__4F7CD00D");
         });
 
         OnModelCreatingPartial(modelBuilder);

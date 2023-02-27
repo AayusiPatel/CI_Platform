@@ -1,4 +1,6 @@
-﻿using CI_Platform.Data;
+﻿
+using CI_Platform.Entities.Data;
+using CI_Platform.Entities.Models;
 using CI_Platform.Models;
 using Microsoft.AspNetCore.Mvc;
 

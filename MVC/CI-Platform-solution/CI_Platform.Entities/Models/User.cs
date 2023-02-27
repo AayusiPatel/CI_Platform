@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CI_Platform.Models;
+namespace CI_Platform.Entities.Models;
 
 public partial class User
 {
@@ -15,7 +15,7 @@ public partial class User
 
     public string Password { get; set; } = null!;
 
-    public int PhoneNumber { get; set; }
+    public long PhoneNumber { get; set; }
 
     public string? Avatar { get; set; }
 
@@ -37,13 +37,9 @@ public partial class User
 
     public bool? Status { get; set; }
 
-    public byte[] CreatedAt { get; set; } = null!;
+    public DateTime CreatedAt { get; set; }
 
     public DateTime? UpdatedAt { get; set; }
 
     public DateTime? DeletedAt { get; set; }
-
-    public virtual City? City { get; set; }
-
-    public virtual Country? Country { get; set; }
 }
