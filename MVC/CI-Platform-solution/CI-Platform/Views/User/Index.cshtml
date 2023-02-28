@@ -1,4 +1,5 @@
-﻿@{
+﻿@model CI_Platform.Entities.Models.User
+@{
     ViewData["Title"] = "Home Page";
     Layout = null;
 }
@@ -67,16 +68,17 @@
     <div class="col-md-auto col-sm-12 d-flex flex-column justify-content:Space-between p-5 pb-0 ">
 
         <br>
-        <form action="~/Home/day1" class="mform">
+        <form  class="mform">
             <div class=" form-group ">
                 <label for="exampleInputEmail1 "> Email address </label>
-                <input type="email " class="form-control " id="exampleInputEmail1 " aria-label="Large " aria-describedby="emailHelp " placeholder="evan.donohue@gmail.com " required>
+                <input asp-for="Email"  type="email " class="form-control " id="exampleInputEmail1 " aria-label="Large " aria-describedby="emailHelp " placeholder="evan.donohue@gmail.com " required>
+                <span asp-validation-for="Email"></span>
             </div>
             <br>
             <div class="form-group ">
                 <label for="exampleInputPassword1 ">Password </label>
 
-                <input type="password " class="form-control form-control-sm " id="exampleInputPassword1 " placeholder="********** " required>
+                <input asp-for="Password" type="password" class="form-control form-control-sm " id="exampleInputPassword1 " placeholder="********** " required>
             </div>
             <br>
             <button type="submit " class="btn btn-outline-danger w-100 rounded-pill "> Sign in </button>

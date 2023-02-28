@@ -27,5 +27,16 @@ namespace CI_Platform.Controllers
             _db.SaveChanges();
             return View();
         }
+        public IActionResult Index()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Index(User obj)
+        {
+            if (_db.Users.Any(u => u.Email == obj.Email && u.Password == obj.Password))
+            { return RedirectToAction("GridView", "Home"); }
+            return View();
+        }
     }
 }

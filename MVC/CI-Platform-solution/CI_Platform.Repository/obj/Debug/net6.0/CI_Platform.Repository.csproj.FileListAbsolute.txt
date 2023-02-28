@@ -10,3 +10,8 @@ C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solutio
 C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\obj\Debug\net6.0\CI_Platform.Repository.dll
 C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\obj\Debug\net6.0\ref\CI_Platform.Repository.dll
 C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\obj\Debug\net6.0\CI_Platform.Repository.pdb
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\bin\Debug\net6.0\CI_Platform.Repository.runtimeconfig.json
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\bin\Debug\net6.0\CI_Platform.Entities.dll
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\bin\Debug\net6.0\CI_Platform.Entities.pdb
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\obj\Debug\net6.0\CI_Platform.Repository.csproj.CopyComplete
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Repository\obj\Debug\net6.0\CI_Platform.Repository.genruntimeconfig.cache

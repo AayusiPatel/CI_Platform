@@ -94,7 +94,7 @@
                     <input asp-for="Password" type="password " class="form-control " id="exampleInputPassword1 " placeholder="********** " required>
                 </div>
                 <br>
-                <button type="submit " class="btn btn-outline-danger w-100 rounded-pill "> Register </button>
+                <button type="submit " asp-action="Registration" class="btn btn-outline-danger w-100 rounded-pill "> Register </button>
 
 
                 <a href="~/Home/ForgotPwd" class="text-reset text-decoration-none  ">
@@ -102,7 +102,7 @@
                 </a>
                 <div class="sign-up ">
                     <p class="text-center ">
-                        Already registered? <a href="~/Home/Index" class="text-decoration-none "> Login now </a>
+                        Already registered? <a href="~/User/Index" class="text-decoration-none "> Login now </a>
                     </p>
                 </div>
           </form>

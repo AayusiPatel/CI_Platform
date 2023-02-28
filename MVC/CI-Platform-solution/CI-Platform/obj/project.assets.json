@@ -3260,6 +3260,10 @@
       "CI_Platform.Repository/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "CI_Platform.Entities": "1.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.3"
+        },
         "compile": {
           "bin/placeholder/CI_Platform.Repository.dll": {}
         },

@@ -20,6 +20,8 @@ public partial class CiPlatformContext : DbContext
 
     public virtual DbSet<Country> Countries { get; set; }
 
+    public virtual DbSet<Try> Tries { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -82,6 +84,22 @@ public partial class CiPlatformContext : DbContext
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("datetime")
                 .HasColumnName("updated_at");
+        });
+
+        modelBuilder.Entity<Try>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("try");
+
+            entity.Property(e => e.Col1)
+                .HasMaxLength(10)
+                .IsFixedLength()
+                .HasColumnName("col-1");
+            entity.Property(e => e.Col2)
+                .HasMaxLength(10)
+                .IsFixedLength()
+                .HasColumnName("col-2");
         });
 
         modelBuilder.Entity<User>(entity =>
