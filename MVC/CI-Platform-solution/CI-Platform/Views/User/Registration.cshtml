@@ -1,4 +1,4 @@
-﻿@model CI_Platform.Entities.Models.User
+﻿@model CI_Platform.Models.ViewUser
 
 @{
     ViewData["Title"] = "Forgot Password Page";
@@ -75,29 +75,33 @@
                 <div class=" form-group ">
 
                     <label asp-for="FirstName" for="exampleFormControlInput1 ">First Name</label>
-                    <input asp-for="FirstName" type="text " class="form-control  " id="exampleFormControlInput1 " placeholder="First Name " required>
+                    <input asp-for="FirstName" type="text" class="form-control  " id="exampleFormControlInput1 " placeholder="First Name " required>
                 </div>
                 <div class="form-group ">
                     <label asp-for="LastName" for="exampleFormControlInput1 ">Last Name</label>
-                    <input asp-for="LastName" type="text " class="form-control " id="exampleFormControlInput1 " placeholder="Lastname " required>
+                    <input asp-for="LastName" type="text" class="form-control " id="exampleFormControlInput1 " placeholder="Lastname " required>
                 </div>
                 <div class="form-group ">
                     <label asp-for="PhoneNumber" for="exampleFormControlInput1 ">Phone Number</label>
-                    <input asp-for="PhoneNumber"type="tel " class="form-control " id="phone " placeholder="1234567890"  >
+                    <input asp-for="PhoneNumber"type="tel" class="form-control " id="phone " placeholder="1234567890"  >
                 </div>
                 <div class="form-group ">
                     <label asp-for="Email"  for="exampleInputEmail1 "> Email address </label>
-                    <input asp-for="Email" type="email " class="form-control " id="exampleInputEmail1 " aria-label="Large " aria-describedby="emailHelp " placeholder="evan.donohue@gmail.com " required>
+                    <input asp-for="Email" type="email" class="form-control " id="exampleInputEmail1 " aria-label="Large " aria-describedby="emailHelp " placeholder="evan.donohue@gmail.com " required>
                 </div>
                 <div class="form-group ">
                     <label asp-for="Password" for="exampleInputPassword1 ">Password </label>
-                    <input asp-for="Password" type="password " class="form-control " id="exampleInputPassword1 " placeholder="********** " required>
+                    <input asp-for="Password" type="password" class="form-control " id="exampleInputPassword1 " placeholder="********** " required>
+                </div>
+                 <div class="form-group ">
+                    <label asp-for="ConfirmPassword" for="exampleInputPassword1 ">Confirm Password </label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-control " id="exampleInputPassword1 " placeholder="********** " required>
                 </div>
                 <br>
-                <button type="submit " asp-action="Registration" class="btn btn-outline-danger w-100 rounded-pill "> Register </button>
+                <button type="submit"  class="btn btn-outline-danger w-100 rounded-pill "> Register </button>
 
 
-                <a href="~/Home/ForgotPwd" class="text-reset text-decoration-none  ">
+                <a href="~/User/ForgotPwd" class="text-reset text-decoration-none  ">
                     <p class="text-center lh-lg pt-2"> Lost your password? </p>
                 </a>
                 <div class="sign-up ">

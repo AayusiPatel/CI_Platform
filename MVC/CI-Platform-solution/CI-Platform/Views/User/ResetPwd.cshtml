@@ -1,4 +1,6 @@
-﻿@{
+﻿@model CI_Platform.Models.ViewUser;
+
+@{
     ViewData["Title"] = "Forgot Password Page";
     Layout = null;
 }
@@ -78,13 +80,13 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1 ">Password </label>
 
-                    <input type="password " class="form-control form-control-sm " id="exampleInputPassword1 " placeholder="********** ">
+                    <input asp-for="Password" type="password" class="form-control form-control-sm " id="exampleInputPassword1 " placeholder="********** ">
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="exampleInputPassword1 ">Confirm New Password </label>
 
-                    <input type="password " class="form-control form-control-sm " id="exampleInputPassword1 " placeholder="********** ">
+                    <input asp-for="ConfirmPassword" type="password" class="form-control form-control-sm " id="exampleInputPassword1 " placeholder="********** ">
                 </div>
                 <br>
                 <button type="submit" class="btn btn-outline-danger w-100 rounded-pill"> Reset my Password </button>
@@ -92,7 +94,7 @@
 
 
                 <br>
-                <a href="~/Home/Index" class="text-decoration-none ">
+                <a href="~/User/Index" class="text-decoration-none ">
                     <p class="text-center ">Login </p>
                 </a>
 

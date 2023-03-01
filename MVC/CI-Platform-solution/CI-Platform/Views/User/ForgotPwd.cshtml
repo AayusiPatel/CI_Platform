@@ -1,4 +1,5 @@
-﻿@{
+﻿@model CI_Platform.Models.ViewUser
+@{
     ViewData["Title"] = "Forgot Password Page";
     Layout = null;
 }
@@ -69,24 +70,25 @@
         </div>
         <div class="col-md-5 col-lg-4 col-sm-12 d-flex flex-column justify-content:Space-between p-5 pb-0">
             <br>
-            <form action="~/Home/ResetPwd" class="mform">
+            <form action="~/User/ResetPwd" class="mform">
+                <input asp-for="Email" type="hidden" value=@ViewBag.abc />
                 <h1 class=" text-center ">Forgot Password</h1>
                 <p class="text-center ">Enter your email address you've using for your account below and we will send you a password reset link</p>
 
                 <br>
                 <div class="form-group ">
                     <label for="exampleInputEmail1 "> Email Address </label>
-                    <input type="email " class="form-control form-control-sm pl-5 " id="exampleInputEmail1 " aria-describedby="emailHelp " placeholder="Enter your email address... ">
+                    <input  asp-for="Email" type="email" class="form-control form-control-sm pl-5 " id="exampleInputEmail1 " aria-describedby="emailHelp " placeholder="Enter your email address... ">
                 </div>
                 <br>
 
                 <br>
-                <button type="submit " class="btn btn-outline-danger w-100 rounded-pill "> Reset my Password </button>
+                <button type="submit" class="btn btn-outline-danger w-100 rounded-pill "> Reset my Password </button>
                 <br>
 
 
                 <br>
-                <a href="~/Home/Index " class="text-decoration-none mb-md-5 ">
+                <a href="~/User/Index " class="text-decoration-none mb-md-5 ">
                     <p class="text-center ">Login </p>
                 </a>
 

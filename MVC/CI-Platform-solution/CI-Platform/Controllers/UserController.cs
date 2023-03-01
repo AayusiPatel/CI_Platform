@@ -1,41 +1,98 @@
-﻿
+﻿using System;
 using CI_Platform.Entities.Data;
 using CI_Platform.Entities.Models;
 using CI_Platform.Models;
+using CI_Platform.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
+using WebMatrix.WebData;
 
 namespace CI_Platform.Controllers
 {
     public class UserController : Controller
     {
-        private readonly CiPlatformContext _db;
 
-        public UserController(CiPlatformContext db)
+        public readonly IUserRepository _userRepository;
+        public readonly CiPlatformContext _db;
+
+        public UserController(IUserRepository userRepository, CiPlatformContext db)
         {
+
+            _userRepository = userRepository;
             _db = db;
         }
+
         public IActionResult Registration()
         {
             return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Registration(User obj)
+        //[ValidateAntiForgeryToken]
+        public IActionResult Registration(ViewUser obj)
         {
-            _db.Users.Add(obj);
-            _db.SaveChanges();
+           
+            User user = new User();
+            {
+                    user.FirstName = obj.FirstName;
+                     user.LastName  = obj.LastName;
+                    user.Email  = obj.Email;
+                    user.Password = obj.Password;
+                    user.PhoneNumber = obj.PhoneNumber;
+            }
+            _userRepository.Registration(user);
+
             return View();
         }
         public IActionResult Index()
         {
             return View();
         }
-        [HttpGet]
+        [HttpPost]
         public IActionResult Index(User obj)
         {
-            if (_db.Users.Any(u => u.Email == obj.Email && u.Password == obj.Password))
-            { return RedirectToAction("GridView", "Home"); }
+            if(_userRepository.Login(obj))
+                 return RedirectToAction("GridView","Home");
+            return View();
+
+        }
+        public IActionResult ForgotPwd()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPwd(ViewUser obj)
+        { 
+            return RedirectToAction("ResetPwd" , "User" , new { abc = obj.Email });
+        //    if (ModelState.IsValid)
+        //    {
+        //        User user = new User();
+        //        {
+        //            user.FirstName = obj.FirstName;
+        //            user.LastName = obj.LastName;
+        //            user.Email = obj.Email;
+        //            user.Password = obj.Password;
+        //            user.PhoneNumber = obj.PhoneNumber;
+        //        }
+
+        //    }
+        //    return View();
+    }
+
+        public IActionResult ResetPwd()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ResetPwd(ViewUser obj)
+        {
+            User user = new User();
+            {
+                user.Email = obj.Email;
+                user.Password = obj.Password;
+               
+            }
+            _userRepository.ResetPwd(user);
             return View();
         }
     }

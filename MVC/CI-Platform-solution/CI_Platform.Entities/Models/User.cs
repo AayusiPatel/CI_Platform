@@ -42,4 +42,22 @@ public partial class User
     public DateTime? UpdatedAt { get; set; }
 
     public DateTime? DeletedAt { get; set; }
+
+    public virtual ICollection<Comment> Comments { get; } = new List<Comment>();
+
+    public virtual ICollection<FavoriteMission> FavoriteMissions { get; } = new List<FavoriteMission>();
+
+    public virtual ICollection<MissionApplication> MissionApplications { get; } = new List<MissionApplication>();
+
+    public virtual ICollection<MissionInvite> MissionInviteFromUsers { get; } = new List<MissionInvite>();
+
+    public virtual ICollection<MissionInvite> MissionInviteToUsers { get; } = new List<MissionInvite>();
+
+    public virtual ICollection<MissionRating> MissionRatings { get; } = new List<MissionRating>();
+
+    public virtual ICollection<Story> Stories { get; } = new List<Story>();
+
+    public virtual ICollection<Timesheet> Timesheets { get; } = new List<Timesheet>();
+
+    public virtual ICollection<UserSkill> UserSkills { get; } = new List<UserSkill>();
 }

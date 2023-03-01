@@ -9,12 +9,12 @@ namespace CI_Platform.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IUserRepository _userRepository;
-        public HomeController(ILogger<HomeController> logger, IUserRepository _userRepository)
+        
+        public readonly IUserRepository _userRepository;
+        public HomeController( IUserRepository userRepository)
         {
-            _logger = logger;
-            _userRepository = _userRepository;
+           
+            _userRepository = userRepository;
         }
 
         public IActionResult Index()
@@ -26,40 +26,9 @@ namespace CI_Platform.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Registration(User obj)
-        //{
-        //    _userRepository.Users.Add(obj);
-        //    _userRepository.SaveChanges();
-        //    return View();
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Registration(User obj)
-        //{
-        //    //     if (obj == null)
-        //    //         return BadRequest("Model is null");
-
-        //    User user = new User()
-        //    {
-        //        FirstName = obj.FirstName,
-        //        LastName = obj.LastName,
-        //        Email = obj.Email,
-        //        Password = obj.Password,
-        //        PhoneNumber = obj.PhoneNumber,
-
-        //    };
-        //    if (obj.Email != null && obj.Password != null)
-        //    {
-        //        _userRepository.Registration(user);
-        //        //     //User user = new User(response);
-
-        //        //     //return Ok(bookModel);
-        //        return RedirectToAction("Index", "Home");
-        //            }
-        //    return View();
-        //}
+     
+      
+       
         public IActionResult Gridview()
         {
             return View();
