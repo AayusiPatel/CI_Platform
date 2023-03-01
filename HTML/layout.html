@@ -29,88 +29,233 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon">Menu</span>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i class="bi bi-menu-button-wide"></i></span>
           </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 abc">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 abc">
 
-                    <li class="nav-item ">
-                        <a class="nav-link text-dark" href="#">Stories</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <li class="nav-item ">
+                            <a class="nav-link text-dark" href="#">Stories</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Policy
                 </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
 
-                </ul>
+                    </ul>
 
+                </div>
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="./img/user-img.png" class="profile-nav" alt=""> Evan Donohue
+                    </a>
+                    <ul class="dropdown-menu me-5">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="./img/user-img.png" class="profile-nav" alt=""> Evan Donohue
-                </a>
-                <ul class="dropdown-menu me-5">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+        </nav>
+
+        <div class="row mb-3 border-top border-bottom">
+            <div class="col-6 ">
+                <form class="d-flex mt-md-3" role="search">
+                    <i class="bi bi-search mt-2"></i>
+                    <input class="form-control border-white" type="search" placeholder="Search Mission " aria-label="Search">
             </div>
-        </div>
-    </nav>
-    <div class="container-fluid row ">
-        <div class="col-6 ">
-            <form class="d-flex" role="search">
-                <i class="bi bi-search mt-1"></i>
-                <input class="form-control mx-2 border-white" type="search" placeholder="Search Mission " aria-label="Search">
-        </div>
-        <div class="col-6 ">
-            <button class="btn btn-primary d-md-none w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <div class="col-6 ">
+                <button class="btn btn-primary d-md-none w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 Filter Missions 
               </button>
-            </p>
-            <div class="collapse d-md-flex align-items-start " id="collapseExample">
-                <select class="form-select  border-white xyz" aria-label="Default select example">
+                </p>
+                <div class="collapse d-md-flex " id="collapseExample">
+                    <select class="form-select  border-white xyz" aria-label="Default select example">
                     <option selected>Country</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                   </select>
-                <select class="form-select border-white xyz" aria-label="Default select example">
+                    <select class="form-select border-white xyz" aria-label="Default select example">
                     <option selected>City</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                   </select>
-                <select class="form-select  border-white xyz" aria-label="Default select example">
+                    <select class="form-select  border-white xyz" aria-label="Default select example">
                     <option selected>Theme</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                   </select>
-                <select class="form-select  border-white xyz" aria-label="Default select example">
+                    <select class="form-select  border-white xyz" aria-label="Default select example">
                     <option selected>Skills</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                   </select>
+                </div>
+
+
             </div>
+        </div>
+    </div>
+    <div class="container-fluid row">
+        <div class="col-10">
+            <h3>Explore 72 Missions</h3>
+        </div>
+        <div class="col-1">
+            <select class="form-select " aria-label="Default select example">
+                <option selected>Sort By</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+                </select>
+            <i class="bi bi-grid-fill"></i>
+            <i class="bi bi-list"></i>
+        </div>
+        <div class="col-1">
+            <i class="bi bi-grid-fill"></i>
+            <i class="bi bi-list"></i>
+        </div>
+    </div>
+    <div class="container-fluid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+        <div class="col">
+            <div class="card " style="">
+                <img src="img/Animal-welfare-&-save-birds-campaign-1.png" class="card-img-top" alt="...">
+                <div class="card-img-overlay text-end justify-content-end">
+                    <p class="">
+                        <button class="btn btn-secondary rounded-pill ">
+                            <img src="./img/pin.png" class="mx-2 cancle-img " alt="">
+                            <span style="color: white;">Torento</span>
+                        </button>
+                    </p>
+                    <div class="">
+                        <img src="img/add1.png" class="card-img-top bg-dark" alt="..." style="max-width: 42px; max-height: 42px; border-radius: 50%;">
+                        <img src="img/heart.png" class="card-img-top bg-dark" alt="..." style="max-width: 42px; max-height: 42px; border-radius: 00%;">
+                    </div>
 
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Education Supplies for Every Pair of Shoes Sold</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
+                    <div class="card-text d-flex justify-content:space-between"><span>Australian Paradise</span>
+                        <span class="text-end">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                    </span>
+                    </div>
 
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item "> <button class="btn btn-outline-dark rounded-pill  ">
+                        
+                        <span style="color: black;">From 10/01/2019 until 25/02/2019</span>
+                    </button></li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-6"><i class="bi bi-person-check-fill" style=""></i> 10<br>
+                                <span class="small text-muted">&nbsp &nbsp Seats Left</span>
+                            </div>
+                            <div class="col-6 "><i class="bi bi-clock"></i> 09/01/2022<br>
+                                <span class="small text-muted">Deadline</span>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+                <div class="card-body  ms-md-auto me-md-auto">
+                    <button type="submit " class="btn btn-outline-danger w-100  rounded-pill "> Apply <i class="bi bi-arrow-right text-danger"></i> </button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card " style="">
+                <img src="img/Animal-welfare-&-save-birds-campaign-1.png" class="card-img-top" alt="...">
+                <div class="card-img-overlay">
+                    <p class="text-end">
+                        <span class="badge badge-pill badge-danger">Secondary</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Education Supplies for Every Pair of Shoes Sold</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card " style="">
+                <img src="img/Animal-welfare-&-save-birds-campaign-1.png" class="card-img-top" alt="...">
+                <div class="card-img-overlay">
+                    <p class="text-end">
+                        <span class="badge badge-pill badge-danger">Secondary</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Education Supplies for Every Pair of Shoes Sold</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card " style="">
+                <img src="img/Animal-welfare-&-save-birds-campaign-1.png" class="card-img-top" alt="...">
+                <div class="card-img-overlay">
+                    <p class="text-end">
+                        <span class="badge badge-pill badge-danger">Secondary</span>
+                    </p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Education Supplies for Every Pair of Shoes Sold</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
         </div>
     </div>
 
