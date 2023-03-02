@@ -70,11 +70,11 @@ namespace CI_Platform.Repository.Repository
             #endregion Update Password Reset Table
 
             #region Send Mail
-            var mailBody = "<h1>Click link to reset password</h1><br><h2><a href='" + "https://localhost:7170/User/Reset?token=" + finalString + "'>Reset Password</a></h2>";
+            var mailBody = "<h1>Click link to reset password</h1><br><h2><a href='" + "https://localhost:7228/User/ResetPwd?token=" + finalString + "'>Reset Password</a></h2>";
 
             // create email message
             var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse("utsav.test3011@gmail.com"));
+            email.From.Add(MailboxAddress.Parse("payushi.tatva@gmail.com"));
             email.To.Add(MailboxAddress.Parse(user.Email));
             email.Subject = "Reset Your Password";
             email.Body = new TextPart(TextFormat.Html) { Text = mailBody };
@@ -82,7 +82,7 @@ namespace CI_Platform.Repository.Repository
             // send email
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("utsav.test3011@gmail.com", "hcgjifptffwelrbs");
+            smtp.Authenticate("payushi.tatva@gmail.com", "dvmiwwylvnkgdinq");
             smtp.Send(email);
             smtp.Disconnect(true);
             #endregion Send Mail

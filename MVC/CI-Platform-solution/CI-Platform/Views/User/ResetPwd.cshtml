@@ -1,4 +1,5 @@
-﻿@model CI_Platform.Models.ViewUser;
+﻿@model CI_Platform.Entities.Models.User;
+
 
 @{
     ViewData["Title"] = "Forgot Password Page";
@@ -72,7 +73,7 @@
         </div>
         <div class="col-md-5 col-lg-4 col-sm-12 d-flex flex-column justify-content:Space-between p-5 pb-0">
             <br>
-            <form action="#" class="mform">
+            <form action="#" class="mform" method="post">
                 <h1 class="text-center">New Password</h1>
                 <p class="text-center ">Please enter a new password in the fields below.</p>
 
@@ -86,7 +87,7 @@
                 <div class="form-group">
                     <label for="exampleInputPassword1 ">Confirm New Password </label>
 
-                    <input asp-for="ConfirmPassword" type="password" class="form-control form-control-sm " id="exampleInputPassword1 " placeholder="********** ">
+                    <input  type="password" class="form-control form-control-sm " id="exampleInputPassword1 " placeholder="********** ">
                 </div>
                 <br>
                 <button type="submit" class="btn btn-outline-danger w-100 rounded-pill"> Reset my Password </button>

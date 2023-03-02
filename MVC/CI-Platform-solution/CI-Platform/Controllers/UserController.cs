@@ -28,7 +28,7 @@ namespace CI_Platform.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public IActionResult Registration(ViewUser obj)
+        public IActionResult Registration(User obj)
         {
            
             User user = new User();
@@ -60,45 +60,11 @@ namespace CI_Platform.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult ForgotPwd(ViewUser obj)
-        //{ 
-        //    return RedirectToAction("ResetPwd" , "User" , new { abc = obj.Email });
-        //    if (ModelState.IsValid)
-        //    {
-        //        User user = new User();
-        //        {
-        //            user.FirstName = obj.FirstName;
-        //            user.LastName = obj.LastName;
-        //            user.Email = obj.Email;
-        //            user.Password = obj.Password;
-        //            user.PhoneNumber = obj.PhoneNumber;
-        //        }
-
-        //    }
-        //    return View();
-    }
-
-
-
-    //[HttpPost]
-    //public IActionResult ResetPwd(ViewUser obj)
-    //{
-    //    User user = new User();
-    //    {
-    //        user.Email = obj.Email;
-    //        user.Password = obj.Password;
-
-    //    }
-    //    //_userRepository.ResetPwd(user);
-    //    return View();
-    //}
-
 
 
 
     [HttpPost]
-        public IActionResult ForgotPwd(ViewUser obj)
+        public IActionResult ForgotPwd(User obj)
         {
             User user = new User();
             {
@@ -116,13 +82,16 @@ namespace CI_Platform.Controllers
                 return View();
             }
             TempData["Message"] = "Check your email to reset password";
-        return RedirectToAction("GridView", "Home");
+        return RedirectToAction("Index", "User");
     }
 
-   
+        public IActionResult ResetPwd()
+        {
+            return View();
+        }
 
         [HttpPost]
-        public IActionResult ResetPwd(ViewUser obj, string token)
+        public IActionResult ResetPwd(User obj, string token)
         {
             User user = new User();
             {

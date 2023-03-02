@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace CI_Platform.Models;
+namespace CI_Platform.Entities.Models;
 
-public partial class ViewUser
+public partial class UserModel
 {
     public long UserId { get; set; }
 
@@ -13,11 +12,8 @@ public partial class ViewUser
     public string? LastName { get; set; }
 
     public string Email { get; set; } = null!;
-   
-    public string Password { get; set; } = null!;
 
-    [Compare("Password", ErrorMessage = "Password and Confirm Password do not match")]
-    public string ConfirmPassword { get; set; } = null!;
+    public string Password { get; set; } = null!;
 
     public long PhoneNumber { get; set; }
 
@@ -47,5 +43,4 @@ public partial class ViewUser
 
     public DateTime? DeletedAt { get; set; }
 
-    
 }

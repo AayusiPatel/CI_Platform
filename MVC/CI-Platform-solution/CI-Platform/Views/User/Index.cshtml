@@ -1,4 +1,4 @@
-﻿@model CI_Platform.Models.ViewUser
+﻿@model CI_Platform.Entities.Models.User;
 
 @{
     ViewData["Title"] = "Home Page";
@@ -70,6 +70,7 @@
 
         <br>
         <form  class="mform" method="post">
+            @TempData["Message"]
             <div class=" form-group ">
                 <label for="exampleInputEmail1 "> Email address </label>
                 <input asp-for="Email"  type="email" class="form-control " id="exampleInputEmail1 " aria-label="Large " aria-describedby="emailHelp " placeholder="evan.donohue@gmail.com " required>

@@ -1,4 +1,4 @@
-﻿@model CI_Platform.Models.ViewUser
+﻿@model CI_Platform.Entities.Models.User;
 
 @{
     ViewData["Title"] = "Forgot Password Page";
@@ -93,10 +93,10 @@
                     <label asp-for="Password" for="exampleInputPassword1 ">Password </label>
                     <input asp-for="Password" type="password" class="form-control " id="exampleInputPassword1 " placeholder="********** " required>
                 </div>
-                 <div class="form-group ">
+                 @*<div class="form-group ">
                     <label asp-for="ConfirmPassword" for="exampleInputPassword1 ">Confirm Password </label>
                     <input asp-for="ConfirmPassword" type="password" class="form-control " id="exampleInputPassword1 " placeholder="********** " required>
-                </div>
+                </div>*@
                 <br>
                 <button type="submit"  class="btn btn-outline-danger w-100 rounded-pill "> Register </button>
 

@@ -1,4 +1,4 @@
-﻿@model CI_Platform.Models.ViewUser
+﻿@model CI_Platform.Entities.Models.User;
 @{
     ViewData["Title"] = "Forgot Password Page";
     Layout = null;
@@ -70,8 +70,8 @@
         </div>
         <div class="col-md-5 col-lg-4 col-sm-12 d-flex flex-column justify-content:Space-between p-5 pb-0">
             <br>
-            <form action="~/User/ResetPwd" class="mform">
-                <input asp-for="Email" type="hidden" value=@ViewBag.abc />
+            <form action="" method="post" class="mform">
+              
                 <h1 class=" text-center ">Forgot Password</h1>
                 <p class="text-center ">Enter your email address you've using for your account below and we will send you a password reset link</p>
                 <div class="text-danger text-center">@TempData["Message"]</div> 

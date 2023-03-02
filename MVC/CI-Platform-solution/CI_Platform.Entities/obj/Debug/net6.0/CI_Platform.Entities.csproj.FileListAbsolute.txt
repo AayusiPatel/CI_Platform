@@ -11,3 +11,4 @@ C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solutio
 C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Entities\obj\Debug\net6.0\CI_Platform.Entities.pdb
 C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Entities\bin\Debug\net6.0\CI_Platform.Entities.runtimeconfig.json
 C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Entities\obj\Debug\net6.0\CI_Platform.Entities.genruntimeconfig.cache
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI_Platform.Entities\obj\Debug\net6.0\CI_Platform.Entities.csproj.AssemblyReference.cache

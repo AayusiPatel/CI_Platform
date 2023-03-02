@@ -629,10 +629,11 @@ public partial class CiPlatformContext : DbContext
 
         modelBuilder.Entity<PasswordReset>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("password_reset");
+            entity.HasKey(e => e.Id).HasName("PK__password__3213E83F4D77BCE8");
 
+            entity.ToTable("password_reset");
+
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
