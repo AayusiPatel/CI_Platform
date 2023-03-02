@@ -4,7 +4,7 @@ using CI_Platform.Entities.Models;
 using CI_Platform.Models;
 using CI_Platform.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
-using WebMatrix.WebData;
+
 
 namespace CI_Platform.Controllers
 {
@@ -60,10 +60,10 @@ namespace CI_Platform.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult ForgotPwd(ViewUser obj)
-        { 
-            return RedirectToAction("ResetPwd" , "User" , new { abc = obj.Email });
+        //[HttpPost]
+        //public ActionResult ForgotPwd(ViewUser obj)
+        //{ 
+        //    return RedirectToAction("ResetPwd" , "User" , new { abc = obj.Email });
         //    if (ModelState.IsValid)
         //    {
         //        User user = new User();
@@ -79,21 +79,69 @@ namespace CI_Platform.Controllers
         //    return View();
     }
 
-        public IActionResult ResetPwd()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult ResetPwd(ViewUser obj)
+
+
+    //[HttpPost]
+    //public IActionResult ResetPwd(ViewUser obj)
+    //{
+    //    User user = new User();
+    //    {
+    //        user.Email = obj.Email;
+    //        user.Password = obj.Password;
+
+    //    }
+    //    //_userRepository.ResetPwd(user);
+    //    return View();
+    //}
+
+
+
+
+    [HttpPost]
+        public IActionResult ForgotPwd(ViewUser obj)
         {
             User user = new User();
             {
+                user.FirstName = obj.FirstName;
+                user.LastName = obj.LastName;
                 user.Email = obj.Email;
                 user.Password = obj.Password;
-               
+                user.PhoneNumber = obj.PhoneNumber;
+
             }
-            _userRepository.ResetPwd(user);
-            return View();
+            var fp = _userRepository.forgot(user);
+            if (fp == null)
+            {
+                TempData["Message"] = "Invalid Email";
+                return View();
+            }
+            TempData["Message"] = "Check your email to reset password";
+        return RedirectToAction("GridView", "Home");
+    }
+
+   
+
+        [HttpPost]
+        public IActionResult ResetPwd(ViewUser obj, string token)
+        {
+            User user = new User();
+            {
+                user.FirstName = obj.FirstName;
+                user.LastName = obj.LastName;
+                user.Email = obj.Email;
+                user.Password = obj.Password;
+                user.PhoneNumber = obj.PhoneNumber;
+
+            }
+            var validToken = _userRepository.reset(user, token);
+
+            if (validToken != null)
+            {
+                TempData["Message"] = "Your Password is changed";
+                return RedirectToAction("Index");
+            }
+            TempData["Message"] = "Token not Found";
+            return RedirectToAction("Login");
         }
     }
 }

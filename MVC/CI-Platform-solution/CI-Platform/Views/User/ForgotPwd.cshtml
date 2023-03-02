@@ -74,7 +74,7 @@
                 <input asp-for="Email" type="hidden" value=@ViewBag.abc />
                 <h1 class=" text-center ">Forgot Password</h1>
                 <p class="text-center ">Enter your email address you've using for your account below and we will send you a password reset link</p>
-
+                <div class="text-danger text-center">@TempData["Message"]</div> 
                 <br>
                 <div class="form-group ">
                     <label for="exampleInputEmail1 "> Email Address </label>

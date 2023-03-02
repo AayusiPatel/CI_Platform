@@ -892,3 +892,6 @@ C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solutio
 C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\CI_Platform.Repository.pdb
 C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\WebMatrix.Data.dll
 C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\WebMatrix.WebData.dll
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\MailKit.dll
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\MimeKit.dll
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\BouncyCastle.Crypto.dll
