@@ -1,4 +1,4 @@
-﻿@model CI_Platform.Entities.Models.User;
+﻿@model CI_Platform.ViewModels.UserModel;
 
 @{
     ViewData["Title"] = "Forgot Password Page";
@@ -72,10 +72,11 @@
         <div class="col-md-5 col-lg-4 col-sm-12 d-flex flex-column justify-content:Space-between p-5 pb-0">
 
             <form method="post" class="mform" >
+                <div class="text-danger text-center"> @TempData["UserExist"]</div>
                 <div class=" form-group ">
 
                     <label asp-for="FirstName" for="exampleFormControlInput1 ">First Name</label>
-                    <input asp-for="FirstName" type="text" class="form-control  " id="exampleFormControlInput1 " placeholder="First Name " required>
+                    <input asp-for="FirstName" type="text" class="form-control  " id="exampleFormControlInput1 " placeholder="First Name " >
                 </div>
                 <div class="form-group ">
                     <label asp-for="LastName" for="exampleFormControlInput1 ">Last Name</label>
@@ -83,20 +84,23 @@
                 </div>
                 <div class="form-group ">
                     <label asp-for="PhoneNumber" for="exampleFormControlInput1 ">Phone Number</label>
+                    
                     <input asp-for="PhoneNumber"type="tel" class="form-control " id="phone " placeholder="1234567890"  >
                 </div>
                 <div class="form-group ">
-                    <label asp-for="Email"  for="exampleInputEmail1 "> Email address </label>
+                    <label asp-for="Email"  for="exampleInputEmail1" > Email address </label>
+                   
                     <input asp-for="Email" type="email" class="form-control " id="exampleInputEmail1 " aria-label="Large " aria-describedby="emailHelp " placeholder="evan.donohue@gmail.com " required>
+                    <span asp-validattion-for="Email"></span>
                 </div>
                 <div class="form-group ">
                     <label asp-for="Password" for="exampleInputPassword1 ">Password </label>
                     <input asp-for="Password" type="password" class="form-control " id="exampleInputPassword1 " placeholder="********** " required>
                 </div>
-                 @*<div class="form-group ">
+                 <div class="form-group ">
                     <label asp-for="ConfirmPassword" for="exampleInputPassword1 ">Confirm Password </label>
                     <input asp-for="ConfirmPassword" type="password" class="form-control " id="exampleInputPassword1 " placeholder="********** " required>
-                </div>*@
+                </div>
                 <br>
                 <button type="submit"  class="btn btn-outline-danger w-100 rounded-pill "> Register </button>
 

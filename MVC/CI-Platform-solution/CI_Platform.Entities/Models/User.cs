@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace CI_Platform.Entities.Models;
 
@@ -15,6 +16,7 @@ public partial class User
 
     public string Password { get; set; } = null!;
 
+    
     public long PhoneNumber { get; set; }
 
     public string? Avatar { get; set; }

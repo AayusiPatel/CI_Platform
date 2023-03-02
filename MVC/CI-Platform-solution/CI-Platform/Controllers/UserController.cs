@@ -1,10 +1,10 @@
 ﻿using System;
 using CI_Platform.Entities.Data;
 using CI_Platform.Entities.Models;
-using CI_Platform.Models;
+using CI_Platform.ViewModels;
 using CI_Platform.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace CI_Platform.Controllers
 {
@@ -27,8 +27,8 @@ namespace CI_Platform.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public IActionResult Registration(User obj)
+        [ValidateAntiForgeryToken]
+        public IActionResult Registration(UserModel obj)
         {
            
             User user = new User();
@@ -39,8 +39,11 @@ namespace CI_Platform.Controllers
                     user.Password = obj.Password;
                     user.PhoneNumber = obj.PhoneNumber;
             }
-            _userRepository.Registration(user);
+           if(_userRepository.Registration(user))
+                return RedirectToAction("Index");
 
+
+            TempData["UserExist"] = "This Email is already Registered.";
             return View();
         }
         public IActionResult Index()
@@ -50,8 +53,14 @@ namespace CI_Platform.Controllers
         [HttpPost]
         public IActionResult Index(User obj)
         {
-            if(_userRepository.Login(obj))
-                 return RedirectToAction("GridView","Home");
+            if (_userRepository.Login(obj))
+            {
+                return RedirectToAction("GridView", "Home");
+            }
+            else
+            {
+                TempData["LoginError"] = "Invalid Email or Password";
+            }
             return View();
 
         }
@@ -64,7 +73,7 @@ namespace CI_Platform.Controllers
 
 
     [HttpPost]
-        public IActionResult ForgotPwd(User obj)
+        public IActionResult ForgotPwd(UserModel obj)
         {
             User user = new User();
             {
@@ -91,7 +100,7 @@ namespace CI_Platform.Controllers
         }
 
         [HttpPost]
-        public IActionResult ResetPwd(User obj, string token)
+        public IActionResult ResetPwd(UserModel obj, string token)
         {
             User user = new User();
             {
@@ -112,5 +121,11 @@ namespace CI_Platform.Controllers
             TempData["Message"] = "Token not Found";
             return RedirectToAction("Login");
         }
+
+
+
+     
+
+
+        }
     }
-}

@@ -1,4 +1,5 @@
-﻿@model CI_Platform.Entities.Models.User;
+﻿
+@model CI_Platform.ViewModels.UserModel;
 
 @{
     ViewData["Title"] = "Home Page";
@@ -70,9 +71,11 @@
 
         <br>
         <form  class="mform" method="post">
-            @TempData["Message"]
+             <div class="text-danger text-center">@TempData["LoginError"]
+            @TempData["Message"]</div>
             <div class=" form-group ">
                 <label for="exampleInputEmail1 "> Email address </label>
+                @Html.ValidationMessageFor(model => model.Email)
                 <input asp-for="Email"  type="email" class="form-control " id="exampleInputEmail1 " aria-label="Large " aria-describedby="emailHelp " placeholder="evan.donohue@gmail.com " required>
                 <span asp-validation-for="Email"></span>
             </div>

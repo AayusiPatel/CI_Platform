@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace CI_Platform.Entities.Models;
+namespace CI_Platform.ViewModels;
 
 public partial class UserModel
 {
     public long UserId { get; set; }
 
+ 
     public string? FirstName { get; set; }
 
     public string? LastName { get; set; }
@@ -14,6 +16,10 @@ public partial class UserModel
     public string Email { get; set; } = null!;
 
     public string Password { get; set; } = null!;
+
+ 
+    public string ConfirmPassword { get; set; } = null!;
+
 
     public long PhoneNumber { get; set; }
 

@@ -17,18 +17,21 @@ namespace CI_Platform.Controllers
             _userRepository = userRepository;
         }
 
-        public IActionResult Index()
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        //public IActionResult Registration()
+        //{
+        //    return View();
+        //}
+
+        public IActionResult PlatformLandingPage()
         {
             return View();
         }
 
-        public IActionResult Registration()
-        {
-            return View();
-        }
-     
-      
-       
         public IActionResult Gridview()
         {
             return View();
@@ -52,14 +55,14 @@ namespace CI_Platform.Controllers
             return View();
         }
 
-        public IActionResult ForgotPwd()
-        {
-            return View();
-        }
-        public IActionResult ResetPwd()
-        {
-            return View();
-        }
+        //public IActionResult ForgotPwd()
+        //{
+        //    return View();
+        //}
+        //public IActionResult ResetPwd()
+        //{
+        //    return View();
+        //}
       
         public IActionResult Privacy()
         {
