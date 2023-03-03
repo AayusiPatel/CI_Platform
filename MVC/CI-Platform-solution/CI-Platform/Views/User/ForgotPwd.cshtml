@@ -1,4 +1,4 @@
-﻿@model CI_Platform.ViewModels.UserModel;
+﻿@model CI_Platform.Entities.ViewModels.ForgotPwd;
 @{
     ViewData["Title"] = "Forgot Password Page";
     Layout = null;
@@ -78,7 +78,7 @@
                 <br>
                 <div class="form-group ">
                     <label for="exampleInputEmail1 "> Email Address </label>
-                    <input  asp-for="Email" type="email" class="form-control form-control-sm pl-5 " id="exampleInputEmail1 " aria-describedby="emailHelp " placeholder="Enter your email address... ">
+                    <input  asp-for="Email" type="email" class="form-control form-control-sm pl-5 " id="exampleInputEmail1 " aria-describedby="emailHelp " placeholder="Enter your email address... " required>
                 </div>
                 <br>
 

@@ -1,10 +1,10 @@
 ﻿using System;
 using CI_Platform.Entities.Data;
-using CI_Platform.Entities.Models;
-using CI_Platform.ViewModels;
 using CI_Platform.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using CI_Platform.Entities.ViewModels;
 
 namespace CI_Platform.Controllers
 {
@@ -30,20 +30,24 @@ namespace CI_Platform.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Registration(UserModel obj)
         {
-           
-            User user = new User();
+
+            //User user = new User();
+            //{
+            //        user.FirstName = obj.FirstName;
+            //         user.LastName  = obj.LastName;
+            //        user.Email  = obj.Email;
+            //        user.Password = obj.Password;
+            //        user.PhoneNumber = obj.PhoneNumber;
+            //}
+            if (ModelState.IsValid) { 
+            if (_userRepository.Registration(obj))
             {
-                    user.FirstName = obj.FirstName;
-                     user.LastName  = obj.LastName;
-                    user.Email  = obj.Email;
-                    user.Password = obj.Password;
-                    user.PhoneNumber = obj.PhoneNumber;
-            }
-           if(_userRepository.Registration(user))
+                TempData["Registered"] = "Registration Succesfull!";
                 return RedirectToAction("Index");
-
-
-            TempData["UserExist"] = "This Email is already Registered.";
+            }
+                TempData["UserExist"] = "This Email is already Registered.";
+            }
+           
             return View();
         }
         public IActionResult Index()
@@ -51,16 +55,39 @@ namespace CI_Platform.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index(User obj)
+        public IActionResult Index(Login obj)
         {
-            if (_userRepository.Login(obj))
+            //User user = new User();
+            //{
+
+            //    user.Email = obj.Email;
+            //    user.Password = obj.Password;
+
+            //}
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("GridView", "Home");
+                var loguser = _userRepository.Login(obj);
+
+                if (loguser != null)
+                {
+                    //var s_string = HttpContext.Session.GetString(obj.Email);
+
+                    //string loggedin = null;
+                    //HttpContext.Session.SetString(loggedin, s_string);
+                    //ViewBag.LoggedIn = loggedin;
+                    //ISession["var1"] = "obg";
+
+                    HttpContext.Session.SetString("Uname", loguser.FirstName + " " + loguser.LastName);
+
+
+                    return RedirectToAction("PlatformLandingPage", "Home");
+                }
+                else
+                {
+                    TempData["LoginError"] = "Invalid Email or Password";
+                }
             }
-            else
-            {
-                TempData["LoginError"] = "Invalid Email or Password";
-            }
+           
             return View();
 
         }
@@ -73,18 +100,18 @@ namespace CI_Platform.Controllers
 
 
     [HttpPost]
-        public IActionResult ForgotPwd(UserModel obj)
+        public IActionResult ForgotPwd(ForgotPwd obj)
         {
-            User user = new User();
-            {
-                user.FirstName = obj.FirstName;
-                user.LastName = obj.LastName;
-                user.Email = obj.Email;
-                user.Password = obj.Password;
-                user.PhoneNumber = obj.PhoneNumber;
+            //User user = new User();
+            //{
+            //    user.FirstName = obj.FirstName;
+            //    user.LastName = obj.LastName;
+            //    user.Email = obj.Email;
+            //    user.Password = obj.Password;
+            //    user.PhoneNumber = obj.PhoneNumber;
 
-            }
-            var fp = _userRepository.forgot(user);
+            //}
+            var fp = _userRepository.forgot(obj);
             if (fp == null)
             {
                 TempData["Message"] = "Invalid Email";
@@ -100,18 +127,18 @@ namespace CI_Platform.Controllers
         }
 
         [HttpPost]
-        public IActionResult ResetPwd(UserModel obj, string token)
+        public IActionResult ResetPwd(ResetPwd obj, string token)
         {
-            User user = new User();
-            {
-                user.FirstName = obj.FirstName;
-                user.LastName = obj.LastName;
-                user.Email = obj.Email;
-                user.Password = obj.Password;
-                user.PhoneNumber = obj.PhoneNumber;
+            //User user = new User();
+            //{
+            //    user.FirstName = obj.FirstName;
+            //    user.LastName = obj.LastName;
+            //    user.Email = obj.Email;
+            //    user.Password = obj.Password;
+            //    user.PhoneNumber = obj.PhoneNumber;
 
-            }
-            var validToken = _userRepository.reset(user, token);
+            //}
+            var validToken = _userRepository.reset(obj, token);
 
             if (validToken != null)
             {

@@ -29,6 +29,8 @@ namespace CI_Platform.Controllers
 
         public IActionResult PlatformLandingPage()
         {
+            string name = HttpContext.Session.GetString("Uname");
+            ViewBag.Uname = name;
             return View();
         }
 

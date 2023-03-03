@@ -1,4 +1,4 @@
-﻿@model CI_Platform.ViewModels.UserModel;
+﻿@model CI_Platform.Entities.ViewModels.ResetPwd;
 
 
 @{
@@ -83,12 +83,14 @@
                     <label for="exampleInputPassword1 ">Password </label>
 
                     <input asp-for="Password" type="password" class="form-control form-control-sm " id="exampleInputPassword1 " placeholder="********** ">
+                      <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="exampleInputPassword1 ">Confirm New Password </label>
 
                     <input asp-for="ConfirmPassword"  type="password" class="form-control form-control-sm " id="exampleInputPassword1 " placeholder="********** ">
+                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
                 <br>
                 <button type="submit" class="btn btn-outline-danger w-100 rounded-pill"> Reset my Password </button>

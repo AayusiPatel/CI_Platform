@@ -15,6 +15,8 @@ using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 using CI_Platform.Entities.Data;
 using CI_Platform.Entities.Models;
 using CI_Platform.Repository.Interface;
+using CI_Platform.Entities.ViewModels;
+
 
 namespace CI_Platform.Repository.Repository
 {
@@ -29,32 +31,55 @@ namespace CI_Platform.Repository.Repository
 
         }
 
-        public bool Login(User obj)
+        public User Login(Login obj)
         {
-            var user = _db.Users.Any(u => u.Email == obj.Email && u.Password == obj.Password) ;
+            User user = new User();
+            {
+
+                user.Email = obj.Email;
+                user.Password = obj.Password;
+
+            }
+            var user1 = _db.Users.FirstOrDefault(u => u.Email == obj.Email && u.Password == obj.Password) ;
 
 
-           return user;
+           return user1;
         }
 
 
-        public bool Registration(User obj)
+        public bool Registration(UserModel obj)
         {
-            var user = _db.Users.FirstOrDefault(x => x.Email == obj.Email);
-
-            if (user == null)
+            User user = new User();
             {
-                _db.Users.Add(obj);
+                user.FirstName = obj.FirstName;
+                user.LastName = obj.LastName;
+                user.Email = obj.Email;
+                user.Password = obj.Password;
+                user.PhoneNumber = obj.PhoneNumber;
+            }
+            if (_db.Users.Any(x => x.Email == obj.Email))
+                return false;
+
+           
+                _db.Users.Add(user);
                 _db.SaveChanges();
                 return true;
-            }
-            return false;
+          
             //return entry.Entity;
         }
 
-        public User forgot(User obj)
+        public User forgot(ForgotPwd obj)
         {
-            var user = _db.Users.FirstOrDefault(u => u.Email.Equals(obj.Email.ToLower()) && u.DeletedAt == null);
+
+            User user = new User();
+            {
+              
+                user.Email = obj.Email;
+            
+
+            }
+
+            var user1 = _db.Users.FirstOrDefault(u => u.Email.Equals(obj.Email.ToLower()) && u.DeletedAt == null);
 
             #region Genrate Token
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -69,8 +94,10 @@ namespace CI_Platform.Repository.Repository
 
             #region Update Password Reset Table
             PasswordReset entry = new PasswordReset();
-            entry.Email = obj.Email;
-            entry.Token = finalString;
+            {
+                entry.Email = obj.Email;
+                entry.Token = finalString;
+            }
             _db.PasswordResets.Add(entry);
             _db.SaveChanges();
             #endregion Update Password Reset Table
@@ -81,7 +108,7 @@ namespace CI_Platform.Repository.Repository
             // create email message
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse("payushi.tatva@gmail.com"));
-            email.To.Add(MailboxAddress.Parse(user.Email));
+            email.To.Add(MailboxAddress.Parse(user1.Email));
             email.Subject = "Reset Your Password";
             email.Body = new TextPart(TextFormat.Html) { Text = mailBody };
 
@@ -93,18 +120,25 @@ namespace CI_Platform.Repository.Repository
             smtp.Disconnect(true);
             #endregion Send Mail
 
-            return user;
+            return user1;
         }
 
 
-        public PasswordReset reset(User obj, string token)
+        public PasswordReset reset(ResetPwd obj, string token)
         {
+            User user = new User();
+            {
+                
+                user.Password = obj.Password;
+             
+
+            }
             var validToken = _db.PasswordResets.FirstOrDefault(x => x.Token == token);
             if (validToken != null)
             {
-                var user = _db.Users.FirstOrDefault(x => x.Email == validToken.Email);
-                user.Password = obj.Password;
-                _db.Users.Update(user);
+                var user1 = _db.Users.FirstOrDefault(x => x.Email == validToken.Email);
+                user1.Password = obj.Password;
+                _db.Users.Update(user1);
                 _db.SaveChanges();
 
             }

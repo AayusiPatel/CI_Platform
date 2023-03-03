@@ -1,4 +1,4 @@
-﻿@model CI_Platform.ViewModels.UserModel;
+﻿@model CI_Platform.Entities.ViewModels.UserModel;
 
 @{
     ViewData["Title"] = "Forgot Password Page";
@@ -77,29 +77,33 @@
 
                     <label asp-for="FirstName" for="exampleFormControlInput1 ">First Name</label>
                     <input asp-for="FirstName" type="text" class="form-control  " id="exampleFormControlInput1 " placeholder="First Name " >
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                    
                 </div>
                 <div class="form-group ">
                     <label asp-for="LastName" for="exampleFormControlInput1 ">Last Name</label>
-                    <input asp-for="LastName" type="text" class="form-control " id="exampleFormControlInput1 " placeholder="Lastname " required>
+                    <input asp-for="LastName" type="text" class="form-control " id="exampleFormControlInput1 " placeholder="Lastname " >
+                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
                 <div class="form-group ">
                     <label asp-for="PhoneNumber" for="exampleFormControlInput1 ">Phone Number</label>
-                    
                     <input asp-for="PhoneNumber"type="tel" class="form-control " id="phone " placeholder="1234567890"  >
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
                 <div class="form-group ">
                     <label asp-for="Email"  for="exampleInputEmail1" > Email address </label>
-                   
-                    <input asp-for="Email" type="email" class="form-control " id="exampleInputEmail1 " aria-label="Large " aria-describedby="emailHelp " placeholder="evan.donohue@gmail.com " required>
-                    <span asp-validattion-for="Email"></span>
+                    <input asp-for="Email" type="email" class="form-control" id="exampleInputEmail1 " aria-label="Large " aria-describedby="emailHelp " placeholder="evan.donohue@gmail.com " >
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group ">
                     <label asp-for="Password" for="exampleInputPassword1 ">Password </label>
-                    <input asp-for="Password" type="password" class="form-control " id="exampleInputPassword1 " placeholder="********** " required>
+                    <input asp-for="Password" type="password" class="form-control " id="exampleInputPassword1 " placeholder="********** " >
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                  <div class="form-group ">
                     <label asp-for="ConfirmPassword" for="exampleInputPassword1 ">Confirm Password </label>
-                    <input asp-for="ConfirmPassword" type="password" class="form-control " id="exampleInputPassword1 " placeholder="********** " required>
+                    <input asp-for="ConfirmPassword" type="password" class="form-control " id="exampleInputPassword1 " placeholder="********** ">
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
                 <br>
                 <button type="submit"  class="btn btn-outline-danger w-100 rounded-pill "> Register </button>
