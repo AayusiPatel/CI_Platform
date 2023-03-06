@@ -38,12 +38,18 @@ namespace CI_Platform.Controllers
 
             List<Mission> missionDeails = _platform.GetMissionDetails();
             ViewBag.MissionDeails = missionDeails;
-            List<City> Cities = _platform.GetCitys();
-            ViewBag.Cities = Cities;
+
+
+
+         
             List<Country> Countries = _platform.GetCountry();
             ViewBag.Countries = Countries;
+            List<City> Cities = _platform.GetCitys();
+            ViewBag.Cities = Cities;
             List<MissionTheme> Themes = _platform.GetMissionTheme();
             ViewBag.Themes = Themes;
+            List<Skill> Skills = _platform.GetSkills();
+            ViewBag.Skills = Skills;
 
 
             return View();

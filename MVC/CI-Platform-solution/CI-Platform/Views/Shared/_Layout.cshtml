@@ -79,30 +79,32 @@
                   @foreach (var item in @ViewBag.Countries)
                 {
                     
-                    <option value="1"> @item.Name</option>
+                    <option value="@item.CountryId"> @item.Name</option>
                 }
                   </select>
-                    <select class="form-select border-white xyz" aria-label="Default select example">
+                    <select class="form-select border-white xyz City" aria-label="Default select example" id="selectCityList">
                         <option>City</option>
-                 @foreach (var item in @ViewBag.Cities)
+               @*  @foreach (var item in @ViewBag.Cities)
                 {
                     
                     <option value="1"> @item.Name</option>
-                }
+                }*@
                   </select>
                     <select class="form-select  border-white xyz" aria-label="Default select example">
                         <option>Themes</option>
                   @foreach (var item in @ViewBag.Themes)
                 {
                     
-                    <option value="1"> @item.Title</option>
+                    <option value="1" type="checkbox"> @item.Title</option>
                 }
                   </select>
                     <select class="form-select  border-white xyz" aria-label="Default select example">
                     <option selected>Skills</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                     @foreach (var item in @ViewBag.Skills)
+                {
+                    
+                    <option value="1"> @item.SkillName</option>
+                }
                   </select>
                 </div>
 
@@ -110,6 +112,37 @@
             </div>
         </div>
         </div>
+
+
+        <script type="text/javascript" language="javascript">
+         function DisableBackButton() {
+             window.history.forward();
+         }
+         DisableBackButton();
+         window.onload = DisableBackButton;
+         window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton(); }
+         window.onunload = function () { void (0); };
+    
+        
+        function GetCity(){
+        var countryId = $('#countryId').find(":selected").val();
+        debugger;
+        $.ajax({
+        url:"/Home/GetCitys",
+        method: "GET",
+        data: {
+        "countryId":countryId
+        },
+        success:function(data){
+        data = JSON.parse(data);
+        $("#selectCityList").empty();
+        data.forEach((name)=> {
+        document.getElementById("selectCityList").innerHTML += `
+        <option value=${name} >${name.Name}</option>
+        `;
+        })
+        }
+        </script>
 
     <!--.............Page Body..............-->
     <div class="container">

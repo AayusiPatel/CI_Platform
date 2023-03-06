@@ -26,15 +26,29 @@ namespace CI_Platform.Repository.Repository
             var country = _db.Countries.ToList();
             return country;
         }
-        public List<City> GetCitys(Country obj)
+        //public List<City> GetCitys()
+        //{
+        //    List<City> cities = _db.Cities.ToList();
+        //    return cities;
+        //}
+        public List<City> GetCityData(int countryId)
         {
-            List<City> cities = _db.Cities.FirstOrDefault(u => u.CountryId == obj.CountryId )ToList();
-            return cities;
+
+            List<City> city = _db.Cities.Where(i => i.CountryId == countryId).ToList();
+            return city;
+
         }
         public List<MissionTheme> GetMissionTheme()
         {
             var theme = _db.MissionThemes.ToList();
             return theme;
+        }
+        public List<Skill> GetSkills()
+        {
+
+            var skills = _db.Skills.ToList();
+            return skills;
+
         }
 
         public List<Mission> GetMissions()
@@ -46,7 +60,7 @@ namespace CI_Platform.Repository.Repository
         }
         public List<Mission> GetMissionDetails()
         {
-            List<Mission> missionDetails = _db.Missions.Include(m => m.City).Include(m => m.Theme).ToList();
+            List<Mission> missionDetails = _db.Missions.Include(m => m.City).Include(m => m.Theme).Include(m => m.MissionMedia).ToList();
             return missionDetails;
         }
 
