@@ -11,10 +11,12 @@ namespace CI_Platform.Controllers
     {
         
         public readonly IUserRepository _userRepository;
-        public HomeController( IUserRepository userRepository)
+        public readonly IPlatformRepository _platform;
+        public HomeController( IUserRepository userRepository, IPlatformRepository platform)
         {
            
             _userRepository = userRepository;
+            _platform = platform;
         }
 
         //public IActionResult Index()
@@ -31,6 +33,19 @@ namespace CI_Platform.Controllers
         {
             string name = HttpContext.Session.GetString("Uname");
             ViewBag.Uname = name;
+            
+            //ViewBag.City = _platform.GetCitys();
+
+            List<Mission> missionDeails = _platform.GetMissionDetails();
+            ViewBag.MissionDeails = missionDeails;
+            List<City> Cities = _platform.GetCitys();
+            ViewBag.Cities = Cities;
+            List<Country> Countries = _platform.GetCountry();
+            ViewBag.Countries = Countries;
+            List<MissionTheme> Themes = _platform.GetMissionTheme();
+            ViewBag.Themes = Themes;
+
+
             return View();
         }
 

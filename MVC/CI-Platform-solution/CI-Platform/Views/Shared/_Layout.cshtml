@@ -74,23 +74,29 @@
               </button>
                 </p>
                 <div class="collapse d-md-flex " id="collapseExample">
-                    <select class="form-select  border-white xyz" aria-label="Default select example">
-                    <option selected>Country</option>
-                    <option value="1">India</option>
-                    <option value="2">US</option>
-                    <option value="3">UK</option>
+                    <select class="form-select  border-white xyz" aria-label="Default select example" placeholder="Country">
+                        <option>Country</option>
+                  @foreach (var item in @ViewBag.Countries)
+                {
+                    
+                    <option value="1"> @item.Name</option>
+                }
                   </select>
                     <select class="form-select border-white xyz" aria-label="Default select example">
-                    <option selected>City</option>
-                    <option value="1">Ahemadabad</option>
-                    <option value="2">New York</option>
-                    <option value="3">London</option>
+                        <option>City</option>
+                 @foreach (var item in @ViewBag.Cities)
+                {
+                    
+                    <option value="1"> @item.Name</option>
+                }
                   </select>
                     <select class="form-select  border-white xyz" aria-label="Default select example">
-                    <option selected>Theme</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                        <option>Themes</option>
+                  @foreach (var item in @ViewBag.Themes)
+                {
+                    
+                    <option value="1"> @item.Title</option>
+                }
                   </select>
                     <select class="form-select  border-white xyz" aria-label="Default select example">
                     <option selected>Skills</option>

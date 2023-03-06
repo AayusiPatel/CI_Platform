@@ -13,5 +13,6 @@ namespace CI_Platform.Repository.Interface
         public List<City> GetCitys();
         public List<MissionTheme> GetMissionTheme();
         public List<Mission> GetMissions();
+        public List<Mission> GetMissionDetails();
     }
 }
