@@ -26,11 +26,11 @@ namespace CI_Platform.Repository.Repository
             var country = _db.Countries.ToList();
             return country;
         }
-        //public List<City> GetCitys()
-        //{
-        //    List<City> cities = _db.Cities.ToList();
-        //    return cities;
-        //}
+        public List<City> GetCitys()
+        {
+            List<City> cities = _db.Cities.ToList();
+            return cities;
+        }
         public List<City> GetCityData(int countryId)
         {
 

@@ -20,14 +20,121 @@
                     <option selected >Sort By</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
-z-indexndex                  <option value="3">Three</option>
+                    <option value="3">Three</option>
                     </select>
                    <button onclick="opengrid()"> <i class="bi bi-grid-fill" style="font-size: large;"></i> </button>
-                <a asp-area="" asp-controller="Home" asp-action="ListView" class=""> <button onclick="openlist()"> <i class="bi bi-list" style="font-size:large;"></i> </button></a>
+                 <button onclick="openlist()"><a href="~/Home/ListView"> <i class="bi bi-list" style="font-size:large;"></i> </a></button>
             </div>
           </div>
 
-         
+
+
+
+
+
+
+@*
+
+                    <div class="container" id="xyzw">
+                <nav class="navbar navbar-expand-lg navbar-light  ">
+                    <div class="container d-flex justify-content-between">
+
+                        <!-- Search bar -->
+
+                        <form class=" d-flex form-search my-1">
+                            <input class=" fontheader2 form-control me-2" type="search" placeholder="Search mission..." id="searchb" onkeyup="search_animal()" aria-label="Search">
+                        </form>
+
+                        <!-- Dropdown -->
+
+                        <div class="collapse navbar-collapse" id="xyz">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+
+                                <li class="nav-item dropdown bdr">
+                                    <a class="fontheader nav-link dropdown-toggle ms-3 me-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        City
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" id="zxc" onchange="temp()" style="height: 200px; overflow-y: scroll;" aria-labelledby=" dropdownMenuButton">
+
+                                        @foreach(var city in @ViewBag.cities){
+                                        <a class="dropdown-item ">
+                                            @city.Text <input type="checkbox" value="@city.Value ">
+                                        </a>}
+                                       
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown bdr">
+                                    <a class="fontheader nav-link dropdown-toggle ms-3 me-5" href="#"
+                                        id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false ">
+                                        Country
+                                    </a>
+
+                                    
+
+                                    <div class="dropdown-menu dropdown-menu-end" id="cntry" onchange="temp()" style="height: 200px; overflow-y: scroll;" aria-labelledby="dropdownMenuButton">
+
+                                         @foreach(var city in @ViewBag.countries){
+                                        <a class="dropdown-item ">
+                                            @city.Text <input type="checkbox" value="@city.Value">
+                                        </a>}
+
+                                      
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown bdr">
+                                    <a class="fontheader nav-link dropdown-toggle ms-3 me-5" href="#"
+                                        id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false ">
+                                        Theme
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end"  aria-labelledby="dropdownMenuButton">
+
+                                        @foreach (var themes in   ViewBag.themes )
+                                        {
+                                           <a class="dropdown-item">
+                                            @themes.Text <input type="checkbox" value="@themes.Value">
+                                           </a> 
+                                        }
+                                        
+
+                                        
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown bdr">
+                                    <a class="fontheader nav-link dropdown-toggle ms-3 me-5" href="#"
+                                        id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="fals ">
+                                        Skills
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+
+                                        @foreach (var skills in ViewBag.skills)
+                                        {
+                                            <a class="dropdown-item">
+                                            @skills.Text <input type="checkbox" class="abcd" value="@skills.Value">
+                                            </a>
+                                        }
+                                        
+                                      
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <hr style="margin: 0rem; border-top: 3px solid #ccc; background-color: #ccc; ">
+            <br>*@
+
+@*        @{
+
+            Html.RenderPartial("_FilterMissionPartial");
+
+                     }
+         *@
 
         <div id="grid" class="grid" >
     <div class="container-fluid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">

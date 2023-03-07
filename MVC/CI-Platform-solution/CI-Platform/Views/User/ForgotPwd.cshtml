@@ -78,7 +78,8 @@
                 <br>
                 <div class="form-group ">
                     <label for="exampleInputEmail1 "> Email Address </label>
-                    <input  asp-for="Email" type="email" class="form-control form-control-sm pl-5 " id="exampleInputEmail1 " aria-describedby="emailHelp " placeholder="Enter your email address... " required>
+                    <input  asp-for="Email" type="email" class="form-control form-control-sm pl-5 " id="exampleInputEmail1 " aria-describedby="emailHelp " placeholder="Enter your email address... " >
+                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <br>
 

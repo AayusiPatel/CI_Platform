@@ -111,14 +111,19 @@ namespace CI_Platform.Controllers
             //    user.PhoneNumber = obj.PhoneNumber;
 
             //}
-            var fp = _userRepository.forgot(obj);
-            if (fp == null)
+            if (ModelState.IsValid)
             {
-                TempData["Message"] = "Invalid Email";
-                return View();
+                var fp = _userRepository.forgot(obj);
+                if (fp == null)
+                {
+                    TempData["Message"] = "Invalid Email";
+                    return View();
+                }
+
+                TempData["Message"] = "Check your email to reset password";
+                return RedirectToAction("Index", "User");
             }
-            TempData["Message"] = "Check your email to reset password";
-        return RedirectToAction("Index", "User");
+            return View();
     }
 
         public IActionResult ResetPwd()
@@ -138,7 +143,9 @@ namespace CI_Platform.Controllers
             //    user.PhoneNumber = obj.PhoneNumber;
 
             //}
-            var validToken = _userRepository.reset(obj, token);
+            if (ModelState.IsValid)
+            {
+                var validToken = _userRepository.reset(obj, token);
 
             if (validToken != null)
             {
@@ -147,6 +154,8 @@ namespace CI_Platform.Controllers
             }
             TempData["Message"] = "Token not Found";
             return RedirectToAction("Login");
+            }
+            return View();
         }
 
 

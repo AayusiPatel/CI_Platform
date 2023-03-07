@@ -81,6 +81,11 @@ namespace CI_Platform.Repository.Repository
 
             var user1 = _db.Users.FirstOrDefault(u => u.Email.Equals(obj.Email.ToLower()) && u.DeletedAt == null);
 
+            if(user1 == null)
+            {
+                return null;
+            }
+
             #region Genrate Token
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var stringChars = new char[16];
