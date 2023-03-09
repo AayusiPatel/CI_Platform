@@ -54,16 +54,41 @@ namespace CI_Platform.Controllers
             ViewBag.Cities = Cities;
             List<MissionTheme> Themes = _platform.GetMissionTheme();
             ViewBag.Themes = Themes;
-            List<Skill> Skills = _platform.GetSkills();
+            List<MissionSkill> Skills = _platform.GetSkills();
             ViewBag.Skills = Skills;
 
+            //IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
+            //{
+            //    List<Mission> cards = _platform.Filter(cityId, countryId, themeId, skillId, search, sort);
+            //    ViewBag.MissionDeails = cards;
 
+            //    return PartialView("_FilterMissionPartial", cards);
+            //}
 
 
             return View();
+
         }
 
-        public JsonResult GetCitys(int countryId)
+
+        //[HttpPost]
+        //public IActionResult PlatformLandingPage()
+        //{ 
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //}
+
+
+
+
+            public JsonResult GetCitys(int countryId)
         {
 
             List<City> city = _platform.GetCityData(countryId);
@@ -73,46 +98,55 @@ namespace CI_Platform.Controllers
             return Json(json);
         }
 
-        public IActionResult Filter(List<int>? cityId, List<int>? countryId)
+        public IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
         {
-            List<Mission> cards = new List<Mission>();
-            var missioncards = _platform.GetMissionDetails();
-            if (cityId.Count != 0)
-            {
-                foreach (var n in cityId)
-                {
-                    foreach (var item in missioncards)
-                    {
-                        if (item.CityId == n)
-                        {
-                            cards.Add(item);
-                        }
+            List<Mission> cards = _platform.Filter(cityId, countryId, themeId, skillId, search, sort);
+            ViewBag.MissionDeails = cards;
 
-                    }
-                }
-            }
-            else if (countryId.Count != 0)
-            {
-                foreach (var n in countryId)
-                {
-                    foreach (var item in missioncards)
-                    {
-                        if (item.CountryId == n)
-                        {
-                            cards.Add(item);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                foreach (var item in missioncards)
-                {
-                    cards.Add(item);
-                }
-            }
             return PartialView("_FilterMissionPartial", cards);
         }
+
+
+        //public IActionResult Filter(List<int>? cityId, List<int>? countryId)
+        //{
+        //    List<Mission> cards = new List<Mission>();
+        //    var missioncards = _platform.GetMissionDetails();
+        //    if (cityId.Count != 0)
+        //    {
+        //        foreach (var n in cityId)
+        //        {
+        //            foreach (var item in missioncards)
+        //            {
+        //                if (item.CityId == n)
+        //                {
+        //                    cards.Add(item);
+        //                }
+
+        //            }
+        //        }
+        //    }
+        //    else if (countryId.Count != 0)
+        //    {
+        //        foreach (var n in countryId)
+        //        {
+        //            foreach (var item in missioncards)
+        //            {
+        //                if (item.CountryId == n)
+        //                {
+        //                    cards.Add(item);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        foreach (var item in missioncards)
+        //        {
+        //            cards.Add(item);
+        //        }
+        //    }
+        //    return PartialView("_FilterMissionPartial", cards);
+        //}
 
 
 
@@ -133,7 +167,7 @@ namespace CI_Platform.Controllers
             ViewBag.Cities = Cities;
             List<MissionTheme> Themes = _platform.GetMissionTheme();
             ViewBag.Themes = Themes;
-            List<Skill> Skills = _platform.GetSkills();
+            List<MissionSkill> Skills = _platform.GetSkills();
             ViewBag.Skills = Skills;
 
             return View();

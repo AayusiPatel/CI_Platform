@@ -16,7 +16,7 @@ window.onunload = function () { void (0); };
 
 function GetCity() {
     var countryId = $('#countryId').find(":selected").val();
-    debugger;
+   /* debugger;*/
     $.ajax({
         url: "/Home/GetCitys",
         method: "GET",
@@ -41,65 +41,96 @@ function GetCity() {
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// (3) filtering the missions 
 
-$(document).ready(function () {
-    var clearAllButton = $('.selected-options .clear-all');
-    clearAllButton.hide();
-    // Get the dropdown menu element
-    const dropdownMenu = $('.dropdown-menu');
-    // Prevent the dropdown menu from closing when an option is clicked
-    dropdownMenu.on('click', function (event) {
-        event.stopPropagation();
-    });
-});
+function temp() {
+/*    var checkedvalues = [];*/
+    //var div = document.getElementById("zxc");
+    //var list = div.getElementsByTagName("input");
+    //for (i = 0; i < list.length; i++) {
+    //    if (list[i].checked) {
+    //        checkedvalues.push(list[i].value);
+    //    }
 
-$(function () {
-    var dropdownMenu = $('.dropdown-menu');
-    var selectedOptionsList = $('.selected-options ul');
-    var clearAllButton = $('.selected-options .clear-all');
+    //}
+   // console.log(checkedvalues);
 
-    // Handle checkbox click
-    dropdownMenu.on('click', 'input[type="checkbox"]', function () {
-        var option = $(this).parent();
-        var optionValue = $(this).val();
 
-        if ($(this).prop('checked')) {
-            // Add the selected option to the displayed list
-            selectedOptionsList.append(`<li data-value="${optionValue}">${option.text()}<span class="remove-option" >&#x2715;</span></li>`);
-        } else {
-            // Remove the selected option from the displayed list
-            selectedOptionsList.find(`li[data-value="${optionValue}"]`).remove();
+
+
+
+
+
+    var checkedcntryvalues = [];
+    var div1 = document.getElementById("countryId");
+    var list = div1.getElementsByTagName("option");
+    for (i = 0; i < list.length; i++) {
+        if (list[i].selected) {
+            checkedcntryvalues.push(list[i].value);
         }
 
-        // Show or hide the Clear All button
-        if (selectedOptionsList.children().length > 0) {
-            clearAllButton.show();
-        } else {
-            clearAllButton.hide();
-        }
-    });
+    }
+    console.log(checkedcntryvalues);
 
-    // Handle remove button click
-    selectedOptionsList.on('click', 'span.remove-option', function () {
-        // Get the value of the option that was removed
-        var optionValue = $(this).parent().data('value');
 
-        // Uncheck the corresponding checkbox in the dropdown menu
-        dropdownMenu.find(`input[value="${optionValue}"]`).prop('checked', false);
 
-        // Remove the selected option from the displayed list
-        $(this).parent().remove();
 
-        // Show or hide the Clear All button
-        if (selectedOptionsList.children().length > 0) {
-            clearAllButton.show();
-        } else {
-            clearAllButton.hide();
+
+    var checkedthemevalues = [];
+    var div2 = document.getElementById("theme");
+    var list = div2.getElementsByTagName("input");
+    for (i = 0; i < list.length; i++) {
+        if (list[i].checked) {
+            checkedthemevalues.push(list[i].value);
         }
 
-        temp();
-    });
+    }
+    console.log(checkedthemevalues);
 
+
+
+    var checkedskillvalues = [];
+    var div3 = document.getElementById("skill");
+    var list = div3.getElementsByTagName("input");
+    for (i = 0; i < list.length; i++) {
+        if (list[i].checked) {
+            checkedskillvalues.push(list[i].value);
+        }
+
+    }
+    console.log(checkedskillvalues);
+
+
+
+    //var search = document.getElementById("searchb").value;
+    //console.log(search)
+    //var sort = document.getElementById("sort").value;
+    //console.log(sort)
+    $.ajax({
+        type: "POST", // POST
+        url: '/Home/Filter',
+        data: {
+         /*   'cityId': checkedvalues,*/
+            'countryId': checkedcntryvalues,
+            'themeId': checkedthemevalues,
+            'skillId': checkedskillvalues,
+            //'search': search,
+            //'sort': sort
+        },
+        dataType: "html", // return datatype like JSON and HTML
+        success: function (data) {
+
+            $("#grid-view").empty();
+            console.log("grid Hii");
+            $("#grid-view").html(data);
+            //$("#list-view").empty();
+            //console.log("list Hii");
+            //$("#list-view").html(data);
+        },
+        error: function (e) {
+            console.log("Bye");
+            alert('Error');
+        },
+    });
+}

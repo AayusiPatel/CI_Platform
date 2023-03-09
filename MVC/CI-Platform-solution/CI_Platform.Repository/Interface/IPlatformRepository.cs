@@ -14,8 +14,13 @@ namespace CI_Platform.Repository.Interface
 
         public List<City> GetCityData(int countryId);
         public List<MissionTheme> GetMissionTheme();
-        public List<Mission> GetMissions();
+        public void GetMissions();
         public List<Mission> GetMissionDetails();
-        public List<Skill> GetSkills();
+        public List<MissionSkill> GetSkills();
+
+
+        public List<Mission> Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort);
+
+
     }
 }

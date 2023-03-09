@@ -75,7 +75,7 @@
                 </button>
                 </p>
                 <div class="collapse d-md-flex " id="collapseExample">
-                    <select class="form-select  border-white xyz" aria-label="Default select example" placeholder="Country" id="countryId" onchange="GetCity()">
+                    <select class="form-select  border-white xyz" aria-label="Default select example" placeholder="Country" id="countryId" onchange="temp(); GetCity();">
                         <option selected>Country</option>
                         @foreach (var item in @ViewBag.Countries)
                         {
@@ -91,22 +91,38 @@
                             <option value="1"> @item.Name</option>
                             }*@
                     </select>
-                    <select class="form-select  border-white xyz" aria-label="Default select example">
-                        <option>Themes</option>
+                    <div class="form-select border-white xyz"   aria-label="Default select example"   id="theme"  onchange="temp()" >
+                        <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Themes
+                            </a>
+                            <ul class="dropdown-menu" >
+                     
                         @foreach (var item in @ViewBag.Themes)
                         {
 
-                            <option value="1" type="checkbox"> @item.Title</option>
+                            <li><input type="checkbox" value="@item.MissionThemeId" /> @item.Title </li>
                         }
-                    </select>
-                    <select class="form-select  border-white xyz" aria-label="Default select example">
+                    </div>
+                    <div class="form-select  border-white xyz" aria-label="Default select example" id="skill"  onchange="temp()">
+
+                           <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Skills
+                            </a>
+                            <ul class="dropdown-menu" >
+                     
+                        @foreach (var item in @ViewBag.Skills)
+                        {
+
+                            <li><input type="checkbox" value="@item.SkillId" /> @item.Skill.SkillName </li>
+                        }
+@*
                         <option selected>Skills</option>
                         @foreach (var item in @ViewBag.Skills)
                         {
 
                             <option value="1"> @item.SkillName</option>
-                        }
-                    </select>
+                        }*@
+                    </div>
                 </div>
 
 

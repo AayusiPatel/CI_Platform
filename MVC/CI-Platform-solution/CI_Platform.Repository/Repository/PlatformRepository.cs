@@ -43,26 +43,172 @@ namespace CI_Platform.Repository.Repository
             var theme = _db.MissionThemes.ToList();
             return theme;
         }
-        public List<Skill> GetSkills()
+        public List<MissionSkill> GetSkills()
         {
 
-            var skills = _db.Skills.ToList();
+            var skills = _db.MissionSkills.Include(m=>m.Skill).ToList();
             return skills;
 
         }
 
-        public List<Mission> GetMissions()
+       
+        public void GetMissions()
         {
+            List<Mission> mission = _db.Missions.ToList();
+            List<MissionMedium> missionMedia = _db.MissionMedia.ToList();
+            List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
+            List<MissionTheme> missionThemes = _db.MissionThemes.ToList();
+            List<MissionRating> missionRatings = _db.MissionRatings.ToList();
 
-            var missions = _db.Missions.ToList();
-            return missions;
+            var missions = (from n in mission
+                            join i in missionMedia on n.MissionId equals i.MissionId
+                            join j in missionSkills on n.MissionId equals j.MissionId
+                            join k in missionThemes on n.ThemeId equals k.MissionThemeId
+                            join l in missionRatings on n.MissionId equals l.MissionId
+                            select n       ).ToList();
+            //return Missions;
 
         }
         public List<Mission> GetMissionDetails()
         {
-            List<Mission> missionDetails = _db.Missions.Include(m => m.City).Include(m => m.Theme).Include(m => m.MissionMedia).ToList();
-            return missionDetails;
+            List<Mission> missionDetails = _db.Missions.Include(m => m.City).Include(m => m.MissionTheme).Include(m => m.MissionMedia).ToList();
+            //foreach (var item in missionDetails)
+            //{ 
+            //    Mission mission = new Mission();
+            //    mission.MissionMedia=_db.MissionMedia.FirstOrDefault(x=>x.MissionId=missionDetails.MissionId)
+            //}
+                return missionDetails;
+        }
+
+
+        public List<Mission> Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
+        {
+            List<Mission> cards = new List<Mission>();
+            var missioncards = GetMissionDetails();
+            var Missionskills = GetSkills();
+            List<int> temp = new List<int>();
+           
+
+            if (cityId.Count != 0 || countryId.Count != 0 || themeId.Count != 0 || skillId.Count != 0)
+            {
+                foreach (var n in cityId)
+                {
+                    foreach (var item in missioncards)
+                    {
+                        bool citychek = cards.Any(x => x.MissionId == item.MissionId);
+                        if (item.CityId == n && citychek == false)
+                        {
+                            cards.Add(item);
+                        }
+
+                    }
+                }
+
+                foreach (var n in countryId)
+                {
+                    foreach (var item in missioncards)
+                    {
+                        bool countrychek = cards.Any(x => x.MissionId == item.MissionId);
+                        if (item.CountryId == n && countrychek == false)
+                        {
+                            cards.Add(item);
+                        }
+                    }
+
+                }
+
+
+                foreach (var n in themeId)
+                {
+                    foreach (var item in missioncards)
+                    {
+                        bool themechek = cards.Any(x => x.MissionId == item.MissionId);
+                        if (item.ThemeId == n && themechek == false)
+                        {
+                            cards.Add(item);
+                        }
+                    }
+                }
+
+                foreach (var n in skillId)
+                {
+                    foreach (var item in Missionskills)
+                    {
+                        bool skillchek = cards.Any(x => x.MissionId == item.MissionId);
+                        if (item.SkillId == n && skillchek == false)
+                        {
+
+                            cards.Add(missioncards.FirstOrDefault(x => x.MissionId == item.MissionId));
+                        }
+                    }
+                    //foreach (var item in Missionskills)
+                    //{
+                    //    if (item.SkillId == n)
+                    //    {
+                    //        temp.Add((int)item.MissionId);
+                    //    }
+                    //    foreach (var item2 in temp)
+                    //    {
+                    //        bool skillchek = missionDetails.Any(x => x.MissionId == item2);
+                    //        if (skillchek == false)
+                    //        {
+                    //            cards.Add(missioncards.FirstOrDefault(x => x.MissionId == item2));
+                    //        }
+                    //    }
+
+                //}
+                }
+
+
+                return cards;
+
+
+            }
+
+            else if (cityId.Count == 0 && countryId.Count == 0 && themeId.Count == 0 && skillId.Count == 0 && search == null)
+            {
+                foreach (var item in missioncards)
+                {
+                    cards.Add(item);
+                }
+                return cards;
+            }
+
+            if (search != null)
+            {
+                foreach (var n in missioncards)
+                {
+                    var title = n.Title.ToLower();
+                    if (title.Contains(search.ToLower()))
+                    {
+                        cards.Add(n);
+                    }
+                }
+
+            }
+
+            if (sort != null)
+            {
+                if (sort == 1)
+                {
+
+                    cards = cards.OrderByDescending(x => x.CreatedAt).ToList();
+                }
+                if (sort == 2)
+                {
+                    cards = cards.OrderBy(x => x.CreatedAt).ToList();
+                }
+
+            }
+            return missioncards;
+
         }
 
     }
 }
+
+    
+
+
+    
+

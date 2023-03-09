@@ -383,7 +383,7 @@ public partial class CiPlatformContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_country_mission");
 
-            entity.HasOne(d => d.Theme).WithMany(p => p.Missions)
+            entity.HasOne(d => d.MissionTheme).WithMany(p => p.Missions)
                 .HasForeignKey(d => d.ThemeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_mission_theme_mission");

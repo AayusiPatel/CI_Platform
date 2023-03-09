@@ -63,7 +63,7 @@ public partial class Mission
 
     public virtual ICollection<Story> Stories { get; } = new List<Story>();
 
-    public virtual MissionTheme Theme { get; set; } = null!;
+    public virtual MissionTheme MissionTheme { get; set; } = null!;
 
     public virtual ICollection<Timesheet> Timesheets { get; } = new List<Timesheet>();
 }

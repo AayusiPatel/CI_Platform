@@ -33,110 +33,17 @@
 
 
 
+
 @*
-
-                    <div class="container" id="xyzw">
-                <nav class="navbar navbar-expand-lg navbar-light  ">
-                    <div class="container d-flex justify-content-between">
-
-                        <!-- Search bar -->
-
-                        <form class=" d-flex form-search my-1">
-                            <input class=" fontheader2 form-control me-2" type="search" placeholder="Search mission..." id="searchb" onkeyup="search_animal()" aria-label="Search">
-                        </form>
-
-                        <!-- Dropdown -->
-
-                        <div class="collapse navbar-collapse" id="xyz">
-                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
-
-                                <li class="nav-item dropdown bdr">
-                                    <a class="fontheader nav-link dropdown-toggle ms-3 me-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        City
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end" id="zxc" onchange="temp()" style="height: 200px; overflow-y: scroll;" aria-labelledby=" dropdownMenuButton">
-
-                                        @foreach(var city in @ViewBag.cities){
-                                        <a class="dropdown-item ">
-                                            @city.Text <input type="checkbox" value="@city.Value ">
-                                        </a>}
-                                       
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown bdr">
-                                    <a class="fontheader nav-link dropdown-toggle ms-3 me-5" href="#"
-                                        id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false ">
-                                        Country
-                                    </a>
-
-                                    
-
-                                    <div class="dropdown-menu dropdown-menu-end" id="cntry" onchange="temp()" style="height: 200px; overflow-y: scroll;" aria-labelledby="dropdownMenuButton">
-
-                                         @foreach(var city in @ViewBag.countries){
-                                        <a class="dropdown-item ">
-                                            @city.Text <input type="checkbox" value="@city.Value">
-                                        </a>}
-
-                                      
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown bdr">
-                                    <a class="fontheader nav-link dropdown-toggle ms-3 me-5" href="#"
-                                        id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false ">
-                                        Theme
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end"  aria-labelledby="dropdownMenuButton">
-
-                                        @foreach (var themes in   ViewBag.themes )
-                                        {
-                                           <a class="dropdown-item">
-                                            @themes.Text <input type="checkbox" value="@themes.Value">
-                                           </a> 
-                                        }
-                                        
-
-                                        
-                                    </div>
-                                </li>
-                                <li class="nav-item dropdown bdr">
-                                    <a class="fontheader nav-link dropdown-toggle ms-3 me-5" href="#"
-                                        id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="fals ">
-                                        Skills
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-
-                                        @foreach (var skills in ViewBag.skills)
-                                        {
-                                            <a class="dropdown-item">
-                                            @skills.Text <input type="checkbox" class="abcd" value="@skills.Value">
-                                            </a>
-                                        }
-                                        
-                                      
-                                    </div>
-                                </li>
-
-                            </ul>
-
-                        </div>
-                    </div>
-                </nav>
-            </div>
-            <hr style="margin: 0rem; border-top: 3px solid #ccc; background-color: #ccc; ">
-            <br>*@
-
-@*        @{
+           
+        @{
 
             Html.RenderPartial("_FilterMissionPartial");
 
                      }
          *@
 
-        <div id="grid" class="grid" >
+        <div id="grid-view" class="grid" >
     <div class="container-fluid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
          @foreach (var item in @ViewBag.MissionDeails)
                 {
@@ -149,7 +56,7 @@
                 <img src="~/img/add1.png" class="card-img-top bg-dark fa-download-1" alt="..." style="">
                         <img src="~/img/heart.png" class="card-img-top bg-dark fa-download-2 " alt="..." style="">
                         <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
-                   <span class="border-dark rounded-pill label"> &nbsp; &nbsp; @item.Theme.Title  &nbsp; &nbsp;</span>
+                   <span class="border-dark rounded-pill label"> &nbsp; &nbsp; @item.MissionTheme.Title  &nbsp; &nbsp;</span>
                     </div>
                 </div>
                 <div class="card-img-overlay ">
