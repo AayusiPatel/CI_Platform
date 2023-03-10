@@ -1,11 +1,11 @@
 ﻿
-@using CI_Platform.Entities.Models
+@using CI_Platform.Entities.ViewModels
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
- <div id="grid" class="grid" >
+ <div id="grid-view" class="grid" >
     <div class="container-fluid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
-         @foreach (var item in @ViewBag.MissionDeails)
+         @foreach (var item in Model.Mission)
                 {
         <div class="col">
             <div class="card " >
@@ -55,4 +55,4 @@
         </div>
         }
         </div>
-        </div>>
+        </div>

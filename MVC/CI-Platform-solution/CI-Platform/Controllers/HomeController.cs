@@ -7,6 +7,7 @@ using CI_Platform.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace CI_Platform.Controllers
@@ -45,9 +46,13 @@ namespace CI_Platform.Controllers
             List<Mission> missionDeails = _platform.GetMissionDetails();
             ViewBag.MissionDeails = missionDeails;
 
+            //List<PlatformModel> models = new List<PlatformModel>();
+            //{
+            //    models.Missi
+            //}
+            //List<PlatformModel.Mission> mission = _platform.GetMissionDetails();
 
 
-         
             List<Country> Countries = _platform.GetCountry();
             ViewBag.Countries = Countries;
             List<City> Cities = _platform.GetCitys();
@@ -57,14 +62,8 @@ namespace CI_Platform.Controllers
             List<MissionSkill> Skills = _platform.GetSkills();
             ViewBag.Skills = Skills;
 
-            //IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
-            //{
-            //    List<Mission> cards = _platform.Filter(cityId, countryId, themeId, skillId, search, sort);
-            //    ViewBag.MissionDeails = cards;
-
-            //    return PartialView("_FilterMissionPartial", cards);
-            //}
-
+            PlatformModel ms = _platform.GetMissions();
+       
 
             return View();
 

@@ -1,4 +1,5 @@
 ﻿using CI_Platform.Entities.Models;
+using CI_Platform.Entities.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace CI_Platform.Repository.Interface
 
         public List<City> GetCityData(int countryId);
         public List<MissionTheme> GetMissionTheme();
-        public void GetMissions();
+        public PlatformModel GetMissions();
         public List<Mission> GetMissionDetails();
         public List<MissionSkill> GetSkills();
 

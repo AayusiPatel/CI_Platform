@@ -51,25 +51,50 @@ namespace CI_Platform.Repository.Repository
             return skills;
 
         }
-
-       
-        public void GetMissions()
+              public PlatformModel GetMissions()
         {
             List<Mission> mission = _db.Missions.ToList();
             List<MissionMedium> missionMedia = _db.MissionMedia.ToList();
             List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
             List<MissionTheme> missionThemes = _db.MissionThemes.ToList();
             List<MissionRating> missionRatings = _db.MissionRatings.ToList();
+            List<City> cities = _db.Cities.ToList();
+            List<Country> countries = _db.Countries.ToList();
 
-            var missions = (from n in mission
-                            join i in missionMedia on n.MissionId equals i.MissionId
-                            join j in missionSkills on n.MissionId equals j.MissionId
-                            join k in missionThemes on n.ThemeId equals k.MissionThemeId
-                            join l in missionRatings on n.MissionId equals l.MissionId
-                            select n       ).ToList();
-            //return missions;
+            PlatformModel missionCards = new PlatformModel();
+            {
 
+                missionCards.Mission = mission;
+                missionCards.MissionThemes = missionThemes;
+                missionCards.MissionSkill = missionSkills;
+                missionCards.MissionMedium = missionMedia;
+                missionCards.MissionRating = missionRatings;
+                    missionCards.Countries = countries;
+                    missionCards.Cities = cities;   
+            }
+            return missionCards;
         }
+
+        //public void GetMissions()
+        //{
+        //    List<Mission> mission = _db.Missions.ToList();
+        //    List<MissionMedium> missionMedia = _db.MissionMedia.ToList();
+        //    List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
+        //    List<MissionTheme> missionThemes = _db.MissionThemes.ToList();
+        //    List<MissionRating> missionRatings = _db.MissionRatings.ToList();
+        //    List<City> cities = _db.Cities.ToList();
+
+        //    var missions = (from n in mission
+        //                    join i in missionMedia on n.MissionId equals i.MissionId
+        //                    join j in missionSkills on n.MissionId equals j.MissionId
+        //                    join k in missionThemes on n.ThemeId equals k.MissionThemeId
+        //                    join l in missionRatings on n.MissionId equals l.MissionId
+        //                    join m in cities on n.CityId equals m.CityId
+        //                    select n).ToList();
+
+        //    //return missions;
+
+        //}
         public List<Mission> GetMissionDetails()
         {
             List<Mission> missionDetails = _db.Missions.Include(m => m.City).Include(m => m.MissionTheme).Include(m => m.MissionMedia).ToList();
