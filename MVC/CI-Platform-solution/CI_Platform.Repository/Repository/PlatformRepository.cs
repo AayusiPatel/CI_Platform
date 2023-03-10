@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using CI_Platform.Entities.Data;
 using CI_Platform.Entities.Models;
+using CI_Platform.Entities.ViewModels;
 using CI_Platform.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 
@@ -66,7 +67,7 @@ namespace CI_Platform.Repository.Repository
                             join k in missionThemes on n.ThemeId equals k.MissionThemeId
                             join l in missionRatings on n.MissionId equals l.MissionId
                             select n       ).ToList();
-            //return Missions;
+            //return missions;
 
         }
         public List<Mission> GetMissionDetails()
@@ -87,22 +88,12 @@ namespace CI_Platform.Repository.Repository
             var missioncards = GetMissionDetails();
             var Missionskills = GetSkills();
             List<int> temp = new List<int>();
-           
+
 
             if (cityId.Count != 0 || countryId.Count != 0 || themeId.Count != 0 || skillId.Count != 0)
             {
-                foreach (var n in cityId)
-                {
-                    foreach (var item in missioncards)
-                    {
-                        bool citychek = cards.Any(x => x.MissionId == item.MissionId);
-                        if (item.CityId == n && citychek == false)
-                        {
-                            cards.Add(item);
-                        }
-
-                    }
-                }
+               
+            
 
                 foreach (var n in countryId)
                 {
@@ -115,6 +106,23 @@ namespace CI_Platform.Repository.Repository
                         }
                     }
 
+                }
+
+                if (cityId.Count != 0 && countryId.Count != 0)
+                {
+                    cards.Clear();
+                    foreach (var n in cityId)
+                    {
+                        foreach (var item in missioncards)
+                        {
+                            bool citychek = cards.Any(x => x.MissionId == item.MissionId);
+                            if (item.CityId == n && citychek == false)
+                            {
+                                cards.Add(item);
+                            }
+
+                        }
+                    }
                 }
 
 
@@ -167,11 +175,11 @@ namespace CI_Platform.Repository.Repository
 
             else if (cityId.Count == 0 && countryId.Count == 0 && themeId.Count == 0 && skillId.Count == 0 && search == null)
             {
-                foreach (var item in missioncards)
-                {
-                    cards.Add(item);
-                }
-                return cards;
+                //foreach (var item in missioncards)
+                //{
+                //    cards.Add(item);
+                //}
+                return missioncards;
             }
 
             if (search != null)
@@ -200,7 +208,7 @@ namespace CI_Platform.Repository.Repository
                 }
 
             }
-            return missioncards;
+            return cards;
 
         }
 

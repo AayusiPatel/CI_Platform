@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CI_Platform.Entities.ViewModels
 {
-    internal class PlatformModel
+    public class PlatformModel
     {
         public CI_Platform.Entities.Models.Mission? Mission { get; set; }
         public List<MissionTheme> MissionThemes { get; set; }

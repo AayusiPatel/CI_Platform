@@ -89,14 +89,14 @@ namespace CI_Platform.Controllers
 
 
             public JsonResult GetCitys(int countryId)
-        {
+          {
 
             List<City> city = _platform.GetCityData(countryId);
             var json = JsonConvert.SerializeObject(city);
 
 
             return Json(json);
-        }
+                 }
 
         public IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
         {

@@ -26,17 +26,21 @@ function GetCity() {
         success: function (data) {
             data = JSON.parse(data);
             $("#selectCityList").empty();
+            document.getElementById("selectCityList").innerHTML += `
+        <option value=${name}> City </option>
+        `;
             data.forEach((name) => {
                 document.getElementById("selectCityList").innerHTML += `
-        <option value=${name} >${name.Name}</option>
+        <option value=${name.CityId} >${name.Name}</option>
         `;
             })
         }
         ,
-        error: function (request, error) {
-            console.log(error);
-        }
-    })
+        error: function (e) {
+            console.log("Bye");
+            alert('Error');
+        },
+    });
 }
 
 
@@ -45,19 +49,9 @@ function GetCity() {
 
 
 function temp() {
-/*    var checkedvalues = [];*/
-    //var div = document.getElementById("zxc");
-    //var list = div.getElementsByTagName("input");
-    //for (i = 0; i < list.length; i++) {
-    //    if (list[i].checked) {
-    //        checkedvalues.push(list[i].value);
-    //    }
-
-    //}
-   // console.log(checkedvalues);
 
 
-
+   
 
 
 
@@ -72,6 +66,18 @@ function temp() {
 
     }
     console.log(checkedcntryvalues);
+
+
+     var checkedvalues = [];
+    var div = document.getElementById("selectCityList");
+    var list = div.getElementsByTagName("option");
+    for (i = 0; i < list.length; i++) {
+        if (list[i].selected) {
+            checkedvalues.push(list[i].value);
+        }
+
+    }
+    console.log(checkedvalues);
 
 
 
@@ -103,19 +109,23 @@ function temp() {
 
 
 
-    //var search = document.getElementById("searchb").value;
-    //console.log(search)
+    var search = document.getElementById("searchb").value;
+    console.log(search)
+
+
     //var sort = document.getElementById("sort").value;
     //console.log(sort)
+
+
     $.ajax({
         type: "POST", // POST
         url: '/Home/Filter',
         data: {
-         /*   'cityId': checkedvalues,*/
+            'cityId': checkedvalues,
             'countryId': checkedcntryvalues,
             'themeId': checkedthemevalues,
             'skillId': checkedskillvalues,
-            //'search': search,
+            'search': search,
             //'sort': sort
         },
         dataType: "html", // return datatype like JSON and HTML
