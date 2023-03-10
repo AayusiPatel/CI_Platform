@@ -18,22 +18,10 @@ namespace CI_Platform.Entities.ViewModels
 
         public List<MissionMedium> MissionMedium { get; set; }
 
-        public List<MissionRating> MissionRating { get; set; }
+        public List<MissionRating>? MissionRating { get; set; }
 
-        public List<Country> Countries { get; set; }
-        public List<City> Cities { get; set; }
-
-
-        //public PlatformModel(List<Mission> missions, List<City> cities, List<Country> countries, List<MissionMedium> medias)
-        //{
-        //    this.Countries = countries;
-        //    this.Mission = missions;
-        //    this.MissionMedium = medias;
-        //    this.Cities = cities;
-        //}
-
-
-
+        public List<Country>? Countries { get; set; }
+        public List<City>? Cities { get; set; }
     }
 
 
