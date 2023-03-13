@@ -124,6 +124,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "CloudinaryDotNet": {
+              "target": "Package",
+              "version": "[1.20.0, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[3.5.0, )"

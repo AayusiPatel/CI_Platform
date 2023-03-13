@@ -1,4 +1,4 @@
-@model CI_Platform.Entities.Models.City
+
 ﻿
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </nav>
-        <div class="row  border-top border-bottom">
+       @* <div class="row  border-top border-bottom">
             <div class="col-6 ">
                 <form class="d-flex mt-md-3" role="search">
                     <i class="bi bi-search mt-2 ms-2"></i>
@@ -84,7 +84,7 @@
                         }
                     </select>
                     <select class="form-select border-white xyz " aria-label="Default select example" id="selectCityList" onchange="temp()">
-                      
+                     *@ 
                        @*     <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             City
                         </a>*@
@@ -95,14 +95,14 @@
                         @item.Name
                         </li>*@
 @*    }*@
-                            <option selected>City</option>
+                         @*   <option selected>City</option>
                           @foreach (var item in @ViewBag.Cities)
                             {
 
                             <option value="@item.CityId"> @item.Name</option>
-                            }
+                            }*@
                            @* </ul>*@
-                    </select>
+                   @* </select>
                     <div class="form-select border-white xyz" aria-label="Default select example" id="theme" onchange="temp()">
                         <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Themes
@@ -127,7 +127,7 @@
                             {
 
                                 <li><input type="checkbox" value="@item.SkillId" /> @item.Skill.SkillName </li>
-                            }
+                            }*@
                             @*
                                 <option selected>Skills</option>
                                 @foreach (var item in @ViewBag.Skills)
@@ -135,13 +135,13 @@
 
                                 <option value="1"> @item.SkillName</option>
                                 }*@
-
+@*
                     </div>
                 </div>
 
 
             </div>
-        </div>
+        </div>*@
     </div>
 
 

@@ -1,5 +1,12 @@
-﻿
-@using CI_Platform.Entities.ViewModels
+﻿@using CI_Platform.Entities.ViewModels
+@model PlatformModel
+
+
+
+
+
+
+
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -7,11 +14,12 @@
     <div class="container-fluid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
          @foreach (var item in Model.Mission)
                 {
+               
         <div class="col">
             <div class="card " >
                 <div class="wrapper">
                     <div class="content">
-                <img src="~/img/Animal-welfare-&-save-birds-campaign-1.png" class="card-img-top" alt="..." style="width: 100%;">
+                <img src=~/img/@(item.MissionMedia.FirstOrDefault()?.MediaPath) class="card-img-top" alt="..." style="width: 100%;">
                
                 <img src="~/img/add1.png" class="card-img-top bg-dark fa-download-1" alt="..." style="">
                         <img src="~/img/heart.png" class="card-img-top bg-dark fa-download-2 " alt="..." style="">
@@ -37,12 +45,12 @@
                         <i class="bi bi-star text-warning"></i>
                     </span>
                     </div>
-                    <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">From @item.StartDate until @item.EndDate</span></h6>
+                    <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">From @item.StartDate.ToString() until @item.EndDate.ToString()</span></h6>
                     <div class="row">
                         <div class="col-6"><i class="bi bi-person-check-fill" style=""></i> 10<br>
                             <span class="small text-muted">&nbsp &nbsp Seats Left</span>
                         </div>
-                        <div class="col-6 "><i class="bi bi-clock"></i> @item.EndDate<br>
+                        <div class="col-6 "><i class="bi bi-clock"></i> @item.EndDate.ToString()<br>
                             <span class="small text-muted">&nbsp &nbsp Deadline</span>
                         </div>
                     </div>
@@ -54,5 +62,6 @@
             </div>
         </div>
         }
+        
         </div>
         </div>

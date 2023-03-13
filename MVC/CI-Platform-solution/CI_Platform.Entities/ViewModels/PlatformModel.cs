@@ -25,14 +25,9 @@ namespace CI_Platform.Entities.ViewModels
     }
 
 
-   
 
 
 
-    public class CityViewModel
-    {
-    
-        public List<Country> Countries { get; set; }
-        public List<City> Cities { get; set; }
-    }
+
+
 }

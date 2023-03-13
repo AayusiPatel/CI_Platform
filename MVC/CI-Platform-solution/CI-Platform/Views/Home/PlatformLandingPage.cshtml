@@ -1,4 +1,6 @@
-﻿
+﻿@using CI_Platform.Entities.ViewModels
+@model PlatformModel
+
 @{
     ViewData["Title"] = "PlatformLandingPage";
 }
@@ -6,12 +8,19 @@
 <h1>PlatformLandingPage</h1>
 
 <body>
+    
+        @{
+
+            Html.RenderPartial("nav2");
+
+        }
+
 <div class="container">
 
 
           <div class="row ">
 
-          <div class="col-5">  <h3 class="text-wrap">Expore 72 Missions</h3>
+          <div class="col-5">  <h3 class="text-wrap">Expore @ViewBag.cont @ViewBag.cont1 Missions</h3>
           </div>
 
 
@@ -31,8 +40,7 @@
 
 
 
-
-
+ 
 
 
 

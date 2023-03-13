@@ -8,6 +8,7 @@ using CI_Platform.Entities.Data;
 using CI_Platform.Entities.Models;
 using CI_Platform.Entities.ViewModels;
 using CI_Platform.Repository.Interface;
+using CloudinaryDotNet.Actions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CI_Platform.Repository.Repository
@@ -47,14 +48,23 @@ namespace CI_Platform.Repository.Repository
         public List<MissionSkill> GetSkills()
         {
 
-            var skills = _db.MissionSkills.Include(m=>m.Skill).ToList();
-            return skills;
+            var skills = _db.MissionSkills.Include(m => m.Skill).ToList();
+            List<MissionSkill> printskl = new List<MissionSkill>();
+            foreach (var skill in skills)
+            {
+                bool chck = printskl.Any(x => x.SkillId == skill.SkillId);
+                if(chck==false)
+                { printskl.Add(skill); }
+            }
+
+
+            return printskl;
 
         }
-              public PlatformModel GetMissions()
+        public PlatformModel GetMissions()
         {
             List<Mission> mission = _db.Missions.ToList();
-            List<MissionMedium> missionMedia = _db.MissionMedia.ToList();
+            List<MissionMedium> missionMedia = _db.MissionMedia.Where(x => x.Default == 1).ToList();
             List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
             List<MissionTheme> missionThemes = _db.MissionThemes.ToList();
             List<MissionRating> missionRatings = _db.MissionRatings.ToList();
@@ -69,41 +79,28 @@ namespace CI_Platform.Repository.Repository
                 missionCards.MissionSkill = missionSkills;
                 missionCards.MissionMedium = missionMedia;
                 missionCards.MissionRating = missionRatings;
-                    missionCards.Countries = countries;
-                    missionCards.Cities = cities;   
+                missionCards.Countries = countries;
+                missionCards.Cities = cities;
             }
             return missionCards;
         }
 
-        //public void GetMissions()
-        //{
-        //    List<Mission> mission = _db.Missions.ToList();
-        //    List<MissionMedium> missionMedia = _db.MissionMedia.ToList();
-        //    List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
-        //    List<MissionTheme> missionThemes = _db.MissionThemes.ToList();
-        //    List<MissionRating> missionRatings = _db.MissionRatings.ToList();
-        //    List<City> cities = _db.Cities.ToList();
-
-        //    var missions = (from n in mission
-        //                    join i in missionMedia on n.MissionId equals i.MissionId
-        //                    join j in missionSkills on n.MissionId equals j.MissionId
-        //                    join k in missionThemes on n.ThemeId equals k.MissionThemeId
-        //                    join l in missionRatings on n.MissionId equals l.MissionId
-        //                    join m in cities on n.CityId equals m.CityId
-        //                    select n).ToList();
-
-        //    //return missions;
-
-        //}
+       
         public List<Mission> GetMissionDetails()
         {
-            List<Mission> missionDetails = _db.Missions.Include(m => m.City).Include(m => m.MissionTheme).Include(m => m.MissionMedia).ToList();
+            List<Mission> missionDetails = _db.Missions.Include(m => m.City).Include(n => n.MissionTheme).ToList();
             //foreach (var item in missionDetails)
             //{ 
             //    Mission mission = new Mission();
             //    mission.MissionMedia=_db.MissionMedia.FirstOrDefault(x=>x.MissionId=missionDetails.MissionId)
             //}
-                return missionDetails;
+            List<MissionMedium> missionMedia = _db.MissionMedia.ToList();
+            var missions = (from z in missionDetails
+                            join i in missionMedia on z.MissionId equals i.MissionId into tbl1
+                            from i in tbl1.DefaultIfEmpty()
+                            select z).ToList();
+
+                return missions;
         }
 
 
@@ -111,7 +108,7 @@ namespace CI_Platform.Repository.Repository
         {
             List<Mission> cards = new List<Mission>();
             var missioncards = GetMissionDetails();
-            var Missionskills = GetSkills();
+            var Missionskills = _db.MissionSkills.Include(m => m.Skill).ToList();
             List<int> temp = new List<int>();
 
 

@@ -36,7 +36,15 @@ namespace CI_Platform.Controllers
         //    return View();
         //}
 
-        public IActionResult PlatformLandingPage()
+
+        //public IActionResult PlatformLandingPage()
+        //{
+        //    return View();
+        //}
+
+
+        //[HttpPost]
+            public IActionResult PlatformLandingPage()
         {
             string name = HttpContext.Session.GetString("Uname");
             ViewBag.Uname = name;
@@ -46,27 +54,23 @@ namespace CI_Platform.Controllers
             List<Mission> missionDeails = _platform.GetMissionDetails();
             ViewBag.MissionDeails = missionDeails;
 
-            //List<PlatformModel> models = new List<PlatformModel>();
-            //{
-            //    models.Missi
-            //}
-            //List<PlatformModel.Mission> mission = _platform.GetMissionDetails();
+            ViewBag.cont = missionDeails.Count;
 
-
-            List<Country> Countries = _platform.GetCountry();
-            ViewBag.Countries = Countries;
+       
             List<City> Cities = _platform.GetCitys();
             ViewBag.Cities = Cities;
+            List<Country> Countries = _platform.GetCountry();
+            ViewBag.Countries = Countries;
             List<MissionTheme> Themes = _platform.GetMissionTheme();
             ViewBag.Themes = Themes;
             List<MissionSkill> Skills = _platform.GetSkills();
             ViewBag.Skills = Skills;
 
+
             PlatformModel ms = _platform.GetMissions();
-       
 
-            return View();
 
+            return View(ms);
         }
 
 
@@ -100,9 +104,14 @@ namespace CI_Platform.Controllers
         public IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
         {
             List<Mission> cards = _platform.Filter(cityId, countryId, themeId, skillId, search, sort);
-            ViewBag.MissionDeails = cards;
+            PlatformModel platformModel = new PlatformModel();
+            {
+                platformModel.Mission = cards;
+            }
 
-            return PartialView("_FilterMissionPartial", cards);
+            return PartialView("_FilterMissionPartial", platformModel);
+
+
         }
 
 

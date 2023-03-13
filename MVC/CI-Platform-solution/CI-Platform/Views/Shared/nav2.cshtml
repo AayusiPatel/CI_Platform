@@ -1,0 +1,87 @@
+﻿@using CI_Platform.Entities.ViewModels
+@model PlatformModel
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+  <div class="row  border-top border-bottom">
+            <div class="col-6 ">
+                <form class="d-flex mt-md-3" role="search">
+                    <i class="bi bi-search mt-2 ms-2"></i>
+                    <input class="form-control border-white" type="search" placeholder="Search Mission " aria-label="Search" id="searchb" onkeyup="temp()">
+                </form>
+            </div>
+            <div class="col-6 ">
+                <button class="btn btn-primary d-md-none w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Filter Missions
+                </button>
+                </p>
+                <div class="collapse d-md-flex " id="collapseExample">
+                    <select class="form-select  border-white xyz" aria-label="Default select example" placeholder="Country" id="countryId" onchange="temp(); GetCity();">
+                        <option selected>Country</option>
+                        @foreach (var item in @ViewBag.Countries)
+                        {
+
+                            <option value="@item.CountryId"> @item.Name</option>
+                        }
+                    </select>
+                    <select class="form-select border-white xyz " aria-label="Default select example" id="selectCityList" onchange="temp()">
+                      
+                       @*     <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            City
+                        </a>*@
+                      @*  <ul class="dropdown-menu">
+                        @foreach (var item in ViewBag.Cities)
+    {
+                        <li><input type="checkbox" name="Cities" value="@item.CityId" />
+                        @item.Name
+                        </li>*@
+@*    }*@
+                            <option selected>City</option>
+                          @foreach (var item in @ViewBag.Cities)
+                            {
+
+                            <option value="@item.CityId"> @item.Name</option>
+                            }
+                           @* </ul>*@
+                    </select>
+                    <div class="form-select border-white xyz" aria-label="Default select example" id="theme" onchange="temp()">
+                        <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Themes
+                        </a>
+                        <ul class="dropdown-menu">
+
+                            @foreach (var item in @ViewBag.Themes)
+                            {
+
+                                <li><input type="checkbox" value="@item.MissionThemeId" /> @item.Title </li>
+                            }
+                            </ul>
+                    </div>
+                    <div class="form-select  border-white xyz" aria-label="Default select example" id="skill" onchange="temp()">
+
+                        <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Skills
+                        </a>
+                        <ul class="dropdown-menu">
+
+                            @foreach (var item in @ViewBag.Skills)
+                            {
+
+                                <li><input type="checkbox" value="@item.SkillId" /> @item.Skill.SkillName </li>
+                            }
+                            @*
+                                <option selected>Skills</option>
+                                @foreach (var item in @ViewBag.Skills)
+                                {
+
+                                <option value="1"> @item.SkillName</option>
+                                }*@
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
