@@ -130,7 +130,7 @@ function temp() {
         },
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
-
+            debugger
             $("#grid-view").empty();
             console.log("grid Hii");
             $("#grid-view").html(data);

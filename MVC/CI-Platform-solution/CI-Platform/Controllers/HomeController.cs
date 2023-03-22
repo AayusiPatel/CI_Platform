@@ -109,7 +109,7 @@ namespace CI_Platform.Controllers
                 platformModel.Mission = cards;
             }
 
-            return PartialView("_FilterMissionPartial", platformModel);
+            return View("_FilterMissionPartial", platformModel);
 
 
         }
