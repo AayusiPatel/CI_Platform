@@ -1,0 +1,32 @@
+﻿@using CI_Platform.Entities.ViewModels
+
+@model StoryModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+  @foreach(var item in Model.stories){
+    <div class="col">
+        <div class="card" onclick="showStory(@item.StoryId)">
+            <div class="wrapper">
+                <div class="content">
+            <img src="~/img/@item.StoryMedia.FirstOrDefault()?.Path" id="@item.StoryId" class="card-img-top" alt="..." style="width: 100%;" >
+            <button class="hidden-button">View Details -></button>
+            
+                    <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
+               <span class="border-dark rounded-pill label" >
+                   &nbsp; &nbsp; @item.Mission.Theme.Title  &nbsp; &nbsp;</span>
+                </div>
+            </div>
+           
+            <div class="card-body mb-0">
+                <h5 class="card-title">@item.Title</h5>
+                <p class="card-text" id="text">@item.Description</p>
+               
+                <a class="text-dark text-decoration-none" href="#" role="button"  >
+                    <img src="~/img/@item.User.Avatar"  style="border-radius: 50%; height: 4.5em;"alt=""> <span class="medium"> @item.User.FirstName @item.User.LastName </span>
+                </a>
+        </div>
+    </div>
+   
+</div>
+}

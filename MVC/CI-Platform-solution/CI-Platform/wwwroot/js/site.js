@@ -5,18 +5,18 @@
 
 
 
-function DisableBackButton() {
-    window.history.forward();
-}
-DisableBackButton();
-window.onload = DisableBackButton;
-window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton(); }
-window.onunload = function () { void (0); };
+//function DisableBackButton() {
+//    window.history.forward();
+//}
+//DisableBackButton();
+//window.onload = DisableBackButton;
+//window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton(); }
+//window.onunload = function () { void (0); };
 
 
 function GetCity() {
     var countryId = $('#countryId').find(":selected").val();
-   /* debugger;*/
+    /* debugger;*/
     $.ajax({
         url: "/Home/GetCitys",
         method: "GET",
@@ -44,6 +44,8 @@ function GetCity() {
 }
 
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -110,11 +112,11 @@ function temp() {
 
 
     var search = document.getElementById("searchb").value;
-    console.log(search)
+    console.log(search);
 
 
-    //var sort = document.getElementById("sort").value;
-    //console.log(sort)
+    var sort = document.getElementById("sort").value;
+    console.log(sort);
 
 
     $.ajax({
@@ -126,7 +128,7 @@ function temp() {
             'themeId': checkedthemevalues,
             'skillId': checkedskillvalues,
             'search': search,
-            //'sort': sort
+            'sort': sort
         },
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
@@ -144,3 +146,320 @@ function temp() {
         },
     });
 }
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+function story() {
+
+
+
+
+    var search = document.getElementById("searchb").value;
+    console.log(search)
+
+
+
+
+    debugger
+
+    $.ajax({
+        type: "POST", // POST
+        url: '/Common/StoryFilter',
+        data: {
+
+            'search': search,
+
+        },
+        dataType: "html", // return datatype like JSON and HTML
+        success: function (data) {
+            debugger
+
+            console.log(data);
+            $("#StoryFilter").empty();
+            $("#StoryFilter").html(data);
+            //$("#StoriesId").empty();
+            //console.log("Filtered Story");
+            //$("#StoriesId").html(data);
+
+          
+
+
+        },
+        error: function (e) {
+            debugger
+            console.log("Bye");
+            alert('Error');
+        },
+    });
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function fav(x) {
+
+    var crd = document.getElementById("card");
+    /*    var missionId = document.getElementsByClassName("mission_id").value;*/
+    var missionId = x;
+
+    $.ajax({
+        type: "POST", // POST
+        url: '/Home/AddFav',
+        data: {
+            'MissionId': missionId
+        },
+        dataType: "html", // return datatype like JSON and HTML
+        success: function (missions) {
+            debugger
+            if (missions == "false") {
+
+                $('#favMission').removeClass();
+                $('#favMission').addClass("bi bi-heart");
+                alert('Mission Removed from Favorites.');
+            }
+
+            else {
+                $('#favMission').removeClass();
+                $('#favMission').addClass("bi bi-heart-fill text-danger");
+                alert('Mission Added to Favorites.');
+            }
+
+            //if (missions == true) {
+            //    $('#favMission').removeClass();
+            //    $('#favMission').addClass("bi bi-heart-fill text-danger");
+            // /*   $('#favMission').css("color", "red");*/
+            //}
+            //else {
+            //   /* $('#favMission').css("color", "black");*/
+            //    $('#favMission').removeClass();
+            //    $('#favMission').addClass("bi bi-heart");
+            //}
+            console.log("Added ");
+
+
+        },
+        error: function (e) {
+            console.log("Bye");
+            alert('Error');
+        },
+    });
+}
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+document.onload = opengrid();
+
+function opengrid() {
+    console.log("grid-view");
+    var div1 = document.getElementById("list-view");
+    var div2 = document.getElementById("grid-view");
+    div1.style.display = 'none';
+    div2.style.display = 'block';
+    console.log("Done");
+}
+function openlist() {
+    console.log("list-view");
+    var div1 = document.getElementById("list-view");
+    var div2 = document.getElementById("grid-view");
+    div1.style.display = 'block';
+    div2.style.display = 'none';
+    console.log("Done");
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//$.ajax({
+//    url: "/Rating/Submit",
+//    type: "POST",
+//    data: { rating: value },
+//    success: function (result) {
+//        console.log("Rating submitted successfully");
+//        // Display a success message to the user
+//    },
+//    error: function () {
+//        console.log("Error submitting rating");
+//        // Display an error message to the user
+//    }
+//});
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+function comment(x) {
+
+
+    var comnt = $("#commentDescription").val();
+    var missionid = x;
+
+    console.log(comnt);
+
+
+    $.ajax({
+        url: "/Home/AddComment",
+        type: "POST", // POST
+        data: {
+            'obj': missionid,
+            'comnt': comnt
+        },
+        dataType: "html", // return datatype like JSON and HTML
+        success: function (data) {
+            console.log(data);
+            $("#comment").html(data);
+            $("#comment").load("#comment");
+          
+            alert('Comment Added successfully.');
+            //$("#commentDescription").val(null);
+            //$("#comment").;
+            //console.log("Added ");
+
+
+        },
+        error: function (e) {
+            console.log("Bye");
+            alert('Error');
+        },
+    });
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+function recommandToCoWorker(x) {
+
+    var toUserId = [];
+    var recommand = document.getElementById("recommand");
+    var list = recommand.getElementsByTagName("input");
+    for (i = 0; i < list.length; i++) {
+        if (list[i].checked) {
+            toUserId.push(list[i].value);
+        }
+
+    }
+
+
+    var Missiond = x;
+
+    /* debugger;*/
+    $.ajax({
+        url: "/Home/RecommandToCoWorker",
+        method: "Post",
+        data: {
+            "toUserId": toUserId,
+            "mid": Missiond
+        },
+        success: function (data) {
+            console.log(toUserId);
+
+        }
+        ,
+        error: function (e) {
+            console.log("Bye");
+            alert('Error');
+        },
+    });
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function applyMission(missionId) {
+    debugger
+    $.ajax({
+
+        url: '/Home/applyMission',
+        method: "POST",
+        data: {
+            'missionId': missionId,
+        },
+        success: function (missions) {
+            debugger
+            if (missions == true) {
+                console.log("done");
+
+                //$('#applyMission').prop('disabled', true);
+                //$('#applyMission').text("Applied");
+                //$('#applyMission').css("color", "red");
+                //document.getElementById("pop-up").innerHTML += `Applied Successfully...`;
+                $('#applyMission').empty();
+                $('#applyMission').text("Applied");
+
+                document.getElementById("pop-up").innerHTML += `Applied Successfully...`;
+            }
+        },
+        error: function (request, error) {
+            console.log("function not working");
+            document.getElementById("pop-up").innerHTML += `You've already Applied...`;
+
+            alert('Error');
+        },
+
+    });
+
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+function PageIndex(x, y) {
+    debugger
+    $.ajax({
+
+        url: '/Home/Volunteering_Mission',
+        method: "POST",
+        data: {
+            'mid': x,
+            'pageIndex': y
+        },
+        success: function (data) {
+            debugger
+
+            console.log("Pagination");
+            $("body").html(data);
+
+
+        },
+        error: function (request, error) {
+            console.log("Error in Pagination");
+
+
+            alert('Error in Pagination');
+        },
+
+    });
+
+}
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function showStory(x) {
+
+    var displayimg = x;
+    var text = document.getElementById("text");
+    var image = document.getElementById(x).src;
+
+    var storyText = document.getElementById("storyText");
+    storyText = text;
+    document.getElementById("baner").style.backgroundImage = 'url(' + image + ')';
+
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+

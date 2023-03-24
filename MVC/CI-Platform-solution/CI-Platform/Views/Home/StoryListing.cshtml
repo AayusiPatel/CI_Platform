@@ -1,0 +1,184 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@*@using CI_Platform.Entities.ViewModels
+
+@model StoryModel*@
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+@*
+
+        @{
+    Html.RenderPartial("nav2");
+}
+*@
+
+
+ <div class="row  border-top border-bottom">
+            <div class="col-6 ">
+                <form class="d-flex mt-md-3" role="search">
+                    <i class="bi bi-search mt-2 ms-2"></i>
+                    <input class="form-control border-white" type="search" placeholder="Search Mission " aria-label="Search" id="searchb" onkeyup="story();">
+                </form>
+            </div>
+  </div>
+
+<div class="container">
+
+
+    <div class="banner container-fluid text-center py-5 text-white mb-5 " id="baner">
+
+        <div class="50 mt-2" id="storyText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos animi quibusdam illum consectetur eligendi rerum, esse adipisci fugit neque molestias dolores fugiat consequuntur, delectus deserunt. Odit pariatur quia reiciendis rerum?</div>
+
+        <button type="button" class="btn btn-outline-light rounded-pill mt-3">Share your Story &nbsp; <i class="bi bi-arrow-right"></i></button>
+
+
+    </div>
+    @*<script>
+        function showStory(){
+        var text = document.getElementById("text").val();
+        var image = document.getElementById("image").src;
+        var storyText =  document.getElementById("storyText");
+        storyText = text ;
+        document.getElementById("baner").style.backgroundImage = "url('image')";
+
+        }
+
+        </script>*@
+
+    <div class="container">
+        <div class="container-fluid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2" id="StoryFilter">
+
+          
+
+
+            @{
+                Html.RenderPartial("_FilterStory");
+            }
+
+
+            
+</div>
+</div>
+</div>
+
+  @*  @foreach(var item in Model.stories){
+    <div class="col">
+        <div class="card" onclick="showStory(@item.StoryId)">
+            <div class="wrapper">
+                <div class="content">
+            <img src="~/img/@item.StoryMedia.FirstOrDefault()?.Path" id="@item.StoryId" class="card-img-top" alt="..." style="width: 100%;" >
+            <button class="hidden-button">View Details -></button>
+            
+                    <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
+               <span class="border-dark rounded-pill label" >
+                   &nbsp; &nbsp; @item.Mission.Theme.Title  &nbsp; &nbsp;</span>
+                </div>
+            </div>
+           
+            <div class="card-body mb-0">
+                <h5 class="card-title">@item.Title</h5>
+                <p class="card-text" id="text">@item.Description</p>
+               
+                <a class="text-dark text-decoration-none" href="#" role="button"  >
+                    <img src="~/img/@item.User.Avatar"  style="border-radius: 50%; height: 4.5em;"alt=""> <span class="medium"> @item.User.FirstName @item.User.LastName </span>
+                </a>
+        </div>
+    </div>
+   
+</div>
+}*@@*
+<div class="col">
+    <div class="card " >
+        <div class="wrapper">
+            <div class="content">
+        <img src="img/Animal-welfare-&-save-birds-campaign-1.png" class="card-img-top" alt="..." style="width: 100%;">
+       
+        
+                <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
+           <span class="border-dark rounded-pill label" > &nbsp; &nbsp; Children  &nbsp; &nbsp;</span>
+            </div>
+        </div>
+       
+        <div class="card-body mb-0">
+            <h5 class="card-title">Education Supplies for Every Pair of Shoes Sold</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
+           
+            <a class="text-dark text-decoration-none" href="#" role="button"  >
+                <img src="img/volunteer1.png"  style="border-radius: 50%; height: 4.5em;"alt=""> <span class="medium"> Evan Donohue </span>
+            </a>
+    </div>
+</div>
+
+</div>
+<div class="col">
+    <div class="card " >
+        <div class="wrapper">
+            <div class="content">
+        <img src="img/Animal-welfare-&-save-birds-campaign-1.png" class="card-img-top" alt="..." style="width: 100%;">
+       
+        
+                <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
+           <span class="border-dark rounded-pill label" > &nbsp; &nbsp; Environment  &nbsp; &nbsp;</span>
+            </div>
+        </div>
+       
+        <div class="card-body mb-0">
+            <h5 class="card-title">Education Supplies for Every Pair of Shoes Sold</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
+           
+            <a class="text-dark text-decoration-none" href="#" role="button"  >
+                <img src="img/volunteer1.png"  style="border-radius: 50%; height: 4em;"alt=""> <span class="medium"> Evan Donohue </span>
+            </a>
+    </div>
+</div>
+
+</div>
+<div class="col">
+    <div class="card " >
+        <div class="wrapper">
+            <div class="content">
+        <img src="img/Animal-welfare-&-save-birds-campaign-1.png" class="card-img-top" alt="..." style="width: 100%;">
+       
+        
+                <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
+           <span class="border-dark rounded-pill label" > &nbsp; &nbsp; Children  &nbsp; &nbsp;</span>
+            </div>
+        </div>
+       
+        <div class="card-body mb-0">
+            <h5 class="card-title">Education Supplies for Every Pair of Shoes Sold</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
+           
+            <a class="text-dark text-decoration-none" href="#" role="button"  >
+                <img src="img/volunteer1.png"  style="border-radius: 50%; height: 4.5em;"alt=""> <span class="medium"> Evan Donohue </span>
+            </a>
+    </div>
+</div>
+
+</div>
+<div class="col">
+    <div class="card " >
+        <div class="wrapper">
+            <div class="content">
+        <img src="img/Animal-welfare-&-save-birds-campaign-1.png" class="card-img-top" alt="..." style="width: 100%;">
+       
+        
+                <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
+           <span class="border-dark rounded-pill label"> &nbsp; &nbsp; Children  &nbsp; &nbsp;</span>
+            </div>
+        </div>
+       
+        <div class="card-body mb-0">
+            <h5 class="card-title">Education Supplies for Every Pair of Shoes Sold</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
+           
+            <a class="text-dark text-decoration-none" href="#" role="button"  >
+                <img src="img/volunteer1.png"  style="border-radius: 50%; height: 4.5em;"alt=""> <span class="medium"> Evan Donohue </span>
+            </a>
+    </div>
+</div>*@
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

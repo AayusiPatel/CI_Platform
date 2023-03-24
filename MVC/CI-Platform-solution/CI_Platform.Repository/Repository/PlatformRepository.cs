@@ -8,7 +8,6 @@ using CI_Platform.Entities.Data;
 using CI_Platform.Entities.Models;
 using CI_Platform.Entities.ViewModels;
 using CI_Platform.Repository.Interface;
-using CloudinaryDotNet.Actions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CI_Platform.Repository.Repository
@@ -53,7 +52,7 @@ namespace CI_Platform.Repository.Repository
             foreach (var skill in skills)
             {
                 bool chck = printskl.Any(x => x.SkillId == skill.SkillId);
-                if(chck==false)
+                if (chck == false)
                 { printskl.Add(skill); }
             }
 
@@ -70,6 +69,8 @@ namespace CI_Platform.Repository.Repository
             List<MissionRating> missionRatings = _db.MissionRatings.ToList();
             List<City> cities = _db.Cities.ToList();
             List<Country> countries = _db.Countries.ToList();
+            List<GoalMission> goalMissions = _db.GoalMissions.ToList();
+            int abc = (int)missionRatings.Average(x => x.Rating);
 
             PlatformModel missionCards = new PlatformModel();
             {
@@ -81,26 +82,22 @@ namespace CI_Platform.Repository.Repository
                 missionCards.MissionRating = missionRatings;
                 missionCards.Countries = countries;
                 missionCards.Cities = cities;
+                missionCards.GoalMission = goalMissions;
+                //missionCards.rating = abc;
             }
             return missionCards;
         }
 
-       
+
         public List<Mission> GetMissionDetails()
         {
-            List<Mission> missionDetails = _db.Missions.Include(m => m.City).Include(n => n.MissionTheme).ToList();
+            List<Mission> missionDetails = _db.Missions.Include(m => m.City).Include(m => m.Theme).Include(m => m.MissionMedia).Include(m => m.GoalMissions).Include(m => m.MissionSkills).ToList();
             //foreach (var item in missionDetails)
             //{ 
             //    Mission mission = new Mission();
             //    mission.MissionMedia=_db.MissionMedia.FirstOrDefault(x=>x.MissionId=missionDetails.MissionId)
             //}
-            List<MissionMedium> missionMedia = _db.MissionMedia.ToList();
-            var missions = (from z in missionDetails
-                            join i in missionMedia on z.MissionId equals i.MissionId into tbl1
-                            from i in tbl1.DefaultIfEmpty()
-                            select z).ToList();
-
-                return missions;
+            return missionDetails;
         }
 
 
@@ -112,10 +109,10 @@ namespace CI_Platform.Repository.Repository
             List<int> temp = new List<int>();
 
 
-            if (cityId.Count != 0 || countryId.Count != 0 || themeId.Count != 0 || skillId.Count != 0)
+            if (countryId.Count != 0 || themeId.Count != 0 || skillId.Count != 0)
             {
-               
-            
+
+
 
                 foreach (var n in countryId)
                 {
@@ -186,34 +183,56 @@ namespace CI_Platform.Repository.Repository
                     //        }
                     //    }
 
-                //}
+                    //}
                 }
 
 
-                return cards;
+
 
 
             }
 
-            else if (cityId.Count == 0 && countryId.Count == 0 && themeId.Count == 0 && skillId.Count == 0 && search == null)
+            if (countryId.Count == 0 && themeId.Count == 0 && skillId.Count == 0 && search == null)
             {
-                //foreach (var item in missioncards)
-                //{
-                //    cards.Add(item);
-                //}
-                return missioncards;
+                foreach (var item in missioncards)
+                {
+                    cards.Add(item);
+                }
+
             }
 
             if (search != null)
             {
-                foreach (var n in missioncards)
+                List<Mission> srch = new List<Mission>();
+
+
+                if (cards.Count != 0)
                 {
-                    var title = n.Title.ToLower();
-                    if (title.Contains(search.ToLower()))
+                    foreach (var n in cards)
                     {
-                        cards.Add(n);
+
+                        var title = n.Title.ToLower();
+                        if (title.Contains(search.ToLower()))
+                        {
+                            srch.Add(n);
+                        }
+
+
                     }
                 }
+
+                if (cards.Count == 0)
+                {
+                    foreach (var n in missioncards)
+                    {
+                        var title = n.Title.ToLower();
+                        if (title.Contains(search.ToLower()))
+                        {
+                            srch.Add(n);
+                        }
+                    }
+                }
+                cards = srch;
 
             }
 
@@ -221,24 +240,111 @@ namespace CI_Platform.Repository.Repository
             {
                 if (sort == 1)
                 {
+                    if (cards.Count != 0)
+                    {
+                        cards = cards.OrderByDescending(x => x.CreatedAt).ToList();
+                    }
 
-                    cards = cards.OrderByDescending(x => x.CreatedAt).ToList();
+                    else
+                    {
+                        missioncards = missioncards.OrderByDescending(x => x.CreatedAt).ToList();
+                    }
                 }
                 if (sort == 2)
                 {
-                    cards = cards.OrderBy(x => x.CreatedAt).ToList();
+                    if (cards.Count != 0)
+                    {
+                        cards = cards.OrderBy(x => x.CreatedAt).ToList();
+                    }
+
+                    else
+                    {
+                        missioncards = missioncards.OrderBy(x => x.CreatedAt).ToList();
+                    }
                 }
+                if (sort == 3)
+                {
+                    if (cards.Count != 0)
+                    {
+                        cards = cards.OrderBy(x => x.EndDate).ToList();
+                    }
+
+                    else
+                    {
+                        missioncards = missioncards.OrderBy(x => x.EndDate).ToList();
+                    }
+                }
+                if (sort == 3)
+                {
+                    if (cards.Count != 0)
+                    {
+                        cards = cards.OrderBy(x => x.EndDate).ToList();
+                    }
+
+                    else
+                    {
+                        missioncards = missioncards.OrderBy(x => x.EndDate).ToList();
+                    }
+                }
+
+                //if (sort == 4)
+                //{
+                //    if (cards.Count != 0)
+                //    {
+
+                //        cards = cards.OrderBy(x => x.FavoriteMissions).ToList();
+                //    }
+
+                //    else
+                //    {
+                //        missioncards = missioncards.OrderBy(x => x.FavoriteMissions).ToList();
+                //    }
+                //}
 
             }
             return cards;
 
         }
 
+
+
+
+
+
+
+
+        public bool AddFav(int UserID, int MissionId)
+        {
+            FavoriteMission mission = new FavoriteMission();
+            {
+                mission.UserId = UserID;
+                mission.MissionId = MissionId;
+            }
+            FavoriteMission favM = _db.FavoriteMissions.FirstOrDefault(x => x.UserId == mission.UserId && x.MissionId == MissionId);
+
+            if (favM != null)
+            {
+
+                _db.FavoriteMissions.Remove(favM);
+                _db.SaveChanges();
+                return false;
+            }
+            else
+            {
+                _db.FavoriteMissions.Add(mission);
+                _db.SaveChanges();
+                return true;
+
+            }
+
+
+
+        }
     }
 }
 
-    
 
 
-    
+
+
 

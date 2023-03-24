@@ -78,6 +78,7 @@ namespace CI_Platform.Controllers
                     //ISession["var1"] = "obg";
 
                     HttpContext.Session.SetString("Uname", loguser.FirstName + " " + loguser.LastName);
+                    HttpContext.Session.SetInt32("UId", (int)loguser.UserId);
 
 
                     return RedirectToAction("PlatformLandingPage", "Home");

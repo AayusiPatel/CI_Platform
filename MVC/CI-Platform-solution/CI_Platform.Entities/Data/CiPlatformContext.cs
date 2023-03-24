@@ -208,6 +208,10 @@ public partial class CiPlatformContext : DbContext
                 .IsUnicode(false)
                 .HasDefaultValueSql("('Pending')")
                 .HasColumnName("approval_status");
+            entity.Property(e => e.CommentDescription)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("comment_description");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
@@ -383,7 +387,7 @@ public partial class CiPlatformContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_country_mission");
 
-            entity.HasOne(d => d.MissionTheme).WithMany(p => p.Missions)
+            entity.HasOne(d => d.Theme).WithMany(p => p.Missions)
                 .HasForeignKey(d => d.ThemeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_mission_theme_mission");

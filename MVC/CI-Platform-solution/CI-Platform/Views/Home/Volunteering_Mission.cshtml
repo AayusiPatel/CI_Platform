@@ -1,589 +1,1016 @@
+@using CI_Platform.Entities.ViewModels
+
+@model VolunteerModel
+
 <!doctype html>
 <html lang="en">
 
 <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
- 
     <link rel="stylesheet" type="text/css" href="~/css/style.css">
+
+
+
     <title>Volunteering_Mission</title>
- 
 
 
-   
 </head>
 
 <body>
 
 
 
-        <div class="card mb-3" style="max-width: 100%;">
-            <div class="row no-gutters">
-              <div class="col-md-5">
-               <!-- ............................................................................................................................................. -->
-               <div class="container w-100 p-0 " >
-
-                <!-- Full-width img with number text -->
-                <div class="mySlides">
-                    <div class="numbertext">1 / 6</div>
-                    <img src="~/img/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-4.png" style="width:100%; ">
-                </div>
-
-                <div class="mySlides">
-                    <div class="numbertext">2 / 6</div>
-                    <img src="~/img/Grow-Trees-On-the-path-to-environment-sustainability-4.png" style="width:100%; ">
-                </div>
-
-                <div class="mySlides">
-                    <div class="numbertext">3 / 6</div>
-                    <img src="~/img/Animal-welfare-&-save-birds-campaign.png" style="width:100%;max-h:100%">
-                </div>
-
-                <div class="mySlides">
-                    <div class="numbertext">4 / 6</div>
-                    <img src="~/img/Grow-Trees-On-the-path-to-environment-sustainability-4.png" style="width:100%;">
-                </div>
-
-                <div class="mySlides">
-                    <div class="numbertext">5 / 6</div>
-                    <img src="~/img/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-4.png" style="width:100%;">
-                </div>
-
-                <div class="mySlides">
-                    <div class="numbertext">6 / 6</div>
-                    <img src="~/img/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-4.png" style="width:100%;">
-                </div>
-
-                <!-- Next and previous buttons -->
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    <div class="card mb-3" style="max-width: 100%;">
+        <div class="row no-gutters">
+            <div class="col-md-5">
+                <!-- ............................................................................................................................................. -->
+                <div class="container w-100 p-0 ">
 
 
+                    @for (int i = 1; i <= Model.missionMedias.Count; i++)
+                    {
+                        <div class="mySlides">
 
-                <!-- Thumbnail img -->
-                <div class="row g-1">
-                    <div class="col">
-                        <img class="demo cursor" src="~/img/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-1.png" style="width:100%" onclick="currentSlide(1)" >
+                            <img src="~/img/@(Model.missionMedias[i-1].MediaPath)" style="width:100%; ">
+                        </div>
+                    }
+                    @*    @foreach (var image in Model.missionMedias)
+                        {
+                        <div class="mySlides">
+
+                        <img src="~/img/@(image.MediaPath)" style="width:100%; ">
+                        </div>
+                        }*@
+                    <!-- Full-width img with number text -->
+                    @*   <div class="mySlides">
+                        <div class="numbertext">1 / 6</div>
+                        @* <img src="~/img/@(Model.MissionMedia.FirstOrDefault()?.MediaPath)" style="width:100%; ">*@
+                    @*</div>
+
+                        <div class="mySlides">
+                        <div class="numbertext">2 / 6</div>
+                        <img src="~/img/Grow-Trees-On-the-path-to-environment-sustainability-4.png" style="width:100%; ">
+                        </div>
+
+                        <div class="mySlides">
+                        <div class="numbertext">3 / 6</div>
+                        <img src="~/img/Animal-welfare-&-save-birds-campaign.png" style="width:100%;max-h:100%">
+                        </div>
+
+                        <div class="mySlides">
+                        <div class="numbertext">4 / 6</div>
+                        <img src="~/img/Grow-Trees-On-the-path-to-environment-sustainability-4.png" style="width:100%;">
+                        </div>
+
+                        <div class="mySlides">
+                        <div class="numbertext">5 / 6</div>
+                        <img src="~/img/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-4.png" style="width:100%;">
+                        </div>
+
+                        <div class="mySlides">
+                        <div class="numbertext">6 / 6</div>
+                        <img src="~/img/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-4.png" style="width:100%;">
+                        </div>*@
+
+                    <!-- Next and previous buttons -->
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+
+
+                    <!-- Thumbnail img -->
+                    <div class="row g-1">
+
+                        @* @for(int i=1; i<= @Model.missionMedias.Count ; i++)
+                            {
+
+
+                            <div class="col">
+                            <img class="demo cursor" src="~/img/@(Model.missionMedias[i].MediaPath)" style="width:100%" onclick="currentSlide(i)" >
+                            </div>
+                            }*@
+                        @for (int i = 1; i <= Model.missionMedias.Count; i++)
+                        {
+                            <div class="col">
+                                <img class="demo cursor" src="~/img/@(Model.missionMedias[i-1].MediaPath)" style="width:100%" onclick="currentSlide(@i)">
+                            </div>
+
+
+                        }
+                        @*           @foreach (var image in Model.missionMedias)
+                            {
+                            <div class="col">
+                            <img class="demo cursor" src="~/img/@(image.MediaPath)" style="width:100%" onclick="currentSlide()" >
+                            </div>
+                            }*@
+
+                        @* <div class="col">
+                            <img class="demo cursor" src="~/img/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-1.png" style="width:100%" onclick="currentSlide(1)" >
+                            </div>
+                            <div class="col">
+                            <img class="demo cursor" src="~/img/Grow-Trees-On-the-path-to-environment-sustainability-1.png" style="width:100%" onclick="currentSlide(2)">
+                            </div>
+                            <div class="col">
+                            <img class="demo cursor" src="~/img/Animal-welfare-&-save-birds-campaign-1.png" style="width:100%" onclick="currentSlide(3)">
+                            </div>
+                            <div class="col">
+                            <img class="demo cursor" src="~/img/Grow-Trees-On-the-path-to-environment-sustainability-1.png" style="width:100%" onclick="currentSlide(4)" >
+                            </div>
+                            <div class="col">
+                            <img class="demo cursor" src="~/img/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-1.png" style="width:100%" onclick="currentSlide(5)" >
+                            </div>
+                            <div class="col">
+                            <img class="demo cursor" src="~/img/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-1.png" style="width:100%" onclick="currentSlide(6)" >
+                            </div>*@
                     </div>
-                    <div class="col">
-                        <img class="demo cursor" src="~/img/Grow-Trees-On-the-path-to-environment-sustainability-1.png" style="width:100%" onclick="currentSlide(2)">
-                    </div>
-                    <div class="col">
-                        <img class="demo cursor" src="~/img/Animal-welfare-&-save-birds-campaign-1.png" style="width:100%" onclick="currentSlide(3)">
-                    </div>
-                    <div class="col">
-                        <img class="demo cursor" src="~/img/Grow-Trees-On-the-path-to-environment-sustainability-1.png" style="width:100%" onclick="currentSlide(4)" >
-                    </div>
-                    <div class="col">
-                        <img class="demo cursor" src="~/img/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-1.png" style="width:100%" onclick="currentSlide(5)" >
-                    </div>
-                    <div class="col">
-                        <img class="demo cursor" src="~/img/CSR-initiative-stands-for-Coffee--and-Farmer-Equity-1.png" style="width:100%" onclick="currentSlide(6)" >
-                    </div>
                 </div>
+                <!-- .............................................................................................................................................. -->
             </div>
-               <!-- .............................................................................................................................................. -->
-              </div>
-              <script>
 
-                let slideIndex = 1;
-                showSlides(slideIndex);
-                
-                // Next/previous controls
-                function plusSlides(n) {
-                    showSlides(slideIndex += n);
-                }
-                
-                // Thumbnail image controls
-                function currentSlide(n) {
-                    showSlides(slideIndex = n);
-                }
-                
-                function showSlides(n) {
-                    let i;
-                    let slides = document.getElementsByClassName("mySlides");
-                    let dots = document.getElementsByClassName("demo");
-                    let captionText = document.getElementById("caption");
-                    if (n > slides.length) { slideIndex = 1 }
-                    if (n < 1) { slideIndex = slides.length }
-                    for (i = 0; i < slides.length; i++) {
-                        slides[i].style.display = "none";
-                    }
-                    for (i = 0; i < dots.length; i++) {
-                        dots[i].className = dots[i].className.replace(" active", "");
-                    }
-                    slides[slideIndex - 1].style.display = "block";
-                    dots[slideIndex - 1].className += " active";
-                    captionText.innerHTML = dots[slideIndex - 1].alt;
-                }
-                
-                
-                
-                </script>
-              <div class="col-md-7">
+
+
+
+
+            <div class="col-md-7">
                 <div class="card-body">
-                
-                
-                  <h1 class="card-title">CSR initiative stands for Coffee & Farmer Equity</h1>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                
-                  <h6 class="sideline"><span class="textline" style="border :1px solid #757575;">Plant 10,000 Trees</span></h6>
-          
-                 
-                  <div class="row ">    
-                      <div class="col-6 ps-5">
-                  <i class="bi bi-person-check-fill fs-5" ></i><span>10 <br> &nbsp; &nbsp;  Seats left</span>
+
+
+                    <h1 class="card-title">@Model.mission.Title</h1>
+                    <p class="card-text">@Model.mission.ShortDescription</p>
+
+                    @if (@Model.mission.MissionType == "Goal")
+                    {
+                        <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">@(Model.mission.GoalMissions.FirstOrDefault()?.GoalValue) @(Model.mission.GoalMissions.FirstOrDefault()?.GoalObjectiveText) </span></h6>
+                    }
+
+                    else if (Model.mission.StartDate <= DateTime.Now && DateTime.Now <= Model.mission.EndDate)
+                    {
+                        <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">Ongoing Opportunity </span></h6>
+
+
+                    }
+                    else
+                    {
+                        <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">@Model.mission.StartDate.ToString().Substring(0,10)  until @Model.mission.EndDate.ToString().Substring(0,10) </span></h6>
+
+                    }
+
+
+
+
+
+
+                    <div class="row ">
+                        <div class="col-6 ps-5">
+                            <i class="bi bi-person-check-fill fs-5"></i><span>10 <br> &nbsp; &nbsp;  Seats left</span>
+                        </div>
+                        <div class="col-6 text-end pe-5">
+                            <img src="img/achieved.png">
+                            <div class="progress d-inline-flex w-50 ">
+                                <div class="progress-bar" role="progressbar" style="width: 75% ;background-color: #e4853a;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <p>8000 Achieved</p>
+                        </div>
+                    </div>
+                    <hr class="mt-0">
+                    <div class="row" id="card">
+                        <div class="col-6">
+                            @if (Model.favoriteMissions.Any(x => x.MissionId == Model.mission.MissionId && x.UserId == @ViewBag.uid))
+                            {
+                                <button type="button" class="btn btn-outline-dark w-100 rounded-pill" onclick="fav(@Model.mission.MissionId)">
+                                    <i id="favMission" class="bi bi-heart-fill text-danger"></i> <span style="font-size: 0.8em;">Add to Favourite </span>
+                                </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-outline-dark w-100 rounded-pill" onclick="fav(@Model.mission.MissionId)">
+                                    <i id="favMission" class="bi bi-heart"></i> <span style="font-size: 0.8em;">Add to Favourite </span>
+                                </button>
+                            }
+
+                        </div>
+                        <div class="col-6 text-end" id="recommand" onchange="recommandToCoWorker(@Model.mission.MissionId)">
+                            <button type="button" class="btn btn-outline-dark w-100 rounded-pill" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-plus"></i> <span style="font-size: 0.8em;"> Recommend to co-worker</span>
+                            </button>
+
+                            <ul class="dropdown-menu">
+
+                                @foreach (var item in Model.CoWorkers)
+                                {
+
+                                    <li><input type="checkbox" value="@item.UserId" /> @item.FirstName @item.LastName </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+                    <h6 class="sideline">
+                        <span class="textline ">
+                            <p class="d-none" id="getMissionId">@Model.mission.MissionId</p>
+
+                            <div  id="mission-rating">
+                                <span class="fa fa-star star1" value="5"></span>
+                                <span class="fa fa-star star1" value="4"></span>
+                                <span class="fa fa-star star1" value="3"></span>
+                                <span class="fa fa-star star1" value="2"></span>
+                                <span class="fa fa-star star1" value="1"></span>
+                            </div>
+                        </span>
+
+                    </h6>
+                    <style>
+                        .rating {
+                            float: left;
+                        }
+
+                        .star1 {
+                            float: right;
+                        }
+
+                            .star1:hover, .star1:hover ~ .star1 {
+                                color: gold;
+                            }
+                    </style>
+                    <script>
+
+
+                                          // Handles the hover over the stars
+
+
+                        @*var id =$('#getMissionId').text();*@
+
+
+
+                              $('#mission-rating .fa-star').click(function() {
+                                   var rating = $(this).attr('value');
+
+                                   console.log(rating);
+                                   var id = parseInt($('#getMissionId').text());
+                                         console.log(id)
+
+                        ;
+                            debugger
+                                     $.ajax({
+                                         url:"/Home/MissionRating",
+                                         method:"Post",
+                                         data:{
+                                             "mid":id,
+                                             "rating":rating
+                                         },
+                                         success:function(data){
+
+
+                                             toastr.options = {
+                                         "closeButton": true,
+                                         "progressBar": true
+                                          };
+                                             if(data == true)
+                                         {
+                                             toastr.success('Applied Rating successfully');
+                                         }
+                                         else
+                                         {
+                                             toastr.error('Your Rating Updated successfully');
+                                         }
+
+                                     },
+                                         error: function (e) {
+                                         console.log("Bye");
+                                         alert('Error');
+                                         },
+
+                                     });
+
+                                     })
+
+
+
+                    </script>
+                    @*   <div class="container">
+                        <span id="rateMe2" class="empty-stars"></span>
+                        </div>
+                    *@
+
+
+
+                    <div id="rating" class="bg-danger"></div>
+                    <input type="hidden" id="rating-value" name="rating-value" />
+
+
+                    <!-- rating.js file -->
+                    @*     <script src="js/addons/rating.js"></script>
+                        <script>
+                        // Rating Initialization
+                        $(document).ready(function() {
+                        $('#rateMe2').mdbRate();
+                        });
+                        </script>*@
+                    @*
+                        <input type="number" class="rating" min="0" max="5" step="1" data-stars="5">
+                        <script>
+                        $(document).ready(function () {
+                        $('.rating').rating({
+                        showCaption: false,
+                        showClear: false,
+                        size: 'xs',
+                        stars: $(this).data('stars'),
+                        step: 1,
+                        readonly: false,
+                        hoverEnabled: true
+                        });
+                        });
+
+                        $(document).ready(function () {
+                        $('.rating').on('rating:change', function (event, value, caption) {
+                        // Handle the user's input
+                        var ratingValue = $(this).rating('getValue');
+                        console.log(ratingValue);
+                        });
+                        });
+                        </script>*@
+
+                    <div class="container-fluid row row-cols-2 row-cols-sm-4 g-2 ">
+                        <div class="col ">
+                            <div class="card h-100 justify-content-between">
+
+                                <i class="bi bi-geo-alt"></i>
+                                <p class="card-text small">City: <br>@Model.mission.City.Name &nbsp</p>
+
+                            </div>
+                        </div>
+                        <div class="col ">
+                            <div class="card h-100 justify-content-between">
+
+                                <i class="bi bi-globe"></i>
+                                <p class="card-text small">Theme: <br> @Model.mission.Theme.Title</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 justify-content-between">
+
+                                <i class="bi bi-calendar3"> </i>
+                                <p class="card-text small">
+                                    Date: <br>
+
+                                    <span> @Model.mission.StartDate.ToString().Substring(0,10) <br> until @Model.mission.EndDate.ToString().Substring(0,10)  </span>
+
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card h-100 justify-content-between">
+                                <i class="bi bi-people">
+                                </i>
+                                <p class="card-text small">
+                                    Organization: <br> @Model.mission.OrganizationName
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" text-center mt-3 " id="pop-up">
+                        @if (Model.missionApplicaton.Any(x => x.MissionId == Model.mission.MissionId && x.UserId == @ViewBag.uid))
+                        {
+                            <button type="button" class="btn btn-outline-danger  rounded-pill" id="applyMission" onclick="applyMission(@Model.mission.MissionId)" disabled> Applied  <i class="bi bi-arrow-right text-danger ms-2"></i> </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-outline-danger  rounded-pill" id="applyMission" onclick="applyMission(@Model.mission.MissionId)">Apply Now <i class="bi bi-arrow-right text-danger ms-2"></i> </button>
+
+                        }
+                    </div>
+
                 </div>
-                <div class="col-6 text-end pe-5">
-                  <img src="img/achieved.png" >
-                  <div class="progress d-inline-flex w-50 ">
-                    <div class="progress-bar" role="progressbar" style="width: 75% ;background-color: #e4853a;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p>8000 Achieved</p>
-                </div>
-                </div>
-                <hr class="mt-0">
-                <div class="row">  
-                    <div class="col-6">            
-                <button type="submit " class="btn btn-outline-dark w-100 rounded-pill "> <i class="bi bi-heart"></i> <span  style="font-size: 0.8em;">Add to Favourite </span></button>
             </div>
-            <div class="col-6 text-end">
-                <button type="submit " class="btn btn-outline-dark w-100 rounded-pill "><i class="bi bi-person-plus" ></i> <span  style="font-size: 0.8em;"> Recommend to co-worker</span> </button>
-            </div>
+
+
         </div>
-        <h6 class="sideline"><span class="textline ">
-            <i class="bi bi-star text-dark"></i>
-            <i class="bi bi-star text-dark"></i>
-            <i class="bi bi-star text-dark"></i>        
-            <i class="bi bi-star text-dark"></i>
-            <i class="bi bi-star text-dark"></i></span></h6>
+    </div>
+    </div>
 
+    @* <div class="container-fluid row me-0 mt-5 pe-0 g-md-5">*@
+    <div class="container row mx-auto mt-5 g-md-5 px-0">
+        <div class="col-12 col-md-7">
 
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-1" type="button"
+                            role="tab" aria-controls="home" aria-selected="true">
+                        Mission
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2" type="button" role="tab"
+                            aria-controls="profile" aria-selected="false">
+                        Organization
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3" type="button" role="tab"
+                            aria-controls="contact" aria-selected="false">
+                        Comments
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="tab-1" role="tabpanel">
+                    <h2>Introduction</h2>
+                    @Model.mission.Description
+                    <h2>Challenge</h2>
+                    @Model.mission.Description
+                    <h2>Documents</h2>
 
-            <div class="container-fluid row row-cols-2 row-cols-sm-4 g-2 ">
-                <div class="col ">
-                    <div class="card h-100 justify-content-between" >
+                    @foreach (var documents in Model.missionDocuments)
+                    {
+                        <button type="submit " class="btn btn-outline-dark  rounded-pill ">
+                            @if (@documents.DocumentType == "PDF")
+                            {
+                                <i class="bi bi-filetype-pdf">@documents.DocumentName</i>
+                            }
+                            else if (@documents.DocumentType == "Image")
+                            {
+                                <i class="bi bi-file-image">@documents.DocumentName</i>
 
-                        <i class="bi bi-geo-alt"></i>
-                        <p class="card-text small">City: <br>London</p>
+                            }
+                            else
+                            {
+                                <i class="bi bi-filetype-doc">@documents.DocumentName</i>
+                            }
 
-                    </div>
-                </div>
-                <div class="col ">
-                    <div class="card h-100 " >
-
-                        <i class="bi bi-globe"></i>
-                        <p class="card-text small">Theme: <br> Enviornment</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100" >
-
-                        <i class="bi bi-calendar3"> </i>
-                        <p class="card-text small">Date: <br> Ongoing Opportunity</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 " >
-                        <i class="bi bi-people">
-                         </i>  
-                        <p class="card-text small">Organization: <br> CSE Network
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class=" text-center mt-3 ">
-                <button type="submit " class="btn btn-outline-danger  rounded-pill "> Apply Now <i class="bi bi-arrow-right text-danger ms-2"></i> </button>
-            </div>
-           
-                </div>
-            </div>
-            
-                
-              </div>
-            </div>
-          </div>
-      
-      <div class="container-fluid row me-0 mt-5 pe-0 g-md-5">
-          <div class="col-12 col-md-7">
-           
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-1" type="button"
-                            role="tab" aria-controls="home" aria-selected="true">Mission</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2" type="button" role="tab"
-                            aria-controls="profile" aria-selected="false">Organization</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3" type="button" role="tab"
-                            aria-controls="contact" aria-selected="false">Comments</button>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="tab-1" role="tabpanel">
-                        <h2>Introduction</h2>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                        Ipsum has been the industry's standard
-                        dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen
-                        book. It has survived not only five centuries, but also the leap into electronic
-                        typesetting, remaining essentially
-                        unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                        containing
-                        <h2>Challenge</h2>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                        Ipsum has been the industry's standard
-                        dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen
-                        book. It has survived not only five centuries, but also the leap into electronic
-                        typesetting, remaining essentially
-                        unchanged.
-                        <h2>Documents</h2>
-                        <button type="submit " class="btn btn-outline-dark  rounded-pill "> <i class="bi bi-filetype-pdf">lorem-ipsum.pdf</i></button>
+                        </button>
+                    }
+                    @*  <button type="submit " class="btn btn-outline-dark  rounded-pill "> <i class="bi bi-filetype-pdf">lorem-ipsum.pdf</i></button>
                         <button type="submit " class="btn btn-outline-dark  rounded-pill "> <i class="bi bi-filetype-doc">at_vero_eos_accusamus.doc</i> </button>
-                        <button type="submit " class="btn btn-outline-dark rounded-pill "> <i class="bi bi-filetype-xml">important_doc.xls</i>  </span></button>
-                    </div>
-                    <div class="tab-pane fade" id="tab-2" role="tabpanel">It
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                        Ipsum has been the industry's standard
-                        dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                        scrambled it to make a type specimen
-                        book. It has survived not only five centuries, but also the leap into electronic
-                        typesetting, remaining essentially
-                        unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                        containing
-                    </div>
-                    <div class="tab-pane fade" id="tab-3" role="tabpanel">
-                       
-                            <form>
-                                <div class="form-group">
-    
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                        placeholder="Enter your comments"></textarea>
-                                </div>
-                                <div class=" mt-3 mb-3">
-                                    <button type="submit" class="btn btn-outline-warning rounded-pill">Post Comment
-                                    </button>
-                                </div>
-                                <div class="row ex1">
+                        <button type="submit " class="btn btn-outline-dark rounded-pill "> <i class="bi bi-filetype-xml">important_doc.xls</i>  </span></button>*@
+                </div>
+
+
+
+                <div class="tab-pane fade" id="tab-2" role="tabpanel">
+                    <h3>@Model.mission.OrganizationName </h3>
+                    <br />
+                    <br />
+                    @Model.mission.OrganizationDetail
+                </div>
+                <div class="tab-pane fade" id="tab-3" role="tabpanel">
+
+                    <form method="post">
+                        <div class="form-group" id="comment">
+                            @ViewBag.ComntAdded
+                            <input type="hidden" asp-for="mission.MissionId" value="@Model.mission.MissionId" id="mid" />
+                            <textarea asp-for="commentDescription" class="form-control" id="commentDescription" rows="3"
+                                      placeholder="Enter your comments"></textarea>
+                        </div>
+                        <div class=" mt-3 mb-3">
+                            <button type="button" class="btn btn-outline-warning rounded-pill" onclick="comment(@Model.mission.MissionId)">
+                                Post Comment
+                            </button>
+                        </div>
+                        <div class="row ex1">
+                            <div class="col-12">
+                                @foreach (var item in Model.comments)
+                                {
                                     <div class="container">
-                                        <div class="col-12">
-                                            <div class="row mt-4" style="background-color: white;">
-                                                <div
-                                                    class="col-md-3 col-12 d-flex justify-content-center align-items-center">
-                                                    <img src="~/img/volunteer1.png"
-                                                        style="border-radius: 50%; height: 4.5em;" alt="">
-                                                </div>
-                                                <div class="col-md-9 col-12">
-                                                    <p>Margaret Walsh</p>
-                                                    <p>Monday, October 21, 2019, 4.57 PM</p>
-                                                    <p>Nice mission great opportunity for peoples</p>
-                                                </div>
+
+
+                                        <div class="row mt-4" style="background-color: white;">
+                                            <div class="col-md-3 col-12 d-flex justify-content-center align-items-center">
+                                                <img src="~/img/@item.User.Avatar"
+                                                 style="border-radius: 50%; height: 4.5em;" alt="">
                                             </div>
-                                            <div class="row mt-4" style="background-color: white;">
-                                                <div
-                                                    class="col-md-3 col-12 d-flex justify-content-center align-items-center">
-                                                    <img src="~/img/volunteer1.png"
-                                                        style="border-radius: 50%; height: 4.5em;" alt="">
-                                                </div>
-                                                <div class="col-md-9 col-12">
-                                                    <p>Margaret Walsh </p>
-                                                    <p>Monday, October 21, 2019, 4.57 PM</p>
-                                                    <p>Nice mission great opportunity for peoples </p>
-                                                </div>
+                                            <div class="col-md-9 col-12">
+                                                <h5 class="my-1">@item.User.FirstName   @item.User.LastName</h5>
+                                                <p class="my-1">@item.CreatedAt.ToString("dddd, MMMM dd, yyyy, h.mm tt")</p>
+                                                <p class="my-1">@item.CommentDescription</p>
                                             </div>
-                                            <div class="row mt-4" style="background-color: white;">
-                                                <div
-                                                    class="col-md-3 col-12 d-flex justify-content-center align-items-center">
-                                                    <img src="~/img/volunteer1.png"
-                                                        style="border-radius: 50%; height: 4.5em;" alt="">
-                                                </div>
-                                                <div class="col-md-9 col-12">
-                                                    <p>Margaret Walsh</p>
-                                                    <p>Monday, October 21, 2019, 4.57 PM</p>
-                                                    <p>Nice mission great opportunity for peoples</p>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-4" style="background-color: white;">
-                                                <div
-                                                    class="col-md-3 col-12 d-flex justify-content-center align-items-center">
-                                                    <img src="~/img/volunteer1.png"
-                                                        style="border-radius: 50%; height: 4.5em;" alt="">
-                                                </div>
-                                                <div class="col-md-9 col-12">
-                                                    <p>Margaret Walsh</p>
-                                                    <p> Monday, October 21, 2019, 4.57 PM </p>
-                                                    <p>Nice mission great opportunity for peoples</p>
-                                                </div>
-                                            </div>
-    
                                         </div>
                                     </div>
-                                </div>
-                            </form>
+
+                                }
+                                @* <div class="col-md-3 col-12 d-flex justify-content-center align-items-center">
+                                    <img src="~/img/volunteer1.png"
+                                    style="border-radius: 50%; height: 4.5em;" alt="">
+                                    </div>
+                                    <div class="col-md-9 col-12">
+                                    <p>Margaret Walsh</p>
+                                    <p>Monday, October 21, 2019, 4.57 PM</p>
+                                    <p>Nice mission great opportunity for peoples</p>
+                                    </div>
+                                    </div>
+                                    <div class="row mt-4" style="background-color: white;">
+                                    <div class="col-md-3 col-12 d-flex justify-content-center align-items-center">
+                                    <img src="~/img/volunteer1.png"
+                                    style="border-radius: 50%; height: 4.5em;" alt="">
+                                    </div>
+                                    <div class="col-md-9 col-12">
+                                    <p>Margaret Walsh </p>
+                                    <p>Monday, October 21, 2019, 4.57 PM</p>
+                                    <p>Nice mission great opportunity for peoples </p>
+                                    </div>
+                                    </div>
+                                    <div class="row mt-4" style="background-color: white;">
+                                    <div class="col-md-3 col-12 d-flex justify-content-center align-items-center">
+                                    <img src="~/img/volunteer1.png"
+                                    style="border-radius: 50%; height: 4.5em;" alt="">
+                                    </div>
+                                    <div class="col-md-9 col-12">
+                                    <p>Margaret Walsh</p>
+                                    <p>Monday, October 21, 2019, 4.57 PM</p>
+                                    <p>Nice mission great opportunity for peoples</p>
+                                    </div>
+                                    </div>
+                                    <div class="row mt-4" style="background-color: white;">
+                                    <div class="col-md-3 col-12 d-flex justify-content-center align-items-center">
+                                    <img src="~/img/volunteer1.png"
+                                    style="border-radius: 50%; height: 4.5em;" alt="">
+                                    </div>
+                                    <div class="col-md-9 col-12">
+                                    <p>Margaret Walsh</p>
+                                    <p> Monday, October 21, 2019, 4.57 PM </p>
+                                    <p>Nice mission great opportunity for peoples</p>
+                                    </div> *@
+
+                            </div>
+
                         </div>
-                    
+                    </form>
                 </div>
-           
-            
-           
-           
-           
-          </div>
 
-          <div class="col-12 col-md-5">
+            </div>
+
+
+
+
+
+        </div>
+
+        <div class="col-12 col-md-5">
             <div class="container px-0">
-                <div class="card" >
+                <div class="card">
                     <div class="card-body">
-                        
-                      <h4 class="card-title">Information</h4>
-                      <div class="table-responsive m-3 ">
-                        <table class="table">
-                            <tbody>
-                              
-                                <tr>
-                                    <td>Skills</td>
-                                    <td>Cool, Easy going, Math</td>
-                                   
-    
-                                </tr>
-                                <tr>
-                                   
-                                    <td>Days</td>
-                                    <td>Weeked Only</td>
-                                   
-                                </tr>
-                                <tr>
-                                    
-                                    <td>Ratings</td>
-                                    <td> <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>(by 125 Volunteeres)</td>
-                                   
-    
-                                </tr>
-                               
-                            </tbody>
-                        </table>
-                  </div>
+
+                        <h4 class="card-title">Information</h4>
+                        <div class="table-responsive m-3 ">
+                            <table class="table">
+                                <tbody>
+
+                                    <tr>
+                                        <td>Skills</td>
+                                        @*    <td>Cool, Easy going, Math</td> *@
+                                        <td>
+                                            @foreach (var item in Model.missionSkills)
+                                            {
+
+                                                <span class="me-2"> @item.Skill.SkillName  </span>
+                                            }
+                                        </td>
+
+
+                                    </tr>
+                                    <tr>
+
+                                        <td>Days</td>
+                                        <td>@Model.mission.Avaibility</td>
+
+                                    </tr>
+                                    <tr>
+
+                                        <td>Ratings</td>
+                                        <td>
+                                            @for (int i = 1; i <= @Model.rating; i++)
+                                            {
+                                                <i class="bi bi-star-fill" style="color: #F8D441;"></i>
+                                            }
+                                            @for (int i = 1; i <= 5 - @Model.rating; i++)
+                                            {
+                                                <i class="bi bi-star" style="color: #F8D441;"></i>
+                                            }(by @Model.mission.MissionRatings.Count Volunteeres)
+                                        </td>
+
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                   
-                  
-          </div>
-    <!-- Optional JavaScript; choose one of the two! -->
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-@*    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
-*@
-    <div class="card" >
-        <div class="card-body">
-            
-          <h4 class="card-title">Recent Volunteers</h4>
-                            <hr>
-                        
-                            <div class="row row-cols-3">
+                </div>
+
+
+
+
+
+
+
+
+                <div class="card" id="recentVolunter">
+                    <div class="card-body">
+
+                        <h4 class="card-title">Recent Volunteers</h4>
+                        <hr>
+                        <div class="row row-cols-3">
+
+                            @foreach (var item in Model.volunteres)
+                            {
                                 <div class="col text-center">
-                                    <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
-                                    <p>Travis Steen</p>
+                                    <img src="~/img/@item.User.Avatar" class="Volunteers" alt="" style="max-width:100% ;">
+                                    <p>@item.User.FirstName   @item.User.LastName</p>
+                                </div>
+                            }
+
+                            @* <div class="col text-center">
+                                <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
+                                <p>Travis Steen</p>
+                                </div>*@
+                            @*  <div class="col  text-center">
+                                <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
+                                <p>Travis Steen</p>
+                                </div>
+                                <div class="col text-center">
+                                <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
+                                <p>Travis Steen</p>
+                                </div>
+                                <div class="col text-center">
+                                <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
+                                <p>Travis Steen</p>
                                 </div>
                                 <div class="col  text-center">
-                                    <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
-                                    <p>Travis Steen</p>
+                                <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
+                                <p>Travis Steen</p>
                                 </div>
                                 <div class="col text-center">
-                                    <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
-                                    <p>Travis Steen</p>
+                                <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
+                                <p>Travis Steen</p>
                                 </div>
                                 <div class="col text-center">
-                                    <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
-                                    <p>Travis Steen</p>
+                                <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
+                                <p>Travis Steen</p>
                                 </div>
                                 <div class="col  text-center">
-                                    <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
-                                    <p>Travis Steen</p>
+                                <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
+                                <p>Travis Steen</p>
                                 </div>
                                 <div class="col text-center">
-                                    <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
-                                    <p>Travis Steen</p>
+                                <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
+                                <p>Travis Steen</p>
+                                </div>*@
+                        </div>
+                        @*<button class="col-2 border" type="submit" onclick="PageIndex(@Model.mission.MissionId,-1);">
+                            <img src="~/img/left.png" />
+                            </button>
+
+                            <p class="mb-0 col-8 border text-center">1 - 9 of 25 Recent Volunteers</p>
+
+                            <button class="col-2 border" type="submit" onclick="PageIndex(@Model.mission.MissionId,(+1));">
+                            <img src="~/img/arrow.png" />
+                            </button>*@
+                        <nav aria-label="Page navigation example ">
+                            <ul class="pagination justify-content-center">
+
+                                @{
+
+                                    for (int i = 1; i <= Model.volunteres.Count; i++)
+                                    {
+
+                                        <li class="page-item ">
+                                            <a class="page-link active" onclick="PageIndex(@Model.mission.MissionId,(@i))">@i </a>
+
+                                        </li>
+
+
+
+                                    }
+                                }
+                            </ul>
+                        </nav>
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        <h1 class="text-center">Releted Missions</h1>
+
+        <div class="container-fluid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
+
+
+            @{
+                int n;
+                if (Model.relatedMissions.Count < 3)
+                {
+                    n = Model.relatedMissions.Count;
+                }
+                else
+                {
+                    n = 3;
+                }
+            }
+
+
+
+            @for (int i = 0; i < n; i++)
+            {
+                <div class="col">
+                    <div class="card " id="card">
+
+                        <div class="wrapper">
+                            <div class="content">
+                                <img src=~/img/@(Model.relatedMissions[i].MissionMedia.FirstOrDefault()?.MediaPath) class="card-img-top" alt="..." style="width: 100%;">
+
+                                <img src="~/img/add1.png" class="card-img-top bg-dark fa-download-1" alt="..." onclick="">
+                                <img src="~/img/heart.png" class="card-img-top bg-dark fa-download-2 " alt="..." onclick="fav(@Model.relatedMissions[i].MissionId)">
+                                <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
+                            <span class="border-dark rounded-pill label"> &nbsp; &nbsp; @Model.relatedMissions[i].Theme.Title  &nbsp; &nbsp;</span>
+                            </div>
+                        </div>
+                        <div class="card-img-overlay h-25">
+                            <p class="text-end">
+                                <span class="border-dark rounded-pill text-white bg-dark ">&nbsp;<i class="bi bi-geo-alt fs-6">@Model.relatedMissions[i].City.Name &nbsp;</i></span>
+
+                            </p>
+                        </div>
+                        <div class="card-body mb-0">
+                            <h5 class="card-title">@Model.relatedMissions[i].Title</h5>
+                            <p class="card-text">@Model.relatedMissions[i].ShortDescription</p>
+                            <div class="card-text  ">
+                                <span>@Model.relatedMissions[i].OrganizationName</span>
+                                <span class="me-0">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-half text-warning"></i>
+                                    <i class="bi bi-star text-warning"></i>
+                                </span>
+
+                            </div>
+
+                            @if (@Model.relatedMissions[i].MissionType == "Goal")
+                            {
+                                <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">@(Model.relatedMissions[i].GoalMissions.FirstOrDefault()?.GoalValue) @(Model.relatedMissions[i].GoalMissions.FirstOrDefault()?.GoalObjectiveText) </span></h6>
+                            }
+
+                            else if (Model.relatedMissions[i].StartDate <= DateTime.Now && DateTime.Now <= Model.relatedMissions[i].EndDate)
+                            {
+                                <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">Ongoing Opportunity </span></h6>
+
+
+                            }
+                            else
+                            {
+                                <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">@Model.relatedMissions[i].StartDate.ToString().Substring(0,10)  until @Model.relatedMissions[i].EndDate.ToString().Substring(0,10) </span></h6>
+
+                            }
+
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <i class="bi bi-person-check-fill" style=""></i> 10<br>
+                                    <span class="small text-muted">&nbsp &nbsp Seats Left</span>
                                 </div>
-                                <div class="col text-center">
-                                    <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
-                                    <p>Travis Steen</p>
-                                </div>
-                                <div class="col  text-center">
-                                    <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
-                                    <p>Travis Steen</p>
-                                </div>
-                                <div class="col text-center">
-                                    <img src="~/img/volunteer7.png" class="Volunteers" alt="" style="max-width:100% ;">
-                                    <p>Travis Steen</p>
+                                <div class="col-6 ">
+                                    <i class="bi bi-clock"></i> @Model.relatedMissions[i].EndDate.ToString().Substring(0,10)<br>
+                                    <span class="small text-muted">&nbsp &nbsp Deadline</span>
                                 </div>
                             </div>
+                        </div>
+                        <hr class="my-0">
+                        <div class="card-body  ms-md-auto me-md-auto mt-0">
+                            <a asp-controller="Home" asp-action="Volunteering_Mission" asp-route-mid="@Model.relatedMissions[i].MissionId"> <button type="submit" class="btn btn-outline-danger w-100  rounded-pill "> Apply <i class="bi bi-arrow-right text-danger"></i> </button></a>
+                        </div>
+                    </div>
                 </div>
-
-
-
-</div>
-</div>
-          </div>
-          <h1 class="text-center">Releted Missions</h1>
-<div class="container-fluid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
-    <div class="col">
-        <div class="card " >
+            }
+            @* }*@
+        </div>
+        @*  <div class="container-fluid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
+            <div class="col">
+            <div class="card ">
             <div class="wrapper">
-                <div class="content">
+            <div class="content">
             <img src="~/img/Animal-welfare-&-save-birds-campaign-1.png" class="card-img-top" alt="..." style="width: 100%;">
-           
+
             <img src="~/img/add1.png" class="card-img-top bg-dark fa-download-1" alt="..." style="">
-                    <img src="~/img/heart.png" class="card-img-top bg-dark fa-download-2 " alt="..." style="">
-                    <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
-               <span class="border-dark rounded-pill label"> &nbsp; &nbsp; Children  &nbsp; &nbsp;</span>
-                </div>
+            <img src="~/img/heart.png" class="card-img-top bg-dark fa-download-2 " alt="..." style="">
+            <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
+            <span class="border-dark rounded-pill label"> &nbsp; &nbsp; Children  &nbsp; &nbsp;</span>
+            </div>
             </div>
             <div class="card-img-overlay ">
-                <p class="text-end">
-                    <span class="border-dark rounded-pill text-white bg-dark ">&nbsp;<i class="bi bi-geo-alt fs-6">Torento &nbsp;</i></span>
-                  
-                </p>
+            <p class="text-end">
+            <span class="border-dark rounded-pill text-white bg-dark ">&nbsp;<i class="bi bi-geo-alt fs-6">Torento &nbsp;</i></span>
+
+            </p>
             </div>
             <div class="card-body mb-0">
-                <h5 class="card-title">Education Supplies for Every Pair of Shoes Sold</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
-                <div class="card-text  "><span>Australian Paradise</span>
-                    <span class="me-0">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i>
-                    <i class="bi bi-star text-warning"></i>
-                </span>
-                </div>
-                <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">From 10/01/2019 until 25/02/2019</span></h6>
-                <div class="row">
-                    <div class="col-6"><i class="bi bi-person-check-fill" style=""></i> 10<br>
-                        <span class="small text-muted">&nbsp &nbsp Seats Left</span>
-                    </div>
-                    <div class="col-6 "><i class="bi bi-clock"></i> 09/01/2022<br>
-                        <span class="small text-muted">&nbsp &nbsp Deadline</span>
-                    </div>
-                </div>
+            <h5 class="card-title">Education Supplies for Every Pair of Shoes Sold</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
+            <div class="card-text  ">
+            <span>Australian Paradise</span>
+            <span class="me-0">
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-half text-warning"></i>
+            <i class="bi bi-star text-warning"></i>
+            </span>
+            </div>
+            <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">From 10/01/2019 until 25/02/2019</span></h6>
+            <div class="row">
+            <div class="col-6">
+            <i class="bi bi-person-check-fill" style=""></i> 10<br>
+            <span class="small text-muted">&nbsp &nbsp Seats Left</span>
+            </div>
+            <div class="col-6 ">
+            <i class="bi bi-clock"></i> 09/01/2022<br>
+            <span class="small text-muted">&nbsp &nbsp Deadline</span>
+            </div>
+            </div>
             </div>
             <hr class="my-0">
             <div class="card-body  ms-md-auto me-md-auto mt-0">
-                <button type="submit " class="btn btn-outline-danger w-100  rounded-pill "> Apply <i class="bi bi-arrow-right text-danger"></i> </button>
+            <button type="submit " class="btn btn-outline-danger w-100  rounded-pill "> Apply <i class="bi bi-arrow-right text-danger"></i> </button>
             </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card " >
+            </div>
+            </div>
+            <div class="col">
+            <div class="card ">
             <div class="wrapper">
-                <div class="content">
+            <div class="content">
             <img src="~/img/Animal-welfare-&-save-birds-campaign-1.png" class="card-img-top" alt="..." style="width: 100%;">
-           
+
             <img src="~/img/add1.png" class="card-img-top bg-dark fa-download-1" alt="..." style="">
-                    <img src="img/heart.png" class="card-img-top bg-dark fa-download-2 " alt="..." style="">
-                    <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
-               <span class="border-dark rounded-pill label"> &nbsp; &nbsp; Children  &nbsp; &nbsp;</span>
-                </div>
+            <img src="img/heart.png" class="card-img-top bg-dark fa-download-2 " alt="..." style="">
+            <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
+            <span class="border-dark rounded-pill label"> &nbsp; &nbsp; Children  &nbsp; &nbsp;</span>
+            </div>
             </div>
             <div class="card-img-overlay ">
-                <p class="text-end">
-                    <span class="border-dark rounded-pill text-white bg-dark ">&nbsp;<i class="bi bi-geo-alt fs-6">Torento &nbsp;</i></span>
-                  
-                </p>
+            <p class="text-end">
+            <span class="border-dark rounded-pill text-white bg-dark ">&nbsp;<i class="bi bi-geo-alt fs-6">Torento &nbsp;</i></span>
+
+            </p>
             </div>
             <div class="card-body mb-0">
-                <h5 class="card-title">Education Supplies for Every Pair of Shoes Sold</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
-                <div class="card-text  "><span>Australian Paradise</span>
-                    <span class="me-0">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i>
-                    <i class="bi bi-star text-warning"></i>
-                </span>
-                </div>
-                <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">From 10/01/2019 until 25/02/2019</span></h6>
-                <div class="row">
-                    <div class="col-6"><i class="bi bi-person-check-fill" style=""></i> 10<br>
-                        <span class="small text-muted">&nbsp &nbsp Seats Left</span>
-                    </div>
-                    <div class="col-6 "><i class="bi bi-clock"></i> 09/01/2022<br>
-                        <span class="small text-muted">&nbsp &nbsp Deadline</span>
-                    </div>
-                </div>
+            <h5 class="card-title">Education Supplies for Every Pair of Shoes Sold</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
+            <div class="card-text  ">
+            <span>Australian Paradise</span>
+            <span class="me-0">
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-half text-warning"></i>
+            <i class="bi bi-star text-warning"></i>
+            </span>
+            </div>
+            <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">From 10/01/2019 until 25/02/2019</span></h6>
+            <div class="row">
+            <div class="col-6">
+            <i class="bi bi-person-check-fill" style=""></i> 10<br>
+            <span class="small text-muted">&nbsp &nbsp Seats Left</span>
+            </div>
+            <div class="col-6 ">
+            <i class="bi bi-clock"></i> 09/01/2022<br>
+            <span class="small text-muted">&nbsp &nbsp Deadline</span>
+            </div>
+            </div>
             </div>
             <hr class="my-0">
             <div class="card-body  ms-md-auto me-md-auto mt-0">
-                <button type="submit " class="btn btn-outline-danger w-100  rounded-pill "> Apply <i class="bi bi-arrow-right text-danger"></i> </button>
+            <button type="submit " class="btn btn-outline-danger w-100  rounded-pill "> Apply <i class="bi bi-arrow-right text-danger"></i> </button>
             </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card " >
+            </div>
+            </div>
+            <div class="col">
+            <div class="card ">
             <div class="wrapper">
-                <div class="content">
+            <div class="content">
             <img src="~/img/Animal-welfare-&-save-birds-campaign-1.png" class="card-img-top" alt="..." style="width: 100%;">
-           
+
             <img src="~/img/add1.png" class="card-img-top bg-dark fa-download-1" alt="..." style="">
-                    <img src="img/heart.png" class="card-img-top bg-dark fa-download-2 " alt="..." style="">
-                    <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
-               <span class="border-dark rounded-pill label"> &nbsp; &nbsp; Children  &nbsp; &nbsp;</span>
-                </div>
+            <img src="img/heart.png" class="card-img-top bg-dark fa-download-2 " alt="..." style="">
+            <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
+            <span class="border-dark rounded-pill label"> &nbsp; &nbsp; Children  &nbsp; &nbsp;</span>
+            </div>
             </div>
             <div class="card-img-overlay ">
-                <p class="text-end">
-                    <span class="border-dark rounded-pill text-white bg-dark ">&nbsp;<i class="bi bi-geo-alt fs-6">Torento &nbsp;</i></span>
-                  
-                </p>
+            <p class="text-end">
+            <span class="border-dark rounded-pill text-white bg-dark ">&nbsp;<i class="bi bi-geo-alt fs-6">Torento &nbsp;</i></span>
+
+            </p>
             </div>
             <div class="card-body mb-0">
-                <h5 class="card-title">Education Supplies for Every Pair of Shoes Sold</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
-                <div class="card-text  "><span>Australian Paradise</span>
-                    <span class="me-0">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-half text-warning"></i>
-                    <i class="bi bi-star text-warning"></i>
-                </span>
-                </div>
-                <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">From 10/01/2019 until 25/02/2019</span></h6>
-                <div class="row">
-                    <div class="col-6"><i class="bi bi-person-check-fill" style=""></i> 10<br>
-                        <span class="small text-muted">&nbsp &nbsp Seats Left</span>
-                    </div>
-                    <div class="col-6 "><i class="bi bi-clock"></i> 09/01/2022<br>
-                        <span class="small text-muted">&nbsp &nbsp Deadline</span>
-                    </div>
-                </div>
+            <h5 class="card-title">Education Supplies for Every Pair of Shoes Sold</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore...</p>
+            <div class="card-text  ">
+            <span>Australian Paradise</span>
+            <span class="me-0">
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-fill text-warning"></i>
+            <i class="bi bi-star-half text-warning"></i>
+            <i class="bi bi-star text-warning"></i>
+            </span>
+            </div>
+            <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">From 10/01/2019 until 25/02/2019</span></h6>
+            <div class="row">
+            <div class="col-6">
+            <i class="bi bi-person-check-fill" style=""></i> 10<br>
+            <span class="small text-muted">&nbsp &nbsp Seats Left</span>
+            </div>
+            <div class="col-6 ">
+            <i class="bi bi-clock"></i> 09/01/2022<br>
+            <span class="small text-muted">&nbsp &nbsp Deadline</span>
+            </div>
+            </div>
             </div>
             <hr class="my-0">
             <div class="card-body  ms-md-auto me-md-auto mt-0">
-                <button type="submit " class="btn btn-outline-danger w-100  rounded-pill "> Apply <i class="bi bi-arrow-right text-danger"></i> </button>
+            <button type="submit " class="btn btn-outline-danger w-100  rounded-pill "> Apply <i class="bi bi-arrow-right text-danger"></i> </button>
             </div>
-        </div>
-    </div>
-    </div>
-    <footer class="border-top footer text-muted mb-4">
-        <div class="container">
-           <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
-        </div>
-    </footer>
+            </div>
+            </div>
+            </div>*@
+
 </body>
 
 </html>
+<script>
+
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        console.log("Current Slid call")
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("demo");
+        let captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+
+
+
+</script>
+@*<script type="text/javascript">
+    $(function () {
+    $("#rating").rateit({
+    min: 1,
+    max: 5,
+    step: 1,
+    resetable: false,
+    readonly: false,
+    backingfld: "#rating-value",
+    starwidth: 32,
+    starheight: 32,
+    symbols: {
+    empty: "bi bi-star text-dark",
+    full: "bi bi-star-fill text-dark "
+    },
+    callback: function (value, event) {
+    // Handle the rating change event here
+    console.log("Rating is: " + value);
+    // You can submit the rating to the server using AJAX or a form
+    }
+    });
+    });
+    </script>*@
+
+@*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+*@

@@ -14,37 +14,25 @@ namespace CI_Platform.Controllers
 {
     public class HomeController : Controller
     {
-        
-        public readonly IUserRepository _userRepository;
+
+        //public readonly IUserRepository _userRepository;
         public readonly IPlatformRepository _platform;
-     
-        public HomeController( IUserRepository userRepository, IPlatformRepository platform)
+        public readonly IVolunteerRepository _volunteer;
+        public readonly IStoryRepository _story;
+
+
+        public HomeController(IPlatformRepository platform, IVolunteerRepository volunteer, IStoryRepository story)
         {
-           
-            _userRepository = userRepository;
+
+            //_userRepository = userRepository;
             _platform = platform;
-         
+            _volunteer = volunteer;
+            _story = story;
+
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //public IActionResult Registration()
-        //{
-        //    return View();
-        //}
-
-
-        //public IActionResult PlatformLandingPage()
-        //{
-        //    return View();
-        //}
-
-
         //[HttpPost]
-            public IActionResult PlatformLandingPage()
+        public IActionResult PlatformLandingPage()
         {
             string name = HttpContext.Session.GetString("Uname");
             ViewBag.Uname = name;
@@ -74,22 +62,7 @@ namespace CI_Platform.Controllers
         }
 
 
-        //[HttpPost]
-        //public IActionResult PlatformLandingPage()
-        //{ 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        //}
-
-
-
+   
 
             public JsonResult GetCitys(int countryId)
           {
@@ -109,52 +82,26 @@ namespace CI_Platform.Controllers
                 platformModel.Mission = cards;
             }
 
-            return View("_FilterMissionPartial", platformModel);
+            return PartialView("_FilterMissionPartial", platformModel);
 
 
         }
 
 
-        //public IActionResult Filter(List<int>? cityId, List<int>? countryId)
-        //{
-        //    List<Mission> cards = new List<Mission>();
-        //    var missioncards = _platform.GetMissionDetails();
-        //    if (cityId.Count != 0)
-        //    {
-        //        foreach (var n in cityId)
-        //        {
-        //            foreach (var item in missioncards)
-        //            {
-        //                if (item.CityId == n)
-        //                {
-        //                    cards.Add(item);
-        //                }
 
-        //            }
-        //        }
-        //    }
-        //    else if (countryId.Count != 0)
-        //    {
-        //        foreach (var n in countryId)
-        //        {
-        //            foreach (var item in missioncards)
-        //            {
-        //                if (item.CountryId == n)
-        //                {
-        //                    cards.Add(item);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        foreach (var item in missioncards)
-        //        {
-        //            cards.Add(item);
-        //        }
-        //    }
-        //    return PartialView("_FilterMissionPartial", cards);
-        //}
+        public bool AddFav(int MissionId)
+        {
+
+            int UId = (int)HttpContext.Session.GetInt32("UId");
+
+            bool favorite = _platform.AddFav(UId, MissionId);
+
+            return favorite;
+
+
+
+            //return RedirectToAction("PlatformLandingPage", "Home");
+        }
 
 
 
@@ -165,10 +112,117 @@ namespace CI_Platform.Controllers
 
         public IActionResult ListView()
         {
+
+
+            return View();
+        }
+        public IActionResult Volunteering_Mission(int mid, int pageIndex = 1)
+        {
+
+
             string name = HttpContext.Session.GetString("Uname");
             ViewBag.Uname = name;
 
+            if (name != null)
+            {
+                var UId = (int)HttpContext.Session.GetInt32("UId");
+                ViewBag.uid = UId;
+            }
 
+            VolunteerModel volunteerModel = _volunteer.DisplayModel(mid, pageIndex);
+
+
+
+
+            return View(volunteerModel);
+        }
+
+
+        //[HttpPost]
+        //public IActionResult Volunteering_Mission(VolunteerModel obj)
+        //{
+        //    int UserId = (int)HttpContext.Session.GetInt32("UId");
+        //    bool comntAdded = _volunteer.addComment(obj, UserId);
+        //    if (comntAdded)
+        //    {
+        //        ViewBag.ComntAdded = "Comment Added";
+        //    }
+        //    else
+        //    {
+        //        ViewBag.ComntAdded = "Comment not Added";
+        //    }
+
+        //    int mid = (int)obj.mission.MissionId;
+        //    string name = HttpContext.Session.GetString("Uname");
+        //    ViewBag.Uname = name;
+        //    VolunteerModel volunteerModel = _volunteer.DisplayModel(mid);
+
+
+        //    return View(volunteerModel);
+        //}
+
+
+
+
+        public void AddComment(int obj, string comnt)
+        {
+
+            int UserId = (int)HttpContext.Session.GetInt32("UId");
+            bool comntAdded = _volunteer.addComment(obj, UserId, comnt);
+            if (comntAdded)
+            {
+                ViewBag.ComntAdded = "Comment Added";
+            }
+            else
+            {
+                ViewBag.ComntAdded = "Comment not Added";
+            }
+
+
+
+        }
+
+
+
+        [HttpPost]
+        public bool applyMission(int missionId)
+        {
+            int UserId = (int)HttpContext.Session.GetInt32("UId");
+            var apply = _volunteer.applyMission(missionId, UserId);
+            if (apply == true)
+            {
+                //TempData["success"] = "Applied Successfully...";
+                return apply;
+            }
+            //TempData["error"] = "You've already Applied... ";
+            return false;
+        }
+
+        public void RecommandToCoWorker(List<int> toUserId, int mid)
+        {
+            int FromUserId = (int)HttpContext.Session.GetInt32("UId");
+
+            _volunteer.RecommandToCoWorker(FromUserId, toUserId, mid);
+
+
+
+        }
+
+        //Star Rating
+        public JsonResult MissionRating(int mid, int rating)
+        {
+            int userId = (int)HttpContext.Session.GetInt32("UId");
+            bool success = _volunteer.MissionRating(userId, mid, rating);
+            return Json(success);
+        }
+
+
+        public IActionResult No_Mission_Found()
+        {
+            return View();
+        }
+        public IActionResult StoryListing()
+        {
             List<Country> Countries = _platform.GetCountry();
             ViewBag.Countries = Countries;
             List<City> Cities = _platform.GetCitys();
@@ -178,35 +232,32 @@ namespace CI_Platform.Controllers
             List<MissionSkill> Skills = _platform.GetSkills();
             ViewBag.Skills = Skills;
 
-            return View();
-        }
-        public IActionResult Volunteering_Mission()
-        {
-            return View();
+            StoryModel model = _story.stories();
+            return View(model);
         }
 
-        public IActionResult No_Mission_Found()
-        {
-            return View();
-        }
-        public IActionResult day1()
-        {
-            return View();
-        }
+        //public void StoryFilter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
+        //{
 
-        //public IActionResult ForgotPwd()
-        //{
-        //    return View();
+        //    List<Story> cards = _story.StoryFilter(cityId, countryId, themeId, skillId, search, sort);
+
+        //    StoryModel sModel = new StoryModel();
+        //    {
+        //        sModel.stories = cards;
+        //    }
+
+
         //}
-        //public IActionResult ResetPwd()
-        //{
-        //    return View();
-        //}
-      
+
+
+
         public IActionResult Privacy()
         {
             return View();
         }
+
+
+
 
 
 

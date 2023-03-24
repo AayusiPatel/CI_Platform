@@ -18,10 +18,23 @@ namespace CI_Platform.Entities.ViewModels
 
         public List<MissionMedium> MissionMedium { get; set; }
 
+
+
         public List<MissionRating>? MissionRating { get; set; }
+        //public int rating { get; set; }
+
+        public List<GoalMission>? GoalMission { get; set; }
 
         public List<Country>? Countries { get; set; }
         public List<City>? Cities { get; set; }
+
+
+        //public List<Mission> PagedData { get; set; }
+
+        //public int CurrentPage { get; set; }
+
+        //public int TotalPages { get; set; }
+
     }
 
 

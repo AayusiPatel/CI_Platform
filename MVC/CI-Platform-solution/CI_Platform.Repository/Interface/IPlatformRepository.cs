@@ -22,6 +22,7 @@ namespace CI_Platform.Repository.Interface
 
         public List<Mission> Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort);
 
+        public bool AddFav(int UserID, int MissionId);
 
     }
 }
