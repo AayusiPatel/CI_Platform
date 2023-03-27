@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8k5gQ/eDyxWfaBz1AQR/EqFp60G4LcQGFLAttXoJCxo=",
+  "Hash": "TAwJowuVly+AbWYBwd2AMPR4WCJJxG7EMRUvI5t3L6s=",
   "Source": "CI-Platform",
   "BasePath": "_content/CI-Platform",
   "Mode": "Default",
@@ -1596,6 +1596,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\star-empty.png"
+    },
+    {
+      "Identity": "C:\\Users\\pci116\\Downloads\\Ayushi\\CI-Platform\\CI-Platform\\MVC\\CI-Platform-solution\\CI-Platform\\wwwroot\\img\\Training Plan-2022-23-Plan-Part2-SQL.pdf",
+      "SourceId": "CI-Platform",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci116\\Downloads\\Ayushi\\CI-Platform\\CI-Platform\\MVC\\CI-Platform-solution\\CI-Platform\\wwwroot\\",
+      "BasePath": "_content/CI-Platform",
+      "RelativePath": "img/Training Plan-2022-23-Plan-Part2-SQL.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\Training Plan-2022-23-Plan-Part2-SQL.pdf"
     },
     {
       "Identity": "C:\\Users\\pci116\\Downloads\\Ayushi\\CI-Platform\\CI-Platform\\MVC\\CI-Platform-solution\\CI-Platform\\wwwroot\\img\\twitter.png",

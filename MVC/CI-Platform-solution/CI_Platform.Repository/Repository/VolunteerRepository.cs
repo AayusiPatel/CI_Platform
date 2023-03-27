@@ -160,7 +160,7 @@ namespace CI_Platform.Repository.Repository
                
 
                 #region Send Mail
-                var mailBody = "<h1></h1><br><h2><a href='" + "https://localhost:7228/Home/Volunteering_Mission?mid=" + mid + "'>Check Out this Mission!</a></h2>";
+                var mailBody = "<h1></h1><br><h2><a href='" + "https://localhost:7228/Platform/Volunteering_Mission?mid=" + mid + "'>Check Out this Mission!</a></h2>";
 
                 // create email message
                 var email = new MimeMessage();

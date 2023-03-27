@@ -3,145 +3,138 @@
 *@
 @{
 }
+@using CI_Platform.Entities.ViewModels
+@model StoryModel
 
-<!doctype html>
-<html lang="en">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <title>Hello, world!</title>
     <style>
-        .anchor a:link {
-            color: rgb(14, 17, 14);
-            background-color: transparent;
-            text-decoration: none;
-        }
+        /*   .anchor a:link {
+                            color: rgb(14, 17, 14);
+                            background-color: transparent;
+                            text-decoration: none;
+                        }
 
-        .anchor a:visited {
-            color: rgb(22, 18, 18);
-            background-color: transparent;
-            text-decoration: none;
-        }
+                        .anchor a:visited {
+                            color: rgb(22, 18, 18);
+                            background-color: transparent;
+                            text-decoration: none;
+                        }
 
-        .anchor a:hover {
-            color: rgb(66, 6, 230);
-            background-color: transparent;
-            text-decoration: underline;
-        }
+                        .anchor a:hover {
+                            color: rgb(66, 6, 230);
+                            background-color: transparent;
+                            text-decoration: underline;
+                        }
 
-        .anchor a:active {
-            color: rgb(175, 49, 49);
-            background-color: transparent;
-            text-decoration: underline;
-        }
-        .navbar-links-sm {
-            display: inline-block;
-            margin-left: 15px;
-        }
-     
+                        .anchor a:active {
+                            color: rgb(175, 49, 49);
+                            background-color: transparent;
+                            text-decoration: underline;
+                        }
+                        .navbar-links-sm {
+                            display: inline-block;
+                            margin-left: 15px;
+                        }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
 
-        /* Position the image container (needed to position the left and right arrows) */
-        .container-fluid {
-            position: relative;
-        }
+                        * {
+                            box-sizing: border-box;
+                            margin: 0;
+                            padding: 0;
+                        }
+
+                        /* Position the image container (needed to position the left and right arrows) */
+        /*  .container-fluid {
+                            position: relative;
+                        }*/
 
         /* Hide the images by default */
-        .mySlides {
-            display: none;
-            padding-bottom: 5px;
-        }
-
+        /*   .mySlides {
+                            display: none;
+                            padding-bottom: 5px;
+                        }
+                */
         /* Add a pointer when hovering over the thumbnail images */
-        .cursor {
-            cursor: pointer;
-        }
-
+        /*  .cursor {
+                            cursor: pointer;
+                        }
+                */
         /* Next & previous buttons */
-        .prev,
-        .next {
-            cursor: pointer;
-            position: absolute;
-            top: 102%;
-            width: auto;
-            /* padding: 16px; */
-            margin-top: -50px;
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
-            -webkit-user-select: none;
-        }
+        /*      .prev,
+                        .next {
+                            cursor: pointer;
+                            position: absolute;
+                            top: 102%;
+                            width: auto;*/
+        /* padding: 16px; */
+        /*        margin-top: -50px;
+                            color: white;
+                            font-weight: bold;
+                            font-size: 20px;
+                            border-radius: 0 3px 3px 0;
+                            user-select: none;
+                            -webkit-user-select: none;
+                        }*/
 
         /* Position the "next button" to the right */
-        .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
+        /*  .next {
+                            right: 0;
+                            border-radius: 3px 0 0 3px;
+                        }*/
 
         /* On hover, add a black background color with a little bit see-through */
-        .prev:hover,
-        .next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
+        /*      .prev:hover,
+                        .next:hover {
+                            background-color: rgba(0, 0, 0, 0.8);
+                        }
 
-        .prev {
-            z-index: 1;
-            padding-left: 5px;
-        }
-
+                        .prev {
+                            z-index: 1;
+                            padding-left: 5px;
+                        }
+                */
         /* Number text (1/3 etc) */
-        .numbertext {
-            color: #f2f2f2;
-            font-size: 12px;
-            padding: 8px 12px;
-            position: absolute;
-            top: 0;
-        }
-
+        /*  .numbertext {
+                            color: #f2f2f2;
+                            font-size: 12px;
+                            padding: 8px 12px;
+                            position: absolute;
+                            top: 0;
+                        }
+                */
         /* Container for image text */
-        .caption-container {
-            text-align: center;
-            background-color: #222;
-            padding: 2px 16px;
-            color: white;
-        }
+        /* .caption-container {
+                            text-align: center;
+                            background-color: #222;
+                            padding: 2px 16px;
+                            color: white;
+                        }
 
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
+                        .row:after {
+                            content: "";
+                            display: table;
+                            clear: both;
+                        }
+                */
 
 
         /* Add a transparency effect for thumnbail images */
-        .demo {
-            opacity: 0.6;
-        }
+        /*    .demo {
+                            opacity: 0.6;
+                        }
 
-        .active,
-        .demo:hover {
-            opacity: 1;
-        }
+                        .active,
+                        .demo:hover {
+                            opacity: 1;
+                        }*/
     </style>
 </head>
 
@@ -152,120 +145,64 @@
         <!-- ..............card..................... -->
         <div class="card mb-3 p-0">
             <div class="row g-0">
-                <div class="col-lg-6 ">
+                <div class="col-lg-5">
                     <!-- Container for the image gallery -->
-                    <div class="container p-0 pb-5 h-100" style="max-width: 100%; height: 100%;">
+                    <div class="container p-0 pb-5" style="width: 100%; height: 100%;">
 
+                        @for (int i = 1; i <= Model.storiesMedium.Count; i++)
+                        {
+                            <div class="mySlides">
 
-                        <div class="mySlides h-100">
-                            <div class="numbertext">1 / 6</div>
-                            <img src="images/Grow-Trees-On-the-path-to-environment-sustainability.png"
-                                style="max-width:100%; height: 100%;">
-                        </div>
-
-                        <div class="mySlides h-100">
-                            <div class="numbertext">2 / 6</div>
-                            <img src="images/Education-Supplies-for-Every--Pair-of-Shoes-Sold.png"
-                                style="max-width:100%; height: 100%;">
-                        </div>
-
-                        <div class="mySlides h-100">
-                            <div class="numbertext">3 / 6</div>
-                            <img src="images/Grow-Trees-On-the-path-to-environment-sustainability.png"
-                                style="max-width:100%; height: 100%;">
-                        </div>
-
-                        <div class="mySlides h-100">
-                            <div class="numbertext">4 / 6</div>
-                            <img src="images/Education-Supplies-for-Every--Pair-of-Shoes-Sold.png"
-                                style="max-width:100%; height: 100%;">
-                        </div>
-
-                        <div class="mySlides h-100">
-                            <div class="numbertext">5 / 6</div>
-                            <img src="images/Grow-Trees-On-the-path-to-environment-sustainability.png"
-                                style="max-width:100%; height: 100%;">
-                        </div>
-
-                        <div class="mySlides h-100">
-                            <div class="numbertext">6 / 6</div>
-                            <img src="images/Grow-Trees-On-the-path-to-environment-sustainability.png"
-                                style="max-width:100%; height: 100%;">
-                        </div>
+                                <img src="~/img/@(Model.storiesMedium[i-1].Path)" style="max-width:100%; height: 100%;">
+                            </div>
+                        }
 
 
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                         <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
                         <div class="container-fluid row ps-4 g-2 ">
-                            <div class="col ">
-                                <div class="card h-75">
+                            @for (int i = 1; i <= Model.storiesMedium.Count; i++)
+                            {
+                                @*<div class="col h-50">
+                                    <div class="card">
                                     <img class="demo cursor"
-                                        src="images/Grow-Trees-On-the-path-to-environment-sustainability.png"
-                                        style="width:100%" onclick="currentSlide(1)" alt="The Woods">
+                                    src="~/img/@(Model.storiesMedium[i-1].Path)"
+                                    style="width:100%; " onclick="currentSlide(@i)" alt="The Woods">
+                                    </div>
+                                    </div>*@
+                                <div class="col">
+                                    <img class="demo cursor" src="~/img/@(Model.storiesMedium[i-1].Path)" style="width:100%" onclick="currentSlide(@i)">
                                 </div>
-                            </div>
-                            <div class="col ">
-                                <div class="card h-75 ">
-                                    <img class="demo cursor"
-                                        src="images/Education-Supplies-for-Every--Pair-of-Shoes-Sold.png"
-                                        style="width:100%" onclick="currentSlide(2)" alt="The Woods">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card h-75">
-                                    <img class="demo cursor"
-                                        src="images/Grow-Trees-On-the-path-to-environment-sustainability.png"
-                                        style="width:100%" onclick="currentSlide(3)" alt="The Woods">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card h-75 ">
-                                    <img class="demo cursor"
-                                        src="images/Education-Supplies-for-Every--Pair-of-Shoes-Sold.png"
-                                        style="width:100%" onclick="currentSlide(4)" alt="The Woods">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card h-75">
-                                    <img class="demo cursor"
-                                        src="images/Grow-Trees-On-the-path-to-environment-sustainability.png"
-                                        style="width:100%" onclick="currentSlide(5)" alt="The Woods">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card h-75 ">
-                                    <img class="demo cursor"
-                                        src="images/Grow-Trees-On-the-path-to-environment-sustainability.png"
-                                        style="width:100%" onclick="currentSlide(6)" alt="The Woods">
-                                </div>
-                            </div>
+
+
+                            }
+
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-7">
                     <div class="card-body">
                         <!-- <h3 class="card-title">CSR initiative stands for Coffee & Farmer Equity</h3>
-    
-    
-                        <p class="card-text mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                            eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-                        </p>
-     -->
+
+
+                                           <p class="card-text mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                               eiusmod
+                                               tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                                           </p>
+                        -->
                         <div class="row mt-3">
-                            <div class="col-4">
-                                <div class="row">
-                                    <img src="images/volunteer1.png"
-                                        style=" width: 100px;    height: 100px; border-radius: 50%;" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-6">
-                                <span>Andrew Johnson</span>
+
+                                <img src="~/img/@Model.Story.User.Avatar"
+                                     style=" width: 100px;    height: 100px; border-radius: 50%;" alt="">
+
+                                <br />
+
+                                <span>@Model.Story.User.FirstName @Model.Story.User.LastName</span>
                             </div>
-                            <div class="col-6 d-flex justify-content-end">
+
+                            <div class="col-6 text-end">
 
                                 <button type="button" class="btn btn-outline-secondary " style="  border-radius: 18px;">
                                     <i class="bi bi-eye"></i>
@@ -277,39 +214,41 @@
                         </div>
 
                         <br>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam. Sed ut perspiciatis unde
+                        <p>
+                            @Model.Story.Description
                         </p>
                         <p>
-                            omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-                            aperiam, eaque ipsa quae ab illo inventore. Lorem ipsum dolor sit amet, consectetur
-                            adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                            @Model.Story.Description
 
                         </p>
-                        enim ad minim veniam. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
+                        @Model.Story.Description
 
+                        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
                         <div class="row">
-                            <div class="col-12 col-md-6 col-sm-12 mt-2">
+                            <div class="col-12 col-md-6 col-sm-12 mt-2" id="recommand">
 
-                                <button type="submit" class="btn btn-outline w-100  rounded-pill" style="background: #F8863400 0% 0% no-repeat padding-box;
-        border: 2px solid #020201;
-        border-radius: 24px;
-        opacity: 1; color:#020202"><i class="bi bi-square-fill  "><span> Recommend to a Co-Worker</span></i>
+                                <button type="button" class="btn btn-outline-dark w-100 rounded-pill" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-plus"></i> <span style="font-size: 0.8em;"> Recommend to co-worker</span>
                                 </button>
+                                <ul class="dropdown-menu" onchange="recommandStory(@Model.Story.StoryId)">
+
+                                    @foreach (var item in Model.CoWorkers)
+                                    {
+
+                                        <li><input type="checkbox" value="@item.UserId" /> @item.FirstName @item.LastName </li>
+                                    }
+                                </ul>
                             </div>
 
                             <div class="col-12 col-md-6 col-sm-12 mt-2">
-                                <button type="submit" class="btn btn-outline w-100  rounded-pill" style="background: #F8863400 0% 0% no-repeat padding-box;
-                                    border: 2px solid #ff9408;
-                                    border-radius: 24px;
-                                    opacity: 1; color:#020202"><span> Apply Now</span> <i
-                                        class="bi bi-arrow-right ms-3"></i>
-                                </button>
+                                <a asp-controller="Platform" asp-action="Volunteering_Mission" asp-route-mid="@Model.Story.MissionId"> <button type="button" class="btn btn-outline-danger w-100  rounded-pill "> Open  Mission <i class="bi bi-arrow-right text-danger"></i> </button></a>
                             </div>
                         </div>
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
                     </div>
                 </div>
             </div>
@@ -328,34 +267,17 @@
             </div>
 
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                @Model.Story.Description
+                @Model.Story.Description
             </p>
 
             <p>
                 We use these technologies for a number of purposes, such as:
 
-                But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain. At vero
-                eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque
-                excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia
-                animi. On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and
-                demoralized But I must explain to you how all this mistaken idea of denouncing pleasure and praising
-                pain. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore et dolore
+                @Model.Story.Description
             </p>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.
+                @Model.Story.Description
             </p>
 
 
@@ -364,22 +286,17 @@
 
 
         </div>
-        <hr>
 
-        <footer class="navbar bg-body-tertiary mt-3 ms-5">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Privacy Policy</a>
-            </div>
-        </footer>
+
+
 
 
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
-
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
     <script>
         // firefox, chrome
         //  document.body.scroll = "no"; // ie only
@@ -415,9 +332,8 @@
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
 </body>
 
-</html>

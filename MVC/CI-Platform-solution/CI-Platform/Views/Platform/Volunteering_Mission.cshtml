@@ -169,7 +169,7 @@
                             <i class="bi bi-person-check-fill fs-5"></i><span>10 <br> &nbsp; &nbsp;  Seats left</span>
                         </div>
                         <div class="col-6 text-end pe-5">
-                            <img src="img/achieved.png">
+                            <img src="~/img/achieved.png">
                             <div class="progress d-inline-flex w-50 ">
                                 <div class="progress-bar" role="progressbar" style="width: 75% ;background-color: #e4853a;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
@@ -215,21 +215,42 @@
 
 
 
-                    <h6 class="sideline">
-                        <span class="textline ">
+                    <div class="row">
+                        <div class="wrapper  d-flex justify-content-center">
+                            <hr class="divider">
                             <p class="d-none" id="getMissionId">@Model.mission.MissionId</p>
 
-                            <div  id="mission-rating">
+                            <div class='rating' id="mission-rating">
                                 <span class="fa fa-star star1" value="5"></span>
                                 <span class="fa fa-star star1" value="4"></span>
                                 <span class="fa fa-star star1" value="3"></span>
                                 <span class="fa fa-star star1" value="2"></span>
                                 <span class="fa fa-star star1" value="1"></span>
                             </div>
-                        </span>
 
-                    </h6>
+
+                            <hr class="divider">
+                        </div>
+                    </div>
                     <style>
+                        .wrapper {
+                            display: flex;
+                            column-gap: 5px;
+                        }
+
+                        .divider {
+                            flex-grow: 1;
+                            border-color: rgb(57, 57, 196);
+                        }
+
+                        .left,
+                        .right {
+                            border: 2px solid red;
+                            height: 50px;
+                            width: 50px;
+                            background: yellow;
+                        }
+
                         .rating {
                             float: left;
                         }
@@ -238,9 +259,15 @@
                             float: right;
                         }
 
-                            .star1:hover, .star1:hover ~ .star1 {
-                                color: gold;
-                            }
+                        .strRating {
+                            background: #fff;
+                            padding: 0 10px;
+                            border-radius: 10px;
+                        }
+
+                        .star1:hover, .star1:hover ~ .star1 {
+                            color: gold;
+                        }
                     </style>
                     <script>
 
@@ -262,7 +289,7 @@
                         ;
                             debugger
                                      $.ajax({
-                                         url:"/Home/MissionRating",
+                                         url:"/Platform/MissionRating",
                                          method:"Post",
                                          data:{
                                              "mid":id,
@@ -297,10 +324,6 @@
 
 
                     </script>
-                    @*   <div class="container">
-                        <span id="rateMe2" class="empty-stars"></span>
-                        </div>
-                    *@
 
 
 
@@ -308,37 +331,7 @@
                     <input type="hidden" id="rating-value" name="rating-value" />
 
 
-                    <!-- rating.js file -->
-                    @*     <script src="js/addons/rating.js"></script>
-                        <script>
-                        // Rating Initialization
-                        $(document).ready(function() {
-                        $('#rateMe2').mdbRate();
-                        });
-                        </script>*@
-                    @*
-                        <input type="number" class="rating" min="0" max="5" step="1" data-stars="5">
-                        <script>
-                        $(document).ready(function () {
-                        $('.rating').rating({
-                        showCaption: false,
-                        showClear: false,
-                        size: 'xs',
-                        stars: $(this).data('stars'),
-                        step: 1,
-                        readonly: false,
-                        hoverEnabled: true
-                        });
-                        });
 
-                        $(document).ready(function () {
-                        $('.rating').on('rating:change', function (event, value, caption) {
-                        // Handle the user's input
-                        var ratingValue = $(this).rating('getValue');
-                        console.log(ratingValue);
-                        });
-                        });
-                        </script>*@
 
                     <div class="container-fluid row row-cols-2 row-cols-sm-4 g-2 ">
                         <div class="col ">
@@ -432,7 +425,7 @@
                     <h2>Documents</h2>
 
                     @foreach (var documents in Model.missionDocuments)
-                    {
+                    {   <a href=~/img/@documents.DocumentPath target="_blank">
                         <button type="submit " class="btn btn-outline-dark  rounded-pill ">
                             @if (@documents.DocumentType == "PDF")
                             {
@@ -449,6 +442,7 @@
                             }
 
                         </button>
+                        </a>
                     }
                     @*  <button type="submit " class="btn btn-outline-dark  rounded-pill "> <i class="bi bi-filetype-pdf">lorem-ipsum.pdf</i></button>
                         <button type="submit " class="btn btn-outline-dark  rounded-pill "> <i class="bi bi-filetype-doc">at_vero_eos_accusamus.doc</i> </button>

@@ -12,5 +12,7 @@ namespace CI_Platform.Repository.Interface
     {
         public StoryModel stories();
         public List<Story> StoryFilter(string? search);
+        public StoryModel storyDetails(int sid, int uid);
+        public void RecommandToCoWorker(int FromUserId, List<int> ToUserId, int sid);
     }
 }

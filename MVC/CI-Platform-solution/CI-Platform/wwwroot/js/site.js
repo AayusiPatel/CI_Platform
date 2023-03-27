@@ -121,7 +121,7 @@ function temp() {
 
     $.ajax({
         type: "POST", // POST
-        url: '/Home/Filter',
+        url: '/Platform/Filter',
         data: {
             'cityId': checkedvalues,
             'countryId': checkedcntryvalues,
@@ -198,7 +198,7 @@ function story() {
 }
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function fav(x) {
 
@@ -208,7 +208,7 @@ function fav(x) {
 
     $.ajax({
         type: "POST", // POST
-        url: '/Home/AddFav',
+        url: '/Platform/AddFav',
         data: {
             'MissionId': missionId
         },
@@ -253,7 +253,7 @@ function fav(x) {
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 document.onload = opengrid();
 
 function opengrid() {
@@ -275,7 +275,7 @@ function openlist() {
 
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 //$.ajax({
@@ -296,7 +296,7 @@ function openlist() {
 
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -310,7 +310,7 @@ function comment(x) {
 
 
     $.ajax({
-        url: "/Home/AddComment",
+        url: "/Platform/AddComment",
         type: "POST", // POST
         data: {
             'obj': missionid,
@@ -357,7 +357,7 @@ function recommandToCoWorker(x) {
 
     /* debugger;*/
     $.ajax({
-        url: "/Home/RecommandToCoWorker",
+        url: "/Platform/RecommandToCoWorker",
         method: "Post",
         data: {
             "toUserId": toUserId,
@@ -381,7 +381,7 @@ function applyMission(missionId) {
     debugger
     $.ajax({
 
-        url: '/Home/applyMission',
+        url: '/Platform/applyMission',
         method: "POST",
         data: {
             'missionId': missionId,
@@ -421,7 +421,7 @@ function PageIndex(x, y) {
     debugger
     $.ajax({
 
-        url: '/Home/Volunteering_Mission',
+        url: '/Platform/Volunteering_Mission',
         method: "POST",
         data: {
             'mid': x,
@@ -463,3 +463,40 @@ function showStory(x) {
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+function recommandStory(x) {
+
+    var toUserId = [];
+    var recommand = document.getElementById("recommand");
+    var list = recommand.getElementsByTagName("input");
+    for (i = 0; i < list.length; i++) {
+        if (list[i].checked) {
+            toUserId.push(list[i].value);
+        }
+
+    }
+
+
+    var StoryId = x;
+
+    /* debugger;*/
+    $.ajax({
+        url: "/Story/RecommandToCoWorker",
+        method: "Post",
+        data: {
+            "toUserId": toUserId,
+            "sid": StoryId,
+        },
+        success: function (data) {
+            console.log(toUserId);
+            toastr.success('E-mial sent successfully!');
+        }
+        ,
+        error: function (e) {
+            console.log("Bye");
+            alert('Error');
+        },
+    });
+}

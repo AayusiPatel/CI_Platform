@@ -32,34 +32,34 @@ namespace CI_Platform.Controllers
         }
 
         //[HttpPost]
-        public IActionResult PlatformLandingPage()
-        {
-            string name = HttpContext.Session.GetString("Uname");
-            ViewBag.Uname = name;
+        //public IActionResult PlatformLandingPage()
+        //{
+        //    string name = HttpContext.Session.GetString("Uname");
+        //    ViewBag.Uname = name;
             
-            //ViewBag.City = _platform.GetCitys();
+        //    //ViewBag.City = _platform.GetCitys();
 
-            List<Mission> missionDeails = _platform.GetMissionDetails();
-            ViewBag.MissionDeails = missionDeails;
+        //    List<Mission> missionDeails = _platform.GetMissionDetails();
+        //    ViewBag.MissionDeails = missionDeails;
 
-            ViewBag.cont = missionDeails.Count;
+        //    ViewBag.cont = missionDeails.Count;
 
        
-            List<City> Cities = _platform.GetCitys();
-            ViewBag.Cities = Cities;
-            List<Country> Countries = _platform.GetCountry();
-            ViewBag.Countries = Countries;
-            List<MissionTheme> Themes = _platform.GetMissionTheme();
-            ViewBag.Themes = Themes;
-            List<MissionSkill> Skills = _platform.GetSkills();
-            ViewBag.Skills = Skills;
+        //    List<City> Cities = _platform.GetCitys();
+        //    ViewBag.Cities = Cities;
+        //    List<Country> Countries = _platform.GetCountry();
+        //    ViewBag.Countries = Countries;
+        //    List<MissionTheme> Themes = _platform.GetMissionTheme();
+        //    ViewBag.Themes = Themes;
+        //    List<MissionSkill> Skills = _platform.GetSkills();
+        //    ViewBag.Skills = Skills;
 
 
-            PlatformModel ms = _platform.GetMissions();
+        //    PlatformModel ms = _platform.GetMissions();
 
 
-            return View(ms);
-        }
+        //    return View(ms);
+        //}
 
 
    
@@ -74,68 +74,68 @@ namespace CI_Platform.Controllers
             return Json(json);
                  }
 
-        public IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
-        {
-            List<Mission> cards = _platform.Filter(cityId, countryId, themeId, skillId, search, sort);
-            PlatformModel platformModel = new PlatformModel();
-            {
-                platformModel.Mission = cards;
-            }
+        //public IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
+        //{
+        //    List<Mission> cards = _platform.Filter(cityId, countryId, themeId, skillId, search, sort);
+        //    PlatformModel platformModel = new PlatformModel();
+        //    {
+        //        platformModel.Mission = cards;
+        //    }
 
-            return PartialView("_FilterMissionPartial", platformModel);
-
-
-        }
+        //    return PartialView("_FilterMissionPartial", platformModel);
 
 
-
-        public bool AddFav(int MissionId)
-        {
-
-            int UId = (int)HttpContext.Session.GetInt32("UId");
-
-            bool favorite = _platform.AddFav(UId, MissionId);
-
-            return favorite;
+        //}
 
 
 
-            //return RedirectToAction("PlatformLandingPage", "Home");
-        }
+        //public bool AddFav(int MissionId)
+        //{
+
+        //    int UId = (int)HttpContext.Session.GetInt32("UId");
+
+        //    bool favorite = _platform.AddFav(UId, MissionId);
+
+        //    return favorite;
 
 
 
-        public IActionResult Gridview()
-        {
-            return View();
-        }
-
-        public IActionResult ListView()
-        {
-
-
-            return View();
-        }
-        public IActionResult Volunteering_Mission(int mid, int pageIndex = 1)
-        {
-
-
-            string name = HttpContext.Session.GetString("Uname");
-            ViewBag.Uname = name;
-
-            if (name != null)
-            {
-                var UId = (int)HttpContext.Session.GetInt32("UId");
-                ViewBag.uid = UId;
-            }
-
-            VolunteerModel volunteerModel = _volunteer.DisplayModel(mid, pageIndex);
+        //    //return RedirectToAction("PlatformLandingPage", "Home");
+        //}
 
 
 
+        //public IActionResult Gridview()
+        //{
+        //    return View();
+        //}
 
-            return View(volunteerModel);
-        }
+        //public IActionResult ListView()
+        //{
+
+
+        //    return View();
+        //}
+        //public IActionResult Volunteering_Mission(int mid, int pageIndex = 1)
+        //{
+
+
+        //    string name = HttpContext.Session.GetString("Uname");
+        //    ViewBag.Uname = name;
+
+        //    if (name != null)
+        //    {
+        //        var UId = (int)HttpContext.Session.GetInt32("UId");
+        //        ViewBag.uid = UId;
+        //    }
+
+        //    VolunteerModel volunteerModel = _volunteer.DisplayModel(mid, pageIndex);
+
+
+
+
+        //    return View(volunteerModel);
+        //}
 
 
         //[HttpPost]
@@ -164,39 +164,39 @@ namespace CI_Platform.Controllers
 
 
 
-        public void AddComment(int obj, string comnt)
-        {
+        //public void AddComment(int obj, string comnt)
+        //{
 
-            int UserId = (int)HttpContext.Session.GetInt32("UId");
-            bool comntAdded = _volunteer.addComment(obj, UserId, comnt);
-            if (comntAdded)
-            {
-                ViewBag.ComntAdded = "Comment Added";
-            }
-            else
-            {
-                ViewBag.ComntAdded = "Comment not Added";
-            }
-
-
-
-        }
+        //    int UserId = (int)HttpContext.Session.GetInt32("UId");
+        //    bool comntAdded = _volunteer.addComment(obj, UserId, comnt);
+        //    if (comntAdded)
+        //    {
+        //        ViewBag.ComntAdded = "Comment Added";
+        //    }
+        //    else
+        //    {
+        //        ViewBag.ComntAdded = "Comment not Added";
+        //    }
 
 
 
-        [HttpPost]
-        public bool applyMission(int missionId)
-        {
-            int UserId = (int)HttpContext.Session.GetInt32("UId");
-            var apply = _volunteer.applyMission(missionId, UserId);
-            if (apply == true)
-            {
-                //TempData["success"] = "Applied Successfully...";
-                return apply;
-            }
-            //TempData["error"] = "You've already Applied... ";
-            return false;
-        }
+        //}
+
+
+
+        //[HttpPost]
+        //public bool applyMission(int missionId)
+        //{
+        //    int UserId = (int)HttpContext.Session.GetInt32("UId");
+        //    var apply = _volunteer.applyMission(missionId, UserId);
+        //    if (apply == true)
+        //    {
+        //        //TempData["success"] = "Applied Successfully...";
+        //        return apply;
+        //    }
+        //    //TempData["error"] = "You've already Applied... ";
+        //    return false;
+        //}
 
         public void RecommandToCoWorker(List<int> toUserId, int mid)
         {
@@ -221,20 +221,20 @@ namespace CI_Platform.Controllers
         {
             return View();
         }
-        public IActionResult StoryListing()
-        {
-            List<Country> Countries = _platform.GetCountry();
-            ViewBag.Countries = Countries;
-            List<City> Cities = _platform.GetCitys();
-            ViewBag.Cities = Cities;
-            List<MissionTheme> Themes = _platform.GetMissionTheme();
-            ViewBag.Themes = Themes;
-            List<MissionSkill> Skills = _platform.GetSkills();
-            ViewBag.Skills = Skills;
+        //public IActionResult StoryListing()
+        //{
+        //    List<Country> Countries = _platform.GetCountry();
+        //    ViewBag.Countries = Countries;
+        //    List<City> Cities = _platform.GetCitys();
+        //    ViewBag.Cities = Cities;
+        //    List<MissionTheme> Themes = _platform.GetMissionTheme();
+        //    ViewBag.Themes = Themes;
+        //    List<MissionSkill> Skills = _platform.GetSkills();
+        //    ViewBag.Skills = Skills;
 
-            StoryModel model = _story.stories();
-            return View(model);
-        }
+        //    StoryModel model = _story.stories();
+        //    return View(model);
+        //}
 
         //public void StoryFilter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
         //{

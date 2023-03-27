@@ -11,6 +11,8 @@ namespace CI_Platform.Entities.ViewModels
     {
        public  List<Story> stories { get; set; }
         public Story Story { get; set; }
-       //public  List<StoryMedium> storyMedia { get; set; }
+        public List<StoryMedium> storiesMedium { get; set; }
+        public List<User>? CoWorkers { get; set; }
+        //public  List<StoryMedium> storyMedia { get; set; }
     }
 }

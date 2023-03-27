@@ -30,6 +30,8 @@ namespace CI_Platform.Controllers
         //}
         public IActionResult StoryListing()
         {
+            string name = HttpContext.Session.GetString("Uname");
+            ViewBag.Uname = name;
             List<Country> Countries = _platform.GetCountry();
             ViewBag.Countries = Countries;
             List<City> Cities = _platform.GetCitys();
@@ -42,10 +44,45 @@ namespace CI_Platform.Controllers
             StoryModel model = _story.stories();
             return View(model);
         }
-        public IActionResult StoryDetail()
+        public IActionResult StoryDetail(int sid)
         {
-            return View();
+            string name = HttpContext.Session.GetString("Uname");
+            ViewBag.Uname = name;
+            List<Country> Countries = _platform.GetCountry();
+            ViewBag.Countries = Countries;
+            List<City> Cities = _platform.GetCitys();
+            ViewBag.Cities = Cities;
+            List<MissionTheme> Themes = _platform.GetMissionTheme();
+            ViewBag.Themes = Themes;
+            List<MissionSkill> Skills = _platform.GetSkills();
+            ViewBag.Skills = Skills;
+            if (name != null)
+            {
+                int UserId = (int)HttpContext.Session.GetInt32("UId");
+            }
+            //if (string.IsNullOrEmpty(Convert.ToString(UserId)))
+            //{
+            //    {
+            //        Response.Redirect(Page.ResolveUrl("~/default.aspx"));
+            //    }
+            //}
+            StoryModel model = _story.storyDetails(sid, 19);
+            //StoryModel model = _story.storyDetails(sid , UserId);
+
+            return View(model);
         }
+
+        public void RecommandToCoWorker(List<int> toUserId, int sid)
+        {
+            int FromUserId = (int)HttpContext.Session.GetInt32("UId");
+
+          _story.RecommandToCoWorker(FromUserId, toUserId, sid);
+
+
+
+        }
+
+
         public IActionResult StoryApply()
         {
             return View();

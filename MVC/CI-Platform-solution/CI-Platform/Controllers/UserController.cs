@@ -81,7 +81,7 @@ namespace CI_Platform.Controllers
                     HttpContext.Session.SetInt32("UId", (int)loguser.UserId);
 
 
-                    return RedirectToAction("PlatformLandingPage", "Home");
+                    return RedirectToAction("PlatformLandingPage", "Platform");
                 }
                 else
                 {
