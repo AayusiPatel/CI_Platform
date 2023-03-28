@@ -21,7 +21,7 @@
 </head>
 
 <body>
-
+ 
 
 
     <div class="card mb-3" style="max-width: 100%;">
@@ -182,7 +182,7 @@
                             @if (Model.favoriteMissions.Any(x => x.MissionId == Model.mission.MissionId && x.UserId == @ViewBag.uid))
                             {
                                 <button type="button" class="btn btn-outline-dark w-100 rounded-pill" onclick="fav(@Model.mission.MissionId)">
-                                    <i id="favMission" class="bi bi-heart-fill text-danger"></i> <span style="font-size: 0.8em;">Add to Favourite </span>
+                                    <i id="favMission" class="bi bi-heart-fill text-danger"></i> <span style="font-size: 0.8em;">Remove from Favourite </span>
                                 </button>
                             }
                             else

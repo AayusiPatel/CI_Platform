@@ -38,8 +38,8 @@ namespace CI_Platform.Repository.Repository
         public StoryModel storyDetails(int sid, int uid)
         {
             List<Story> stories = _db.Stories.Include(m => m.StoryMedia).Include(m => m.Mission.Theme).Include(m => m.User).ToList();
-            Story story = stories.FirstOrDefault(x=>x.StoryId == sid);
-            List<StoryMedium> photos = _db.StoryMedia.Where(x=>x.StoryId == sid).ToList();
+            Story story = stories.FirstOrDefault(x => x.StoryId == sid);
+            List<StoryMedium> photos = _db.StoryMedia.Where(x => x.StoryId == sid).ToList();
             List<User> coWorkers = _db.Users.Where(x => x.UserId != uid).ToList();
             //List<StoryMedium> storyMedia = _db.StoryMedia.ToList();
             StoryModel storyModel = new StoryModel();
@@ -63,24 +63,24 @@ namespace CI_Platform.Repository.Repository
 
             if (search != null)
             {
-              
 
 
-                 foreach (var n in missioncards)
+
+                foreach (var n in missioncards)
+                {
+
+                    var title = n.Title.ToLower();
+                    if (title.Contains(search.ToLower()))
                     {
-
-                        var title = n.Title.ToLower();
-                        if (title.Contains(search.ToLower()))
-                        {
-                            cards.Add(n);
-                        }
-
-
+                        cards.Add(n);
                     }
-                
+
+
+                }
+
 
             }
-            if(search == null)
+            if (search == null)
             {
                 cards = missioncards;
             }
@@ -136,6 +136,38 @@ namespace CI_Platform.Repository.Repository
             }
         }
 
+
+        public List<MissionApplication> missionsSStory(int ud)
+        {
+            List<MissionApplication> missions = _db.MissionApplications.Include(x => x.Mission).Where(x => x.UserId == ud).ToList();
+            return missions;
+        }
+
+
+        public bool saveStory(ShareStory obj, int status, int uid)
+        {
+
+            Story str = new Story();
+            {
+                str.Title = obj.Stitle;
+                str.Description = obj.Sdescription;
+                str.UserId = uid;
+                str.MissionId = obj.MissionId;
+            }
+            if(status == 1)
+            {
+                str.Status = "DRAFT";
+            }
+            if (status == 2)
+            {
+                str.Status = "PENDING";
+            }
+
+            _db.Stories.Add(str);
+            _db.SaveChanges();
+
+            return true;
+        }
     }
 
 }

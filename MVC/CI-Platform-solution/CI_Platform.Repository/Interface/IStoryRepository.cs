@@ -14,5 +14,7 @@ namespace CI_Platform.Repository.Interface
         public List<Story> StoryFilter(string? search);
         public StoryModel storyDetails(int sid, int uid);
         public void RecommandToCoWorker(int FromUserId, List<int> ToUserId, int sid);
+        public List<MissionApplication> missionsSStory(int ud);
+        public bool saveStory(ShareStory obj, int status, int uid);
     }
 }

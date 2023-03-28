@@ -32,7 +32,7 @@
                     <option value="3">Three</option>
                     </select>
                    <button onclick="opengrid()"> <i class="bi bi-grid-fill" style="font-size: large;"></i> </button>
-                 <button onclick="openlist()"><a href="~/Home/ListView"> <i class="bi bi-list" style="font-size:large;"></i> </a></button>
+                 <button onclick="openlist()"> <i class="bi bi-list" style="font-size:large;"></i></button>
             </div>
           </div>
 
@@ -51,60 +51,6 @@
         }
 
 
-        @*<div id="grid-view" class="grid" >
-    <div class="container-fluid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
-                       @foreach (var item in @ViewBag.MissionDeails)
-                {
-                <div class="col">
-                    <div class="card " >
-                        <div class="wrapper">
-                            <div class="content">
-                        <img src="~/img/Animal-welfare-&-save-birds-campaign-1.png" class="card-img-top" alt="..." style="width: 100%;">
-
-                    <img src="~/img/add1.png" class="card-img-top bg-dark fa-download-1" alt="..." style="">
-                                <img src="~/img/heart.png" class="card-img-top bg-dark fa-download-2 " alt="..." style="">
-                                <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
-                   <span class="border-dark rounded-pill label"> &nbsp; &nbsp; @item.MissionTheme.Title  &nbsp; &nbsp;</span>
-                            </div>
-                        </div>
-                        <div class="card-img-overlay ">
-                            <p class="text-end">
-                                <span class="border-dark rounded-pill text-white bg-dark ">&nbsp;<i class="bi bi-geo-alt fs-6">@item.City.Name &nbsp;</i></span>
-
-
-                        </p>
-                        </div>
-                        <div class="card-body mb-0">
-                            <h5 class="card-title">@item.Title</h5>
-                            <p class="card-text">@item.ShortDescription</p>
-                            <div class="card-text  "><span>@item.OrganizationName</span>
-                                <span class="me-0">
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-fill text-warning"></i>
-                                <i class="bi bi-star-half text-warning"></i>
-                                <i class="bi bi-star text-warning"></i>
-                            </span>
-                            </div>
-                            <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">From @item.StartDate.ToShortDateString() until @item.EndDate.ToShortDateString()</span></h6>
-                            <div class="row">
-                                <div class="col-6"><i class="bi bi-person-check-fill" style=""></i> 10<br>
-                                    <span class="small text-muted">&nbsp &nbsp Seats Left</span>
-                                </div>
-                                <div class="col-6 "><i class="bi bi-clock"></i> @item.EndDate.ToShortDateString()<br>
-                                    <span class="small text-muted">&nbsp &nbsp Deadline</span>
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="my-0">
-                        <div class="card-body  ms-md-auto me-md-auto mt-0">
-                            <button type="submit" class="btn btn-outline-danger w-100  rounded-pill "> Apply <i class="bi bi-arrow-right text-danger"></i> </button>
-                        </div>
-                    </div>
-                </div>
-                        }
-        </div>
-        </div>*@
 
         </body>
 

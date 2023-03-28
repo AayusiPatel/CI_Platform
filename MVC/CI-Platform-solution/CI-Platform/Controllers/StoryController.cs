@@ -56,18 +56,28 @@ namespace CI_Platform.Controllers
             ViewBag.Themes = Themes;
             List<MissionSkill> Skills = _platform.GetSkills();
             ViewBag.Skills = Skills;
-            if (name != null)
-            {
-                int UserId = (int)HttpContext.Session.GetInt32("UId");
-            }
+
+            //if (name != null)
+            //{
+            //    int UserId = (int)HttpContext.Session.GetInt32("UId");
+
+            //}
+
+            int UserId = (int)HttpContext.Session.GetInt32("UId");
+
+
+
             //if (string.IsNullOrEmpty(Convert.ToString(UserId)))
             //{
             //    {
             //        Response.Redirect(Page.ResolveUrl("~/default.aspx"));
             //    }
             //}
-            StoryModel model = _story.storyDetails(sid, 19);
-            //StoryModel model = _story.storyDetails(sid , UserId);
+
+
+
+            //StoryModel model = _story.storyDetails(sid, 19);
+            StoryModel model = _story.storyDetails(sid, UserId);
 
             return View(model);
         }
@@ -85,6 +95,48 @@ namespace CI_Platform.Controllers
 
         public IActionResult StoryApply()
         {
+            string name = HttpContext.Session.GetString("Uname");
+            ViewBag.Uname = name;
+
+            if (name != null)
+            {
+                int UserId = (int)HttpContext.Session.GetInt32("UId");
+                List<MissionApplication> misShareStory = _story.missionsSStory(UserId);
+
+                ShareStory ss = new ShareStory();
+                {
+                    ss.missions = misShareStory;
+                }
+                return View(ss);
+            }
+
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult StoryApply(ShareStory obj , int command)
+        {
+            string name = HttpContext.Session.GetString("Uname");
+            ViewBag.Uname = name;
+            int UserId = (int)HttpContext.Session.GetInt32("UId");
+            bool abc = _story.saveStory(obj,command,UserId);
+            if (command == 1)
+            {
+                if (abc == false)
+                {
+                    return RedirectToAction("StoryListing", "Story");
+                }
+
+                List<MissionApplication> misShareStory = _story.missionsSStory(UserId);
+
+                obj.missions = misShareStory;
+                return View(obj);
+            }
+            if(command == 2)
+            {
+                return RedirectToAction("StoryListing", "Story");
+            }
             return View();
         }
     }

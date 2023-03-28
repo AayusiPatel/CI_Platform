@@ -15,4 +15,15 @@ namespace CI_Platform.Entities.ViewModels
         public List<User>? CoWorkers { get; set; }
         //public  List<StoryMedium> storyMedia { get; set; }
     }
+
+
+    public class ShareStory
+    {
+       public  List<MissionApplication> missions { get; set; }
+
+        public string? Stitle { get; set; }
+        public string? Sdescription { get; set; }
+        public DateTime? PublishedAt { get; set; }
+        public long MissionId { get; set; }
+    }
 }

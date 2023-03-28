@@ -118,6 +118,7 @@ function temp() {
     var sort = document.getElementById("sort").value;
     console.log(sort);
 
+    debugger
 
     $.ajax({
         type: "POST", // POST
@@ -133,14 +134,15 @@ function temp() {
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
             debugger
-            $("#grid-view").empty();
+            $("#Filter").empty();
             console.log("grid Hii");
-            $("#grid-view").html(data);
+            $("#Filter").html(data);
             //$("#list-view").empty();
             //console.log("list Hii");
             //$("#list-view").html(data);
         },
         error: function (e) {
+            debugger
             console.log("Bye");
             alert('Error');
         },
@@ -254,7 +256,6 @@ function fav(x) {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-document.onload = opengrid();
 
 function opengrid() {
     console.log("grid-view");
