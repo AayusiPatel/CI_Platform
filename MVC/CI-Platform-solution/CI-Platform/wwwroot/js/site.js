@@ -118,6 +118,7 @@ function temp() {
     var sort = document.getElementById("sort").value;
     console.log(sort);
 
+  
     debugger
 
     $.ajax({
@@ -134,9 +135,11 @@ function temp() {
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
             debugger
+           
             $("#Filter").empty();
             console.log("grid Hii");
             $("#Filter").html(data);
+      
             //$("#list-view").empty();
             //console.log("list Hii");
             //$("#list-view").html(data);

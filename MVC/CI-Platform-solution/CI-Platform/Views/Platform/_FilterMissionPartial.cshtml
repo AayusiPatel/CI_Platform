@@ -40,11 +40,14 @@
                     <p class="card-text">@item.ShortDescription</p>
                     <div class="card-text  "><span>@item.OrganizationName</span>
                         <span class="me-0">
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-fill text-warning"></i>
-                        <i class="bi bi-star-half text-warning"></i>
-                        <i class="bi bi-star text-warning"></i>
+                        @for (int i = 1; i <= 3; i++)
+                                {
+                                    <i class="bi bi-star-fill" style="color: #F8D441;"></i>
+                                }
+                                @for (int i = 1; i <= 2; i++)
+                                {
+                                    <i class="bi bi-star" style="color: #F8D441;"></i>
+                                }
                     </span>
                     </div>
                     <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">From @item.StartDate.ToString() until @item.EndDate.ToString()</span></h6>

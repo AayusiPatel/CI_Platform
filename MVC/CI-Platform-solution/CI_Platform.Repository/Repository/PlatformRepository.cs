@@ -91,7 +91,7 @@ namespace CI_Platform.Repository.Repository
 
         public List<Mission> GetMissionDetails()
         {
-            List<Mission> missionDetails = _db.Missions.Include(m => m.City).Include(m => m.Theme).Include(m => m.MissionMedia).Include(m => m.GoalMissions).Include(m => m.MissionSkills).ToList();
+            List<Mission> missionDetails = _db.Missions.Include(m => m.City).Include(m => m.Theme).Include(m => m.MissionMedia).Include(m => m.GoalMissions).Include(m => m.MissionSkills).Include(m=>m.MissionRatings).ToList();
             //foreach (var item in missionDetails)
             //{ 
             //    Mission mission = new Mission();
