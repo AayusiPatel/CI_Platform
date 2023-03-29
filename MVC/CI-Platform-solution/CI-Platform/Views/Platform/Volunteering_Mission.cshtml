@@ -373,9 +373,21 @@
                         </div>
                     </div>
                     <div class=" text-center mt-3 " id="pop-up">
-                        @if (Model.missionApplicaton.Any(x => x.MissionId == Model.mission.MissionId && x.UserId == @ViewBag.uid))
+                        @{
+                            bool check = Model.missionApplicaton.Any(x => x.MissionId == @Model.mission.MissionId && x.UserId == @ViewBag.uid);
+                            var misChk = Model.missionApplicaton.FirstOrDefault(x => x.MissionId == @Model.mission.MissionId && x.UserId == @ViewBag.uid);
+                             bool chk = (misChk.ApprovalStatus == "Approve");
+                        }
+                        @if (check)
                         {
-                            <button type="button" class="btn btn-outline-danger  rounded-pill" id="applyMission" onclick="applyMission(@Model.mission.MissionId)" disabled> Applied  <i class="bi bi-arrow-right text-danger ms-2"></i> </button>
+                            @if (chk)
+                            {
+                                <button type="button" class="btn btn-outline-danger  rounded-pill" id="applyMission" onclick="applyMission(@Model.mission.MissionId)" disabled> Applied  <i class="bi bi-arrow-right text-danger ms-2"></i> </button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-outline-danger  rounded-pill" id="applyMission" onclick="applyMission(@Model.mission.MissionId)" disabled> Requested  <i class="bi bi-arrow-right text-danger ms-2"></i> </button>
+                            }
                         }
                         else
                         {

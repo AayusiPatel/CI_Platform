@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/sKWGdA9+8qJxKnN6Bu5TwxWD3CFHXF14+ib9Cnx1QLgIvc1Ev7vVNBaZFVRpBQInqYfsv6HvnS2qFF0e7EXPg==",
+  "dgSpecHash": "T7SViCz6Xzw8OvAYWklS6YK9V4zsRAnDBlsK0c6+zo5XIMqHvvQ9SjibzNwPiujeVnMwFUu8KYMay0xp4grLCA==",
   "success": true,
   "projectFilePath": "C:\\Users\\pci116\\Downloads\\Ayushi\\CI-Platform\\CI-Platform\\MVC\\CI-Platform-solution\\CI_Platform.Repository\\CI_Platform.Repository.csproj",
   "expectedPackageFiles": [
@@ -11,7 +11,7 @@
     "C:\\Users\\pci116\\.nuget\\packages\\mailkit\\3.5.0\\mailkit.3.5.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
-    "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
+    "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.1\\microsoft.data.sqlclient.5.0.1.nupkg.sha512",
@@ -59,6 +59,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.21.0\\system.identitymodel.tokens.jwt.6.21.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.io\\4.3.0\\system.io.4.3.0.nupkg.sha512",
+    "C:\\Users\\pci116\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\system.memory.data\\1.0.2\\system.memory.data.1.0.2.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",

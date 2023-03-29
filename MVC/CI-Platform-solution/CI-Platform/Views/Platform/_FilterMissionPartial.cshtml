@@ -40,22 +40,41 @@
                     <p class="card-text">@item.ShortDescription</p>
                     <div class="card-text  "><span>@item.OrganizationName</span>
                         <span class="me-0">
-                        @for (int i = 1; i <= 3; i++)
+                            @{
+
+                                int rating = (int)@item.MissionRatings.Average(x=>x.Rating);
+                            }
+                                 @for (int i = 1; i <= rating; i++)
                                 {
                                     <i class="bi bi-star-fill" style="color: #F8D441;"></i>
                                 }
-                                @for (int i = 1; i <= 2; i++)
+                                @for (int i = 1; i <= (5-rating); i++)
                                 {
                                     <i class="bi bi-star" style="color: #F8D441;"></i>
                                 }
                     </span>
                     </div>
-                    <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">From @item.StartDate.ToString() until @item.EndDate.ToString()</span></h6>
-                    <div class="row">
+                    @if (@item.MissionType == "Goal")
+                        {
+                            <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">@(item.GoalMissions.FirstOrDefault()?.GoalValue) @(item.GoalMissions.FirstOrDefault()?.GoalObjectiveText) </span></h6>
+                        }
+
+                        else if (item.StartDate <= DateTime.Now && DateTime.Now <= item.EndDate)
+                        {
+                            <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">Ongoing Opportunity </span></h6>
+
+
+                        }
+                        else
+                        {
+                            <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">@item.StartDate.ToString().Substring(0,10)  until @item.EndDate.ToString().Substring(0,10) </span></h6>
+
+                        }   
+                        <div class="row">
                         <div class="col-6"><i class="bi bi-person-check-fill" style=""></i> 10<br>
                             <span class="small text-muted">&nbsp &nbsp Seats Left</span>
                         </div>
-                        <div class="col-6 "><i class="bi bi-clock"></i> @item.EndDate.ToString()<br>
+                        <div class="col-6 "><i class="bi bi-clock"></i> @item.EndDate.ToString().Substring(0,10)<br>
                             <span class="small text-muted">&nbsp &nbsp Deadline</span>
                         </div>
                     </div>
@@ -87,7 +106,7 @@
 
 
 
-         <div id="list-view" >
+         <div id="list-view" style="display: none;" >
                <div class="container-fluid ">
               @foreach (var item in Model.Mission)
                 {
@@ -105,11 +124,18 @@
                         <i class="bi bi-globe">@item.Theme.Title  &nbsp;</i>
                         <i class="bi bi-people">@item.OrganizationName</i>
                         <p class="text-end">
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-half text-warning"></i>
-                            <i class="bi bi-star text-warning"></i>
+                                @{
+
+                                int rating = (int)@item.MissionRatings.Average(x=>x.Rating);
+                            }
+                            @for (int i = 1; i <= rating; i++)
+                                {
+                                    <i class="bi bi-star-fill" style="color: #F8D441;"></i>
+                                }
+                                @for (int i = 1; i <= (5-rating); i++)
+                                {
+                                    <i class="bi bi-star" style="color: #F8D441;"></i>
+                                }
                         </p>
                     
                       <h5 class="card-title">@item.Title</h5>

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lZW6wiJFpvf8mmgbPICzi5aJprtOmO7V7wj1P1jVCdETzZsUyk9V7LEc74UcMgUOtFdFIs+a1oTnOr0EnuHPPg==",
+  "dgSpecHash": "Onab8xwNYvks6D1ND6IOy4jKOE6F+n63zN1VDc1Dz1nsIVAq33krpQQ4UBBb4SN+qHADLhOHPHERkt0lIdydFg==",
   "success": true,
   "projectFilePath": "C:\\Users\\pci116\\Downloads\\Ayushi\\CI-Platform\\CI-Platform\\MVC\\CI-Platform-solution\\CI-Platform\\CI-Platform.csproj",
   "expectedPackageFiles": [
@@ -16,7 +16,7 @@
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnet.webpages.webdata\\3.2.9\\microsoft.aspnet.webpages.webdata.3.2.9.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
-    "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
+    "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\6.0.0\\microsoft.aspnetcore.razor.language.6.0.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.build\\17.3.2\\microsoft.build.17.3.2.nupkg.sha512",
@@ -146,7 +146,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.io.compression.zipfile\\4.3.0\\system.io.compression.zipfile.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.io.filesystem\\4.3.0\\system.io.filesystem.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.io.filesystem.primitives\\4.3.0\\system.io.filesystem.primitives.4.3.0.nupkg.sha512",
-    "C:\\Users\\pci116\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
+    "C:\\Users\\pci116\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.linq\\4.3.0\\system.linq.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.linq.expressions\\4.3.0\\system.linq.expressions.4.3.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",

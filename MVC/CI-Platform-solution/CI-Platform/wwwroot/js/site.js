@@ -118,6 +118,8 @@ function temp() {
     var sort = document.getElementById("sort").value;
     console.log(sort);
 
+    var listView = document.getElementById("list-view");
+    var gridView = document.getElementById("grid-view");
   
     debugger
 
@@ -139,10 +141,16 @@ function temp() {
             $("#Filter").empty();
             console.log("grid Hii");
             $("#Filter").html(data);
-      
+
+            console.log(data.listView);
+
+            //$("#grid-view").empty();
+            //console.log("grid-view Hii");
+            //$("#grid-view").html(data);
             //$("#list-view").empty();
             //console.log("list Hii");
             //$("#list-view").html(data);
+
         },
         error: function (e) {
             debugger
@@ -400,7 +408,7 @@ function applyMission(missionId) {
                 //$('#applyMission').css("color", "red");
                 //document.getElementById("pop-up").innerHTML += `Applied Successfully...`;
                 $('#applyMission').empty();
-                $('#applyMission').text("Applied");
+                $('#applyMission').text("Requested");
 
                 document.getElementById("pop-up").innerHTML += `Applied Successfully...`;
             }

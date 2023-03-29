@@ -103,189 +103,196 @@ namespace CI_Platform.Repository.Repository
 
         public List<Mission> Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
         {
-            List<Mission> cards = new List<Mission>();
-            var missioncards = GetMissionDetails();
+            //List<Mission> cards = new List<Mission>();
+            List<Mission> cards = GetMissionDetails();
             var Missionskills = _db.MissionSkills.Include(m => m.Skill).ToList();
             List<int> temp = new List<int>();
-
-
-            if (countryId.Count != 0 || themeId.Count != 0 || skillId.Count != 0)
+            
+            if(countryId.Count > 0)
             {
-
-
-
                 foreach (var n in countryId)
                 {
-                    foreach (var item in missioncards)
-                    {
-                        bool countrychek = cards.Any(x => x.MissionId == item.MissionId);
-                        if (item.CountryId == n && countrychek == false)
-                        {
-                            cards.Add(item);
-                        }
-                    }
-
+                    cards = cards.Where(x => x.CountryId == n).ToList();
                 }
-
-                if (cityId.Count != 0 && countryId.Count != 0)
-                {
-                    cards.Clear();
-                    foreach (var n in cityId)
-                    {
-                        foreach (var item in missioncards)
-                        {
-                            bool citychek = cards.Any(x => x.MissionId == item.MissionId);
-                            if (item.CityId == n && citychek == false)
-                            {
-                                cards.Add(item);
-                            }
-
-                        }
-                    }
-                }
-
-
-                foreach (var n in themeId)
-                {
-                    foreach (var item in missioncards)
-                    {
-                        bool themechek = cards.Any(x => x.MissionId == item.MissionId);
-                        if (item.ThemeId == n && themechek == false)
-                        {
-                            cards.Add(item);
-                        }
-                    }
-                }
-
-                foreach (var n in skillId)
-                {
-                    foreach (var item in Missionskills)
-                    {
-                        bool skillchek = cards.Any(x => x.MissionId == item.MissionId);
-                        if (item.SkillId == n && skillchek == false)
-                        {
-
-                            cards.Add(missioncards.FirstOrDefault(x => x.MissionId == item.MissionId));
-                        }
-                    }
-                    //foreach (var item in Missionskills)
-                    //{
-                    //    if (item.SkillId == n)
-                    //    {
-                    //        temp.Add((int)item.MissionId);
-                    //    }
-                    //    foreach (var item2 in temp)
-                    //    {
-                    //        bool skillchek = missionDetails.Any(x => x.MissionId == item2);
-                    //        if (skillchek == false)
-                    //        {
-                    //            cards.Add(missioncards.FirstOrDefault(x => x.MissionId == item2));
-                    //        }
-                    //    }
-
-                    //}
-                }
-
-
-
-
-
             }
-
-            if (countryId.Count == 0 && themeId.Count == 0 && skillId.Count == 0 && search == null)
+            if(cityId.Count > 0)
             {
-                foreach (var item in missioncards)
+                foreach(var n in cityId)
                 {
-                    cards.Add(item);
+                    cards = cards.Where(x=>x.CityId == n).ToList();  
                 }
-
             }
+            if(themeId.Count > 0)
+            {
+                cards = cards.Where(c => themeId.Contains((int)c.ThemeId)).ToList();
+            }
+            if (skillId != null)
+            {
+             
+                    //cards = cards.Where(x => skillId.Contains(x.MissionSkills.sk).ToList();
+               
+
+                //foreach (var n in skillId)
+                //{
+                //    foreach (var item in Missionskills)
+                //    {
+
+                //        if (item.SkillId == n)
+                //        {
+
+                //            cards = cards.Where(x => x.MissionId == item.MissionId).ToList();
+
+                       
+                //        }
+                //    }
+                //}
+            }
+            //if (countryId.Count != 0 || themeId.Count != 0 || skillId.Count != 0)
+            //{
+
+
+
+            //    foreach (var n in countryId)
+            //    {
+            //        foreach (var item in missioncards)
+            //        {
+            //            bool countrychek = cards.Any(x => x.MissionId == item.MissionId);
+            //            if (item.CountryId == n && countrychek == false)
+            //            {
+            //                cards.Add(item);
+            //            }
+            //        }
+
+            //    }
+
+            //    if (cityId.Count != 0 && countryId.Count != 0)
+            //    {
+            //        cards.Clear();
+            //        foreach (var n in cityId)
+            //        {
+            //            foreach (var item in missioncards)
+            //            {
+            //                bool citychek = cards.Any(x => x.MissionId == item.MissionId);
+            //                if (item.CityId == n && citychek == false)
+            //                {
+            //                    cards.Add(item);
+            //                }
+
+            //            }
+            //        }
+            //    }
+
+
+            //    foreach (var n in themeId)
+            //    {
+            //        foreach (var item in missioncards)
+            //        {
+            //            bool themechek = cards.Any(x => x.MissionId == item.MissionId);
+            //            if (item.ThemeId == n && themechek == false)
+            //            {
+            //                cards.Add(item);
+            //            }
+            //        }
+            //    }
+
+            //    foreach (var n in skillId)
+            //    {
+            //        foreach (var item in Missionskills)
+            //        {
+            //            bool skillchek = cards.Any(x => x.MissionId == item.MissionId);
+            //            if (item.SkillId == n && skillchek == false)
+            //            {
+
+            //                cards.Add(missioncards.FirstOrDefault(x => x.MissionId == item.MissionId));
+            //            }
+            //        }
+            //        //foreach (var item in Missionskills)
+            //        //{
+            //        //    if (item.SkillId == n)
+            //        //    {
+            //        //        temp.Add((int)item.MissionId);
+            //        //    }
+            //        //    foreach (var item2 in temp)
+            //        //    {
+            //        //        bool skillchek = missionDetails.Any(x => x.MissionId == item2);
+            //        //        if (skillchek == false)
+            //        //        {
+            //        //            cards.Add(missioncards.FirstOrDefault(x => x.MissionId == item2));
+            //        //        }
+            //        //    }
+
+            //        //}
+            //    }
+            //}
+
+            //if (countryId.Count == 0 && themeId.Count == 0 && skillId.Count == 0 && search == null)
+            //{
+            //    foreach (var item in missioncards)
+            //    {
+            //        cards.Add(item);
+            //    }
+
+            //}
 
             if (search != null)
             {
-                List<Mission> srch = new List<Mission>();
-
-
-                if (cards.Count != 0)
-                {
-                    foreach (var n in cards)
-                    {
-
-                        var title = n.Title.ToLower();
-                        if (title.Contains(search.ToLower()))
-                        {
-                            srch.Add(n);
-                        }
-
-
-                    }
-                }
-
-                if (cards.Count == 0)
-                {
-                    foreach (var n in missioncards)
-                    {
-                        var title = n.Title.ToLower();
-                        if (title.Contains(search.ToLower()))
-                        {
-                            srch.Add(n);
-                        }
-                    }
-                }
-                cards = srch;
-
+                cards = cards.Where(a => a.Title.Contains(search) || a.OrganizationName.Contains(search)).ToList();
             }
+
+            //    List<Mission> srch = new List<Mission>();
+
+
+            //    if (cards.Count != 0)
+            //    {
+            //        foreach (var n in cards)
+            //        {
+
+            //            var title = n.Title.ToLower();
+            //            if (title.Contains(search.ToLower()))
+            //            {
+            //                cards.Add(n);
+            //            }
+
+
+            //        }
+            //    }
+
+            //    if (cards.Count == 0)
+            //    {
+            //        foreach (var n in missioncards)
+            //        {
+            //            var title = n.Title.ToLower();
+            //            if (title.Contains(search.ToLower()))
+            //            {
+            //                srch.Add(n);
+            //            }
+            //        }
+            //    }
+            //    cards = srch;
+
+            //}
 
             if (sort != null)
             {
                 if (sort == 1)
                 {
-                    if (cards.Count != 0)
-                    {
+                  
                         cards = cards.OrderByDescending(x => x.CreatedAt).ToList();
-                    }
-
-                    else
-                    {
-                        missioncards = missioncards.OrderByDescending(x => x.CreatedAt).ToList();
-                    }
+                   
                 }
                 if (sort == 2)
                 {
-                    if (cards.Count != 0)
-                    {
+                   
                         cards = cards.OrderBy(x => x.CreatedAt).ToList();
-                    }
-
-                    else
-                    {
-                        missioncards = missioncards.OrderBy(x => x.CreatedAt).ToList();
-                    }
+                    
                 }
                 if (sort == 3)
                 {
-                    if (cards.Count != 0)
-                    {
+                   
                         cards = cards.OrderBy(x => x.EndDate).ToList();
-                    }
-
-                    else
-                    {
-                        missioncards = missioncards.OrderBy(x => x.EndDate).ToList();
-                    }
+                   
                 }
-                if (sort == 3)
-                {
-                    if (cards.Count != 0)
-                    {
-                        cards = cards.OrderBy(x => x.EndDate).ToList();
-                    }
-
-                    else
-                    {
-                        missioncards = missioncards.OrderBy(x => x.EndDate).ToList();
-                    }
-                }
+              
 
                 //if (sort == 4)
                 //{

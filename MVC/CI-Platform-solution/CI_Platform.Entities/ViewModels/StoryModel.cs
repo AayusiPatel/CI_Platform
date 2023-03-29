@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+
 using CI_Platform.Entities.Models;
 
 namespace CI_Platform.Entities.ViewModels
@@ -25,5 +27,7 @@ namespace CI_Platform.Entities.ViewModels
         public string? Sdescription { get; set; }
         public DateTime? PublishedAt { get; set; }
         public long MissionId { get; set; }
+        public List<IFormFile>? file { get; set; }
+
     }
 }
