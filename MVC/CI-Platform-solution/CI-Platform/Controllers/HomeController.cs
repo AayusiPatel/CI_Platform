@@ -36,7 +36,7 @@ namespace CI_Platform.Controllers
         //{
         //    string name = HttpContext.Session.GetString("Uname");
         //    ViewBag.Uname = name;
-            
+
         //    //ViewBag.City = _platform.GetCitys();
 
         //    List<Mission> missionDeails = _platform.GetMissionDetails();
@@ -44,7 +44,7 @@ namespace CI_Platform.Controllers
 
         //    ViewBag.cont = missionDeails.Count;
 
-       
+
         //    List<City> Cities = _platform.GetCitys();
         //    ViewBag.Cities = Cities;
         //    List<Country> Countries = _platform.GetCountry();
@@ -62,17 +62,17 @@ namespace CI_Platform.Controllers
         //}
 
 
-   
 
-            public JsonResult GetCitys(int countryId)
-          {
+
+        public JsonResult GetCitys(int countryId)
+        {
 
             List<City> city = _platform.GetCityData(countryId);
             var json = JsonConvert.SerializeObject(city);
 
 
             return Json(json);
-                 }
+        }
 
         //public IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
         //{
@@ -276,4 +276,3 @@ namespace CI_Platform.Controllers
         }
     }
 }
-﻿

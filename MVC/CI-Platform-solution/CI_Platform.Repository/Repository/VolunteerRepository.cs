@@ -32,7 +32,7 @@ namespace CI_Platform.Repository.Repository
 
         public List<MissionMedium> media(int mid)
         {
-            List<MissionMedium> photos = _db.MissionMedia.Where(x=>x.MissionId==mid).ToList();
+            List<MissionMedium> photos = _db.MissionMedia.Where(x => x.MissionId == mid).ToList();
             return photos;
         }
 
@@ -42,30 +42,30 @@ namespace CI_Platform.Repository.Repository
             return documents;
         }
 
-    //    public List<MissionApplication> volunteers(int mid)
-    //    {
+        //    public List<MissionApplication> volunteers(int mid)
+        //    {
 
-    //        List<MissionApplication> missionApplications = _db.MissionApplications.ToList();
-    //        List<User> users = _db.Users.ToList();
-           
+        //        List<MissionApplication> missionApplications = _db.MissionApplications.ToList();
+        //        List<User> users = _db.Users.ToList();
 
-    //        List<MissionApplication> application_user = 
-    //            ( from e in missionApplications
-    //              join f in users on e.UserId equals f.UserId into tbl1
-             
-    //              where e.MissionId == mid
-    //              select  e ).ToList();
 
-            
-        
-    //        return application_user;
-    //}
+        //        List<MissionApplication> application_user = 
+        //            ( from e in missionApplications
+        //              join f in users on e.UserId equals f.UserId into tbl1
+
+        //              where e.MissionId == mid
+        //              select  e ).ToList();
+
+
+
+        //        return application_user;
+        //}
 
 
         public int avgRating(int mid)
         {
             List<MissionRating> ratings = _db.MissionRatings.Where(x => x.MissionId == mid).ToList();
-            int abc = (int)ratings.Average(x => x.Rating);   
+            int abc = (int)ratings.Average(x => x.Rating);
             return abc;
         }
 
@@ -157,7 +157,7 @@ namespace CI_Platform.Repository.Repository
                 _db.Add(invite);
                 _db.SaveChanges();
 
-               
+
 
                 #region Send Mail
                 var mailBody = "<h1></h1><br><h2><a href='" + "https://localhost:7228/Platform/Volunteering_Mission?mid=" + mid + "'>Check Out this Mission!</a></h2>";
@@ -183,7 +183,7 @@ namespace CI_Platform.Repository.Repository
         public bool MissionRating(int userId, int mid, int rating)
         {
             MissionRating ratingCheck = _db.MissionRatings.FirstOrDefault(a => a.UserId == userId && a.MissionId == mid);
-            
+
             if (ratingCheck != null)
             {
                 //MissionRating missionRating = new MissionRating();
@@ -214,13 +214,13 @@ namespace CI_Platform.Repository.Repository
 
 
 
-        public VolunteerModel DisplayModel(int mid,int pageIndex)
+        public VolunteerModel DisplayModel(int mid, int pageIndex)
         {
             List<Mission> missions = _platform.GetMissionDetails();
             Mission mission = missions.FirstOrDefault(x => x.MissionId == mid);
             List<MissionMedium> Photos = media(mid);
             List<MissionDocument> documents = document(mid);
-            List<Mission> relatedMissions = missions.Where(  x => x.OrganizationName == mission.OrganizationName || x.ThemeId == mission.ThemeId || x.CountryId == mission.CountryId  ).ToList();
+            List<Mission> relatedMissions = missions.Where(x => x.OrganizationName == mission.OrganizationName || x.ThemeId == mission.ThemeId || x.CountryId == mission.CountryId).ToList();
             relatedMissions.Remove(mission);
             int rating = avgRating(mid);
             List<MissionSkill> missionSkills = _db.MissionSkills.Include(m => m.Skill).Where(x => x.MissionId == mid).ToList();
@@ -246,7 +246,7 @@ namespace CI_Platform.Repository.Repository
                 volunteerModel.rating = rating;
                 volunteerModel.missionSkills = missionSkills;
                 volunteerModel.missionApplicaton = apps;
-                 volunteerModel.comments = comments;
+                volunteerModel.comments = comments;
                 volunteerModel.CoWorkers = users;
                 volunteerModel.favoriteMissions = favoriteMissions;
                 volunteerModel.volunteres = recentVolunteres;

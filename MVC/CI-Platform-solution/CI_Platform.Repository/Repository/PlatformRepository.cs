@@ -91,7 +91,7 @@ namespace CI_Platform.Repository.Repository
 
         public List<Mission> GetMissionDetails()
         {
-            List<Mission> missionDetails = _db.Missions.Include(m => m.City).Include(m => m.Theme).Include(m => m.MissionMedia).Include(m => m.GoalMissions).Include(m => m.MissionSkills).Include(m=>m.MissionRatings).ToList();
+            List<Mission> missionDetails = _db.Missions.Include(m => m.City).Include(m => m.Theme).Include(m => m.MissionMedia).Include(m => m.GoalMissions).Include(m => m.MissionSkills).Include(m => m.MissionRatings).ToList();
             //foreach (var item in missionDetails)
             //{ 
             //    Mission mission = new Mission();
@@ -106,46 +106,42 @@ namespace CI_Platform.Repository.Repository
             //List<Mission> cards = new List<Mission>();
             List<Mission> cards = GetMissionDetails();
             var Missionskills = _db.MissionSkills.Include(m => m.Skill).ToList();
-            List<int> temp = new List<int>();
-            
-            if(countryId.Count > 0)
+            List<Mission> temp = new List<Mission>();
+
+            if (countryId.Count > 0)
             {
                 foreach (var n in countryId)
                 {
                     cards = cards.Where(x => x.CountryId == n).ToList();
                 }
             }
-            if(cityId.Count > 0)
+            if (cityId.Count > 0)
             {
-                foreach(var n in cityId)
+                foreach (var n in cityId)
                 {
-                    cards = cards.Where(x=>x.CityId == n).ToList();  
+                    cards = cards.Where(x => x.CityId == n).ToList();
                 }
             }
-            if(themeId.Count > 0)
+            if (themeId.Count > 0)
             {
                 cards = cards.Where(c => themeId.Contains((int)c.ThemeId)).ToList();
             }
-            if (skillId != null)
+            if (skillId.Count > 0)
             {
-             
-                    //cards = cards.Where(x => skillId.Contains(x.MissionSkills.sk).ToList();
-               
 
-                //foreach (var n in skillId)
-                //{
-                //    foreach (var item in Missionskills)
-                //    {
+                //temp = cards.Where(x => skillId.Contains(x.MissionSkills.s).ToList();
 
-                //        if (item.SkillId == n)
-                //        {
 
-                //            cards = cards.Where(x => x.MissionId == item.MissionId).ToList();
+                foreach (var n in skillId)
+                {
 
-                       
-                //        }
-                //    }
-                //}
+
+                    temp.AddRange(cards.Where(x => x.MissionSkills.Any(x => x.SkillId == n)));
+
+                    //cards.Add(missioncards.FirstOrDefault(x => x.MissionId == item.MissionId));
+
+                }
+                cards = temp;
             }
             //if (countryId.Count != 0 || themeId.Count != 0 || skillId.Count != 0)
             //{
@@ -276,23 +272,23 @@ namespace CI_Platform.Repository.Repository
             {
                 if (sort == 1)
                 {
-                  
-                        cards = cards.OrderByDescending(x => x.CreatedAt).ToList();
-                   
+
+                    cards = cards.OrderByDescending(x => x.CreatedAt).ToList();
+
                 }
                 if (sort == 2)
                 {
-                   
-                        cards = cards.OrderBy(x => x.CreatedAt).ToList();
-                    
+
+                    cards = cards.OrderBy(x => x.CreatedAt).ToList();
+
                 }
                 if (sort == 3)
                 {
-                   
-                        cards = cards.OrderBy(x => x.EndDate).ToList();
-                   
+
+                    cards = cards.OrderBy(x => x.EndDate).ToList();
+
                 }
-              
+
 
                 //if (sort == 4)
                 //{

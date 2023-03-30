@@ -39,15 +39,16 @@ namespace CI_Platform.Controllers
             //        user.Password = obj.Password;
             //        user.PhoneNumber = obj.PhoneNumber;
             //}
-            if (ModelState.IsValid) { 
-            if (_userRepository.Registration(obj))
+            if (ModelState.IsValid)
             {
-                TempData["Registered"] = "Registration Succesfull!";
-                return RedirectToAction("Index");
-            }
+                if (_userRepository.Registration(obj))
+                {
+                    TempData["Registered"] = "Registration Succesfull!";
+                    return RedirectToAction("Index");
+                }
                 TempData["UserExist"] = "This Email is already Registered.";
             }
-           
+
             return View();
         }
         public IActionResult Index()
@@ -88,7 +89,7 @@ namespace CI_Platform.Controllers
                     TempData["LoginError"] = "Invalid Email or Password";
                 }
             }
-           
+
             return View();
 
         }
@@ -100,7 +101,7 @@ namespace CI_Platform.Controllers
 
 
 
-    [HttpPost]
+        [HttpPost]
         public IActionResult ForgotPwd(ForgotPwd obj)
         {
             //User user = new User();
@@ -125,7 +126,7 @@ namespace CI_Platform.Controllers
                 return RedirectToAction("Index", "User");
             }
             return View();
-    }
+        }
 
         public IActionResult ResetPwd()
         {
@@ -148,21 +149,21 @@ namespace CI_Platform.Controllers
             {
                 var validToken = _userRepository.reset(obj, token);
 
-            if (validToken != null)
-            {
-                TempData["Message"] = "Your Password is changed";
-                return RedirectToAction("Index");
-            }
-            TempData["Message"] = "Token not Found";
-            return RedirectToAction("Login");
+                if (validToken != null)
+                {
+                    TempData["Message"] = "Your Password is changed";
+                    return RedirectToAction("Index");
+                }
+                TempData["Message"] = "Token not Found";
+                return RedirectToAction("Login");
             }
             return View();
         }
 
 
 
-     
 
 
-        }
+
     }
+}

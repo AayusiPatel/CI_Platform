@@ -146,28 +146,110 @@ namespace CI_Platform.Repository.Repository
 
         public bool saveStory(ShareStory obj, int status, int uid)
         {
-
-            Story str = new Story();
+            Story story = _db.Stories.FirstOrDefault(x => x.UserId == uid && x.MissionId == obj.MissionId);
+            if (story == null)
             {
-                str.Title = obj.Stitle;
-                str.Description = obj.Sdescription;
-                str.UserId = uid;
-                str.MissionId = obj.MissionId;
-            }
-            if(status == 1)
-            {
-                str.Status = "DRAFT";
-            }
-            if (status == 2)
-            {
-                str.Status = "PENDING";
-            }
+                Story str = new Story();
+                {
+                    str.Title = obj.Stitle;
+                    str.Description = obj.Sdescription;
+                    str.UserId = uid;
+                    str.MissionId = obj.MissionId;
+                }
+                if (status == 1)
+                {
+                    str.Status = "DRAFT";
+                }
+                if (status == 2)
+                {
+                    str.Status = "PENDING";
+                }
 
-            _db.Stories.Add(str);
-            _db.SaveChanges();
+                _db.Stories.Add(str);
+                _db.SaveChanges();
+            }
+            if (story != null)
+            {
+                {
+                    story.Title = obj.Stitle;
+                    story.Description = obj.Sdescription;
+                    story.UserId = uid;
+                    story.MissionId = obj.MissionId;
+                }
+                if (status == 1)
+                {
+                    story.Status = "DRAFT";
+                }
+                if (status == 2)
+                {
+                    story.Status = "PENDING";
+                }
 
+                _db.Stories.Update(story);
+                _db.SaveChanges();
+            }
             return true;
         }
+
+
+
+        public async Task<bool> saveImage(ShareStory obj, int uid)
+        {
+
+            var filePaths = new List<string>();
+            foreach (var formFile in obj.file)
+            {
+                StoryMedium mediaobj = new StoryMedium();
+                int sid = (int)_db.Stories.FirstOrDefault(x => x.UserId == uid && x.MissionId == obj.MissionId).StoryId;
+                mediaobj.StoryId = sid;
+                mediaobj.Path = formFile.FileName;
+                mediaobj.Type = "PNG";
+                //subview.StorySend.StoryMedia.Add(mediaobj);
+
+                _db.StoryMedia.Add(mediaobj);
+                _db.SaveChanges();
+
+                if (formFile.Length > 0)
+                {
+                    // full path to file in temp location
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Story", formFile.FileName); //we are using Temp file name just for the example. Add your own file path.
+                    filePaths.Add(filePath);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                         formFile.CopyToAsync(stream);
+                    }
+                }
+                
+              
+            }
+            return true ;
+        }
+
+        public ShareStory getData(int mid, int uid)
+        {
+            ShareStory obj = new ShareStory();
+            Story story = _db.Stories.FirstOrDefault(m=>m.MissionId == mid && m.UserId == uid);
+
+            if (story.Status == "DRAFT")
+            {
+
+                {
+                    //obj.Stitle = story.Title;
+                    //obj.Sdescription = story.Description;
+                    //obj.PublishedAt = story.PublishedAt;
+                    //obj.file = story.StoryMedia;
+                    obj.story = story;
+
+                }
+
+                return obj;
+            }
+
+            return null;
+        }
+
+
+
     }
 
 }

@@ -118,8 +118,8 @@ function temp() {
     var sort = document.getElementById("sort").value;
     console.log(sort);
 
-    var listView = document.getElementById("list-view");
-    var gridView = document.getElementById("grid-view");
+    //var listView = document.getElementById("list-view");
+    //var gridView = document.getElementById("grid-view");
   
     debugger
 
@@ -181,7 +181,7 @@ function story() {
 
     $.ajax({
         type: "POST", // POST
-        url: '/Common/StoryFilter',
+        url: '/Story/StoryFilter',
         data: {
 
             'search': search,

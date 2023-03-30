@@ -20,10 +20,10 @@ using CI_Platform.Entities.ViewModels;
 
 namespace CI_Platform.Repository.Repository
 {
-    public class UserRepository: IUserRepository
+    public class UserRepository : IUserRepository
     {
         public readonly CiPlatformContext _db;
-       
+
 
         public UserRepository(CiPlatformContext db)
         {
@@ -40,10 +40,10 @@ namespace CI_Platform.Repository.Repository
                 user.Password = obj.Password;
 
             }
-            var user1 = _db.Users.FirstOrDefault(u => u.Email == obj.Email && u.Password == obj.Password) ;
+            var user1 = _db.Users.FirstOrDefault(u => u.Email == obj.Email && u.Password == obj.Password);
 
 
-           return user1;
+            return user1;
         }
 
 
@@ -60,11 +60,11 @@ namespace CI_Platform.Repository.Repository
             if (_db.Users.Any(x => x.Email == obj.Email))
                 return false;
 
-           
-                _db.Users.Add(user);
-                _db.SaveChanges();
-                return true;
-          
+
+            _db.Users.Add(user);
+            _db.SaveChanges();
+            return true;
+
             //return entry.Entity;
         }
 
@@ -73,15 +73,15 @@ namespace CI_Platform.Repository.Repository
 
             User user = new User();
             {
-              
+
                 user.Email = obj.Email;
-            
+
 
             }
 
             var user1 = _db.Users.FirstOrDefault(u => u.Email.Equals(obj.Email.ToLower()) && u.DeletedAt == null);
 
-            if(user1 == null)
+            if (user1 == null)
             {
                 return null;
             }
@@ -133,9 +133,9 @@ namespace CI_Platform.Repository.Repository
         {
             User user = new User();
             {
-                
+
                 user.Password = obj.Password;
-             
+
 
             }
             var validToken = _db.PasswordResets.FirstOrDefault(x => x.Token == token);
@@ -150,6 +150,6 @@ namespace CI_Platform.Repository.Repository
             return validToken;
         }
 
-        
+
     }
 }

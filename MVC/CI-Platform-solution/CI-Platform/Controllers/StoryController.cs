@@ -2,6 +2,8 @@
 using CI_Platform.Entities.ViewModels;
 using CI_Platform.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+
 
 namespace CI_Platform.Controllers
 {
@@ -9,16 +11,16 @@ namespace CI_Platform.Controllers
     {
 
         public readonly IPlatformRepository _platform;
-    
+
         public readonly IStoryRepository _story;
 
 
-        public StoryController(IPlatformRepository platform,  IStoryRepository story)
+        public StoryController(IPlatformRepository platform, IStoryRepository story)
         {
 
             //_userRepository = userRepository;
             _platform = platform;
-           
+
             _story = story;
 
         }
@@ -86,7 +88,7 @@ namespace CI_Platform.Controllers
         {
             int FromUserId = (int)HttpContext.Session.GetInt32("UId");
 
-          _story.RecommandToCoWorker(FromUserId, toUserId, sid);
+            _story.RecommandToCoWorker(FromUserId, toUserId, sid);
 
 
 
@@ -115,29 +117,57 @@ namespace CI_Platform.Controllers
         }
 
         [HttpPost]
-        public IActionResult StoryApply(ShareStory obj , int command)
+        public IActionResult StoryApply(ShareStory obj, int command)
         {
             string name = HttpContext.Session.GetString("Uname");
             ViewBag.Uname = name;
             int UserId = (int)HttpContext.Session.GetInt32("UId");
-            bool abc = _story.saveStory(obj,command,UserId);
+            bool abc = _story.saveStory(obj, command, UserId);
+            _story.saveImage(obj, UserId);
             if (command == 1)
             {
-                if (abc == false)
-                {
-                    return RedirectToAction("StoryListing", "Story");
-                }
-
+              
                 List<MissionApplication> misShareStory = _story.missionsSStory(UserId);
 
                 obj.missions = misShareStory;
                 return View(obj);
             }
-            if(command == 2)
+            if (command == 2)
             {
                 return RedirectToAction("StoryListing", "Story");
             }
             return View();
+        }
+
+
+        public IActionResult StoryFilter(string? search)
+        {
+
+            List<Story> cards = _story.StoryFilter(search);
+
+            StoryModel sModel = new StoryModel();
+            {
+                sModel.stories = cards;
+            }
+
+            return PartialView("_FilterStory", sModel);
+        }
+
+        [HttpPost]
+        public  JsonResult CheckData(int mid)
+        {
+            string name = HttpContext.Session.GetString("Uname");
+            ViewBag.Uname = name;
+            int UserId = (int)HttpContext.Session.GetInt32("UId");
+            // Check if the saved data exists in your data store based on the selected option
+            var StoryModel =  _story.getData(mid, UserId);
+
+            var dataExists = JsonConvert.SerializeObject(StoryModel.story);
+
+            // Return a boolean value indicating whether the data exists
+            return Json(dataExists);
+
+            //return View("~/Story/StoryApply", StoryModel);
         }
     }
 }

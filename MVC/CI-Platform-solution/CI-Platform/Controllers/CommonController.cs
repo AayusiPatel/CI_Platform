@@ -44,7 +44,7 @@ namespace CI_Platform.Controllers
             return Json(json);
         }
 
-       
+
 
         public IActionResult AddFav(int MissionId)
         {
@@ -75,7 +75,7 @@ namespace CI_Platform.Controllers
 
 
             //return PartialView("_GridPartial", platformModel);
-        
+
             return PartialView("_FilterMissionPartial", platformModel);
         }
 
@@ -131,7 +131,7 @@ namespace CI_Platform.Controllers
                 sModel.stories = cards;
             }
 
-            return PartialView("_FilterStory",sModel);
+            return PartialView("_FilterStory", sModel);
         }
 
 

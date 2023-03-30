@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+
 
 using CI_Platform.Entities.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace CI_Platform.Entities.ViewModels
 {
@@ -22,7 +23,7 @@ namespace CI_Platform.Entities.ViewModels
     public class ShareStory
     {
        public  List<MissionApplication> missions { get; set; }
-
+        public Story story { get; set; }
         public string? Stitle { get; set; }
         public string? Sdescription { get; set; }
         public DateTime? PublishedAt { get; set; }

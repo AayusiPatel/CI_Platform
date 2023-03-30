@@ -16,5 +16,8 @@ namespace CI_Platform.Repository.Interface
         public void RecommandToCoWorker(int FromUserId, List<int> ToUserId, int sid);
         public List<MissionApplication> missionsSStory(int ud);
         public bool saveStory(ShareStory obj, int status, int uid);
+
+        public  Task<bool> saveImage(ShareStory obj, int uid);
+        public ShareStory getData(int mid, int uid);
     }
 }
