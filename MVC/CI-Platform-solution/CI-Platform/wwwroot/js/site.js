@@ -512,3 +512,34 @@ function recommandStory(x) {
         },
     });
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function StoryPage(x) {
+    debugger
+    $.ajax({
+
+        url: '/Story/StoryListing',
+        method: "GET",
+        data: {
+          
+            'PageIndex': x
+        },
+        success: function (data) {
+            debugger
+
+            console.log("Pagination");
+            $("body").html(data);
+
+
+        },
+        error: function (request, error) {
+            console.log("Error in Pagination");
+
+
+            alert('Error in Pagination');
+        },
+
+    });
+
+}

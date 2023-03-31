@@ -3,27 +3,27 @@
 *@
 @*@using CI_Platform.Entities.ViewModels
 
-@model StoryModel*@
+    @model StoryModel*@
 
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 
 @*
 
-        @{
+    @{
     Html.RenderPartial("nav2");
-}
+    }
 *@
 
 
- <div class="row  border-top border-bottom">
-            <div class="col-6 ">
-                <form class="d-flex mt-md-3" role="search">
-                    <i class="bi bi-search mt-2 ms-2"></i>
-                    <input class="form-control border-white" type="search" placeholder="Search Mission " aria-label="Search" id="searchb" onkeyup="story();">
-                </form>
-            </div>
-               <div class="col-6 ">
+<div class="row  border-top border-bottom">
+    <div class="col-6 ">
+        <form class="d-flex mt-md-3" role="search">
+            <i class="bi bi-search mt-2 ms-2"></i>
+            <input class="form-control border-white" type="search" placeholder="Search Mission " aria-label="Search" id="searchb" onkeyup="story();">
+        </form>
+    </div>
+    <div class="col-6 ">
         <button class="btn btn-primary d-md-none w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             Filter Story
         </button>
@@ -39,7 +39,7 @@
             </select>
             <select class="form-select border-white xyz " aria-label="Default select example" id="selectCityList" onchange="temp()">
 
-           
+
                 <option selected>City</option>
                 @foreach (var item in @ViewBag.Cities)
                 {
@@ -74,14 +74,14 @@
                         <li><input type="checkbox" value="@item.SkillId" /> @item.Skill.SkillName </li>
                     }
                 </ul>
-           
+
             </div>
         </div>
 
 
     </div>
-  </div>
-  @*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+</div>
+@*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////*@
 <div class="container">
 
 
@@ -89,20 +89,22 @@
 
         <div class="50 mt-2" id="storyText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos animi quibusdam illum consectetur eligendi rerum, esse adipisci fugit neque molestias dolores fugiat consequuntur, delectus deserunt. Odit pariatur quia reiciendis rerum?</div>
 
-       <a asp-controller="Story" asp-action="StoryApply" >
-           <button type="button"  class="btn btn-outline-light rounded-pill mt-3">Share your Story &nbsp;
-               <i class="bi bi-arrow-right">
+        <a asp-controller="Story" asp-action="StoryApply">
+            <button type="button" class="btn btn-outline-light rounded-pill mt-3">
+                Share your Story &nbsp;
+                <i class="bi bi-arrow-right">
 
-               </i></button>
-    </a>
+                </i>
+            </button>
+        </a>
 
     </div>
- 
+
 
     <div class="container">
         <div class="container-fluid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2" id="StoryFilter">
 
-          
+
 
 
             @{
@@ -110,11 +112,32 @@
             }
 
 
-            
+
+        </div>
+    </div>
 </div>
-</div>
+<div id="pagination">
+         </button>
+                        <nav aria-label="Page navigation example ">
+                            <ul class="pagination justify-content-center">
+
+                                @{
+
+                                    for (int i = 1; i <= Model.totalcount ; i++)
+                                    {
+
+                                        <li class="page-item ">
+                                            <a class="page-link active" onclick="StoryPage(@i)">@i </a>
+
+                                        </li>
+
+
+
+                                    }
+                                }
+                            </ul>
+                        </nav>
 </div>
 
- 
 
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

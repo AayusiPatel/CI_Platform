@@ -30,7 +30,7 @@ namespace CI_Platform.Controllers
         //{
         //    return View();
         //}
-        public IActionResult StoryListing()
+        public IActionResult StoryListing(int PageIndex = 1)
         {
             string name = HttpContext.Session.GetString("Uname");
             ViewBag.Uname = name;
@@ -43,7 +43,7 @@ namespace CI_Platform.Controllers
             List<MissionSkill> Skills = _platform.GetSkills();
             ViewBag.Skills = Skills;
 
-            StoryModel model = _story.stories();
+            StoryModel model = _story.stories(PageIndex);
             return View(model);
         }
         public IActionResult StoryDetail(int sid)
@@ -142,12 +142,15 @@ namespace CI_Platform.Controllers
 
         public IActionResult StoryFilter(string? search)
         {
-
+          
             List<Story> cards = _story.StoryFilter(search);
+            int PageSize = 3;
+            int TotalRecords = (cards.Count) / PageSize;
 
             StoryModel sModel = new StoryModel();
             {
                 sModel.stories = cards;
+                sModel.totalcount = TotalRecords;
             }
 
             return PartialView("_FilterStory", sModel);

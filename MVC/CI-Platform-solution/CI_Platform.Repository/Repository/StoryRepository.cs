@@ -23,14 +23,20 @@ namespace CI_Platform.Repository.Repository
             _db = db;
         }
 
-        public StoryModel stories()
+        public StoryModel stories(int PageIndex)
         {
-            List<Story> stories = _db.Stories.Include(m => m.StoryMedia).Include(m => m.Mission.Theme).Include(m => m.User).ToList();
+            int PageSize = 3;
+            List<Story> stories = _db.Stories.Include(m => m.StoryMedia).Include(m => m.Mission.Theme).Include(m => m.User)
+               .ToList();
+
+            List<Story> records = stories.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList(); 
+
+            int TotalRecords = (stories.Count)/PageSize ;
             //List<StoryMedium> storyMedia = _db.StoryMedia.ToList();
             StoryModel storyModel = new StoryModel();
             {
-                storyModel.stories = stories;
-
+                storyModel.stories = records;
+                storyModel.totalcount = TotalRecords;
             }
             return storyModel;
         }
