@@ -164,6 +164,8 @@ namespace CI_Platform.Controllers
 
             var dataExists = JsonConvert.SerializeObject(StoryModel.story);
 
+   
+
             // Return a boolean value indicating whether the data exists
             return Json(dataExists);
 
