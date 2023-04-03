@@ -107,3 +107,27 @@
         </div>*@
 
 }
+
+
+<div class="container" id="paginationFilter" style="display: none;">
+       
+                        <nav aria-label="Page navigation example ">
+                            <ul class="pagination justify-content-center">
+
+                                @{
+
+                                    for (int i = 1; i <= Model.totalcount ; i++)
+                                    {
+
+                                        <li class="page-item ">
+                                            <a class="page-link active" onclick="story(@i)">@i </a>
+
+                                        </li>
+
+
+
+                                    }
+                                }
+                            </ul>
+                        </nav>
+</div>

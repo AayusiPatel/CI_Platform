@@ -140,16 +140,17 @@ namespace CI_Platform.Controllers
         }
 
 
-        public IActionResult StoryFilter(string? search)
+        public IActionResult StoryFilter(string? search, int PageIndex = 1)
         {
           
             List<Story> cards = _story.StoryFilter(search);
             int PageSize = 3;
             int TotalRecords = (cards.Count) / PageSize;
+            List<Story> records = cards.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
 
             StoryModel sModel = new StoryModel();
             {
-                sModel.stories = cards;
+                sModel.stories = records;
                 sModel.totalcount = TotalRecords;
             }
 
@@ -165,9 +166,9 @@ namespace CI_Platform.Controllers
             // Check if the saved data exists in your data store based on the selected option
             var StoryModel =  _story.getData(mid, UserId);
 
-            var dataExists = JsonConvert.SerializeObject(StoryModel.story);
+            var dataExists = JsonConvert.SerializeObject(StoryModel);
 
-   
+                //dataExists.
 
             // Return a boolean value indicating whether the data exists
             return Json(dataExists);

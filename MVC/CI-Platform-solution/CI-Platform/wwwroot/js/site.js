@@ -166,7 +166,7 @@ function temp() {
 
 
 
-function story() {
+function story(x) {
 
 
 
@@ -174,7 +174,7 @@ function story() {
     var search = document.getElementById("searchb").value;
     console.log(search)
 
-
+    
 
 
     debugger
@@ -185,11 +185,12 @@ function story() {
         data: {
 
             'search': search,
-
+            'PageIndex' : x ,
         },
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
             debugger
+
 
             console.log(data);
             $("#StoryFilter").empty();
@@ -198,7 +199,9 @@ function story() {
             //console.log("Filtered Story");
             //$("#StoriesId").html(data);
 
-          
+            var paginatoinPage = document.getElementById("paginationPage").style.display = 'none';
+
+            var paginationFilter = document.getElementById("paginationFilter").style.display = 'block';
 
 
         },

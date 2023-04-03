@@ -285,7 +285,7 @@
                  console.log(data);
 
                   {
-                      let myDateObj = new Date(data.PublishedAt);
+                      let myDateObj = new Date(data.story.PublishedAt);
                         const year = myDateObj.getFullYear();
                         const month = String(myDateObj.getMonth() + 1).padStart(2, '0');
                             const day = String(myDateObj.getDate()).padStart(2, '0');
@@ -296,7 +296,7 @@
                               
 
                     // The data exists, so populate the form with the retrieved data
-                    $("#formGroupExampleInput").val(data.Title);
+                    $("#formGroupExampleInput").val(data.story.Title);
                   
                     $("#sDate").val(data.PublishedAt);
 
@@ -306,10 +306,15 @@
                     var editor1 = CKEDITOR.instances.editor;
 
 
-                 
+                   if(data.Description != null ){
+                                     CKEDITOR.get("editor").setContent(data.Description);
+                                 }
+                                 else{
+                                     CKEDITOR.get("editor").setContent("Add Story Description");
+                                 }
 
 // Set the content of the editor
-                        editor1.setData('Your content goes here');
+                        //editor1.setData('Your content goes here');
                   
 
 

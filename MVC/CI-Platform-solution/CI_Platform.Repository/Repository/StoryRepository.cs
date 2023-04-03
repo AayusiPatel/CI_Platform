@@ -234,17 +234,27 @@ namespace CI_Platform.Repository.Repository
         public ShareStory getData(int mid, int uid)
         {
             ShareStory obj = new ShareStory();
-            Story story = _db.Stories.FirstOrDefault(m=>m.MissionId == mid && m.UserId == uid);
+            Story story = _db.Stories.FirstOrDefault(m => m.MissionId == mid && m.UserId == uid && m.Status == "DRAFT");
 
-            if (story.Status == "DRAFT")
+          
+
+            if (story != null)
             {
+                List<StoryMedium> images = _db.StoryMedia.Where(media => media.StoryId == story.StoryId).ToList();
+                List<string> displayImage = new List<string>();
+                foreach (var image in images)
+                {
+                    displayImage.Add(image.Path);
+                }
 
                 {
+
                     //obj.Stitle = story.Title;
                     //obj.Sdescription = story.Description;
                     //obj.PublishedAt = story.PublishedAt;
                     //obj.file = story.StoryMedia;
                     obj.story = story;
+                    obj.images = displayImage;
 
                 }
 
@@ -254,7 +264,16 @@ namespace CI_Platform.Repository.Repository
             return null;
         }
 
-
+        //public List<string> getImages(int sid)
+        //{
+        //    List<StoryMedium> images = _db.StoryMedia.Where(media => media.StoryId == sid).ToList();
+        //    List<string> displayImage = new List<string>();
+        //    foreach(var image in images)
+        //    {
+        //        displayImage.Add(image.Path);
+        //    }
+        //    return displayImage;
+        //}
 
     }
 
