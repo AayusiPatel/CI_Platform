@@ -116,6 +116,20 @@ namespace CI_Platform.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        //public IActionResult SavedStory(int mid)
+        //{
+        //    string name = HttpContext.Session.GetString("Uname");
+        //    ViewBag.Uname = name;
+        //    int UserId = (int)HttpContext.Session.GetInt32("UId");
+        //    // Check if the saved data exists in your data store based on the selected option
+        //    var StoryModel = _story.getData(mid, UserId);
+        //    List<MissionApplication> misShareStory = _story.missionsSStory(UserId);
+        //    StoryModel.missions = misShareStory;
+        //    return View("StoryApply",StoryModel);
+        //}
+
         [HttpPost]
         public IActionResult StoryApply(ShareStory obj, int command)
         {
@@ -168,12 +182,13 @@ namespace CI_Platform.Controllers
 
             var dataExists = JsonConvert.SerializeObject(StoryModel);
 
-                //dataExists.
+            //dataExists.
 
             // Return a boolean value indicating whether the data exists
             return Json(dataExists);
 
             //return View("~/Story/StoryApply", StoryModel);
+            //return RedirectToAction("StoryApply", StoryModel);
         }
     }
 }

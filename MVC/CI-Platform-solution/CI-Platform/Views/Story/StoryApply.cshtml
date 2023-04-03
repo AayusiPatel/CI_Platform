@@ -120,7 +120,7 @@
                                 <option value="0">Select your mission</option>
                                 @foreach (var obj in Model.missions)
                                 {
-                                    <option value="@obj.Mission.MissionId">@obj.Mission.Title</option>
+                                    <option value="@obj.Mission.MissionId">  @obj.Mission.Title </option>
                                 }
                             </select>
                         </div>
@@ -152,7 +152,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12" >
+                    <div class="col-lg-12">
                         <textarea asp-for="Sdescription" id="editor"></textarea>
 
                         <script>
@@ -201,11 +201,7 @@
                         <button type="submit" class="threebt rounded-pill btn btn-outline-warning" value="2" name="command">Submit</button>
                     </div>
                 </div><br><br><hr>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <a href="#" style="color: #333333;">Privacy Policy</a>
-                    </div>
-                </div>
+
             </div>
         </form>
     </div>
@@ -267,7 +263,7 @@
          console.log(selectedValue);
 
 
-           debugger
+
 
         $.ajax({
             type: "POST", // POST
@@ -280,6 +276,9 @@
             success: function (data) {
 
                  console.log(data);
+
+
+
                   data = JSON.parse(data);
 
                  console.log(data);
@@ -293,31 +292,58 @@
 
                                       data.PublishedAt = formattedDate;
 
-                              
+
 
                     // The data exists, so populate the form with the retrieved data
                     $("#formGroupExampleInput").val(data.story.Title);
-                  
+
                     $("#sDate").val(data.PublishedAt);
 
-                    console.log(data.Description);
 
 
-                    var editor1 = CKEDITOR.instances.editor;
 
+                    console.log(data.displayImages);
+                           if(data.displayImages != null){
+                               debugger
+                                     imagesArray = [];
+                                     for (var i = 0; i < data.displayImages; i++){
+                                         debugger
+                                      imagesArray.push(data.displayImages[i]);
+                                      debugger
+                                      console.log(data.displayImages[i]);
+                                      debugger
+                                      }
+                                      console.log(imagesArray);
+                                       let images = ""
+                                      data.displayImages.forEach((image, index) => {
+                                        images += `<div class="image">
+                                                    <img src="${image}" alt="image">
+                                                    <span onclick="deleteImage(${index})">&times;</span>
+                                                  </div>`
 
-                   if(data.Description != null ){
-                                     CKEDITOR.get("editor").setContent(data.Description);
+                                      })
+                                      output.innerHTML = images;
+
                                  }
                                  else{
-                                     CKEDITOR.get("editor").setContent("Add Story Description");
+                                     output.innerHTML = "No Images Are Choosen";
                                  }
 
-// Set the content of the editor
-                        //editor1.setData('Your content goes here');
-                  
 
+                                 
+                 //import ClassicEditor from 'https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js';
 
+    //                ClassicEditor.create( document.querySelector( '#editor' ) )
+    //.then( editor => {
+    //    // Get the editor instance
+    //    let instance = editor.model.document;
+
+    //    // Set the data in the editor
+    //    instance.setData('Hello, world!');
+    //} )
+    //.catch( error => {
+    //    console.error( error );
+    //} );
                 }
                 //else {
                 //    // The data doesn't exist, so clear the form

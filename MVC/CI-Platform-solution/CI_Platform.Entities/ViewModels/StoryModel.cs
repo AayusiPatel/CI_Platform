@@ -32,7 +32,7 @@ namespace CI_Platform.Entities.ViewModels
         public long MissionId { get; set; }
         public List<IFormFile>? file { get; set; }
 
-        public List<string> images { get; set; } = new List<string> { };
+        public List<string> displayImages { get; set; } = new List<string> { };
 
     }
 }

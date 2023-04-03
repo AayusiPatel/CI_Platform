@@ -245,16 +245,17 @@ namespace CI_Platform.Repository.Repository
                 foreach (var image in images)
                 {
                     displayImage.Add(image.Path);
+                    story.StoryMedia.Remove(image);
                 }
 
                 {
 
-                    //obj.Stitle = story.Title;
-                    //obj.Sdescription = story.Description;
-                    //obj.PublishedAt = story.PublishedAt;
+                    obj.Stitle = story.Title;
+                    obj.Sdescription = story.Description;
+                    obj.PublishedAt = story.PublishedAt;
                     //obj.file = story.StoryMedia;
                     obj.story = story;
-                    obj.images = displayImage;
+                    obj.displayImages = displayImage;
 
                 }
 
