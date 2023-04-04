@@ -31,7 +31,7 @@ namespace CI_Platform.Entities.ViewModels
         public DateTime? PublishedAt { get; set; }
         public long MissionId { get; set; }
         public List<IFormFile>? file { get; set; }
-
+        public string? url { get; set; }
         public List<string> displayImages { get; set; } = new List<string> { };
 
     }

@@ -3,6 +3,9 @@ using CI_Platform.Entities.Models;
 using CI_Platform.Entities.ViewModels;
 using CI_Platform.Repository.Interface;
 using MailKit.Security;
+
+using Microsoft.AspNetCore.Http;
+
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
 using MimeKit.Text;
@@ -161,6 +164,7 @@ namespace CI_Platform.Repository.Repository
                     str.Description = obj.Sdescription;
                     str.UserId = uid;
                     str.MissionId = obj.MissionId;
+                    str.PublishedAt = obj.PublishedAt;
                 }
                 if (status == 1)
                 {
@@ -181,6 +185,7 @@ namespace CI_Platform.Repository.Repository
                     story.Description = obj.Sdescription;
                     story.UserId = uid;
                     story.MissionId = obj.MissionId;
+                    story.PublishedAt = obj.PublishedAt;
                 }
                 if (status == 1)
                 {
@@ -201,32 +206,63 @@ namespace CI_Platform.Repository.Repository
 
         public async Task<bool> saveImage(ShareStory obj, int uid)
         {
+            int sid = (int)_db.Stories.FirstOrDefault(x => x.UserId == uid && x.MissionId == obj.MissionId).StoryId;
 
-            var filePaths = new List<string>();
-            foreach (var formFile in obj.file)
+            if (obj.url != null)
             {
-                StoryMedium mediaobj = new StoryMedium();
-                int sid = (int)_db.Stories.FirstOrDefault(x => x.UserId == uid && x.MissionId == obj.MissionId).StoryId;
-                mediaobj.StoryId = sid;
-                mediaobj.Path = formFile.FileName;
-                mediaobj.Type = "PNG";
-                //subview.StorySend.StoryMedia.Add(mediaobj);
+                var checkUrl = _db.StoryMedia.Where(media => media.StoryId == sid && media.Type == "video").FirstOrDefault();
 
-                _db.StoryMedia.Add(mediaobj);
-                _db.SaveChanges();
 
-                if (formFile.Length > 0)
+                if (checkUrl != null)
                 {
-                    // full path to file in temp location
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Story", formFile.FileName); //we are using Temp file name just for the example. Add your own file path.
-                    filePaths.Add(filePath);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                         formFile.CopyToAsync(stream);
-                    }
+                    checkUrl.Path = obj.url;
+                    checkUrl.UpdatedAt = DateTime.Now;
+                    _db.StoryMedia.Update(checkUrl);
+                    _db.SaveChanges();
                 }
-                
-              
+                else
+                {
+                    StoryMedium forUrl = new StoryMedium();
+                    {
+                        forUrl.StoryId = sid;
+                        forUrl.Type = "video";
+                        forUrl.Path = obj.url;
+                    }
+                    _db.StoryMedia.Add(forUrl);
+                    _db.SaveChanges();
+                }
+            }
+
+            if (obj.file != null)
+            {
+                var filePaths = new List<string>();
+                foreach (var formFile in obj.file)
+                {
+                    StoryMedium mediaobj = new StoryMedium();
+                  
+
+
+                    mediaobj.StoryId = sid;
+                    mediaobj.Path = formFile.FileName;
+                    mediaobj.Type = "PNG";
+                    //subview.StorySend.StoryMedia.Add(mediaobj);
+
+                    _db.StoryMedia.Add(mediaobj);
+                    _db.SaveChanges();
+
+                    if (formFile.Length > 0)
+                    {
+                        // full path to file in temp location
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Story", formFile.FileName); //we are using Temp file name just for the example. Add your own file path.
+                        filePaths.Add(filePath);
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            formFile.CopyToAsync(stream);
+                        }
+                    }
+
+
+                }
             }
             return true ;
         }
@@ -240,7 +276,8 @@ namespace CI_Platform.Repository.Repository
 
             if (story != null)
             {
-                List<StoryMedium> images = _db.StoryMedia.Where(media => media.StoryId == story.StoryId).ToList();
+                List<StoryMedium> images = _db.StoryMedia.Where(media => media.StoryId == story.StoryId && media.Type == "png").ToList();
+
                 List<string> displayImage = new List<string>();
                 foreach (var image in images)
                 {
@@ -248,16 +285,22 @@ namespace CI_Platform.Repository.Repository
                     story.StoryMedia.Remove(image);
                 }
 
+                StoryMedium? url = _db.StoryMedia.FirstOrDefault(media => media.StoryId == story.StoryId && media.Type == "video");
+                
+                
+
                 {
 
                     obj.Stitle = story.Title;
                     obj.Sdescription = story.Description;
                     obj.PublishedAt = story.PublishedAt;
-                    //obj.file = story.StoryMedia;
+                    //obj.file = storiesMedium;
                     obj.story = story;
                     obj.displayImages = displayImage;
-
+                    if(url != null)
+                        obj.url = url.Path;
                 }
+                story.StoryMedia.Remove(url);
 
                 return obj;
             }

@@ -117,7 +117,7 @@ namespace CI_Platform.Controllers
         }
 
 
-        [HttpPost]
+        //[HttpPost]
         //public IActionResult SavedStory(int mid)
         //{
         //    string name = HttpContext.Session.GetString("Uname");
@@ -136,8 +136,14 @@ namespace CI_Platform.Controllers
             string name = HttpContext.Session.GetString("Uname");
             ViewBag.Uname = name;
             int UserId = (int)HttpContext.Session.GetInt32("UId");
+            if (command == 3)
+            {
+                return RedirectToAction("StoryListing", "Story");
+            }
+
             bool abc = _story.saveStory(obj, command, UserId);
             _story.saveImage(obj, UserId);
+
             if (command == 1)
             {
               
@@ -182,7 +188,7 @@ namespace CI_Platform.Controllers
 
             var dataExists = JsonConvert.SerializeObject(StoryModel);
 
-            //dataExists.
+           
 
             // Return a boolean value indicating whether the data exists
             return Json(dataExists);
