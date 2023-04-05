@@ -80,7 +80,7 @@ namespace CI_Platform.Controllers
 
                     HttpContext.Session.SetString("Uname", loguser.FirstName + " " + loguser.LastName);
                     HttpContext.Session.SetInt32("UId", (int)loguser.UserId);
-
+                    HttpContext.Session.SetString("Avatar", loguser.Avatar);
 
                     return RedirectToAction("PlatformLandingPage", "Platform");
                 }

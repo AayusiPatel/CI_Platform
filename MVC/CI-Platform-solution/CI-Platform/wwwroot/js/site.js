@@ -230,17 +230,19 @@ function fav(x) {
         },
         dataType: "html", // return datatype like JSON and HTML
         success: function (missions) {
-            debugger
+             debugger
             if (missions == "false") {
 
                 $('#favMission').removeClass();
                 $('#favMission').addClass("bi bi-heart");
+                document.getElementById("favMissionText").innerHTML ="Add to Favourite";
                 alert('Mission Removed from Favorites.');
             }
-
+            
             else {
                 $('#favMission').removeClass();
                 $('#favMission').addClass("bi bi-heart-fill text-danger");
+                document.getElementById("favMissionText").innerHTML = "Remove from Favourite";
                 alert('Mission Added to Favorites.');
             }
 
@@ -333,9 +335,8 @@ function comment(x) {
         },
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
-            console.log(data);
-            $("#comment").html(data);
-            $("#comment").load("#comment");
+           
+         
           
             alert('Comment Added successfully.');
             //$("#commentDescription").val(null);
@@ -519,7 +520,7 @@ function recommandStory(x) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function StoryPage(x) {
-    debugger
+  
     $.ajax({
 
         url: '/Story/StoryListing',
@@ -529,7 +530,7 @@ function StoryPage(x) {
             'PageIndex': x
         },
         success: function (data) {
-            debugger
+          
 
             console.log("Pagination");
             $("body").html(data);

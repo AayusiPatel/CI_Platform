@@ -3,7 +3,8 @@
 *@
 @{
 }
-
+@using CI_Platform.Entities.ViewModels
+@model ProfileViewModel
 
 
 <!DOCTYPE html>
@@ -73,10 +74,10 @@
             <div class="col-lg-3 col-sm-4">
 
                 <div class="border p-3 d-flex justify-content-center align-items-center flex-column">
-                    <img src="~/images/user-img.png" style="border-radius: 50%; height:125px; width:125px" class="">
+                    <img src="~/img/@ViewBag.Avatar" style="border-radius: 50%; height:125px; width:125px" class="">
 
 
-                    <span style="color: #414141;" class="">Evan Donohue</span>
+                    <span style="color: #414141;" class="">@ViewBag.Uname</span>
                     <button class="border-0 p-0 btn btn-primary" style="background-color: white;" 
                         data-toggle="modal" data-target="#exampleModal">
                         <span class="" style="color: #414141;">Change Password</span>
@@ -127,41 +128,41 @@
                     <div class="row mt-3">
                         <div class="col-12 col-sm-6">
                             <label>Name</label>
-                            <input type="text" class="form-control" placeholder="Enter your name">
+                            <input type="text" asp-for="FirstName" class="form-control" placeholder="Enter your name">
                         </div>
                         <div class="col-12 col-sm-6">
                             <label>Surname</label>
-                            <input type="text" class="form-control" placeholder="Enter your surname">
+                            <input type="text" asp-for="LastName" class="form-control" placeholder="Enter your surname">
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-12 col-sm-6">
                             <label>Employee ID</label>
-                            <input type="text" class="form-control" placeholder="Enter your employee id">
+                            <input type="text" asp-for="EmployeeId" class="form-control" placeholder="Enter your employee id">
                         </div>
                         <div class="col-12 col-sm-6">
                             <label>Manager</label>
-                            <input type="text" class="form-control" placeholder="Enter your manager details">
+                            <input type="text"  class="form-control" placeholder="Enter your manager details">
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-12 col-sm-6">
                             <label>Title</label>
-                            <input type="text" class="form-control" placeholder="Enter your employee id">
+                            <input type="text" asp-for="Title" class="form-control" placeholder="Enter your employee id">
                         </div>
                         <div class="col-12 col-sm-6">
                             <label>Department</label>
-                            <input type="text" class="form-control" placeholder="Enter your manager details">
+                            <input type="text" asp-for="Department" class="form-control" placeholder="Enter your manager details">
                         </div>
                     </div>
                     <div class="form-group mt-3">
                         <label for="exampleFormControlTextarea1">My Profile*</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                        <textarea class="form-control" asp-for="ProfileText" id="exampleFormControlTextarea1" rows="4"
                             placeholder="Enter your comments..."></textarea>
                     </div>
                     <div class="form-group mt-3">
                         <label for="exampleFormControlTextarea1">Why I Volunteer?</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                        <textarea asp-for="WhyIVolunteer" class="form-control" id="exampleFormControlTextarea1" rows="4"
                             placeholder="Enter your comments..."></textarea>
                     </div>
                     <h4 style="color: #414141;" class="mt-3">Address Information</h4>
@@ -198,7 +199,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                             <label>LinkedIn</label><br>
-                            <input type="text" class="form-control" placeholder="Enter linkedIn URL">
+                            <input type="text" asp-for="LinkedInUrl" class="form-control" placeholder="Enter linkedIn URL">
                         </div>
 
                     </div>
@@ -209,7 +210,7 @@
 
                     <div class="form-group mt-3">
 
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="8"
+                        <textarea class="form-control"  id="exampleFormControlTextarea1" rows="8"
                             placeholder=""></textarea>
                     </div>
 

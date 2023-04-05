@@ -32,9 +32,10 @@ namespace CI_Platform.Repository.Repository
             List<Story> stories = _db.Stories.Include(m => m.StoryMedia).Include(m => m.Mission.Theme).Include(m => m.User)
                .ToList();
 
-            List<Story> records = stories.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList(); 
+            List<Story> records = stories.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
 
-            int TotalRecords = (stories.Count)/PageSize ;
+            int TotalRecords = (int)Math.Ceiling(stories.Count() / (double)PageSize);
+            //int TotalRecords = (int)Math.Ceiling((decimal)((stories.Count) / PageSize) ;
             //List<StoryMedium> storyMedia = _db.StoryMedia.ToList();
             StoryModel storyModel = new StoryModel();
             {

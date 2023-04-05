@@ -114,8 +114,6 @@ namespace CI_Platform.Controllers
                 ViewBag.ComntAdded = "Comment not Added";
             }
 
-
-
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,8 +27,14 @@ namespace CI_Platform.Entities.ViewModels
     {
        public  List<MissionApplication> missions { get; set; }
         public Story story { get; set; }
+
+        [Required(ErrorMessage ="Story Title is required.")]
         public string? Stitle { get; set; }
+
+        [Required(ErrorMessage = "Story Description is required.")]
         public string? Sdescription { get; set; }
+
+        [Required(ErrorMessage = "Published Date  is required.")]
         public DateTime? PublishedAt { get; set; }
         public long MissionId { get; set; }
         public List<IFormFile>? file { get; set; }

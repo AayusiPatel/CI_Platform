@@ -133,6 +133,7 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <input type="text" class="form-control" asp-for="Stitle" id="formGroupExampleInput" placeholder="Enter story title">
+                                <span class="text-danger" asp-validation-for="Stitle"></span>
                             </div>
                         </div>
                     </div>
@@ -143,6 +144,7 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <input type="date" id="sDate" asp-for="PublishedAt" class="form-control">
+                                 <span class="text-danger" asp-validation-for="PublishedAt"></span>
                             </div>
                         </div>
                     </div>
@@ -155,6 +157,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <textarea asp-for="Sdescription" name=Sdescription id="editor"></textarea>
+                        <span class="text-danger" asp-validation-for="Sdescription"></span>
                         <script>
                             CKEDITOR.replace('Sdescription');
                         </script>
@@ -369,20 +372,19 @@
                                    let returnImage = ""
                                   data.displayImages.forEach((img, index) => {
 
-
+                                       returnImage = img;
                                       ///////////////////////////////////////////////////////
-                                       showImg = "/img/" + img;
+                                       img = "/img/" + img;
         toDataUrl(img,function(x){
             image = x;
-            returnImage = img;
+           
 
-            dT.items.add(new File([image], returnImage , {
+            dT.items.add(new File([image], returnImage, {
                 type: "image/png"
             }));
             imagesArray.push(new File([image], returnImage, {
                 type: "image/png"
             }));
-            debugger
             //console.log("image: ", dT);
 
         //document.querySelector('#imageupload').files = dT.files;
@@ -391,7 +393,7 @@
                                       //////////////////////////////////////////////////////
 
                                     images += `<div class="image">
-                                                <img src="${showImg}" alt="image">
+                                                <img src="${img}" alt="image">
                                                 <span onclick="deleteImage(${index})">&times;</span>
                                               </div>`
 

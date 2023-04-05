@@ -133,36 +133,51 @@ namespace CI_Platform.Controllers
         [HttpPost]
         public IActionResult StoryApply(ShareStory obj, int command)
         {
-            string name = HttpContext.Session.GetString("Uname");
+           
+                string name = HttpContext.Session.GetString("Uname");
             ViewBag.Uname = name;
             int UserId = (int)HttpContext.Session.GetInt32("UId");
+            List<MissionApplication> misShareStory = _story.missionsSStory(UserId);
+            obj.missions = misShareStory;
+            if (command == 1)
+            {
+                if (ModelState.ContainsKey("Stitle"))
+                {
+                    return View(obj);
+                }
+                else
+                {
+                    bool abc = _story.saveStory(obj, command, UserId);
+                    _story.saveImage(obj, UserId);
+                    return View(obj);
+                }
+            }
+            if (command == 2)
+            {
+                if (ModelState.IsValid)
+                {
+                    return View(obj);
+                }
+                else
+                {
+
+                    bool abc = _story.saveStory(obj, command, UserId);
+                    _story.saveImage(obj, UserId);
+                    return RedirectToAction("StoryListing", "Story");
+                }
+            }
             if (command == 3)
             {
                 return RedirectToAction("StoryListing", "Story");
             }
 
-            bool abc = _story.saveStory(obj, command, UserId);
-            _story.saveImage(obj, UserId);
-
-            if (command == 1)
-            {
-              
-                List<MissionApplication> misShareStory = _story.missionsSStory(UserId);
-
-                obj.missions = misShareStory;
-                return View(obj);
-            }
-            if (command == 2)
-            {
-                return RedirectToAction("StoryListing", "Story");
-            }
-            return View();
+            return View(obj);
         }
 
 
         public IActionResult StoryFilter(string? search, int PageIndex = 1)
         {
-          
+
             List<Story> cards = _story.StoryFilter(search);
             int PageSize = 3;
             int TotalRecords = (cards.Count) / PageSize;
@@ -178,17 +193,17 @@ namespace CI_Platform.Controllers
         }
 
         [HttpPost]
-        public  JsonResult CheckData(int mid)
+        public JsonResult CheckData(int mid)
         {
             string name = HttpContext.Session.GetString("Uname");
             ViewBag.Uname = name;
             int UserId = (int)HttpContext.Session.GetInt32("UId");
             // Check if the saved data exists in your data store based on the selected option
-            var StoryModel =  _story.getData(mid, UserId);
+            var StoryModel = _story.getData(mid, UserId);
 
             var dataExists = JsonConvert.SerializeObject(StoryModel);
 
-           
+
 
             // Return a boolean value indicating whether the data exists
             return Json(dataExists);
