@@ -283,13 +283,17 @@
              console.log(data);
              if(data != null){
               {
-                  let myDateObj = new Date(data.story.PublishedAt);
+                  if(data.story.PublishedAt != null)
+                  {
+                     let myDateObj = new Date(data.story.PublishedAt);
                     const year = myDateObj.getFullYear();
                     const month = String(myDateObj.getMonth() + 1).padStart(2, '0');
                         const day = String(myDateObj.getDate()).padStart(2, '0');
                             const formattedDate = `${year}-${month}-${day}`;
 
                                   data.PublishedAt = formattedDate;
+                  }
+               
 
 
 
@@ -335,7 +339,7 @@
                                  // console.log(imagesArray);
 
                                  /////////////////////////////////////////////////////////////////////////////////////////
-                                   function toDataUrl(url, callback) {
+                                  function toDataUrl(url, callback) {
                                     console.log(url);
                                 var newUrl = url;
                                 var xhr = new XMLHttpRequest();
@@ -359,29 +363,35 @@
                             const dT = new DataTransfer();
 
                             let image;
+
                                  /////////////////////////////////////////////////////////////////////////////////////
                                    let images = ""
+                                   let returnImage = ""
                                   data.displayImages.forEach((img, index) => {
-                                      /////////////////////////////////////////////////////////////////////////////
-                                       img = "/img/" + img;
+
+
+                                      ///////////////////////////////////////////////////////
+                                       showImg = "/img/" + img;
         toDataUrl(img,function(x){
             image = x;
+            returnImage = img;
 
-
-            dT.items.add(new File([image], "myfile.png", {
+            dT.items.add(new File([image], returnImage , {
                 type: "image/png"
             }));
-            imagesArray.push(new File([image], "myfile.png", {
+            imagesArray.push(new File([image], returnImage, {
                 type: "image/png"
             }));
+            debugger
             //console.log("image: ", dT);
 
         //document.querySelector('#imageupload').files = dT.files;
         });
         console.log(imagesArray);
-                                      ////////////////////////////////////////////////////////////////////////////
+                                      //////////////////////////////////////////////////////
+
                                     images += `<div class="image">
-                                                <img src="${img}" alt="image">
+                                                <img src="${showImg}" alt="image">
                                                 <span onclick="deleteImage(${index})">&times;</span>
                                               </div>`
 
@@ -408,7 +418,7 @@
 
                 $("#sDate").val("");
                  $("#sUrl").val("");
-                  output.innerHTML = "No Images Are Choosen";
+                  output.innerHTML = "";
                  CKEDITOR.instances.editor.setData("");
             }
 

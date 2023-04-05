@@ -254,10 +254,15 @@ namespace CI_Platform.Repository.Repository
                     {
                         // full path to file in temp location
                         var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Story", formFile.FileName); //we are using Temp file name just for the example. Add your own file path.
-                        filePaths.Add(filePath);
-                        using (var stream = new FileStream(filePath, FileMode.Create))
+
+                        if (File.Exists(filePath) == false)
                         {
-                            formFile.CopyToAsync(stream);
+
+                            filePaths.Add(filePath);
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                formFile.CopyToAsync(stream);
+                            }
                         }
                     }
 
