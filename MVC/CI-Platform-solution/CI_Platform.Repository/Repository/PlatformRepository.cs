@@ -36,6 +36,8 @@ namespace CI_Platform.Repository.Repository
         {
 
             List<City> city = _db.Cities.Where(i => i.CountryId == countryId).ToList();
+            if (countryId == 0)
+                city = _db.Cities.ToList();
             return city;
 
         }

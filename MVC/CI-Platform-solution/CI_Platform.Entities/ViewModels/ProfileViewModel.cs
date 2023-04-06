@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CI_Platform.Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,5 +38,11 @@ namespace CI_Platform.Entities.ViewModels
         public string? LinkedInUrl { get; set; }
 
         public string? Title { get; set; }
+
+        public List<UserSkill> userSkills { get; set; } = new List<UserSkill>();
+
+        public List<Skill> skill { get; set; } = new List<Skill> { };
+
+        public List<int>? skillsToAdd { get; set; }   
     }
 }
