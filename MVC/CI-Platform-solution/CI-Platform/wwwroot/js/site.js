@@ -52,12 +52,6 @@ function GetCity() {
 
 function temp() {
 
-
-   
-
-
-
-
     var checkedcntryvalues = [];
     var div1 = document.getElementById("countryId");
     var list = div1.getElementsByTagName("option");

@@ -54,6 +54,8 @@ namespace CI_Platform.Controllers
             {
                 int UserId = (int)HttpContext.Session.GetInt32("UId");
                 bool pm = _profile.updateUser(obj,UserId);
+                obj.skill = _profile.getUser(UserId).skill;
+                obj.userSkills = _profile.getUser(UserId).userSkills;
                 return View(obj);
             }
 

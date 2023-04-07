@@ -17,9 +17,9 @@
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
     <title>User edit profile</title>
@@ -33,14 +33,10 @@
 
         .apply2 :hover {
             background-color: #ffaf75;
-            
         }
 
         .scroll-hide select {
-            max-height: 100px;
-            max-width: 200px;
             border: 2px solid #f3f3f3;
-            padding-left: 16px;
             overflow: auto;
             /* this will hide the scrollbar in mozilla based browsers */
             /*overflow: -moz-scrollbars-none;*/
@@ -49,22 +45,22 @@
             -ms-overflow-style: none;
         }
 
-        /* this will hide the scrollbar in webkit based browsers - safari, chrome, etc */
-        .scroll-hide select::-webkit-scrollbar {
-            width: 0 !important;
-            display: none;
-        }
+            /* this will hide the scrollbar in webkit based browsers - safari, chrome, etc */
+            .scroll-hide select::-webkit-scrollbar {
+                width: 0 !important;
+                display: none;
+            }
     </style>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script>
-  $(document).ready(function(){
-     $('button').click(function() {
-      var mylist = $('#input').val();
-      $('#list').append('<li>'+mylist+'</li>');
-       return false;
-   });
-  });
-  </script> -->
+    <script>
+    $(document).ready(function(){
+       $('button').click(function() {
+        var mylist = $('#input').val();
+        $('#list').append('<li>'+mylist+'</li>');
+         return false;
+     });
+    });
+    </script> -->
 </head>
 
 
@@ -78,17 +74,17 @@
 
 
                     <span style="color: #414141;" class="">@ViewBag.Uname</span>
-                    <button class="border-0 p-0 btn btn-primary" style="background-color: white;" 
-                        data-toggle="modal" data-target="#exampleModal">
+                    <button class="border-0 p-0 btn btn-primary" style="background-color: white;"
+                            data-toggle="modal" data-target="#exampleModal">
                         <span class="" style="color: #414141;">Change Password</span>
                     </button>
                     <!-- Button trigger modal -->
                     <!-- <button type="button">
-                    Launch demo modal
-                  </button> -->
+                      Launch demo modal
+                    </button> -->
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -102,7 +98,7 @@
                                         <input type="text" class="form-control " placeholder="Enter old password">
                                         <input type="text" class="form-control mt-3" placeholder="Enter  New password">
                                         <input type="text" class="form-control mt-3"
-                                            placeholder="Enter Confirm password">
+                                               placeholder="Enter Confirm password">
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -142,7 +138,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                             <label>Manager</label>
-                            <input type="text"  class="form-control" placeholder="Enter your manager details">
+                            <input type="text" class="form-control" placeholder="Enter your manager details">
                         </div>
                     </div>
                     <div class="row mt-3">
@@ -158,39 +154,39 @@
                     <div class="form-group mt-3">
                         <label for="exampleFormControlTextarea1">My Profile*</label>
                         <textarea class="form-control" asp-for="ProfileText" id="exampleFormControlTextarea1" rows="4"
-                            placeholder="Enter your comments..."></textarea>
+                                  placeholder="Enter your comments..."></textarea>
                     </div>
                     <div class="form-group mt-3">
                         <label for="exampleFormControlTextarea1">Why I Volunteer?</label>
                         <textarea asp-for="WhyIVolunteer" class="form-control" id="exampleFormControlTextarea1" rows="4"
-                            placeholder="Enter your comments..."></textarea>
+                                  placeholder="Enter your comments..."></textarea>
                     </div>
                     <h4 style="color: #414141;" class="mt-3">Address Information</h4>
                     <hr>
                     <div class="row mt-3">
-                       <div class="col-12 col-sm-6">
-                        <label>Country*</label>
-                        <select id="countryId" asp-for="CountryId" onchange="GetCity();" class="form-select" aria-label="Default select example"
-                                aria-placeholder="Select your country">
-                            <option value="0">Select your country</option>
-                            @foreach (var obj in @ViewBag.countries)
-                            {
-                                <option value="@obj.CountryId">@obj.Name</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="col-12 col-sm-6">
-                        <label>City*</label>
-                        <select class="form-select" asp-for="CityId" aria-label="Default select example"
-                                aria-placeholder="Select your City" id="selectCityList" onchange="temp()">
-                            <option value="0">Select your City</option>
-                            @foreach (var item in @ViewBag.Cities)
-                            {
+                        <div class="col-12 col-sm-6">
+                            <label>Country*</label>
+                            <select id="countryId" asp-for="CountryId" onchange="GetCity();" class="form-select" aria-label="Default select example"
+                                    aria-placeholder="Select your country">
+                                <option value="0">Select your country</option>
+                                @foreach (var obj in @ViewBag.countries)
+                                {
+                                    <option value="@obj.CountryId">@obj.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <label>City*</label>
+                            <select class="form-select" asp-for="CityId" aria-label="Default select example"
+                                    aria-placeholder="Select your City" id="selectCityList" onchange="temp()">
+                                <option value="0">Select your City</option>
+                                @foreach (var item in @ViewBag.Cities)
+                                {
 
-                                <option value="@item.CityId"> @item.Name</option>
-                            }
-                        </select>
-                    </div>
+                                    <option value="@item.CityId"> @item.Name</option>
+                                }
+                            </select>
+                        </div>
                     </div>
                     <h4 style="color: #414141;" class="mt-3">Professional Information</h4>
                     <hr>
@@ -199,7 +195,7 @@
                         <div class="col-12 col-sm-6">
                             <label>Availablity</label>
                             <select class="form-select" aria-label="Default select example"
-                                aria-placeholder="Select your availablity">
+                                    aria-placeholder="Select your availablity">
                                 <option value="0">Select your availablity</option>
                                 <option value="1">One</option>
                                 <option value="2">Two</option>
@@ -219,8 +215,20 @@
 
                     <div class="form-group mt-3">
 
-                        <textarea class="form-control"  id="exampleFormControlTextarea1" rows="8"
-                            placeholder=""></textarea>
+                        <div class="form-control"  id="PrintSkills" rows="8"
+                             placeholder="">
+
+
+                            @for (int item = 0; item < @Model.userSkills.Count; item++)
+                            {
+                                
+                                <li>
+                                  <input asp-for="skillsToAdd" type="hidden" 
+                                  value="@Model.userSkills[item].SkillId" \ >  @Model.userSkills[@item].Skill.SkillName
+                                </li>
+                            }
+
+                        </div>
                     </div>
 
 
@@ -233,111 +241,103 @@
                                 <span>Add Skills</span>
                             </a>
 
-                            <!-- Modal HTML -->
-                            <div id="myModal" class="modal fade">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Confirmation</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                    </div>
+                    <!-- Modal HTML -->
+                    <div id="myModal" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Add your Skills</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="row h-100">
+
+                                        <div class="col-6 scroll-hide">
+
+                                            <select class="form-control h-100 " id="features"
+                                                    name="Features[]" multiple="multiple">
+
+
+                                                @foreach (var item in Model.skill)
+                                                {
+                                                    @if (Model.userSkills.Any(us => us.SkillId == item.SkillId))
+                                                    {
+                                                        <option value="@item.SkillId" selected>
+                                                            @item.SkillName
+                                                        </option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.SkillId">@item.SkillName</option>
+                                                    }
+
+                                                }
+
+                                            </select>
+
                                         </div>
-                                        <div class="modal-body">
+                                        <!-- <button style="width:10px;height: 30px;"> > </button> -->
+                                        <div class="col-1 mt-3">
 
-                                            <div class="row">
-
-                                                <div class="col-5 ">
-                                                    <div class="container ">
-                                                        <div class="row text-center">
+                                            <div class="col-xs-2">
 
 
-                                                            <div class="col-xs-4  scroll-hide">
-                                                                <select class="form-control" id="features"
-                                                                    name="Features[]" multiple="multiple"
-                                                                    style="height:200px;">
-
-
-                                                                    @foreach(var item in Model.skill)
-                                                                    {
-                                                                        <option value="@item.SkillId">@item.SkillName</option> 
-                                                                    }
-
-                                                                    
-
-
-                                                                </select>
-                                                            </div>
-
-
-
-
-
-
-
-
-
-                                                        </div>
-
-                                                    </div>
+                                                <div class="input-group">
+                                                    <button type="button" value="" class="border-0" id="add">
+                                                        >
+                                                    </button>
                                                 </div>
-                                                <!-- <button style="width:10px;height: 30px;"> > </button> -->
-                                                <div class="col-2 mt-3">
-
-                                                    <div class="col-xs-2">
-
-
-                                                        <div class="input-group">
-                                                            <button type="button" value="" class="border-0" id="add">
-                                                                ></button>
-                                                        </div>
 
 
 
 
-                                                        <div class="input-group" style="padding-top:10px;">
-                                                            <button type="button" value="" class="border-0" id="remove">
-                                                                < </button>
-                                                        </div>
-
-
-                                                    </div>
-
+                                                <div class="input-group" style="padding-top:10px;">
+                                                    <button type="button" value="" class="border-0" id="remove">
+                                                        <
+                                                    </button>
                                                 </div>
-                                                <div class="col-5 ">
-                                                    <div class="container ">
-
-                                                        <div class="col-xs-4 scroll-hide">
-                                                            <select class="form-control" asp-for="skillsToAdd"  size="9"
-                                                                id="selected_features" multiple="multiple"
-                                                                style="height:200px;">
-
-                                                                  @foreach(var item in Model.userSkills)
-                                                                    {
-                                                                        <option value="@(item.SkillId)" selected> 
-                                                                            @item.Skill.SkillName </option> 
-                                                                    }
-                                                              
 
 
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
 
                                         </div>
-                                        <div class="apply-2 mb-2">
-                                            <button type="button" class="btn btn-outline-dark rounded-pill ms-3"
-                                                data-bs-dismiss="modal">Cancel</button>
-                                            <button type="button" class="btn btn-outline apply">
-                                                Save
-                                            </button>
+                                        <div class="col-5 scroll-hide">
+
+                                            <select class="form-control" size="9"
+                                                    id="selected_features" multiple="multiple">
+
+                                                @foreach (var item in Model.userSkills)
+                                                {
+                                                    <option value="@(item.SkillId)">
+                                                        @item.Skill.SkillName
+                                                    </option>
+                                                }
+
+                                            </select>
+
+
                                         </div>
+
+
+                                    </div>
+                                    <div class="apply-2 mb-2">
+                                        <button type="button" class="btn btn-outline-dark rounded-pill ms-3"
+                                                data-bs-dismiss="modal">
+                                            Cancel
+                                        </button>
+                                        <button type="button" class="btn btn-outline apply" onclick="printSelect();">
+                                            Save
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
+
 
                     <div class="row mt-3">
                         <div class="col-12 text-end apply2">
@@ -366,12 +366,12 @@
             <div class="col-12 ">
                 <a href="#" style="color: #333333;">Privacy Policy</a>
 
-                <button class="border-0 p-0 btn btn-primary" style="background-color: white;" 
-                    data-toggle="modal" data-target="#exampleModal1">
+                <button class="border-0 p-0 btn btn-primary" style="background-color: white;"
+                        data-toggle="modal" data-target="#exampleModal1">
                     <span><a href="#" style="color: #333333;">Contact Us</a></span>
                 </button>
                 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -390,7 +390,7 @@
                                     <input type="text" class="form-control" placeholder="Enter your Subject">
                                     <label class="mt-3" for="exampleFormControlTextarea1">Message*</label>
                                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
-                                        placeholder="Enter your message..."></textarea>
+                                              placeholder="Enter your message..."></textarea>
                                 </form>
                             </div>
                             <div class="modal-footer">
@@ -405,18 +405,49 @@
         </div>
     </div>
 
-   
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-        crossorigin="anonymous"></script>
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-        crossorigin="anonymous"></script>
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+
+    <script>
+           function printSelect()
+           {
+               console.log("Add TO Skill Text");
+             var selectValue = document.getElementById("selected_features");
+               console.log(selectValue);
+            //var printValue = selectValue.getElementsByTagName("option").textContent;
+            // console.log(printValue);
 
 
+
+                  var list = selectValue.getElementsByTagName("option");
+                   console.log(list);
+                    $("#PrintSkills").empty();
+                   //document.getElementById("PrintSkills").empty();
+                  for (i = 0; i < list.length; i++) {
+
+
+                           document.getElementById("PrintSkills").innerHTML += `
+    
+        <li>
+        <input asp-for="skillsToAdd" name="skillsToAdd" type="hidden" 
+                                  value="${list[i].value}" \ >  ${list[i].text}
+                                </li>
+         `;
+                            console.log(list[i].text);
+                          }
+  
+           //document.getElementById("PrintSkills").value = checkedvalues;
+         }
+
+    </script>
     <script>
         console.log("hi");
         var exampleModal = document.getElementById('exampleModal')
@@ -479,7 +510,7 @@
                     $(this).attr('selected', 'selected');
                 });
             }
-        });  
+        });
     </script>
 
 
