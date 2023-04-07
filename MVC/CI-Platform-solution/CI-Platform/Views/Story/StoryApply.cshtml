@@ -143,7 +143,7 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <input type="date" id="sDate" asp-for="PublishedAt" class="form-control">
-                                 <span class="text-danger" asp-validation-for="PublishedAt"></span>
+                                <span class="text-danger" asp-validation-for="PublishedAt"></span>
                             </div>
                         </div>
                     </div>
@@ -225,7 +225,9 @@
          for (let i = 0; i < files.length; i++) {
              imagesArray.push(files[i])
          }
+           console.log(files);
          displayImages()
+
      })
 
      inputDiv.addEventListener("drop", () => {
@@ -237,6 +239,7 @@
              if (imagesArray.every(image => image.name !== files[i].name))
                  imagesArray.push(files[i])
          }
+           console.log(files);
          displayImages()
      })
       function displayImages() {
@@ -295,7 +298,7 @@
 
                                   data.PublishedAt = formattedDate;
                   }
-               
+
 
 
 
@@ -305,7 +308,7 @@
                 $("#sDate").val(data.PublishedAt);
                  $("#sUrl").val(data.url);
                 console.log(data.displayImages);
-
+                const input = document.querySelector("#imageupload")
                        if(data.displayImages != null){
 
 
@@ -356,10 +359,6 @@
                             }
 
 
-                            function rtType(filename){
-                                var x= filename.split(".");
-                                return x[0]
-                            }
 
 
                             const dT = new DataTransfer();
@@ -376,7 +375,7 @@
                                        img = "/img/" + img;
         toDataUrl(img,function(x){
             image = x;
-           
+
 
             dT.items.add(new File([image], returnImage, {
                 type: "image/png"
@@ -384,11 +383,11 @@
             imagesArray.push(new File([image], returnImage, {
                 type: "image/png"
             }));
-            //console.log("image: ", dT);
+       
 
-        //document.querySelector('#imageupload').files = dT.files;
+        document.querySelector('#imageupload').files = dT.files;
         });
-        console.log(imagesArray);
+      
                                       //////////////////////////////////////////////////////
 
                                     images += `<div class="image">
@@ -402,6 +401,8 @@
                              imagesArray.splice(index, 1)
                                     displayImages()
                                           }
+                              
+
                              }
                              else{
                                  output.innerHTML = "No Images Are Choosen";
@@ -409,7 +410,8 @@
 
 
                                CKEDITOR.instances.editor.setData(data.story.Description);
-
+                                 
+                             
             debugger
 
             }

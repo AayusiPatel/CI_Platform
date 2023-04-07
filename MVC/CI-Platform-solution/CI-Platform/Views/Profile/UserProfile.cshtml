@@ -34,7 +34,13 @@
         .apply2 :hover {
             background-color: #ffaf75;
         }
-
+         .file {
+        width: 125px;
+        height: 125px;
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
         .scroll-hide select {
             border: 2px solid #f3f3f3;
             overflow: auto;
@@ -70,7 +76,15 @@
             <div class="col-lg-3 col-sm-4">
 
                 <div class="border p-3 d-flex justify-content-center align-items-center flex-column">
-                    <img src="~/img/@ViewBag.Avatar" style="border-radius: 50%; height:125px; width:125px" class="">
+              @*   <div class="d-flex justify-content-center align-items-center border input-div position-relative" style="height:150px">
+
+
+                                <input id="imageupload" type="file" class="file" accept="image/jpeg, image/png, image/jpg" multiple /> <img src="~/img/@Model.Avatar" style="border-radius: 50%; height:125px; width:125px" class="">
+
+                            </div>*@
+                            
+                                <input id="profileImageInput" type="file" asp-for="Avatar"  class="file" accept="image/jpeg, image/png, image/jpg" onchange="profilechange()" />
+                    <img src="~/img/@Model.Avatar" class="ProfileImage" style="border-radius: 50%; height:125px; width:125px" >
 
 
                     <span style="color: #414141;" class="">@ViewBag.Uname</span>
@@ -415,7 +429,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
             integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
             crossorigin="anonymous"></script>
+<script>
+       var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
+            reader.onload = function (e) {
+                $('.ProfileImage').attr('src', e.target.result);
+            }
+    
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+     $("#profileImageInput").on('change', function(){
+         console.log(this);
+        readURL(this);
+    });
+    
+</script>
     <script>
            function printSelect()
            {

@@ -27,12 +27,16 @@ namespace CI_Platform.Repository.Repository
             List<UserSkill> userSkills = _db.UserSkills.Include(uSkill => uSkill.Skill).Where(user => user.UserId == uid).ToList();
             
             List<Skill> skills = _db.Skills.ToList();
+            foreach (var userSkill in userSkills)
+            {
+                skills = skills.Where(skill => skill.SkillId != userSkill.SkillId).ToList();
+            }
 
             ProfileViewModel profile = new ProfileViewModel();
             {
                 profile.FirstName = user.FirstName;
                 profile.LastName = user.LastName;
-                profile.Email = user.Email;
+                profile.Avatar = user.Avatar;
                 profile.EmployeeId = user.EmployeeId;
                 profile.Title = user.Title;
                 profile.Department = user.Department;
@@ -57,7 +61,7 @@ namespace CI_Platform.Repository.Repository
             {
                 profile.FirstName = user.FirstName;
                 profile.LastName = user.LastName;
-              
+                profile.Avatar= user.Avatar;
                 profile.EmployeeId = user.EmployeeId;
                 profile.Title = user.Title;
                 profile.Department = user.Department;
