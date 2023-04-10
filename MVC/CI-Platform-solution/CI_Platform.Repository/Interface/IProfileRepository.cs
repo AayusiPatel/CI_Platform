@@ -10,6 +10,8 @@ namespace CI_Platform.Repository.Interface
     public interface IProfileRepository
     {
         public ProfileViewModel getUser(int uid);
+
+        public bool ContactUs(ContactUsViewModel obj);
         public bool updateUser(ProfileViewModel user, int uid);
     }
 }

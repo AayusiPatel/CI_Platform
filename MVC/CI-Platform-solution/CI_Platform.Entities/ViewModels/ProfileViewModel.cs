@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,11 @@ namespace CI_Platform.Entities.ViewModels
 
         public string Email { get; set; } = null!;
 
+        public string? OldPassword { get; set; } 
         public string Password { get; set; } = null!;
+
+
+        public string ConfirmPassword { get; set; } = null!;
 
         public long PhoneNumber { get; set; }
 
@@ -46,6 +51,18 @@ namespace CI_Platform.Entities.ViewModels
 
         public List<Skill> skill { get; set; } = new List<Skill> { };
 
-        public List<int>? skillsToAdd { get; set; }   
+        public List<int>? skillsToAdd { get; set; }
+
+      
     }
-}
+
+    public class ContactUsViewModel
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+
+        public string Subject { get; set; }
+
+        public string Message { get; set; }
+    }
+    }

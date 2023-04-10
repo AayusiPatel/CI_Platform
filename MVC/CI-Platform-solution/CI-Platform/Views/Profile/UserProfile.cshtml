@@ -16,11 +16,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
     <title>User edit profile</title>
     <style>
@@ -34,13 +29,15 @@
         .apply2 :hover {
             background-color: #ffaf75;
         }
-         .Avatarfile {
-        width: 125px;
-        height: 125px;
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-    }
+
+        .Avatarfile {
+            width: 125px;
+            height: 125px;
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
         .scroll-hide select {
             border: 2px solid #f3f3f3;
             overflow: auto;
@@ -57,85 +54,88 @@
                 display: none;
             }
     </style>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-    $(document).ready(function(){
-       $('button').click(function() {
-        var mylist = $('#input').val();
-        $('#list').append('<li>'+mylist+'</li>');
-         return false;
-     });
-    });
-    </script> -->
+
 </head>
 
 
 <body>
-     <form method="post" enctype="multipart/form-data">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-sm-4">
+    @if (TempData["error"] != null)
+    {
 
-                <div class="border p-3 d-flex justify-content-center align-items-center flex-column">
-              @*   <div class="d-flex justify-content-center align-items-center border input-div position-relative" style="height:150px">
+        <script type="text/javascript">
+            toastr.error('@TempData["error"]')
+        </script>
+    }
+    <form method="post" enctype="multipart/form-data">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-4">
+
+                    <div class="border p-3 d-flex justify-content-center align-items-center flex-column">
+                        @*   <div class="d-flex justify-content-center align-items-center border input-div position-relative" style="height:150px">
 
 
-                                <input id="imageupload" type="file" class="file" accept="image/jpeg, image/png, image/jpg" multiple /> <img src="~/img/@Model.Avatar" style="border-radius: 50%; height:125px; width:125px" class="">
+                            <input id="imageupload" type="file" class="file" accept="image/jpeg, image/png, image/jpg" multiple /> <img src="~/img/@Model.Avatar" style="border-radius: 50%; height:125px; width:125px" class="">
 
                             </div>*@
-                            
-                                <input id="profileImageInput" type="file" asp-for="Avatarfile"  class="Avatarfile" accept="image/jpeg, image/png, image/jpg"  />
-                    <img src="~/img/@Model.Avatar" class="ProfileImage" style="border-radius: 50%; height:125px; width:125px" >
+
+                        <input id="profileImageInput" type="file" asp-for="Avatarfile" class="Avatarfile" accept="image/jpeg, image/png, image/jpg" />
+                        <img src="~/img/@Model.Avatar" class="ProfileImage" style="border-radius: 50%; height:125px; width:125px">
 
 
-                    <span style="color: #414141;" class="">@ViewBag.Uname</span>
-                    <button class="border-0 p-0 btn btn-primary" style="background-color: white;"
-                            data-toggle="modal" data-target="#exampleModal">
-                        <span class="" style="color: #414141;">Change Password</span>
-                    </button>
-                    <!-- Button trigger modal -->
-                    <!-- <button type="button">
-                      Launch demo modal
-                    </button> -->
+                        <span style="color: #414141;" class="">@ViewBag.Uname</span>
+                        <button type="button" class="border-0 p-0 btn btn-primary" style="background-color: white;"
+                                data-toggle="modal" data-target="#exampleModal">
+                            <span class="" style="color: #414141;">Change Password</span>
+                        </button>
+                        <!-- Button trigger modal -->
+                        <!-- <button type="button">
+                          Launch demo modal
+                        </button> -->
 
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Chane Password</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                            @*        <form>*@
-                                        <input type="text" class="form-control " placeholder="Enter old password">
-                                        <input type="text" class="form-control mt-3" placeholder="Enter  New password">
-                                        <input type="text" class="form-control mt-3"
-                                               placeholder="Enter Confirm password">
-                            @*        </form>*@
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Chane Password</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        @*        <form>*@
+                                        <input asp-for="OldPassword" type="password" class="form-control" id="OldPassward" placeholder="Enter old password"><span class="text-danger" id="OldPasswardError"></span>
+                                        <input type="password" asp-for="Password" class="form-control mt-3" id="Passward" placeholder="Enter  New password" onkeyup="validation()">
+                                        <span class="text-danger" id="PasswardError"></span>
+
+                                        <input type="password" asp-for="ConfirmPassword" id="ConfirmPassword" class="form-control mt-3"
+                                               placeholder="Enter Confirm password" onkeyup="validation()">
+                                        <span class="text-danger" id="ConfirmPasswordError"></span>
+                                        @*        </form>*@
+                                    </div>
+
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" id="resetPass" name="resetPass" value="1" disabled>Save changes</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+
+
+
+
+
                     </div>
-
-
-
-
-
-
                 </div>
-            </div>
 
-            <div class="col-lg-9 col-sm-8">
-                <h4 style="color: #414141;">Basic Information</h4>
-                <hr>
-               
+                <div class="col-lg-9 col-sm-8">
+                    <h4 style="color: #414141;">Basic Information</h4>
+                    <hr>
+
                     <div class="row mt-3">
                         <div class="col-12 col-sm-6">
                             <label>Name</label>
@@ -230,16 +230,16 @@
 
                     <div class="form-group mt-3">
 
-                        <div class="form-control"  id="PrintSkills" rows="8"
+                        <div class="form-control" id="PrintSkills" rows="8"
                              placeholder="">
 
 
                             @for (int item = 0; item < @Model.userSkills.Count; item++)
                             {
-                                
+
                                 <li>
-                                  <input asp-for="skillsToAdd" type="hidden" 
-                                  value="@Model.userSkills[item].SkillId" \ >  @Model.userSkills[@item].Skill.SkillName
+                                    <input asp-for="skillsToAdd" type="hidden"
+                                       value="@Model.userSkills[item].SkillId" \>  @Model.userSkills[@item].Skill.SkillName
                                 </li>
                             }
 
@@ -364,92 +364,120 @@
                     </div>
 
 
-            </div>
-
-        </div>
-
-
-
-    </div>
-    <hr>
-    <div class="container">
-        <div class="row">
-
-            <div class="col-12 ">
-                <a href="#" style="color: #333333;">Privacy Policy</a>
-
-                <button class="border-0 p-0 btn btn-primary" style="background-color: white;"
-                        data-toggle="modal" data-target="#exampleModal1">
-                    <span><a href="#" style="color: #333333;">Contact Us</a></span>
-                </button>
-                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Contact Us</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                             @*   <form>*@
-                                    <label>Name*</label>
-                                    <input type="text" class="form-control" placeholder="Enter your name">
-                                    <label class="mt-3">Email Address*</label>
-                                    <input type="text" class="form-control" placeholder="Enter your Email Address">
-                                    <label class="mt-3">Subject*</label>
-                                    <input type="text" class="form-control" placeholder="Enter your Subject">
-                                    <label class="mt-3" for="exampleFormControlTextarea1">Message*</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
-                                              placeholder="Enter your message..."></textarea>
-                          @*      </form>*@
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
             </div>
-        </div>
-    </div>
 
-    
-                </form>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+
+
+        </div>
+        <hr>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-12 ">
+                    <a href="#" style="color: #333333;">Privacy Policy</a>
+
+                    <button class="border-0 p-0 btn btn-primary" style="background-color: white;"
+                            data-toggle="modal" data-target="#exampleModal1">
+                        <span><a href="#" style="color: #333333;">Contact Us</a></span>
+                    </button>
+                    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Contact Us</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    @*   <form>*@
+                                    <label>Name*</label>
+                                    <input type="text" id="Name" class="form-control" placeholder="Enter your name">
+                                    <label class="mt-3">Email Address*</label>
+                                    <input type="text" id="Email" class="form-control" placeholder="Enter your Email Address">
+                                    <label class="mt-3">Subject*</label>
+                                    <input type="text" id="Subject" class="form-control" placeholder="Enter your Subject">
+                                    <label class="mt-3" for="exampleFormControlTextarea1">Message*</label>
+                                    <textarea class="form-control" id="Message"  rows="4"
+                                              placeholder="Enter your message..."></textarea>
+                                    @*      </form>*@
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" onclick="ContactUs()">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+  @*  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
             integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
             crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
             integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
             crossorigin="anonymous"></script>
-<script>
-       var readURL = function(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                $('.ProfileImage').attr('src', e.target.result);
-                
-            }
-    
-            reader.readAsDataURL(input.files[0]);
+    <script>
+        function validation(){
+            var passwrd = $("#Passward").val();
+            var ConformPasswrd = $("#ConfirmPassword").val();
+            var oldPassword = $("#OldPassward").val();
+             if(oldPassword.length == 0){
+             $("#OldPasswardError").text("Passward must not be null");
+             }
+        if(passwrd.length == 0){
+        $("#PasswardError").text("Passward must not be null");
         }
-    }
+        else if(ConformPasswrd.length == 0){
+        $("#ConfirmPasswordError").text("ConfirmPassword must not be null");
+        }
+        else if(passwrd != ConformPasswrd){
+         $("#ConfirmPasswordError").text("Passwords do not match.");
+        }
+        else{
+            $("#PasswardError").text("");
+            $("#ConfirmPasswordError").text("");
+           
+                   document.querySelector('#resetPass').disabled = false;
+            
+        }
 
-     $("#profileImageInput").on('change', function(){
-         
-        readURL(this);
-    
-    });
+        }
 
-  
-</script>
+    </script>
+    <script>
+           var readURL = function(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.ProfileImage').attr('src', e.target.result);
+
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+         $("#profileImageInput").on('change', function(){
+
+            readURL(this);
+
+        });
+
+
+    </script>
     <script>
            function printSelect()
            {
@@ -469,15 +497,15 @@
 
 
                            document.getElementById("PrintSkills").innerHTML += `
-    
+
         <li>
-        <input asp-for="skillsToAdd" name="skillsToAdd" type="hidden" 
+        <input asp-for="skillsToAdd" name="skillsToAdd" type="hidden"
                                   value="${list[i].value}" \ >  ${list[i].text}
                                 </li>
          `;
                             console.log(list[i].text);
                           }
-  
+
            //document.getElementById("PrintSkills").value = checkedvalues;
          }
 

@@ -9,6 +9,8 @@ using CI_Platform.Entities.Models;
 using CI_Platform.Entities.ViewModels;
 using CI_Platform.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
+using SmtpClient = MailKit.Net.Smtp.SmtpClient;
+
 
 namespace CI_Platform.Repository.Repository
 {

@@ -82,7 +82,7 @@ namespace CI_Platform.Controllers
                     HttpContext.Session.SetInt32("UId", (int)loguser.UserId);
                     if(loguser.Avatar != null)
                          HttpContext.Session.SetString("Avatar", loguser.Avatar);
-
+                    TempData["true"] = "Logged Successfully!";
                     return RedirectToAction("PlatformLandingPage", "Platform");
                 }
                 else

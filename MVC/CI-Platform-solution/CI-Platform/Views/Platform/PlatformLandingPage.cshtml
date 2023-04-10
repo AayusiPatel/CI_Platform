@@ -8,49 +8,57 @@
 <h1>PlatformLandingPage</h1>
 
 <body class="container">
-    
-        @{
+    @if (TempData["true"] != null)
+    {
+  
+        <script type="text/javascript">
+            toastr.success('@TempData["true"]')
+        </script>
+    }
 
-            Html.RenderPartial("nav2");
+    @{
 
-        }
+        Html.RenderPartial("nav2");
 
-
-
-
-          <div class="row ">
-
-          <div class="col-5">  <h3 class="text-wrap">Expore @ViewBag.cont @ViewBag.cont1 Missions</h3>
-          </div>
-
-            <div class="col-7 text-end">
-                <select class="form-select d-inline-flex w-25" aria-label="Default select example" id="sort" onchange="temp();">
-                    <option selected >Sort By</option>
-                    <option value="1">Newest</option>
-                    <option value="2">Oldest</option>
-                    <option value="3">Registration deadline</option>
-                    <option value="4">My favourites</option>
-                    </select>
-                   <button onclick="opengrid()"> <i class="bi bi-grid-fill" style="font-size: large;"></i> </button>
-                 <button onclick="openlist()"> <i class="bi bi-list" style="font-size:large;"></i> </button>
-            </div>
-          </div>
+    }
 
 
 
 
+    <div class="row ">
 
- 
+        <div class="col-5">
+            <h3 class="text-wrap">Expore @ViewBag.cont @ViewBag.cont1 Missions</h3>
+        </div>
+
+        <div class="col-7 text-end">
+            <select class="form-select d-inline-flex w-25" aria-label="Default select example" id="sort" onchange="temp();">
+                <option selected>Sort By</option>
+                <option value="1">Newest</option>
+                <option value="2">Oldest</option>
+                <option value="3">Registration deadline</option>
+                <option value="4">My favourites</option>
+            </select>
+            <button onclick="opengrid()"> <i class="bi bi-grid-fill" style="font-size: large;"></i> </button>
+            <button onclick="openlist()"> <i class="bi bi-list" style="font-size:large;"></i> </button>
+        </div>
+    </div>
 
 
 
-        @{
-
-            Html.RenderPartial("_FilterMissionPartial");
-
-        }
 
 
 
-        </body>
+
+
+
+    @{
+
+        Html.RenderPartial("_FilterMissionPartial");
+
+    }
+
+
+
+</body>
 

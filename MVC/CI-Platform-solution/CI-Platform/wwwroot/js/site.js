@@ -541,3 +541,37 @@ function StoryPage(x) {
     });
 
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function ContactUs() {
+
+    var Name = document.querySelector('#Name').value;
+    var Email = document.querySelector('#Email').value;
+    var Subject = document.querySelector('#Subject').value;
+    var Message = document.querySelector('#Message').value;
+    console.log(Name,Email,Subject,Message);
+    /* debugger;*/
+    $.ajax({
+        url: "/Profile/ContactUs",
+        method: "Post",
+        data: {
+            "Name": Name,
+            "Email": Email,
+            "Subject": Subject,
+            "Message": Message,
+        },
+        success: function (data) {
+            console.log(data);
+            if(data)
+                alert('E-mial sent successfully!');
+
+        }
+        ,
+        error: function (e) {
+            console.log("Bye");
+            alert('Error');
+        },
+    });
+}

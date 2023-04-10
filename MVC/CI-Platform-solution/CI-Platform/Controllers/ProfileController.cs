@@ -40,7 +40,7 @@ namespace CI_Platform.Controllers
 
 
         [HttpPost]
-        public IActionResult UserProfile(ProfileViewModel obj)
+        public IActionResult UserProfile(ProfileViewModel obj, int resetPass)
         {
             string name = HttpContext.Session.GetString("Uname");
             ViewBag.Uname = name;
@@ -53,14 +53,33 @@ namespace CI_Platform.Controllers
             if (name != null)
             {
                 int UserId = (int)HttpContext.Session.GetInt32("UId");
-                bool pm = _profile.updateUser(obj,UserId);
+
+                bool pm = _profile.updateUser(obj, UserId);
+                if (pm == false && resetPass == 1)
+                {
+                    TempData["error"] = "Old Password is Worng!";
+                }
                 obj = _profile.getUser(UserId);
-                
+
                 return View(obj);
             }
 
 
             return View(obj);
         }
+
+        public bool ContactUs(ContactUsViewModel obj)
+        {
+            if (obj.Name == null || obj.Message == null || obj.Email == null || obj.Subject == null)
+            {
+                return false;
+            }
+            bool ContactUs = _profile.ContactUs(obj);
+            
+        
+            return ContactUs;
+        }
+
+
     }
 }
