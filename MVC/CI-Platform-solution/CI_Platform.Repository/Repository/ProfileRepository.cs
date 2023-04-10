@@ -61,7 +61,8 @@ namespace CI_Platform.Repository.Repository
             {
                 profile.FirstName = user.FirstName;
                 profile.LastName = user.LastName;
-                profile.Avatar= user.Avatar;
+                if(user.Avatarfile != null)
+                    profile.Avatar= user.Avatarfile.FileName;
                 profile.EmployeeId = user.EmployeeId;
                 profile.Title = user.Title;
                 profile.Department = user.Department;

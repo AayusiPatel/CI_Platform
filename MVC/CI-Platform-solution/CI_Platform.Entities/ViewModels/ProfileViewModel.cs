@@ -1,4 +1,5 @@
 ﻿using CI_Platform.Entities.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,8 @@ namespace CI_Platform.Entities.ViewModels
         public long PhoneNumber { get; set; }
 
         public string? Avatar { get; set; }
+
+        public IFormFile? Avatarfile { get; set; }
 
         public string? WhyIVolunteer { get; set; }
 
