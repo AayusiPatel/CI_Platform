@@ -1,6 +1,7 @@
 ﻿using CI_Platform.Entities.Models;
 using CI_Platform.Entities.ViewModels;
 using CI_Platform.Repository.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CI_Platform.Controllers
@@ -21,6 +22,10 @@ namespace CI_Platform.Controllers
             _story = story;
 
         }
+
+        [HttpGet]
+    
+
         public IActionResult PlatformLandingPage()
         {
             string name = HttpContext.Session.GetString("Uname");
@@ -44,17 +49,28 @@ namespace CI_Platform.Controllers
             ViewBag.Skills = Skills;
 
 
+
             PlatformModel ms = _platform.GetMissions();
 
 
             return View(ms);
         }
-        public IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
+        public IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort, int PageIndex =1)
         {
             List<Mission> cards = _platform.Filter(cityId, countryId, themeId, skillId, search, sort);
+
+            int PageSize = 3;
+
+            int TotalRecords = (int)Math.Ceiling(cards.Count() / (double)PageSize);
+
+            List<Mission> records = cards.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
+
+
+
             PlatformModel platformModel = new PlatformModel();
             {
-                platformModel.Mission = cards;
+                platformModel.Mission = records;
+                platformModel.totalcount = TotalRecords;
             }
 
             return PartialView("_FilterMissionPartial", platformModel);

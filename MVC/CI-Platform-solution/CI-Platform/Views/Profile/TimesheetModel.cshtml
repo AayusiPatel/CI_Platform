@@ -1,0 +1,68 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@using CI_Platform.Entities.ViewModels
+
+    @model TimeSheetViewModel
+
+                               
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                    Please input
+                                                    below Volunteering Hours
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <label class="mb-1 ">Mission</label>
+                                                <select type="text" asp-for="MissionId" class="form-control form-select"
+                                                        placeholder="Select your Mission">
+                                                    <option value="1">hiii</option>
+                                                    <option value="2">hiii</option>
+                                                    <option value="3">hiii</option>
+                                                </select>
+                                                <label class="mb-1 mt-3">
+                                                    Date
+                                                </label>
+
+                                                <div class="form-group">
+                                                    <input type="date" asp-for="DateVolunteereed" id="sDate"
+                                                           class="form-control">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <label class="mb-1 mt-3">Hours</label>
+                                                        <input type="text" asp-for="Time.Value.Hours" class="form-control"
+                                                               placeholder="Enter Spent Hours">
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <label class="mb-1 mt-3">
+                                                            Minute
+                                                        </label>
+                                                        <input type="text" asp-for="Time.Value.Minutes" class="form-control"
+                                                               placeholder="Enter Spent Minutes">
+                                                    </div>
+                                                </div>
+
+                                                <label class="mb-1 mt-3"
+                                                       for="exampleFormControlTextarea1">Message</label>
+                                                <textarea asp-for="Notes" class="form-control" id="exampleFormControlTextarea1"
+                                                          rows="4" placeholder="Enter your message..."></textarea>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary "
+                                                        data-bs-dismiss="modal">
+                                                    Close
+                                                </button>
+                                                <button type="button" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                           

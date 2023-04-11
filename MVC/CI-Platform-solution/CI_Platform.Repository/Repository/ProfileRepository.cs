@@ -29,7 +29,7 @@ namespace CI_Platform.Repository.Repository
         {
             User user = _db.Users.Include(user => user.UserSkills).FirstOrDefault(user => user.UserId == uid);
             List<UserSkill> userSkills = _db.UserSkills.Include(uSkill => uSkill.Skill).Where(user => user.UserId == uid).ToList();
-            
+
             List<Skill> skills = _db.Skills.ToList();
             foreach (var userSkill in userSkills)
             {
@@ -51,7 +51,7 @@ namespace CI_Platform.Repository.Repository
                 profile.LinkedInUrl = user.LinkedInUrl;
                 profile.skill = skills;
                 profile.userSkills = userSkills;
-             
+
             }
 
             return profile;
@@ -63,7 +63,7 @@ namespace CI_Platform.Repository.Repository
 
             if (user.Password != null && user.OldPassword == profile.Password)
             {
-               
+
 
                 profile.Password = user.Password;
 
@@ -88,8 +88,8 @@ namespace CI_Platform.Repository.Repository
             {
                 profile.FirstName = user.FirstName;
                 profile.LastName = user.LastName;
-                if(user.Avatarfile != null)
-                    profile.Avatar= user.Avatarfile.FileName;
+                if (user.Avatarfile != null)
+                    profile.Avatar = user.Avatarfile.FileName;
                 profile.EmployeeId = user.EmployeeId;
                 profile.Title = user.Title;
                 profile.Department = user.Department;
@@ -102,7 +102,7 @@ namespace CI_Platform.Repository.Repository
             }
             _db.Users.Update(profile);
             _db.SaveChanges();
-           {
+            {
                 List<UserSkill> skills = _db.UserSkills.Where(skill => skill.UserId == uid).ToList();
                 _db.UserSkills.RemoveRange(skills);
 
@@ -155,5 +155,24 @@ namespace CI_Platform.Repository.Repository
         //    }
 
         //}
+
+
+        public TimeSheetViewModel UpdateActivity(int obj)
+        {
+            Timesheet timesheet = _db.Timesheets.FirstOrDefault(entry => entry.TimesheetId == obj);
+
+            TimeSheetViewModel tVModel = new TimeSheetViewModel();
+            {
+                
+                tVModel.Time = timesheet.Time;
+                tVModel.DateVolunteereed = timesheet.DateVolunteereed;
+                tVModel.Notes = timesheet.Notes;
+                tVModel.MissionId = timesheet.MissionId;
+
+
+            }
+
+            return tVModel;
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace CI_Platform.Entities.ViewModels
         public List<Country>? Countries { get; set; }
         public List<City>? Cities { get; set; }
 
-
+        public int totalcount { get; set; }
         //public List<Mission> PagedData { get; set; }
 
         //public int CurrentPage { get; set; }

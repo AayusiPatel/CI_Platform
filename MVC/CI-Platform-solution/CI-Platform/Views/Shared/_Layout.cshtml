@@ -54,11 +54,11 @@
                     </a>
                     <ul class="dropdown-menu me-5">
                         <li><a class="dropdown-item" asp-action="UserProfile" asp-controller="Profile">Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" asp-action="TimeSheet" asp-controller="Profile">Volunteering Timesheet</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="~/User/Index">Log out</a></li>
+                        <li><a class="dropdown-item" asp-action="LogOut" asp-controller="User">Log out</a></li>
                     </ul>
                 </div>
             </div>
@@ -146,7 +146,7 @@
     </div>
 
 
-    <hr />
+    <hr class="m-0" />
 
     <!--.............Page Body..............-->
     

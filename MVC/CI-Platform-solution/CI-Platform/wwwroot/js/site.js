@@ -50,7 +50,7 @@ function GetCity() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-function temp() {
+function temp(x) {
 
     var checkedcntryvalues = [];
     var div1 = document.getElementById("countryId");
@@ -126,7 +126,8 @@ function temp() {
             'themeId': checkedthemevalues,
             'skillId': checkedskillvalues,
             'search': search,
-            'sort': sort
+            'sort': sort,
+            'PageIndex': x
         },
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
@@ -574,4 +575,34 @@ function ContactUs() {
             alert('Error');
         },
     });
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function getActivity(x) {
+
+   
+    console.log("TimeSheet!!!!!!!!");
+     {
+        $.ajax({
+            url: "/Profile/getActivity",
+            method: "Post",
+            data: {
+                "tid": x,
+
+            },
+            success: function (data) {
+                console.log(data);
+                debugger
+                $("#TimesheetTime").empty();
+                $("#TimesheetTime").html(data);
+            }
+            ,
+            error: function (e) {
+                console.log("Bye");
+                alert('Error');
+            },
+        });
+    }
+
+    
 }

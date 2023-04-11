@@ -58,7 +58,7 @@ namespace CI_Platform.Controllers
             return RedirectToAction("PlatformLandingPage", "Home");
         }
 
-        public IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
+        public IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort, int PageIndex)
         {
             List<Mission> cards = _platform.Filter(cityId, countryId, themeId, skillId, search, sort);
             int cnt = cards.Count;

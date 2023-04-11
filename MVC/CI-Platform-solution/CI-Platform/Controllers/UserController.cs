@@ -162,7 +162,12 @@ namespace CI_Platform.Controllers
         }
 
 
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
 
+            return RedirectToAction("Index" , "User");
+        }
 
 
 

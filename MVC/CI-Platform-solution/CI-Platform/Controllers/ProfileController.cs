@@ -81,5 +81,20 @@ namespace CI_Platform.Controllers
         }
 
 
+
+        public IActionResult TimeSheet()
+        {
+            return View();
+        }
+
+        public IActionResult getActivity(int tid)
+        {
+            if (tid > 0) { 
+            TimeSheetViewModel tm = _profile.UpdateActivity(tid);
+            return PartialView("TimesheetModel", tm);
+        }
+            return PartialView("TimesheetModel");
+        }
+
     }
 }

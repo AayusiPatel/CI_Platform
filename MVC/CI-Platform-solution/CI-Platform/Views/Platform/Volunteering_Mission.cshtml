@@ -307,11 +307,16 @@
                             @{
                                 bool check = Model.missionApplicaton.Any(x => x.MissionId == @Model.mission.MissionId && x.UserId == @ViewBag.uid);
                                 var misChk = Model.missionApplicaton.FirstOrDefault(x => x.MissionId == @Model.mission.MissionId && x.UserId == @ViewBag.uid);
-                                bool chk = (misChk.ApprovalStatus == "Approve");
+                              
                             }
                             @if (check)
                             {
-                                @if (chk)
+                                  
+                             @*   {
+                                    bool chk = (misChk.ApprovalStatus == "Approve");
+                                }*@
+
+                                @if (misChk.ApprovalStatus == "Approve")
                                 {
                                     <button type="button" class="btn btn-outline-danger  rounded-pill" id="applyMission" onclick="applyMission(@Model.mission.MissionId)" disabled> Applied  <i class="bi bi-arrow-right text-danger ms-2"></i> </button>
                                 }
