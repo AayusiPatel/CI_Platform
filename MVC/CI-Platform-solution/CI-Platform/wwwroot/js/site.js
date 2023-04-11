@@ -582,7 +582,7 @@ function getActivity(x) {
 
    
     console.log("TimeSheet!!!!!!!!");
-     {
+    if (x > 0) {
         $.ajax({
             url: "/Profile/getActivity",
             method: "Post",
@@ -602,6 +602,20 @@ function getActivity(x) {
                 alert('Error');
             },
         });
+    }
+
+    else {
+
+        const myForm = document.querySelector('#timesheetform');
+       
+        myForm.querySelectorAll('.form-control').forEach((element, index) => {
+
+            element.value = "";
+
+            console.log(element.value);
+        });
+         
+      
     }
 
     
