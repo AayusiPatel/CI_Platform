@@ -2,6 +2,7 @@
 using CI_Platform.Entities.ViewModels;
 using CI_Platform.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CI_Platform.Controllers
 {
@@ -84,13 +85,50 @@ namespace CI_Platform.Controllers
 
         public IActionResult TimeSheet()
         {
-            return View();
+            string name = HttpContext.Session.GetString("Uname");
+            ViewBag.Uname = name;
+            string avatar = HttpContext.Session.GetString("Avatar");
+            ViewBag.Avatar = avatar;
+            List<City> Cities = _platform.GetCitys();
+            ViewBag.Cities = Cities;
+            List<Country> Countries = _platform.GetCountry();
+            ViewBag.Countries = Countries;
+            if (name != null)
+            {
+                int UserId = (int)HttpContext.Session.GetInt32("UId");
+
+               TimeSheetViewModel tm = _profile.GetActivities(UserId);
+
+                return View(tm);
+            }
+
+                return View();
         }
 
+        [HttpPost]
+        public IActionResult TimeSheet(TimeSheetViewModel obj)
+        {
+            int UserId = (int)HttpContext.Session.GetInt32("UId");
+
+            if (obj.TimesheetId == 0)
+            {
+
+                _profile.AddActivity(obj, UserId);
+            }
+            if (obj.TimesheetId != 0)
+            {
+                _profile.UpdateActivity(obj);
+
+            }
+            TimeSheetViewModel tm = _profile.GetActivities(UserId);
+
+            return View(tm);
+        }
         public IActionResult getActivity(int tid)
         {
-        
-            TimeSheetViewModel tm = _profile.UpdateActivity(tid);
+            int UserId = (int)HttpContext.Session.GetInt32("UId");
+
+            TimeSheetViewModel tm = _profile.GetActivity(tid,UserId);
             return PartialView("TimesheetModel", tm);
         
         }

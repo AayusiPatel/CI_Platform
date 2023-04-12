@@ -610,7 +610,7 @@ function getActivity(x) {
        
         myForm.querySelectorAll('.form-control').forEach((element, index) => {
 
-            element.value = "";
+            element.value = null;
 
             console.log(element.value);
         });

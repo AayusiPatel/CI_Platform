@@ -7,7 +7,7 @@
 
     @model TimeSheetViewModel
 
-                               <form id="timesheetform">
+                               <form id="timesheetform" method="post">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -19,14 +19,16 @@
                                                         aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-
+                                                <input type="hidden" asp-for="TimesheetId" class="form-control" value="@Model.TimesheetId" />
                                                 <label class="mb-1 ">Mission</label>
                                                 <select type="text" asp-for="MissionId" class="form-control form-select"
-                                                        placeholder="Select your Mission">
-                                                    <option value="1">hiii</option>
-                                                    <option value="2">hiii</option>
-                                                    <option value="3">hiii</option>
-                                                </select>
+                                                            placeholder="Select your Mission">
+                                                                <option value="">Select your Mission</option>
+                                                        @foreach (var item in Model.timeMissions)
+                                                        {
+                                                           <option value="@item.MissionId">@item.Title</option> 
+                                                        }
+                                                    </select>
                                                 <label class="mb-1 mt-3">
                                                     Date
                                                 </label>
@@ -61,7 +63,7 @@
                                                         data-bs-dismiss="modal">
                                                     Close
                                                 </button>
-                                                <button type="button" class="btn btn-primary">Submit</button>
+                                                <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
                                         </div>
                                     </div>

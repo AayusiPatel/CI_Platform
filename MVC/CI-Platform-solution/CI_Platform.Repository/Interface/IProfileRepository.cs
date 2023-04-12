@@ -13,7 +13,14 @@ namespace CI_Platform.Repository.Interface
 
         public bool ContactUs(ContactUsViewModel obj);
         public bool updateUser(ProfileViewModel user, int uid);
+        public TimeSheetViewModel GetActivities(int uid);
+        public TimeSheetViewModel GetActivity(int obj, int uid);
 
-        public TimeSheetViewModel UpdateActivity(int obj);
+        public bool AddActivity(TimeSheetViewModel obj, int uid);
+
+        public bool UpdateActivity(TimeSheetViewModel obj);
+
+
+
     }
 }

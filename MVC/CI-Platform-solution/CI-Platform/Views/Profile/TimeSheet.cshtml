@@ -71,16 +71,19 @@
                                     <th scope="col"> <b>Minutes</b> </th>
                                     <th scope="col"></th>
                                 </tr>
-
+                                @foreach (var item in Model.timecards)
+                                {
+                                    
+                                
                                 <tr class="mt-3 mb-3">
-                                    <td scope="col">Environment Conservation</td>
+                                    <td scope="col">@item.Mission.Title</td>
 
-                                    <td scope="col">22/02/2022</td>
-                                    <td scope="col">1h</td>
-                                    <td scope="col">30min</td>
+                                    <td scope="col">@item.DateVolunteereed.ToString().Substring(0,10)</td>
+                                    <td scope="col">@item.Time h</td>
+                                    <td scope="col">@item.Time Min</td>
                                     <td scope="col">
                                         <button type="button" class="btn p-0" data-bs-toggle="modal"
-                                                data-bs-target="#TimesheetTime" onclick="getActivity(2);">
+                                                data-bs-target="#TimesheetTime" onclick="getActivity(@item.TimesheetId);">
                                             <i class="bi bi-pencil-square" style="color: coral;"></i>
                                         </button>
                                         <button type="button" class="btn p-0" data-bs-toggle="modal"
@@ -90,6 +93,8 @@
                                     </td>
 
                                 </tr>
+
+                                }
                             </tbody>
                         </table>
                     
@@ -129,9 +134,11 @@
                                                     <label class="mb-1 ">Mission</label>
                                                     <select type="text" asp-for="MissionId" class="form-control form-select"
                                                             placeholder="Select your Mission">
-                                                        <option value="1">hiii</option>
-                                                        <option value="2">hiii</option>
-                                                        <option value="3">hiii</option>
+                                                              <option value="">Select your Mission</option>
+                                                        @foreach (var item in Model.goalMissions)
+                                                        {
+                                                           <option value="@item.MissionId">@item.Title</option> 
+                                                        }
                                                     </select>
                                                     <label class="mb-1 mt-3">Actions</label>
                                                     <input type="text" asp-for="Action" class="form-control" placeholder="Enter Actions">
@@ -177,11 +184,14 @@
 
                                     </tr>
 
-
+                                    @foreach (var item in Model.goalcards)
+                                    {
+                                        
+                                    
                                     <tr class=" mt-3 mb-3">
-                                        <td scope="col">Plantation Programme</td>
-                                        <td scope="col">22/02/2022</td>
-                                        <td scope="col">0</td>
+                                        <td scope="col">@item.Mission.Title</td>
+                                        <td scope="col">@item.DateVolunteereed</td>
+                                        <td scope="col">@item.Action</td>
 
                                         <td scope="col">
                                             <button type="button" class="btn p-0" data-bs-toggle="modal"
@@ -195,6 +205,7 @@
                                         </td>
 
                                     </tr>
+                                    }
                                 </tbody>
                             </table>
                        
