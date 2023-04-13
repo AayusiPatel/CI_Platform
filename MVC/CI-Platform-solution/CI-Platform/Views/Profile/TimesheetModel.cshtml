@@ -23,7 +23,7 @@
                                                 <label class="mb-1 ">Mission</label>
                                                 <select type="text" asp-for="MissionId" class="form-control form-select"
                                                             placeholder="Select your Mission">
-                                                                <option value="">Select your Mission</option>
+                                                                <option value="null">Select your Mission</option>
                                                         @foreach (var item in Model.timeMissions)
                                                         {
                                                            <option value="@item.MissionId">@item.Title</option> 
@@ -40,14 +40,14 @@
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <label class="mb-1 mt-3">Hours</label>
-                                                        <input type="text" asp-for="Time.Value.Hours" class="form-control"
+                                                        <input type="text" asp-for="Hours" class="form-control"
                                                                placeholder="Enter Spent Hours">
                                                     </div>
                                                     <div class="col-6">
                                                         <label class="mb-1 mt-3">
                                                             Minute
                                                         </label>
-                                                        <input type="text" asp-for="Time.Value.Minutes" class="form-control"
+                                                        <input type="text" asp-for="Minutes" class="form-control"
                                                                placeholder="Enter Spent Minutes">
                                                     </div>
                                                 </div>

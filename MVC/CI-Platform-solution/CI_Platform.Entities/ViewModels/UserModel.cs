@@ -45,6 +45,8 @@ public  class Login
     [Required(ErrorMessage = "Password is Required")]
     [DataType(DataType.Password)]
     public string Password { get; set; } = null!;
+
+    public string? returnUrl { get; set; }
 }
 
 public class ForgotPwd

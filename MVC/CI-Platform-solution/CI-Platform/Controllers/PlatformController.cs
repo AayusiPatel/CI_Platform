@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CI_Platform.Controllers
 {
+    
     public class PlatformController : Controller
     {
         public readonly IPlatformRepository _platform;
@@ -24,8 +25,8 @@ namespace CI_Platform.Controllers
         }
 
         [HttpGet]
-    
 
+        [Authorize]
         public IActionResult PlatformLandingPage()
         {
             string name = HttpContext.Session.GetString("Uname");

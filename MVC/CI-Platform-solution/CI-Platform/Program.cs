@@ -2,8 +2,29 @@
 using CI_Platform.Entities.Data;
 using CI_Platform.Repository.Interface;
 using CI_Platform.Repository.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddAuthentication();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/User/Index";
+        options.LogoutPath = "/User/LogOut";
+    });
+
+
+builder.Services.AddAuthentication("AuthCookie")
+    .AddCookie("AuthCookie",options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromDays(2);
+        options.Cookie.Name = "AuthCookie";
+        options.LoginPath = "/User/Index";
+        options.LogoutPath = "/User/LogOut";
+    });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -14,11 +35,10 @@ builder.Services.AddScoped<IVolunteerRepository, VolunteerRepository>();
 builder.Services.AddScoped<IStoryRepository, StoryRepository>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 
-
-
-
-
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
+
 
 builder.Services.AddSession();
 
@@ -41,8 +61,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
 app.UseSession();
+app.UseAuthentication();
+app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",

@@ -129,9 +129,23 @@ namespace CI_Platform.Controllers
             int UserId = (int)HttpContext.Session.GetInt32("UId");
 
             TimeSheetViewModel tm = _profile.GetActivity(tid,UserId);
-            return PartialView("TimesheetModel", tm);
-        
+
+
+            if(tm.Action == null)
+                return PartialView("TimesheetModel", tm);
+
+            if(tm.Time == null)
+                return PartialView("GoalsheetModel", tm);
+
+            return View("Error");
         }
 
-    }
+        public IActionResult deleteActivity(int tid)
+        {
+            _profile.DeleteActivity(tid);
+            return RedirectToAction("TimeSheet" , "Profile");
+        }
+
+
+        }
 }

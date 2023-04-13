@@ -3,8 +3,10 @@ using CI_Platform.Entities.Data;
 using CI_Platform.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+
 using CI_Platform.Entities.ViewModels;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 
 namespace CI_Platform.Controllers
 {
@@ -51,38 +53,75 @@ namespace CI_Platform.Controllers
 
             return View();
         }
-        public IActionResult Index()
+        public IActionResult Index(String returnUrl="")
         {
-            return View();
+            Login login = new Login();
+            {
+                login.returnUrl = returnUrl;
+            }
+            return View(login);
         }
+
         [HttpPost]
         public IActionResult Index(Login obj)
         {
-            //User user = new User();
-            //{
+           
+          
 
-            //    user.Email = obj.Email;
-            //    user.Password = obj.Password;
-
-            //}
             if (ModelState.IsValid)
             {
                 var loguser = _userRepository.Login(obj);
 
                 if (loguser != null)
                 {
-                    //var s_string = HttpContext.Session.GetString(obj.Email);
+                    
 
-                    //string loggedin = null;
-                    //HttpContext.Session.SetString(loggedin, s_string);
-                    //ViewBag.LoggedIn = loggedin;
-                    //ISession["var1"] = "obg";
+                    //var options = new CookieOptions
+                    //{
+                    //    Expires = DateTime.Now.AddDays(30),
+                    //    IsEssential = true,
+                    //    HttpOnly = true,
+                    //    SameSite = SameSiteMode.Strict
+                    //};
+
+                    //Response.Cookies.Append("Email", loguser.Email, new CookieOptions
+                    //{
+                    //    Expires = DateTime.UtcNow.AddDays(7),
+                    //    IsEssential = true // Optional, but recommended.
+                    //});
+
+                    var claims = new List<Claim>
+                {
+                        new Claim("role","member"),
+                         new Claim("Name", $"{loguser.FirstName} {loguser.LastName}"),
+                        new Claim("Email", loguser.Email),
+                        new Claim("Sid", loguser.UserId.ToString()),
+                   
+                };
+
+                    var identity = new ClaimsIdentity(claims, "AuthCookie");
+                    var Principle = new ClaimsPrincipal(identity);
+
+                    HttpContext.User = Principle;
+
+                    var abc = HttpContext.SignInAsync(Principle);
+
+             
+
+
 
                     HttpContext.Session.SetString("Uname", loguser.FirstName + " " + loguser.LastName);
                     HttpContext.Session.SetInt32("UId", (int)loguser.UserId);
                     if(loguser.Avatar != null)
                          HttpContext.Session.SetString("Avatar", loguser.Avatar);
                     TempData["true"] = "Logged Successfully!";
+
+                    
+                    if (!string.IsNullOrEmpty(obj.returnUrl))
+                    {
+                        return LocalRedirect(obj.returnUrl);
+                    }
+
                     return RedirectToAction("PlatformLandingPage", "Platform");
                 }
                 else
@@ -164,6 +203,7 @@ namespace CI_Platform.Controllers
 
         public IActionResult LogOut()
         {
+            HttpContext.SignOutAsync().Wait();
             HttpContext.Session.Clear();
 
             return RedirectToAction("Index" , "User");

@@ -479,6 +479,7 @@ function showStory(x) {
 
 function recommandStory(x) {
 
+    debugger
     var toUserId = [];
     var recommand = document.getElementById("recommand");
     var list = recommand.getElementsByTagName("input");
@@ -579,7 +580,7 @@ function ContactUs() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function getActivity(x) {
-
+    debugger
    
     console.log("TimeSheet!!!!!!!!");
     if (x > 0) {
@@ -595,6 +596,8 @@ function getActivity(x) {
                 debugger
                 $("#TimesheetTime").empty();
                 $("#TimesheetTime").html(data);
+                $("#TimeSheetModalGoal").empty();
+                $("#TimeSheetModalGoal").html(data);
             }
             ,
             error: function (e) {
@@ -606,9 +609,18 @@ function getActivity(x) {
 
     else {
 
-        const myForm = document.querySelector('#timesheetform');
+        const timeForm = document.querySelector('#timesheetform');
+
+        const goalForm = document.querySelector('#goalsheetform');
        
-        myForm.querySelectorAll('.form-control').forEach((element, index) => {
+        timeForm.querySelectorAll('.form-control').forEach((element, index) => {
+
+            element.value = null;
+
+            console.log(element.value);
+        });
+
+        goalForm.querySelectorAll('.form-control').forEach((element, index) => {
 
             element.value = null;
 

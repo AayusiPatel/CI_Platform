@@ -31,5 +31,8 @@ namespace CI_Platform.Entities.ViewModels
         public List<Mission> timeMissions { get; set; } = new List<Mission> { };
 
         public List<Mission> goalMissions { get; set; } = new List<Mission> { };
+
+        public int Hours { get; set; } 
+        public int Minutes { get; set; } 
     }
 }

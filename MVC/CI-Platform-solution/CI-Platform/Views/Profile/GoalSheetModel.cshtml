@@ -1,0 +1,62 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@using CI_Platform.Entities.ViewModels
+
+    @model TimeSheetViewModel
+
+
+
+       <form id="goalsheetform" method="post">
+<div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                        Please input
+                                                        below Volunteering Goal
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                     <input type="hidden" asp-for="TimesheetId" class="form-control" value="@Model.TimesheetId" />
+                                                    <label class="mb-1 ">Mission</label>
+                                                    <select type="text" asp-for="MissionId" class="form-control form-select"
+                                                            placeholder="Select your Mission">
+                                                              <option value="null">Select your Mission</option>
+                                                        @foreach (var item in Model.goalMissions)
+                                                        {
+                                                           <option value="@item.MissionId">@item.Title</option> 
+                                                        }
+                                                    </select>
+                                                    <label class="mb-1 mt-3">Actions</label>
+                                                    <input type="text" asp-for="Action" class="form-control" placeholder="Enter Actions">
+
+                                                    <label class="mb-1 mt-3">
+                                                        Date
+                                                    </label>
+
+                                                    <div class="form-group">
+                                                        <input type="date" asp-for="DateVolunteereed"  id="sDate"
+                                                               class="form-control">
+                                                    </div>
+
+                                                    <label class="mb-1 mt-3"
+                                                           for="exampleFormControlTextarea1">Message</label>
+                                                    <textarea class="form-control" asp-for="Notes" id="exampleFormControlTextarea1"
+                                                              rows="4" placeholder="Enter your message..."></textarea>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        </form>

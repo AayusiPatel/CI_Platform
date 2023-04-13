@@ -50,7 +50,8 @@
                 </div>
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="~/img/user-img.png" class="profile-nav" alt=""> @ViewBag.Uname
+                        <img src="~/img/user-img.png" class="profile-nav" alt=""> @*@ViewBag.Uname*@
+                        @User.Identity.Name
                     </a>
                     <ul class="dropdown-menu me-5">
                         <li><a class="dropdown-item" asp-action="UserProfile" asp-controller="Profile">Profile</a></li>

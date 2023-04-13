@@ -24,6 +24,7 @@ namespace CI_Platform.Repository.Repository
     {
         public readonly CiPlatformContext _db;
 
+      
 
         public UserRepository(CiPlatformContext db)
         {

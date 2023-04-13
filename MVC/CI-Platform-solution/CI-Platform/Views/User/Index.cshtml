@@ -71,10 +71,17 @@
 
         <br>
         <form  class="mform" method="post">
+@*
+            @Html.HiddenFor(m=>m.returnUrl)*@
+
+
+            <input asp-for="returnUrl"  type="hidden"  >
+
              <div class="text-danger text-center">@TempData["LoginError"]
             @TempData["Message"]
             @TempData["Registered"]    
         </div>
+
             <div class=" form-group ">
                 <label for="exampleInputEmail1 "> Email address </label>
               

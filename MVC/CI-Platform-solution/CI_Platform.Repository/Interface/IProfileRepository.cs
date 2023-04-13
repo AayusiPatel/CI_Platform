@@ -20,7 +20,7 @@ namespace CI_Platform.Repository.Interface
 
         public bool UpdateActivity(TimeSheetViewModel obj);
 
-
+        public bool DeleteActivity(int tid);
 
     }
 }

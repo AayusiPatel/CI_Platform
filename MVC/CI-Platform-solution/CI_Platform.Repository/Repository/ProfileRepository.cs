@@ -61,8 +61,8 @@ namespace CI_Platform.Repository.Repository
         {
             User profile = _db.Users.Include(user => user.UserSkills).FirstOrDefault(user => user.UserId == uid);
 
-           
-          
+
+
 
             {
                 profile.FirstName = user.FirstName;
@@ -104,7 +104,7 @@ namespace CI_Platform.Repository.Repository
 
                 if (user.Password != null && user.OldPassword == profile.Password)
                 {
-                   
+
 
                     profile.Password = user.Password;
 
@@ -169,8 +169,8 @@ namespace CI_Platform.Repository.Repository
         {
             TimeSheetViewModel tm = new TimeSheetViewModel();
 
-            tm.timecards = _db.Timesheets.Include(m=>m.Mission).Where(t=>t.UserId == uid && t.Mission.MissionType == "Time").ToList();
-            tm.goalcards = _db.Timesheets.Include(m => m.Mission).Where(t => t.UserId == uid && t.Mission.MissionType == "Goal").ToList();
+            tm.timecards = _db.Timesheets.Include(m => m.Mission).Where(t => t.UserId == uid && t.Mission.MissionType == "Time" && t.DeletedAt == null).ToList();
+            tm.goalcards = _db.Timesheets.Include(m => m.Mission).Where(t => t.UserId == uid && t.Mission.MissionType == "Goal" && t.DeletedAt == null).ToList();
             tm.timeMissions = _db.Missions.Include(m => m.MissionApplications).Where(t => t.MissionType == "Time" && t.MissionApplications.Any(t => t.UserId == uid)).ToList();
             tm.goalMissions = _db.Missions.Include(m => m.MissionApplications).Where(t => t.MissionType == "Goal" && t.MissionApplications.Any(t => t.UserId == uid)).ToList();
             return tm;
@@ -187,18 +187,19 @@ namespace CI_Platform.Repository.Repository
         public TimeSheetViewModel GetActivity(int obj, int uid)
         {
             Timesheet timesheet = _db.Timesheets.FirstOrDefault(entry => entry.TimesheetId == obj);
-           
+
 
             TimeSheetViewModel tVModel = new TimeSheetViewModel();
             {
-                
+
                 tVModel.Time = timesheet.Time;
                 tVModel.DateVolunteereed = timesheet.DateVolunteereed;
                 tVModel.Notes = timesheet.Notes;
                 tVModel.MissionId = timesheet.MissionId;
-                //tVModel.TimesheetId = timesheet.TimesheetId;
-                //tVModel.Action = timesheet.Action;
-
+                tVModel.TimesheetId = timesheet.TimesheetId;
+                tVModel.Action = timesheet.Action;
+                tVModel.Hours = timesheet.Time.Value.Hours;
+                tVModel.Minutes = timesheet.Time.Value.Minutes;
                 tVModel.timeMissions = _db.Missions.Include(m => m.MissionApplications).Where(t => t.MissionType == "Time" && t.MissionApplications.Any(t => t.UserId == uid)).ToList();
                 tVModel.goalMissions = _db.Missions.Include(m => m.MissionApplications).Where(t => t.MissionType == "Goal" && t.MissionApplications.Any(t => t.UserId == uid)).ToList();
 
@@ -207,16 +208,21 @@ namespace CI_Platform.Repository.Repository
             return tVModel;
         }
 
-        public bool AddActivity(TimeSheetViewModel obj,int uid)
+        public bool AddActivity(TimeSheetViewModel obj, int uid)
         {
             Timesheet ts = new Timesheet();
             {
                 ts.UserId = uid;
                 ts.MissionId = obj.MissionId;
-                ts.Time = obj.Time;
                 ts.Action = obj.Action;
                 ts.DateVolunteereed = obj.DateVolunteereed;
                 ts.Notes = obj.Notes;
+
+                if (obj.Hours != 0 || obj.Minutes != 0)
+                {
+                    ts.Time = new TimeSpan(obj.Hours, obj.Minutes, 0);
+                }
+
 
             }
 
@@ -229,14 +235,18 @@ namespace CI_Platform.Repository.Repository
 
         public bool UpdateActivity(TimeSheetViewModel obj)
         {
-            Timesheet ts = _db.Timesheets.FirstOrDefault(t=>t.TimesheetId == obj.TimesheetId);
+            Timesheet ts = _db.Timesheets.FirstOrDefault(t => t.TimesheetId == obj.TimesheetId);
             {
-              
+
                 ts.MissionId = obj.MissionId;
-                ts.Time = obj.Time;
+
                 ts.Action = obj.Action;
                 ts.DateVolunteereed = obj.DateVolunteereed;
                 ts.Notes = obj.Notes;
+                if (obj.Hours != 0 || obj.Minutes != 0)
+                {
+                    ts.Time = new TimeSpan(obj.Hours, obj.Minutes, 0);
+                }
 
             }
 
@@ -246,5 +256,16 @@ namespace CI_Platform.Repository.Repository
             return true;
 
         }
+        public bool DeleteActivity(int tid)
+        {
+            Timesheet ts = _db.Timesheets.FirstOrDefault(t => t.TimesheetId == tid);
+
+            ts.DeletedAt = DateTime.Now;
+
+            _db.Timesheets.Update(ts);
+            _db.SaveChanges();
+            return true;
+        }
+
     }
 }
