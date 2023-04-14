@@ -15,6 +15,30 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Admin/AdminMain.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRtaW5NYWluLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Admin/_CmsAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX0Ntc0FkbWluLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Admin/_MissionAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX01pc3Npb25BZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Admin/_MissionApplicationAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX01pc3Npb25BcHBsaWNhdGlvbkFkbWluLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Admin/_StoryAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX1N0b3J5QWRtaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Admin/_UserAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX1VzZXJBZG1pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Home/day1.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxkYXkxLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

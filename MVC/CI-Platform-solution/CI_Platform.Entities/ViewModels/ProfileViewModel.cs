@@ -13,18 +13,21 @@ namespace CI_Platform.Entities.ViewModels
     {
         public long UserId { get; set; }
 
+        [Required]
         public string? FirstName { get; set; }
 
+        [Required]
         public string? LastName { get; set; }
-
+        [Required]
         public string Email { get; set; } = null!;
 
         public string? OldPassword { get; set; } 
-        public string Password { get; set; } = null!;
+        public string? Password { get; set; }
 
 
-        public string ConfirmPassword { get; set; } = null!;
+        public string? ConfirmPassword { get; set; }
 
+        [Required]
         public long PhoneNumber { get; set; }
 
         public string? Avatar { get; set; }
@@ -36,9 +39,9 @@ namespace CI_Platform.Entities.ViewModels
         public string? EmployeeId { get; set; }
 
         public string? Department { get; set; }
-
+        [Required]
         public long? CityId { get; set; }
-
+        [Required]
         public long? CountryId { get; set; }
 
         public string? ProfileText { get; set; }
@@ -47,10 +50,11 @@ namespace CI_Platform.Entities.ViewModels
 
         public string? Title { get; set; }
 
-        public List<UserSkill> userSkills { get; set; } = new List<UserSkill>();
+        public List<UserSkill>? userSkills { get; set; } = new List<UserSkill>();
 
-        public List<Skill> skill { get; set; } = new List<Skill> { };
+        public List<Skill>? skill { get; set; } = new List<Skill> { };
 
+        [Required]
         public List<int>? skillsToAdd { get; set; }
 
       
