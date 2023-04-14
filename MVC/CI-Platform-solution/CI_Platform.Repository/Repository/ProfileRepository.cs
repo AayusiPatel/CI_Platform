@@ -167,12 +167,14 @@ namespace CI_Platform.Repository.Repository
 
         public TimeSheetViewModel GetActivities(int uid)
         {
+            List<Timesheet> timeSheets = _db.Timesheets.Include(m => m.Mission).Where(t => t.UserId == uid  && t.DeletedAt == null).ToList();
+            List<Mission> mission = _db.Missions.Include(m => m.MissionApplications).Where(t => t.MissionApplications.Any(t => t.UserId == uid) && t.Status == 1).ToList();
             TimeSheetViewModel tm = new TimeSheetViewModel();
 
-            tm.timecards = _db.Timesheets.Include(m => m.Mission).Where(t => t.UserId == uid && t.Mission.MissionType == "Time" && t.DeletedAt == null).ToList();
-            tm.goalcards = _db.Timesheets.Include(m => m.Mission).Where(t => t.UserId == uid && t.Mission.MissionType == "Goal" && t.DeletedAt == null).ToList();
-            tm.timeMissions = _db.Missions.Include(m => m.MissionApplications).Where(t => t.MissionType == "Time" && t.MissionApplications.Any(t => t.UserId == uid)).ToList();
-            tm.goalMissions = _db.Missions.Include(m => m.MissionApplications).Where(t => t.MissionType == "Goal" && t.MissionApplications.Any(t => t.UserId == uid)).ToList();
+            tm.timecards = timeSheets.Where(t=>t.Mission.MissionType == "Time").ToList();
+            tm.goalcards = timeSheets.Where(t => t.Mission.MissionType == "Goal").ToList(); ;
+            tm.timeMissions = mission.Where(t => t.MissionType == "Time").ToList();
+            tm.goalMissions = mission.Where(t => t.MissionType == "Time").ToList();
             return tm;
         }
 
@@ -187,6 +189,7 @@ namespace CI_Platform.Repository.Repository
         public TimeSheetViewModel GetActivity(int obj, int uid)
         {
             Timesheet timesheet = _db.Timesheets.FirstOrDefault(entry => entry.TimesheetId == obj);
+            List<Mission> mission = _db.Missions.Include(m => m.MissionApplications).Where(t => t.MissionApplications.Any(t => t.UserId == uid) && t.Status == 1).ToList();
 
 
             TimeSheetViewModel tVModel = new TimeSheetViewModel();
@@ -200,8 +203,8 @@ namespace CI_Platform.Repository.Repository
                 tVModel.Action = timesheet.Action;
                 tVModel.Hours = timesheet.Time.Value.Hours;
                 tVModel.Minutes = timesheet.Time.Value.Minutes;
-                tVModel.timeMissions = _db.Missions.Include(m => m.MissionApplications).Where(t => t.MissionType == "Time" && t.MissionApplications.Any(t => t.UserId == uid)).ToList();
-                tVModel.goalMissions = _db.Missions.Include(m => m.MissionApplications).Where(t => t.MissionType == "Goal" && t.MissionApplications.Any(t => t.UserId == uid)).ToList();
+                tVModel.timeMissions = mission.Where(t => t.MissionType == "Time").ToList();
+                tVModel.goalMissions = mission.Where(t => t.MissionType == "Time").ToList();
 
             }
 

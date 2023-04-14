@@ -147,7 +147,7 @@ namespace CI_Platform.Controllers
             obj.missions = misShareStory;
             if (command == 1)
             {
-                if (ModelState.ContainsKey("Stitle"))
+                if (ModelState.IsValid == false)
                 {
                     return View(obj);
                 }
@@ -160,7 +160,7 @@ namespace CI_Platform.Controllers
             }
             if (command == 2)
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid == false)
                 {
                     return View(obj);
                 }

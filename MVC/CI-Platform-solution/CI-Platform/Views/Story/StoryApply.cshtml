@@ -111,12 +111,14 @@
                         <div class="col-lg-12">
                             <select class="form-select" id="getData" aria-label="Default select example"
                                     asp-for="MissionId" aria-placeholder="Select your mission" onchange="Sdata();">
-                                <option value="0">Select your mission</option>
+                                <option value="">Select your mission</option>
                                 @foreach (var obj in Model.missions)
                                 {
                                     <option value="@obj.Mission.MissionId">  @obj.Mission.Title </option>
                                 }
                             </select>
+
+                            <span class="text-danger" asp-validation-for="MissionId"></span>
                         </div>
                     </div>
                     <div class="col-lg-4">

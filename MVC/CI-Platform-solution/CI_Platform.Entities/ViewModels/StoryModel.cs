@@ -25,8 +25,9 @@ namespace CI_Platform.Entities.ViewModels
 
     public class ShareStory
     {
-       public  List<MissionApplication> missions { get; set; }
-        public Story story { get; set; }
+       public  List<MissionApplication> missions { get; set; } = new List<MissionApplication>();
+
+        public Story? story { get; set; }
 
         [Required(ErrorMessage ="Story Title is required.")]
         public string? Stitle { get; set; }
@@ -36,7 +37,11 @@ namespace CI_Platform.Entities.ViewModels
 
         [Required(ErrorMessage = "Published Date  is required.")]
         public DateTime? PublishedAt { get; set; }
+
+        
+        [Required(ErrorMessage = "Mission  is required.")]
         public long MissionId { get; set; }
+
         public List<IFormFile>? file { get; set; }
         public string? url { get; set; }
         public List<string> displayImages { get; set; } = new List<string> { };

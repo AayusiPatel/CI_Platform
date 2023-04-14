@@ -17,14 +17,14 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     });
 
 
-builder.Services.AddAuthentication("AuthCookie")
-    .AddCookie("AuthCookie",options =>
-    {
-        options.ExpireTimeSpan = TimeSpan.FromDays(2);
-        options.Cookie.Name = "AuthCookie";
-        options.LoginPath = "/User/Index";
-        options.LogoutPath = "/User/LogOut";
-    });
+//builder.Services.AddAuthentication("AuthCookie")
+//    .AddCookie("AuthCookie",options =>
+//    {
+//        options.ExpireTimeSpan = TimeSpan.FromDays(2);
+//        options.Cookie.Name = "AuthCookie";
+//        options.LoginPath = "/User/Index";
+//        options.LogoutPath = "/User/LogOut";
+//    });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
