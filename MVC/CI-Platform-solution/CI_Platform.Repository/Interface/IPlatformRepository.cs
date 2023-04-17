@@ -13,7 +13,7 @@ namespace CI_Platform.Repository.Interface
         public List<Country> GetCountry();
         public List<City> GetCitys();
 
-        public List<City> GetCityData(int countryId);
+        public List<City> GetCityData(List<int>? countryId);
         public List<MissionTheme> GetMissionTheme();
         public PlatformModel GetMissions();
         public List<Mission> GetMissionDetails();

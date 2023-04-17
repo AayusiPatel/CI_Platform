@@ -34,11 +34,11 @@ namespace CI_Platform.Repository.Repository
             List<City> cities = _db.Cities.ToList();
             return cities;
         }
-        public List<City> GetCityData(int countryId)
+        public List<City> GetCityData(List<int>? countryId)
         {
 
-            List<City> city = _db.Cities.Where(i => i.CountryId == countryId).ToList();
-            if (countryId == 0)
+            List<City> city = _db.Cities.Where(i => countryId.Contains((int)i.CountryId)).ToList();
+            if (countryId.Count == 0)
                 city = _db.Cities.ToList();
             return city;
 
@@ -128,17 +128,19 @@ namespace CI_Platform.Repository.Repository
 
             if (countryId.Count > 0)
             {
-                foreach (var n in countryId)
-                {
-                    cards = cards.Where(x => x.CountryId == n).ToList();
-                }
+                cards = cards.Where(x => countryId.Contains((int)x.CountryId)).ToList();
+                //foreach (var n in countryId)
+                //{
+                //    cards = cards.Where(x => countryId.Contains((int)x.CountryId)).ToList();
+                //}
             }
             if (cityId.Count > 0)
             {
-                foreach (var n in cityId)
-                {
-                    cards = cards.Where(x => x.CityId == n).ToList();
-                }
+                cards = cards.Where(c => cityId.Contains((int)c.CityId)).ToList();
+            //    foreach (var n in cityId)
+            //    {
+            //        cards = cards.Where(x => x.CityId == n).ToList();
+            //    }
             }
             if (themeId.Count > 0)
             {
@@ -159,7 +161,8 @@ namespace CI_Platform.Repository.Repository
                     //cards.Add(missioncards.FirstOrDefault(x => x.MissionId == item.MissionId));
 
                 }
-                cards = temp;
+             
+                cards = temp.Distinct().ToList();
             }
           
 

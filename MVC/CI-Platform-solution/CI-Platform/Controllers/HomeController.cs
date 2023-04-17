@@ -64,7 +64,7 @@ namespace CI_Platform.Controllers
 
 
 
-        public JsonResult GetCitys(int countryId)
+        public JsonResult GetCitys(List<int>? countryId)
         {
 
             List<City> city = _platform.GetCityData(countryId);

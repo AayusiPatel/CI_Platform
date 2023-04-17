@@ -15,25 +15,48 @@
 
 
 function GetCity() {
-    var countryId = $('#countryId').find(":selected").val();
-    /* debugger;*/
+     debugger
+    var countryIds = [];
+    var countrydiv = document.getElementById("countryId");
+    var list = countrydiv.getElementsByTagName("input");
+    for (i = 0; i < list.length; i++) {
+        if (list[i].checked) {
+            countryIds.push(list[i].value);
+        }
+
+    }
+    console.log("countryids:" + countryIds);
+   /* var countryId = $('#countryId').find(":selected").val();*/
+    debugger
     $.ajax({
         url: "/Home/GetCitys",
-        method: "GET",
+        method: "POST",
         data: {
-            "countryId": countryId
+            'countryId': countryIds
         },
         success: function (data) {
             data = JSON.parse(data);
+            console.log(data);
             $("#selectCityList").empty();
+        //    document.getElementById("selectCityList").innerHTML += `
+        //<option value=${name}> City </option>
+        //`;
+
             document.getElementById("selectCityList").innerHTML += `
-        <option value=${name}> City </option>
+          <ul class="dropdown-menu">
         `;
             data.forEach((name) => {
+        //        document.getElementById("selectCityList").innerHTML += `
+        //<option value=${name.CityId} >${name.Name}</option>
+        //`;
+
                 document.getElementById("selectCityList").innerHTML += `
-        <option value=${name.CityId} >${name.Name}</option>
-        `;
+                     <li><input type="checkbox" value="${name.CityId}" />${name.Name}</li>
+                    `;
             })
+            document.getElementById("selectCityList").innerHTML += `
+          </ul>
+        `;
         }
         ,
         error: function (e) {
@@ -46,7 +69,40 @@ function GetCity() {
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function GetProfileCity() {
+    debugger
 
+     var countryId = $('#countryId').find(":selected").val();
+    debugger
+    $.ajax({
+        url: "/Home/GetCitys",
+        method: "POST",
+        data: {
+            'countryId': countryId
+        },
+        success: function (data) {
+            data = JSON.parse(data);
+            console.log(data);
+            $("#selectCityList").empty();
+                document.getElementById("selectCityList").innerHTML += `
+            <option value=${name}> City </option>
+            `;
+
+            
+            data.forEach((name) => {
+                        document.getElementById("selectCityList").innerHTML += `
+                <option value=${name.CityId} >${name.Name}</option>
+                `;
+
+            })  ;
+        }
+        ,
+        error: function (e) {
+            console.log("Bye");
+            alert('Error');
+        },
+    });
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -54,9 +110,9 @@ function temp(x) {
 
     var checkedcntryvalues = [];
     var div1 = document.getElementById("countryId");
-    var list = div1.getElementsByTagName("option");
+    var list = div1.getElementsByTagName("input");
     for (i = 0; i < list.length; i++) {
-        if (list[i].selected) {
+        if (list[i].checked) {
             checkedcntryvalues.push(list[i].value);
         }
 
@@ -66,16 +122,16 @@ function temp(x) {
 
      var checkedvalues = [];
     var div = document.getElementById("selectCityList");
-    var list = div.getElementsByTagName("option");
+    var list = div.getElementsByTagName("input");
     for (i = 0; i < list.length; i++) {
-        if (list[i].selected) {
+        if (list[i].checked) {
             checkedvalues.push(list[i].value);
         }
 
     }
     console.log(checkedvalues);
 
-
+    
 
 
 
@@ -127,8 +183,12 @@ function temp(x) {
             'skillId': checkedskillvalues,
             'search': search,
             'sort': sort,
-            'PageIndex': x
+            'PageIndex': x,
+
+           
         },
+
+        
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
             debugger
@@ -231,14 +291,14 @@ function fav(x) {
                 $('#favMission').removeClass();
                 $('#favMission').addClass("bi bi-heart");
                 document.getElementById("favMissionText").innerHTML ="Add to Favourite";
-                alert('Mission Removed from Favorites.');
+                toastr.success('Mission Removed from Favorites.');
             }
             
             else {
                 $('#favMission').removeClass();
                 $('#favMission').addClass("bi bi-heart-fill text-danger");
                 document.getElementById("favMissionText").innerHTML = "Remove from Favourite";
-                alert('Mission Added to Favorites.');
+                toastr.success('Mission Added to Favorites.');
             }
 
             //if (missions == true) {
@@ -333,7 +393,7 @@ function comment(x) {
            
          
           
-            alert('Comment Added successfully.');
+            toastr.success('Comment Added successfully.');
             //$("#commentDescription").val(null);
             //$("#comment").;
             //console.log("Added ");
@@ -376,7 +436,7 @@ function recommandToCoWorker(x) {
         },
         success: function (data) {
             console.log(toUserId);
-
+            toastr.success('E-mail Sent Successfully!')
         }
         ,
         error: function (e) {
@@ -567,7 +627,7 @@ function ContactUs() {
         success: function (data) {
             console.log(data);
             if(data)
-                alert('E-mial sent successfully!');
+                toastr.success('E-mial sent successfully!');
 
         }
         ,

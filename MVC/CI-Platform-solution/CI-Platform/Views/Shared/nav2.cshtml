@@ -15,34 +15,49 @@
         </button>
 
         <div class="collapse d-md-flex " id="collapseExample">
-            <select class="form-select  border-white xyz" aria-label="Default select example" placeholder="Country" id="countryId" onchange="temp(1); GetCity();">
-                <option selected>Country</option>
+            <div class="form-select  border-white xyz" aria-label="Default select example" placeholder="Country" id="countryId" onchange="temp(1); GetCity();">
+                @*<option selected>Country</option>
                 @foreach (var item in @ViewBag.Countries)
                 {
 
                     <option value="@item.CountryId"> @item.Name</option>
-                }
-            </select>
-            <select class="form-select border-white xyz " aria-label="Default select example" id="selectCityList" onchange="temp(1)">
+                }*@
 
-                @*     <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    City
-                    </a>*@
-                @*  <ul class="dropdown-menu">
-                    @foreach (var item in ViewBag.Cities)
+                <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Country
+                </a>
+                <ul class="dropdown-menu">
+
+                    @foreach (var item in @ViewBag.Countries)
                     {
-                    <li><input type="checkbox" name="Cities" value="@item.CityId" />
+
+                        <li><input type="checkbox" value="@item.CountryId" /> @item.Name </li>
+                    }
+                </ul>
+            </div>
+            <div class="form-select border-white xyz " aria-label="Default select example"  onchange="temp(1)">
+
+                     <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    City
+                    </a>
+                  <ul class="dropdown-menu" id="selectCityList">
+                    @foreach (var item in @ViewBag.Cities)
+                    {
+                    <li><input type="checkbox" value="@item.CityId" />
                     @item.Name
-                    </li>*@
-                @*    }*@
+                    </li>
+                    }
+               @* <select>
                 <option selected>City</option>
                 @foreach (var item in @ViewBag.Cities)
                 {
 
                     <option value="@item.CityId"> @item.Name</option>
                 }
-                @* </ul>*@
-            </select>
+                
+               </select>*@
+                </ul>
+            </div>
             <div class="form-select border-white xyz" aria-label="Default select example" id="theme" onchange="temp(1)">
                 <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Themes

@@ -94,7 +94,7 @@ namespace CI_Platform.Controllers
 
 
 
-
+        [Authorize]
         public IActionResult Volunteering_Mission(int mid, int pageIndex = 1)
         {
 

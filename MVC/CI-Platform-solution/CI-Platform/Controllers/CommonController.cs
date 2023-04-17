@@ -34,7 +34,7 @@ namespace CI_Platform.Controllers
 
 
 
-        public JsonResult GetCitys(int countryId)
+        public JsonResult GetCitys(List<int>? countryId)
         {
 
             List<City> city = _platform.GetCityData(countryId);
@@ -58,26 +58,26 @@ namespace CI_Platform.Controllers
             return RedirectToAction("PlatformLandingPage", "Home");
         }
 
-        public IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort, int PageIndex)
-        {
-            List<Mission> cards = _platform.Filter(cityId, countryId, themeId, skillId, search, sort);
-            int cnt = cards.Count;
-            ViewBag.cont = cnt;
-            PlatformModel platformModel = new PlatformModel();
-            {
-                platformModel.Mission = cards;
-            }
+        //public IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort, int PageIndex)
+        //{
+        //    List<Mission> cards = _platform.Filter(cityId, countryId, themeId, skillId, search, sort);
+        //    int cnt = cards.Count;
+        //    ViewBag.cont = cnt;
+        //    PlatformModel platformModel = new PlatformModel();
+        //    {
+        //        platformModel.Mission = cards;
+        //    }
 
-            if (cards.Count == 0)
-            {
-                return PartialView("_NoMissionFound");
-            }
+        //    if (cards.Count == 0)
+        //    {
+        //        return PartialView("_NoMissionFound");
+        //    }
 
 
-            //return PartialView("_GridPartial", platformModel);
+        //    //return PartialView("_GridPartial", platformModel);
 
-            return PartialView("_FilterMissionPartial", platformModel);
-        }
+        //    return PartialView("_FilterMissionPartial", platformModel);
+        //}
 
 
 

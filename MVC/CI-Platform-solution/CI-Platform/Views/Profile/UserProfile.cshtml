@@ -181,7 +181,7 @@
                     <div class="row mt-3">
                         <div class="col-12 col-sm-6">
                             <label>Country*</label>
-                            <select id="countryId" asp-for="CountryId" onchange="GetCity();" class="form-select" aria-label="Default select example"
+                            <select id="countryId" asp-for="CountryId" onchange="GetProfileCity();" class="form-select" aria-label="Default select example"
                                     aria-placeholder="Select your country">
                                 <option value="0">Select your country</option>
                                 @foreach (var obj in @ViewBag.countries)

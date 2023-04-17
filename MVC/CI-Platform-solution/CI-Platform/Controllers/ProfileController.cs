@@ -43,6 +43,7 @@ namespace CI_Platform.Controllers
         [HttpPost]
         public IActionResult UserProfile(ProfileViewModel obj, int resetPass)
         {
+           
             string name = HttpContext.Session.GetString("Uname");
             ViewBag.Uname = name;
             string avatar = HttpContext.Session.GetString("Avatar");
@@ -51,6 +52,10 @@ namespace CI_Platform.Controllers
             ViewBag.Cities = Cities;
             List<Country> Countries = _platform.GetCountry();
             ViewBag.Countries = Countries;
+            //if (ModelState.IsValid == false)
+            //{
+            //    return View(obj);
+            //}
             if (name != null)
             {
                 int UserId = (int)HttpContext.Session.GetInt32("UId");
@@ -108,6 +113,7 @@ namespace CI_Platform.Controllers
         [HttpPost]
         public IActionResult TimeSheet(TimeSheetViewModel obj)
         {
+          
             int UserId = (int)HttpContext.Session.GetInt32("UId");
 
             if (obj.TimesheetId == 0)
