@@ -11,7 +11,7 @@
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
-<div id="Filter">
+
     <div id="grid-view" class="grid">
         <div class="container-fluid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
             @foreach (var item in Model.Mission)
@@ -25,7 +25,19 @@
 
                                 <img src="~/img/add1.png" class="card-img-top bg-dark fa-download-1" alt="...">
                              @*   <img src="~/img/heart.png" class="card-img-top bg-dark fa-download-2 " alt="..." style="">*@
-                                <i class="bi bi-suit-heart bg-dark fa-download-2"></i>
+                              @*  <i class="bi bi-suit-heart bg-dark fa-download-2 text-light"></i>*@
+                                @{
+                                    bool a = item.FavoriteMissions.Any(x => x.UserId == @ViewBag.uid);
+                                }
+                                   @if (item.FavoriteMissions.Any(x => x.UserId == @ViewBag.uid))
+                                {
+                                 
+                                       <i class="bi bi-suit-heart-fill fa-download-2 text-danger bg-dark " style="font-size: 2.5rem;" ></i> 
+                                    
+                                }
+                                else{
+                                <i class="bi bi-suit-heart fa-download-2 text-light bg-dark" style="font-size: 2.5rem;" ></i>
+                                }
                             <span class="border-dark rounded-pill label"> &nbsp; &nbsp; @item.Theme.Title  &nbsp; &nbsp;</span>
                             </div>
                         </div>
@@ -176,4 +188,3 @@
 </div>
 
 
-</div>

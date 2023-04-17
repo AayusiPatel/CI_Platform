@@ -3,6 +3,8 @@
 *@
 @{
 }
+@using CI_Platform.Entities.ViewModels
+@model AdminViewModel
  <div id="cmspage">
                                 <h4>User</h4>
                                 <hr class="m-0">
@@ -31,14 +33,27 @@
                                             <th scope="col">Status</th>
                                             <th scope="col" style="text-align: center;">Actions</th>
                                         </tr>
-                                        <tr>
-                                            <td>Het</td>
-                                            <td>Shah</td>
-                                            <td>.Net</td>
-                                            <td>hetshah2207@gmail.com</td>
-                                            <td>1000</td>
-                                            <td style="background-color: #EBFFEF; width: 33px; color: #3CDD5F; ">Active
-                                            </td>
+
+                                        @foreach (var item in Model.users)
+                                       {
+                                             <tr>
+                                            <td>@item.FirstName</td>
+                                            <td>@item.LastName</td>
+                                            <td>@item.Email</td>
+                                            <td>@item.EmployeeId</td>
+                                            <td>@item.Department</td>
+                                           
+                        @if(item.Status == true)
+                        {<td style="background-color: #EBFFEF; width: 33px; color: #3CDD5F; ">
+                            Active
+                            </td>
+                        }
+                        else{
+                             <td style="background-color: #EBFFEF; width: 33px; color: #3CDD5F; ">
+                                 InActive
+                                 </td>
+                        }
+                    
                                             <td style=" text-align:center;">
                                                 <button type="button" class="btn p-0" onclick="editform('nav-user');">
                                                     <i class="bi bi-pencil-square" style="color: coral;"></i>
@@ -49,6 +64,7 @@
                                                 </button>
                                             </td>
                                         </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>

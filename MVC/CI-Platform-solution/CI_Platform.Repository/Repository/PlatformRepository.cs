@@ -66,7 +66,7 @@ namespace CI_Platform.Repository.Repository
         }
         public PlatformModel GetMissions()
         {
-            List<Mission> mission = _db.Missions.ToList();
+            List<Mission> mission = _db.Missions.Include(m => m.FavoriteMissions).ToList();
             List<MissionMedium> missionMedia = _db.MissionMedia.Where(x => x.Default == 1).ToList();
             List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
             List<MissionTheme> missionThemes = _db.MissionThemes.ToList();
@@ -75,6 +75,8 @@ namespace CI_Platform.Repository.Repository
             List<Country> countries = _db.Countries.ToList();
             List<GoalMission> goalMissions = _db.GoalMissions.ToList();
             int abc = (int)missionRatings.Average(x => x.Rating);
+
+
 
             int PageIndex = 1;
             int PageSize = 3;

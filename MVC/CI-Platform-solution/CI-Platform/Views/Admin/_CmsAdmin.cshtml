@@ -2,6 +2,8 @@
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@using CI_Platform.Entities.ViewModels
+@model AdminViewModel
   <div id="cmspage">
                                 <h4>CMS Page</h4>
                                 <hr class="m-0">
@@ -27,8 +29,12 @@
                                             <th scope="col">status</th>
                                             <th style="text-align: center;" scope="col">Action</th>
                                         </tr>
+                                        @foreach (var item in Model.cms)
+                                        {
+                                            
+                                        
                                         <tr>
-                                            <td>Het</td>
+                                            <td>@item.Title</td>
                                             <td style="background-color: #EBFFEF; width: 33px; color: #3CDD5F; ">Active
                                             </td>
                                             <td style="text-align: center;">
@@ -40,6 +46,8 @@
                                                 </button>
                                             </td>
                                         </tr>
+
+                                        }
                                     </tbody>
                                 </table>
                             </div>

@@ -39,6 +39,8 @@ namespace CI_Platform.Controllers
 
             ViewBag.cont = missionDeails.Count;
 
+            var UId = (int)HttpContext.Session.GetInt32("UId");
+            ViewBag.uid = UId;
 
             List<City> Cities = _platform.GetCitys();
             ViewBag.Cities = Cities;
@@ -56,9 +58,15 @@ namespace CI_Platform.Controllers
 
             return View(ms);
         }
-        public IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort, int PageIndex =1)
+        public IActionResult Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort, int PageIndex = 1)
         {
             List<Mission> cards = _platform.Filter(cityId, countryId, themeId, skillId, search, sort);
+
+
+            if(cards.Count == 0)
+            {
+                return PartialView("_NoMissionFound");
+            }
 
             int PageSize = 3;
 
@@ -73,6 +81,8 @@ namespace CI_Platform.Controllers
                 platformModel.Mission = records;
                 platformModel.totalcount = TotalRecords;
             }
+
+           
 
             return PartialView("_FilterMissionPartial", platformModel);
 
