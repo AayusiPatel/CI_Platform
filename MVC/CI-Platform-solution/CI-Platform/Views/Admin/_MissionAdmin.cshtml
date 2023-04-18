@@ -1,5 +1,8 @@
-﻿<div id="cmspage">
-    <h4>Mission</h4>
+﻿@using CI_Platform.Entities.ViewModels
+@model AdminViewModel
+
+<div id="cmspage3">
+   @* <h4>Mission</h4>
     <hr class="m-0">
     <div class="row mt-3 g-0">
         <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
@@ -14,7 +17,7 @@
                 Add
             </button>
         </div>
-    </div>
+    </div>*@
     <table class="table mt-3">
         <tbody>
             <tr style="background-color: #F8F9FC;">
@@ -24,14 +27,18 @@
                 <th scope="col">End Date</th>
                 <th scope="col" style="text-align: center;">Actions</th>
             </tr>
+            @foreach (var item in Model.missions)
+            {
+                
+            
             <tr>
-                <td>Feed the Homeless</td>
-                <td>Time</td>
-                <td>05/02/2019</td>
-                <td> 05/02/2019 </td>
+                <td>@item.Title</td>
+                <td>@item.MissionType</td>
+                <td>@item.StartDate.Value.ToShortDateString()</td>
+                <td> @item.EndDate.Value.ToShortDateString() </td>
 
                 <td style="text-align: center;">
-                    <button type="button" class="btn p-0" onclick="editform('nav-mission');">
+                    <button type="button" class="btn p-0" onclick="editform('nav-mission',3); getData('nav-mission',3,@item.MissionId);">
                         <i class="bi bi-pencil-square" style="color: coral;"></i>
                     </button>
                     <button type="button" class="btn p-0">
@@ -39,8 +46,32 @@
                     </button>
                 </td>
             </tr>
+            }
         </tbody>
     </table>
+     <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only"></span>
+                </a>
+            </li>
+            @for(int i = 1; i <= @ViewBag.totalPages; i++){
+            
+                <li class="page-item" onclick="AdminSearch(3,@i)"><a class="page-link" href="#">@i</a></li>
+           }
+    @*        <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>*@
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only"></span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
 <div class="border" id="add" style="display: none;">
     <h3 class="p-3 m-0" style="background-color: #F8F9FC;"> Add mission</h3>
@@ -69,7 +100,7 @@
             <div class="col-10"></div>
             <div class="col-2">
                 <button type="button" class="cancell rounded-pill btn btn-outline-dark"
-                        onclick="addpage('nav-mission');">
+                        onclick="addpage('nav-mission',3);">
                     Cancel
                 </button>
                 <button type="submit" class="threebt rounded-pill btn btn-outline-warning"
@@ -85,14 +116,28 @@
     <hr class="m-0">
     <form action="" class="px-3">
         <label for="select mission" class="mt-3"> Title </label>
-        <input type="text" class="form-control" id="formGroupExampleInput">
+        <input type="text" asp-for="mission.Title" class="form-control" id="formGroupExampleInput">
+          <label for="select mission" class="mt-3"> Short Description </label>
+        <textarea type="text" asp-for="mission.ShortDescription" class="form-control" id="formGroupExampleInput"></textarea>
         <label for="mission2" class="mt-3"> Description</label>
-        <textarea id="mission2" cols="172" rows="10"
+        <textarea id="mission2" asp-for="mission.Description" cols="172" rows="10"
                   maxlength="40000"></textarea>
         <script>
             var abc = document.getElementById("mission2");
             CKEDITOR.replace(abc);
         </script>
+
+          <label for="select mission" class="mt-3"> Start Date </label>
+        <input type="date" asp-for="mission.StartDate" class="form-control" id="formGroupExampleInput">
+        <label for="select mission" class="mt-3"> End Date </label>
+        <input type="date" asp-for="mission.EndDate" class="form-control" id="formGroupExampleInput">
+         <label class="mb-1 mt-3">Mission Type</label>
+        <select type="text" class="form-select form-control">
+            <option value="1">Select your mission type</option>
+            <option value="2">Time</option>
+            <option value="3">Goal</option>
+            <option value="4">4</option>
+        </select>
         <label for="select mission" class="mt-3"> Slug </label>
         <input type="text" class="form-control" id="formGroupExampleInput">
 
@@ -107,7 +152,7 @@
             <div class="col-10"></div>
             <div class="col-2">
                 <button type="button" class="cancell rounded-pill btn btn-outline-dark"
-                        onclick="editpage('nav-mission');">
+                        onclick="editpage('nav-mission',3);">
                     Cancel
                 </button>
                 <button type="submit" class="threebt rounded-pill btn btn-outline-warning"

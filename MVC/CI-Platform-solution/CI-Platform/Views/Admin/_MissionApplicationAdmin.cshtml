@@ -3,9 +3,12 @@
 *@
 @{
 }
-<div id="cmspage">
+@using CI_Platform.Entities.ViewModels
+@model AdminViewModel
 
-      <h4>Application</h4>
+<div id="cmspage4">
+
+    @*  <h4>Application</h4>
                             <hr class="m-0">
                             <div class="row mt-3 g-0">
                                 <div class="col-12 col-xl-3 col-lg-6 col-sm-8">
@@ -17,7 +20,7 @@
                                 <div class="col-12 col-xl-9 col-lg-6 col-sm-4">
 
                                 </div>
-                            </div>
+                            </div>*@
                             <table class="table mt-3">
                                 <tbody>
                                     <tr style="background-color: #F8F9FC;">
@@ -28,12 +31,16 @@
                                         <th scope="col">Applied Date</th>
                                         <th scope="col">Actions</th>
                                     </tr>
+                                    @foreach (var item in Model.missionApplications)
+                                    {
+                                        
+                                    
                                     <tr>
-                                        <td>Various versions have evolved over</td>
-                                        <td>5164975623</td>
-                                        <td>1364975623</td>
-                                        <td>Het Shah </td>
-                                        <td>20/02/2023</td>
+                                        <td>@item.Mission.Title</td>
+                                        <td>@item.MissionId</td>
+                                        <td>@item.UserId</td>
+                                        <td>@item.User.FirstName  @item.User.LastName </td>
+                                        <td>@item.AppliedAt.ToShortDateString()</td>
                                         <td>
                                             <button type="button" class="btn p-0 me-3">
                                                 <i class="bi bi-check-circle" style="color: green;"></i>
@@ -44,6 +51,7 @@
                                             </button>
                                         </td>
                                     </tr>
+                                    }
                                 </tbody>
                             </table>
 

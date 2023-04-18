@@ -15,7 +15,7 @@
 
 
 function GetCity() {
-     debugger
+    debugger
     var countryIds = [];
     var countrydiv = document.getElementById("countryId");
     var list = countrydiv.getElementsByTagName("input");
@@ -26,7 +26,7 @@ function GetCity() {
 
     }
     console.log("countryids:" + countryIds);
-   /* var countryId = $('#countryId').find(":selected").val();*/
+    /* var countryId = $('#countryId').find(":selected").val();*/
     debugger
     $.ajax({
         url: "/Home/GetCitys",
@@ -38,17 +38,17 @@ function GetCity() {
             data = JSON.parse(data);
             console.log(data);
             $("#selectCityList").empty();
-        //    document.getElementById("selectCityList").innerHTML += `
-        //<option value=${name}> City </option>
-        //`;
+            //    document.getElementById("selectCityList").innerHTML += `
+            //<option value=${name}> City </option>
+            //`;
 
             document.getElementById("selectCityList").innerHTML += `
           <ul class="dropdown-menu">
         `;
             data.forEach((name) => {
-        //        document.getElementById("selectCityList").innerHTML += `
-        //<option value=${name.CityId} >${name.Name}</option>
-        //`;
+                //        document.getElementById("selectCityList").innerHTML += `
+                //<option value=${name.CityId} >${name.Name}</option>
+                //`;
 
                 document.getElementById("selectCityList").innerHTML += `
                      <li><input type="checkbox" value="${name.CityId}" />${name.Name}</li>
@@ -72,7 +72,7 @@ function GetCity() {
 function GetProfileCity() {
     debugger
 
-     var countryId = $('#countryId').find(":selected").val();
+    var countryId = $('#countryId').find(":selected").val();
     debugger
     $.ajax({
         url: "/Home/GetCitys",
@@ -84,17 +84,17 @@ function GetProfileCity() {
             data = JSON.parse(data);
             console.log(data);
             $("#selectCityList").empty();
-                document.getElementById("selectCityList").innerHTML += `
+            document.getElementById("selectCityList").innerHTML += `
             <option value=${name}> City </option>
             `;
 
-            
+
             data.forEach((name) => {
-                        document.getElementById("selectCityList").innerHTML += `
+                document.getElementById("selectCityList").innerHTML += `
                 <option value=${name.CityId} >${name.Name}</option>
                 `;
 
-            })  ;
+            });
         }
         ,
         error: function (e) {
@@ -120,7 +120,7 @@ function temp(x) {
     console.log(checkedcntryvalues);
 
 
-     var checkedvalues = [];
+    var checkedvalues = [];
     var div = document.getElementById("selectCityList");
     var list = div.getElementsByTagName("input");
     for (i = 0; i < list.length; i++) {
@@ -131,7 +131,7 @@ function temp(x) {
     }
     console.log(checkedvalues);
 
-    
+
 
 
 
@@ -170,7 +170,7 @@ function temp(x) {
 
     //var listView = document.getElementById("list-view");
     //var gridView = document.getElementById("grid-view");
-  
+
     debugger
 
     $.ajax({
@@ -185,14 +185,14 @@ function temp(x) {
             'sort': sort,
             'PageIndex': x,
 
-           
+
         },
 
-        
+
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
             debugger
-           
+
             $("#Filter").empty();
             console.log("grid Hii");
             $("#Filter").html(data);
@@ -229,7 +229,7 @@ function story(x) {
     var search = document.getElementById("searchb").value;
     console.log(search)
 
-    
+
 
 
     debugger
@@ -240,7 +240,7 @@ function story(x) {
         data: {
 
             'search': search,
-            'PageIndex' : x ,
+            'PageIndex': x,
         },
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
@@ -285,15 +285,15 @@ function fav(x) {
         },
         dataType: "html", // return datatype like JSON and HTML
         success: function (missions) {
-             debugger
+            debugger
             if (missions == "false") {
 
                 $('#favMission').removeClass();
                 $('#favMission').addClass("bi bi-heart");
-                document.getElementById("favMissionText").innerHTML ="Add to Favourite";
+                document.getElementById("favMissionText").innerHTML = "Add to Favourite";
                 toastr.success('Mission Removed from Favorites.');
             }
-            
+
             else {
                 $('#favMission').removeClass();
                 $('#favMission').addClass("bi bi-heart-fill text-danger");
@@ -390,9 +390,9 @@ function comment(x) {
         },
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
-           
-         
-          
+
+
+
             toastr.success('Comment Added successfully.');
             //$("#commentDescription").val(null);
             //$("#comment").;
@@ -576,17 +576,17 @@ function recommandStory(x) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function StoryPage(x) {
-  
+
     $.ajax({
 
         url: '/Story/StoryListing',
         method: "GET",
         data: {
-          
+
             'PageIndex': x
         },
         success: function (data) {
-          
+
 
             console.log("Pagination");
             $("body").html(data);
@@ -613,7 +613,7 @@ function ContactUs() {
     var Email = document.querySelector('#Email').value;
     var Subject = document.querySelector('#Subject').value;
     var Message = document.querySelector('#Message').value;
-    console.log(Name,Email,Subject,Message);
+    console.log(Name, Email, Subject, Message);
     /* debugger;*/
     $.ajax({
         url: "/Profile/ContactUs",
@@ -626,7 +626,7 @@ function ContactUs() {
         },
         success: function (data) {
             console.log(data);
-            if(data)
+            if (data)
                 toastr.success('E-mial sent successfully!');
 
         }
@@ -641,7 +641,7 @@ function ContactUs() {
 
 function getActivity(x) {
     debugger
-   
+
     console.log("TimeSheet!!!!!!!!");
     if (x > 0) {
         $.ajax({
@@ -672,7 +672,7 @@ function getActivity(x) {
         const timeForm = document.querySelector('#timesheetform');
 
         const goalForm = document.querySelector('#goalsheetform');
-       
+
         timeForm.querySelectorAll('.form-control').forEach((element, index) => {
 
             element.value = null;
@@ -686,9 +686,107 @@ function getActivity(x) {
 
             console.log(element.value);
         });
-         
-      
+
+
     }
 
-    
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function AdminSearch(x,y) {
+
+    var search = document.getElementById("search" + x).value;
+    console.log(search);
+
+    $.ajax({
+        url: "/Admin/SearchAdmin",
+        method: "Post",
+        data: {
+            "obj": search,
+            "page": x,
+            "pageIndex" : y,
+        },
+        success: function (data) {
+            console.log(data);
+
+            $("#cmspage" + x).empty();
+
+            $("#cmspage" + x).html(data);
+
+
+            var htmlObject = document.createElement('div');
+            htmlObject.innerHTML = data;
+
+            var abc = htmlObject.querySelector("#add");
+
+            console.log(abc);
+        }
+        ,
+        error: function (e) {
+            console.log("Bye");
+            alert('Error');
+        },
+    });
+}
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function getData(x, y, id) {
+
+    var page = document.getElementById(x);
+
+    var addForm = page.querySelector("#edit");
+ 
+    debugger
+
+
+    $.ajax({
+        url: "/Admin/EditForm",
+        method: "Post",
+        data:
+        {
+            "id": id,
+            "page": y,
+        },
+        success: function (data) {
+            debugger
+            console.log(data);
+
+            /////////////////////////////////////////////////////////////////
+
+                     var htmlObject = document.createElement('div');
+            htmlObject.innerHTML = data;
+
+            var abc = htmlObject.querySelector("#edit");
+               abc.style.display = "block";
+
+            console.log(abc);
+            console.log(addForm);
+            debugger
+            addForm.replaceWith(abc);
+            if (y == 2) {
+                var cmsDescription = document.getElementById("cms2");
+                CKEDITOR.replace(cmsDescription);
+            }
+            if (y == 3) {
+                var abc = document.getElementById("mission2");
+                CKEDITOR.replace(abc);}
+            debugger
+         
+          
+                    debugger
+            /////////////////////////////////////////////////////      
+        },
+        error: function (e) {
+            debugger
+            console.log("Bye");
+            alert('Error');
+        },
+    });
+
 }

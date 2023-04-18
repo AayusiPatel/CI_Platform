@@ -157,7 +157,7 @@
         }
 
         .nav-pills .nav-link.active,
-        .nav-pills .show>.nav-link {
+        .nav-pills .show > .nav-link {
             color: #F88634;
             background-color: #ffffff;
         }
@@ -174,10 +174,10 @@
             white-space: nowrap;
         }
 
-        table tbody {
-            display: table;
-            width: 100%;
-        }
+            table tbody {
+                display: table;
+                width: 100%;
+            }
     </style>
 
 </head>
@@ -199,58 +199,58 @@
 
                         <li>
                             <a href="#" class="nav-link align-middle active" id="nav-user-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">
+                               data-bs-target="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">
                                 <i class="bi bi-person mr-3" style="font-size: 18px;"></i>
                                 <span class="ms-1 d-none d-sm-inline">User</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="nav-link align-middle " id="nav-cms-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-cms" role="tab" aria-controls="nav-cms" aria-selected="true">
+                               data-bs-target="#nav-cms" role="tab" aria-controls="nav-cms" aria-selected="true">
                                 <i class="bi bi-file-earmark-text mr-3" style="font-size: 18px;"></i>
                                 <span class="ms-1 d-none d-sm-inline">CMS Page</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="nav-link align-middle" id="nav-mission-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-mission" role="tab" aria-controls="nav-mission"
-                                aria-selected="true">
+                               data-bs-target="#nav-mission" role="tab" aria-controls="nav-mission"
+                               aria-selected="true">
                                 <i class="bi bi-bullseye mr-3" style="font-size: 18px;"></i>
                                 <span class="ms-1 d-none d-sm-inline">Mission</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="nav-link align-middle" id="nav-theme-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-theme" role="tab" aria-controls="nav-theme" aria-selected="true">
+                               data-bs-target="#nav-theme" role="tab" aria-controls="nav-theme" aria-selected="true">
                                 <i class="bi bi-columns-gap mr-3" style="font-size: 18px;"></i>
                                 <span class="ms-1 d-none d-sm-inline">Mission Theme</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="nav-link align-middle " id="nav-skill-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-skill" role="tab" aria-controls="nav-skill" aria-selected="true">
+                               data-bs-target="#nav-skill" role="tab" aria-controls="nav-skill" aria-selected="true">
                                 <i class="bi bi-tools mr-3"></i>
                                 <span class="ms-1 d-none d-sm-inline"> Mission Skills </span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="nav-link align-middle" id="nav-application-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-application" role="tab" aria-controls="nav-application"
-                                aria-selected="true">
+                               data-bs-target="#nav-application" role="tab" aria-controls="nav-application"
+                               aria-selected="true">
                                 <i class="bi bi-folder2 mr-3" style="font-size: 22px;"></i>
                                 <span class="ms-1 d-none d-sm-inline"> Mission Application </span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="nav-link align-middle" id="nav-story-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-story" role="tab" aria-controls="nav-story" aria-selected="true">
+                               data-bs-target="#nav-story" role="tab" aria-controls="nav-story" aria-selected="true">
                                 <i class="bi bi-journal-text mr-3" style="font-size: 18px;"></i>
                                 <span class="ms-1 d-none d-sm-inline"> Story</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="nav-link align-middle" id="nav-banner-tab" data-bs-toggle="tab"
-                                data-bs-target="#nav-banner" role="tab" aria-controls="nav-banner" aria-selected="true">
+                               data-bs-target="#nav-banner" role="tab" aria-controls="nav-banner" aria-selected="true">
                                 <i class="bi bi-box mr-3" style="font-size: 18px;"></i>
                                 <span class="ms-1 d-none d-sm-inline"> Banner Management </span>
                             </a>
@@ -269,7 +269,7 @@
 
 
                 <nav class="navbar navbar-expand-lg navbar-light "
-                    style=" background: #FFFFFF 0% 0% no-repeat padding-box; box-shadow: 3px 5px 10px #00000014; opacity: 1;">
+                     style=" background: #FFFFFF 0% 0% no-repeat padding-box; box-shadow: 3px 5px 10px #00000014; opacity: 1;">
                     <div class="container-fluid">
 
                         <span>Thursday, November 3, 2022, 10:06 AM</span>
@@ -279,7 +279,7 @@
                             <img src="~/img/user-img.png" class="profile-nav" alt="">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    style="color: black;" data-bs-toggle="dropdown" aria-expanded="false">
+                                   style="color: black;" data-bs-toggle="dropdown" aria-expanded="false">
                                     Evan Donohue
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -298,22 +298,78 @@
                     <div class="tab-content" id="nav-tabContent">
 
                         <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
-                                       @{
-                Html.RenderPartial("_UserAdmin");
-            }
+                            <div id="pageContent">
+                                <h4>User</h4>
+                                <hr class="m-0">
+                                <div class="row mt-3 g-0">
+                                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                                        <div class="form-group has-search">
+                                            <span class="form-control-feedback"><i class="bi bi-search"></i></span>
+                                            <input type="text" class="form-control" id="search1" placeholder="Search" onkeyup="AdminSearch(1);">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-sm-end mt-3 mt-sm-0">
+                                        <button type="button" class="btn btn-outline-warning rounded-pill" onclick="addform('nav-user',1);">
+                                            <i class="bi bi-plus"></i>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            @{
+                                Html.RenderPartial("_UserAdmin");
+                            }
                         </div>
 
                         <div class="tab-pane fade" id="nav-cms" role="tabpanel" aria-labelledby="nav-cms-tab">
-                                      @{
-                Html.RenderPartial("_CmsAdmin");
-            }
+                            <div id="pageContent">
+
+                                <h4>CMS Page</h4>
+                                <hr class="m-0">
+                                <div class="row mt-3 g-0">
+                                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                                        <div class="form-group has-search">
+                                            <span class="form-control-feedback"><i class="bi bi-search"></i></span>
+                                            <input type="text" class="form-control" id="search2" placeholder="Search" onkeyup="AdminSearch(2);">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-sm-end mt-3 mt-sm-0">
+                                        <button type="button" class="btn btn-outline-warning rounded-pill"
+                                                onclick="addform('nav-cms',2);">
+                                            <i class="bi bi-plus"></i>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            @{
+                                Html.RenderPartial("_CmsAdmin");
+                            }
                         </div>
 
-                        
+
                         <div class="tab-pane fade" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                       @{
-                Html.RenderPartial("_MissionAdmin");
-            }
+                            <div id="pageContent">
+                                <h4>Mission</h4>
+                                <hr class="m-0">
+                                <div class="row mt-3 g-0">
+                                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                                        <div class="form-group has-search">
+                                            <span class="form-control-feedback"><i class="bi bi-search"></i></span>
+                                            <input type="text" class="form-control" id="search3" placeholder="Search" onkeyup="AdminSearch(3);">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-sm-end mt-3 mt-sm-0">
+                                        <button type="button" class="btn btn-outline-warning rounded-pill" onclick="addform('nav-mission',3);">
+                                            <i class="bi bi-plus"></i>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            @{
+                                Html.RenderPartial("_MissionAdmin");
+                            }
                         </div>
 
                         <div class="tab-pane fade" id="nav-theme" role="tabpanel" aria-labelledby="nav-theme-tab">
@@ -326,15 +382,46 @@
                         </div>
 
                         <div class="tab-pane fade" id="nav-application" role="tabpanel" aria-labelledby="nav-application-tab">
-                                      @{
-                Html.RenderPartial("_MissionApplicationAdmin");
-            }
+                            <div id="pageContent">
+                                  <h4>Application</h4>
+                            <hr class="m-0">
+                            <div class="row mt-3 g-0">
+                                <div class="col-12 col-xl-3 col-lg-6 col-sm-8">
+                                    <div class="form-group has-search">
+                                        <span class="form-control-feedback"><i class="bi bi-search"></i></span>
+                                        <input type="text" class="form-control" id="search4" placeholder="Search" onkeyup="AdminSearch(4);">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-xl-9 col-lg-6 col-sm-4">
+
+                                </div>
+                            </div>
+                            </div>
+                            @{
+                                Html.RenderPartial("_MissionApplicationAdmin");
+                            }
                         </div>
 
                         <div class="tab-pane fade" id="nav-story" role="tabpanel" aria-labelledby="nav-story-tab">
-                                      @{
-                Html.RenderPartial("_StoryAdmin");
-            }
+                            <div id="pageContent">
+                                
+      <h4>Story</h4>
+                            <hr class="m-0">
+                            <div class="row mt-3 g-0">
+                                <div class="col-12 col-xl-3 col-lg-6 col-sm-8">
+                                    <div class="form-group has-search">
+                                        <span class="form-control-feedback"><i class="bi bi-search"></i></span>
+                                        <input type="text" class="form-control" id="search5" placeholder="Search" onkeyup="AdminSearch(5);">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-xl-9 col-lg-6 col-sm-4">
+
+                                </div>
+                            </div>
+                            </div>
+                            @{
+                                Html.RenderPartial("_StoryAdmin");
+                            }
                         </div>
 
                         <div class="tab-pane fade" id="nav-banner" role="tabpanel" aria-labelledby="nav-banner-tab">
@@ -346,32 +433,40 @@
         </div>
     </div>
     <script>
-        function addform(x) {
+        function addform(x,y) {
             var page = document.getElementById(x);
-            var cmsPage = page.querySelector("#cmspage");
+            var cmsPage = page.querySelector("#cmspage"+y);
             var addForm = page.querySelector("#add");
+            var pageContent = page.querySelector("#pageContent");
             cmsPage.style.display = "none";
+              pageContent.style.display = "none";
             addForm.style.display = 'block';
         }
-        function addpage(x) {
+        function addpage(x,y) {
             var page = document.getElementById(x);
-            var cmsPage = page.querySelector("#cmspage");
+            var cmsPage = page.querySelector("#cmspage"+y);
             var addForm = page.querySelector("#add");
+              var pageContent = page.querySelector("#pageContent");
             cmsPage.style.display = "block";
+              pageContent.style.display = "block";
             addForm.style.display = 'none';
         }
-        function editform(x) {
+        function editform(x,y) {
             var page = document.getElementById(x);
-            var cmsPage = page.querySelector("#cmspage");
+            var cmsPage = page.querySelector("#cmspage"+y);
             var addForm = page.querySelector("#edit");
+              var pageContent = page.querySelector("#pageContent");
             cmsPage.style.display = "none";
+             pageContent.style.display = "none";
             addForm.style.display = 'block';
         }
-        function editpage(x) {
+        function editpage(x,y) {
             var page = document.getElementById(x);
-            var cmsPage = page.querySelector("#cmspage");
+            var cmsPage = page.querySelector("#cmspage"+y);
             var addForm = page.querySelector("#edit");
+              var pageContent = page.querySelector("#pageContent");
             cmsPage.style.display = "block";
+               pageContent.style.display = "block";
             addForm.style.display = 'none';
         }
     </script>
@@ -382,9 +477,9 @@
 
 
 
- <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> 
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-   
+
 
 </body>
 
