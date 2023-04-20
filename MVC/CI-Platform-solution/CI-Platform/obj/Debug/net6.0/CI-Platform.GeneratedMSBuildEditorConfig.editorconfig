@@ -31,8 +31,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX01pc3Npb25BcHBsaWNhdGlvbkFkbWluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Admin/_SkillAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX1NraWxsQWRtaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Admin/_StoryAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX1N0b3J5QWRtaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Admin/_ThemeAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cX1RoZW1lQWRtaW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Admin/_UserAdmin.cshtml]
@@ -81,6 +89,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Platform/_NoMissionFound.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxhdGZvcm1cX05vTWlzc2lvbkZvdW5kLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Platform/_RecentVolunteers.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGxhdGZvcm1cX1JlY2VudFZvbHVudGVlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/pci116/Downloads/Ayushi/CI-Platform/CI-Platform/MVC/CI-Platform-solution/CI-Platform/Views/Profile/GoalSheetModel.cshtml]

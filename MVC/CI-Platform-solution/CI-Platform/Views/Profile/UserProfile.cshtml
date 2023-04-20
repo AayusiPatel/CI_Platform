@@ -79,7 +79,7 @@
 
                             </div>*@
 
-                        <input id="profileImageInput" type="file" asp-for="Avatarfile" class="Avatarfile" accept="image/*"/>
+                        <input id="profileImageInput" type="file" asp-for="Avatarfile" class="Avatarfile" accept="image/*" />
                         <img src="~/img/@Model.Avatar" class="ProfileImage" style="border-radius: 50%; height:125px; width:125px">
 
 
@@ -401,7 +401,7 @@
                                     <label class="mt-3">Subject*</label>
                                     <input type="text" id="Subject" class="form-control" placeholder="Enter your Subject">
                                     <label class="mt-3" for="exampleFormControlTextarea1">Message*</label>
-                                    <textarea class="form-control" id="Message"  rows="4"
+                                    <textarea class="form-control" id="Message" rows="4"
                                               placeholder="Enter your message..."></textarea>
                                     @*      </form>*@
                                 </div>
@@ -419,9 +419,9 @@
 
 
     </form>
-  @*  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>*@
+    @*  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
             integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
             crossorigin="anonymous"></script>
@@ -433,28 +433,25 @@
             var passwrd = $("#Passward").val();
             var ConformPasswrd = $("#ConfirmPassword").val();
             var oldPassword = $("#OldPassward").val();
+            document.querySelector('#resetPass').disabled = true;
              if(oldPassword.length == 0){
-             $("#OldPasswardError").text("Passward must not be null");
+                $("#OldPasswardError").text("Passward must not be null");
              }
-        if(passwrd.length == 0){
-        $("#PasswardError").text("Passward must not be null");
+             if(passwrd.length == 0){
+                $("#PasswardError").text("Passward must not be null");
+             }
+             else if(ConformPasswrd.length == 0){
+                $("#ConfirmPasswordError").text("ConfirmPassword must not be null");
+             }
+            else if(passwrd != ConformPasswrd){
+                $("#ConfirmPasswordError").text("Passwords do not match.");
+            }
+            else{
+                $("#PasswardError").text("");
+                $("#ConfirmPasswordError").text("");
+                document.querySelector('#resetPass').disabled = false;
+             }
         }
-        else if(ConformPasswrd.length == 0){
-        $("#ConfirmPasswordError").text("ConfirmPassword must not be null");
-        }
-        else if(passwrd != ConformPasswrd){
-         $("#ConfirmPasswordError").text("Passwords do not match.");
-        }
-        else{
-            $("#PasswardError").text("");
-            $("#ConfirmPasswordError").text("");
-           
-                   document.querySelector('#resetPass').disabled = false;
-            
-        }
-
-        }
-
     </script>
     <script>
            var readURL = function(input) {

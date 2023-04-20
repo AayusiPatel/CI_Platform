@@ -88,9 +88,30 @@
 
 
                         <div class="row">
+
                             <div class="col-6">
-                                <i class="bi bi-person-check-fill" style=""></i> 10<br>
-                                <span class="small text-muted">&nbsp &nbsp Seats Left</span>
+                                @{
+                                    <i class="bi bi-person-check-fill" style=""></i>
+                                        if (item.MissionType == "Goal")
+                                        {
+                                            int seates = @item.GoalMissions.FirstOrDefault().GoalValue;
+                                            int apply = @item.MissionApplications.Count();
+                                            int left = seates - apply;
+
+                                            <span>@left</span>
+                                            <br>
+                                            <span>seats left</span> 
+                                        }
+                                        else
+                                        {
+                                            int apply = @item.MissionApplications.Count();
+                                            <span>@apply</span>
+                                             <br>
+                                            <span>Already Volunteered</span> 
+                                        }
+                                    }
+                               @* <i class="bi bi-person-check-fill" style=""></i> 10<br>
+                                <span class="small text-muted">&nbsp &nbsp Seats Left</span>*@
                             </div>
                             <div class="col-6 ">
                                 <i class="bi bi-clock"></i> @item.EndDate.ToString().Substring(0,10)<br>

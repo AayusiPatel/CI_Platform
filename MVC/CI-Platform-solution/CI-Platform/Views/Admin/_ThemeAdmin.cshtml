@@ -1,0 +1,135 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using CI_Platform.Entities.ViewModels
+@model AdminViewModel
+
+
+<div id="cmspage">
+    <table class="table mt-3">
+        <tbody>
+            <tr style="background-color: #F8F9FC;">
+                <th scope="col">Theme Title</th>
+                <th scope="col">Status</th>
+
+
+                <th scope="col" style="text-align: center;">Actions</th>
+            </tr>
+            @foreach (var obj in Model.themes)
+            {
+                <tr>
+                    <td>@obj.Title</td>
+                    @if (obj.Status == 1)
+                    {
+                        <td style="background-color: #EBFFEF; width: 33px; color: #3CDD5F; ">
+                            Active
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="background-color: #FFF5F5; width: 33px; color: #FF4545; ">
+                            Inactive
+                        </td>
+                    }
+
+
+
+                    <td style="text-align: center;">
+                        <button type="button" class="btn p-0" onclick="editform('nav-theme'); getData('nav-theme',6, @obj.MissionThemeId);">
+                            <i class="bi bi-pencil-square" style="color: coral;"></i>
+                        </button>
+                        <button type="button" class="btn p-0" onclick=" if (confirm('Are you sure you want to delete?')) { return location.href=' @Url.Action("DeleteActivity", "Admin" ,new {id = @obj.MissionThemeId,page = 6})' } ">
+                            <i class=" bi bi-trash ms-3"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only"></span>
+                </a>
+            </li>
+            @for (int i = 1; i <= Model.ThemePages; i++)
+            {
+
+                <li class="page-item" onclick="AdminSearch(6,@i)"><a class="page-link" href="#">@i</a></li>
+            }
+            @*        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>*@
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only"></span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div class="border" id="add" style="display: none;">
+    <h3 class="p-3 m-0" style="background-color: #F8F9FC;"> Add theme</h3>
+    <hr class="m-0">
+    <form method="post" class="px-3">
+
+        <label for="select mission" class="mt-3"> Theme Name </label>
+        <input asp-for="missionTheme.Title" type="text" class="form-control" id="formGroupExampleInput">
+
+
+
+        <label class="mb-1 mt-3">Status</label>
+        <select type="text" asp-for="missionTheme.Status" class="form-select form-control">
+            <option value="">Select Status</option>
+            <option value="1">Active</option>
+            <option value="0">In-Active</option>
+        </select>
+        <div class="row my-3">
+            <div class="col-10"></div>
+            <div class="col-2">
+                <button type="button" class="cancell rounded-pill btn btn-outline-dark"
+                        onclick="addpage('nav-theme');">
+                    Cancel
+                </button>
+                <button type="submit" class="threebt rounded-pill btn btn-outline-warning"
+                        value="6" name="command">
+                    Save
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="border" id="edit" style="display: none;">
+    <h3 class="p-3 m-0" style="background-color: #F8F9FC;"> Edit theme </h3>
+    <hr class="m-0">
+    <form method="post" class="px-3">
+        <label for="select mission" class="mt-3"> Theme Name </label>
+        <input type="hidden" asp-for="missionTheme.MissionThemeId" />
+        <input asp-for="missionTheme.Title" type="text" class="form-control" id="formGroupExampleInput">
+
+        <label class="mb-1 mt-3">Status</label>
+        <select type="text" asp-for="missionTheme.Status" class="form-select form-control">
+
+            <option value="1">Active</option>
+            <option value="0">In-Active</option>
+
+        </select>
+        <div class="row my-3">
+            <div class="col-10"></div>
+            <div class="col-2">
+                <button type="button" class="cancell rounded-pill btn btn-outline-dark"
+                        onclick="editpage('nav-theme');">
+                    Cancel
+                </button>
+                <button type="submit" class="threebt rounded-pill btn btn-outline-warning"
+                        value="6" name="command">
+                    Save
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

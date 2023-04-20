@@ -10,6 +10,7 @@ namespace CI_Platform.Repository.Interface
 {
     public interface IUserRepository
     {
+        public bool adminCheck(String email);
         public User Login(Login obj);
         public bool Registration(UserModel obj);
         //public bool ResetPwd(User obj);

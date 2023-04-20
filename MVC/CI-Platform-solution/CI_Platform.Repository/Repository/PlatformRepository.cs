@@ -18,11 +18,9 @@ namespace CI_Platform.Repository.Repository
     {
         public readonly CiPlatformContext _db;
 
-
         public PlatformRepository(CiPlatformContext db)
         {
             _db = db;
-
         }
         public List<Country> GetCountry()
         {
@@ -36,12 +34,10 @@ namespace CI_Platform.Repository.Repository
         }
         public List<City> GetCityData(List<int>? countryId)
         {
-
             List<City> city = _db.Cities.Where(i => countryId.Contains((int)i.CountryId)).ToList();
             if (countryId.Count == 0)
                 city = _db.Cities.ToList();
             return city;
-
         }
         public List<MissionTheme> GetMissionTheme()
         {
@@ -50,7 +46,6 @@ namespace CI_Platform.Repository.Repository
         }
         public List<MissionSkill> GetSkills()
         {
-
             var skills = _db.MissionSkills.Include(m => m.Skill).ToList();
             List<MissionSkill> printskl = new List<MissionSkill>();
             foreach (var skill in skills)
@@ -59,38 +54,28 @@ namespace CI_Platform.Repository.Repository
                 if (chck == false)
                 { printskl.Add(skill); }
             }
-
-
             return printskl;
-
         }
         public PlatformModel GetMissions()
         {
-            List<Mission> mission = _db.Missions.Include(m => m.FavoriteMissions).ToList();
-            List<MissionMedium> missionMedia = _db.MissionMedia.Where(x => x.Default == 1).ToList();
-            List<MissionSkill> missionSkills = _db.MissionSkills.ToList();
-            List<MissionTheme> missionThemes = _db.MissionThemes.ToList();
-            List<MissionRating> missionRatings = _db.MissionRatings.ToList();
+            List<Mission> mission = _db.Missions
+                .Include(m => m.FavoriteMissions)
+                .Include(m => m.MissionApplications)
+                .Where(m=>m.DeletedAt == null).ToList();
+            List<MissionMedium> missionMedia = _db.MissionMedia.Where(x => x.Default == 1 && x.DeletedAt == null).ToList();
+            List<MissionSkill> missionSkills = _db.MissionSkills.Where(m => m.DeletedAt == null).ToList();
+            List<MissionTheme> missionThemes = _db.MissionThemes.Where(m => m.DeletedAt == null).ToList();
+            List<MissionRating> missionRatings = _db.MissionRatings.Where(m => m.DeletedAt == null).ToList();
             List<City> cities = _db.Cities.ToList();
             List<Country> countries = _db.Countries.ToList();
-            List<GoalMission> goalMissions = _db.GoalMissions.ToList();
+            List<GoalMission> goalMissions = _db.GoalMissions.Where(m => m.DeletedAt == null).ToList();
             int abc = (int)missionRatings.Average(x => x.Rating);
-
-
-
             int PageIndex = 1;
             int PageSize = 3;
-
             List<Mission> records = mission.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
-
             int TotalRecords = (int)Math.Ceiling(mission.Count() / (double)PageSize);
-           
-         
-
-
             PlatformModel missionCards = new PlatformModel();
             {
-
                 missionCards.Mission = records;
                 missionCards.MissionThemes = missionThemes;
                 missionCards.MissionSkill = missionSkills;
@@ -102,47 +87,37 @@ namespace CI_Platform.Repository.Repository
                 missionCards.totalcount = TotalRecords;
                 //missionCards.rating = abc;
             }
-
-
-
             return missionCards;
         }
 
-
         public List<Mission> GetMissionDetails()
         {
-            List<Mission> missionDetails = _db.Missions.Include(m => m.City).Include(m => m.Theme).Include(m => m.MissionMedia).Include(m => m.GoalMissions).Include(m => m.MissionSkills).Include(m => m.MissionRatings).ToList();
-            //foreach (var item in missionDetails)
-            //{ 
-            //    Mission mission = new Mission();
-            //    mission.MissionMedia=_db.MissionMedia.FirstOrDefault(x=>x.MissionId=missionDetails.MissionId)
-            //}
+            List<Mission> missionDetails = _db.Missions
+                .Include(m => m.City)
+                .Include(m => m.Theme)
+                .Include(m => m.MissionMedia)
+                .Include(m => m.GoalMissions)
+                .Include(m => m.MissionSkills)
+                .Include(m => m.MissionRatings)
+                .Include(m => m.MissionApplications)
+                .Where(m => m.DeletedAt == null)
+                .ToList();
             return missionDetails;
         }
-
-
         public List<Mission> Filter(List<int>? cityId, List<int>? countryId, List<int>? themeId, List<int>? skillId, string? search, int? sort)
         {
             //List<Mission> cards = new List<Mission>();
             List<Mission> cards = GetMissionDetails();
             var Missionskills = _db.MissionSkills.Include(m => m.Skill).ToList();
             List<Mission> temp = new List<Mission>();
-
             if (countryId.Count > 0)
             {
                 cards = cards.Where(x => countryId.Contains((int)x.CountryId)).ToList();
-                //foreach (var n in countryId)
-                //{
-                //    cards = cards.Where(x => countryId.Contains((int)x.CountryId)).ToList();
-                //}
+               
             }
             if (cityId.Count > 0)
             {
                 cards = cards.Where(c => cityId.Contains((int)c.CityId)).ToList();
-            //    foreach (var n in cityId)
-            //    {
-            //        cards = cards.Where(x => x.CityId == n).ToList();
-            //    }
             }
             if (themeId.Count > 0)
             {
@@ -150,53 +125,31 @@ namespace CI_Platform.Repository.Repository
             }
             if (skillId.Count > 0)
             {
-
-                //temp = cards.Where(x => skillId.Contains(x.MissionSkills.s).ToList();
-
-
                 foreach (var n in skillId)
                 {
-
-
                     temp.AddRange(cards.Where(x => x.MissionSkills.Any(x => x.SkillId == n)));
 
-                    //cards.Add(missioncards.FirstOrDefault(x => x.MissionId == item.MissionId));
-
                 }
-             
                 cards = temp.Distinct().ToList();
             }
-          
-
             if (search != null)
             {
                 cards = cards.Where(a => a.Title.Contains(search) || a.OrganizationName.Contains(search)).ToList();
             }
-
-           
-
             if (sort != null)
             {
                 if (sort == 1)
                 {
-
                     cards = cards.OrderByDescending(x => x.CreatedAt).ToList();
-
                 }
                 if (sort == 2)
                 {
-
                     cards = cards.OrderBy(x => x.CreatedAt).ToList();
-
                 }
                 if (sort == 3)
                 {
-
                     cards = cards.OrderBy(x => x.EndDate).ToList();
-
                 }
-
-
                 //if (sort == 4)
                 //{
                 //    if (cards.Count != 0)
@@ -212,21 +165,8 @@ namespace CI_Platform.Repository.Repository
                 //}
 
             }
-
-           
-           
-
-
             return cards;
-
         }
-
-
-
-
-
-
-
 
         public bool AddFav(int UserID, int MissionId)
         {
@@ -235,11 +175,10 @@ namespace CI_Platform.Repository.Repository
                 mission.UserId = UserID;
                 mission.MissionId = MissionId;
             }
-            FavoriteMission favM = _db.FavoriteMissions.FirstOrDefault(x => x.UserId == mission.UserId && x.MissionId == MissionId);
+            FavoriteMission favM = _db.FavoriteMissions.FirstOrDefault(x => x.UserId == mission.UserId && x.MissionId == MissionId && x.DeletedAt == null);
 
             if (favM != null)
             {
-
                 _db.FavoriteMissions.Remove(favM);
                 _db.SaveChanges();
                 return false;
@@ -251,9 +190,6 @@ namespace CI_Platform.Repository.Repository
                 return true;
 
             }
-
-
-
         }
     }
 }

@@ -100,11 +100,27 @@
                                 <i class="bi bi-person-check-fill fs-5"></i><span>10 <br> &nbsp; &nbsp;  Seats left</span>
                             </div>
                             <div class="col-6 text-end pe-5">
-                                <img src="~/img/achieved.png">
+                                 @{
+                                        if (Model.mission.MissionType == "Goal")
+                                        {
+                                            int seates = @Model.mission.GoalMissions.FirstOrDefault().GoalValue;
+                                            int apply = @Model.mission.MissionApplications.Count();
+                                            float per = (((float)apply / (float)seates)*(float)(100));
+                                               <input type="range" class="mt-1" id="name="slider" min="0" max="100" value=@per>
+                                            <p>@apply Achieved</p>
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-clock"></i> @Model.mission.EndDate.ToString().Substring(0,10)
+                                            <br>
+                                            <span class="small text-muted">&nbsp &nbsp Deadline</span>
+                                        }
+                                    }
+                               @* <img src="~/img/achieved.png">
                                 <div class="progress d-inline-flex w-50 ">
                                     <div class="progress-bar" role="progressbar" style="width: 75% ;background-color: #e4853a;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <p>8000 Achieved</p>
+                                <p>8000 Achieved</p>*@
                             </div>
                         </div>
                         <hr class="mt-0">
@@ -152,11 +168,30 @@
                                 <p class="d-none" id="getMissionId">@Model.mission.MissionId</p>
 
                                 <div class='rating' id="mission-rating">
-                                    <span class="fa fa-star star1" value="5"></span>
-                                    <span class="fa fa-star star1" value="4"></span>
-                                    <span class="fa fa-star star1" value="3"></span>
-                                    <span class="fa fa-star star1" value="2"></span>
-                                    <span class="fa fa-star star1" value="1"></span>
+                                    @if (ViewBag.rating != null)
+                                    {
+                                        for (int j = 5; j > (@ViewBag.rating); j--)
+                                        {
+                                            <span class="bi bi-star star1" value="@j"></span>
+                                        }
+                                        for (var j = (@ViewBag.rating); j >= 1; j--)
+                                        {
+                                            <span class="bi bi-star-fill star1 text-warning" value="@j"></span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="bi bi-star star1" value="5"></span>
+                                        <span class="bi bi-star star1" value="4"></span>
+                                        <span class="bi bi-star star1" value="3"></span>
+                                        <span class="bi bi-star star1" value="2"></span>
+                                        <span class="bi bi-star star1" value="1"></span>
+                                    }
+                                    @* <span class="fa fa-star star1" value="5"></span>
+                                        <span class="fa fa-star star1" value="4"></span>
+                                        <span class="fa fa-star star1" value="3"></span>
+                                        <span class="fa fa-star star1" value="2"></span>
+                                        <span class="fa fa-star star1" value="1"></span>*@
                                 </div>
 
 
@@ -201,59 +236,81 @@
                             }
                         </style>
                         <script>
+                                                              //$('#mission-rating .bi').click(function() {
+                                                              //     var rating = $(this).attr('value');
 
+                                                              //     console.log(rating);
+                                                              //     var id = parseInt($('#getMissionId').text());
+                                                              //           console.log(id) ;
+                                                              //       debugger
+                                                              //       $.ajax({
+                                                              //           url:"/Platform/MissionRating",
+                                                              //           method:"Post",
+                                                              //           data:{
+                                                              //               "mid":id,
+                                                              //               "rating":rating
+                                                              //           },
+                                                              //           success:function(data){
 
-                                              // Handles the hover over the stars
+                                                              //               toastr.options = {
+                                                              //           "closeButton": true,
+                                                              //           "progressBar": true
+                                                              //            };
+                                                              //               if(data == true)
+                                                              //           {
+                                                              //               toastr.success('Applied Rating successfully');
+                                                              //           }
+                                                              //           else
+                                                              //           {
+                                                              //               toastr.error('Your Rating Updated successfully');
+                                                              //           }
 
+                                                              //       },
+                                                              //           error: function (e) {
+                                                              //           console.log("Bye");
+                                                              //           alert('Error');
+                                                              //           },
 
-                            @*var id =$('#getMissionId').text();*@
+                                                              //       });
 
+                                                              //       })
 
-
-                                  $('#mission-rating .fa-star').click(function() {
-                                       var rating = $(this).attr('value');
-
-                                       console.log(rating);
-                                       var id = parseInt($('#getMissionId').text());
-                                             console.log(id)
-
-                            ;
-                                debugger
-                                         $.ajax({
-                                             url:"/Platform/MissionRating",
-                                             method:"Post",
-                                             data:{
-                                                 "mid":id,
-                                                 "rating":rating
-                                             },
-                                             success:function(data){
-
-
-                                                 toastr.options = {
-                                             "closeButton": true,
-                                             "progressBar": true
-                                              };
-                                                 if(data == true)
-                                             {
-                                                 toastr.success('Applied Rating successfully');
+                          $('#mission-rating .bi').click(function() {
+                                debugger;
+                               var rating = $(this).attr('value');
+                                console.log(rating);
+                                var id = parseInt($('#getMissionId').text());
+                                console.log(id);
+                                $.ajax({
+                                    url:"/Platform/MissionRating",
+                                method:"Post",
+                                data:{
+                                    "mid":id,
+                                "rating":rating
+                                        },
+                                success:function(data){
+                                    //toastr.options = {
+                                    //    "closeButton": true,
+                                    //    "progressBar": true
+                                    //};
+                                if(data == true)
+                                {
+                                    //toastr.success('Applied Rating successfully');
+                                             location.reload();
                                              }
-                                             else
-                                             {
-                                                 toastr.error('Your Rating Updated successfully');
+                                else
+                                {
+                                    //toastr.error('Your Rating Updated successfully');
+                                             location.reload();
                                              }
 
                                          },
-                                             error: function (e) {
-                                             console.log("Bye");
-                                             alert('Error');
+                                error: function (e) {
+                                    console.log("Bye");
+                                alert('Error');
                                              },
-
                                          });
-
                                          })
-
-
-
                         </script>
 
 
@@ -307,14 +364,14 @@
                             @{
                                 bool check = Model.missionApplicaton.Any(x => x.MissionId == @Model.mission.MissionId && x.UserId == @ViewBag.uid);
                                 var misChk = Model.missionApplicaton.FirstOrDefault(x => x.MissionId == @Model.mission.MissionId && x.UserId == @ViewBag.uid);
-                              
+
                             }
                             @if (check)
                             {
-                                  
-                             @*   {
+
+                                @*   {
                                     bool chk = (misChk.ApprovalStatus == "Approve");
-                                }*@
+                                    }*@
 
                                 @if (misChk.ApprovalStatus == "Approve")
                                 {
@@ -511,7 +568,13 @@
 
 
                     <div class="card" id="recentVolunter">
-                        <div class="card-body">
+
+                        @{
+
+        Html.RenderPartial("_RecentVolunteers");
+
+    }
+                       @* <div class="card-body">
 
                             <h4 class="card-title">Recent Volunteers</h4>
                             <hr>
@@ -547,7 +610,7 @@
                                     }
                                 </ul>
                             </nav>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>
@@ -582,7 +645,17 @@
                                 <img src=~/img/@(Model.relatedMissions[i].MissionMedia.FirstOrDefault()?.MediaPath) class="card-img-top" alt="..." style="width: 100%;">
 
                                 <img src="~/img/add1.png" class="card-img-top bg-dark fa-download-1" alt="..." onclick="">
-                                <img src="~/img/heart.png" class="card-img-top bg-dark fa-download-2 " alt="..." onclick="fav(@Model.relatedMissions[i].MissionId)">
+                                @{
+                                    bool a = Model.relatedMissions[i].FavoriteMissions.Any(x => x.UserId == @ViewBag.uid);
+                                }
+                                @if (Model.relatedMissions[i].FavoriteMissions.Any(x => x.UserId == @ViewBag.uid))
+                                {
+                                    <i class="bi bi-suit-heart-fill fa-download-2 text-danger bg-dark " style="font-size: 2.5rem;"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-suit-heart fa-download-2 text-light bg-dark" style="font-size: 2.5rem;"></i>
+                                }
                                 <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
                             <span class="border-dark rounded-pill label"> &nbsp; &nbsp; @Model.relatedMissions[i].Theme.Title  &nbsp; &nbsp;</span>
                             </div>

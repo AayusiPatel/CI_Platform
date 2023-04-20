@@ -15,54 +15,73 @@ namespace CI_Platform.Repository.Repository
     {
         public readonly CiPlatformContext _db;
 
-
-
         public AdminRepository(CiPlatformContext db)
         {
             _db = db;
 
         }
-
         public AdminViewModel displayModel()
         {
             AdminViewModel adminModel = new AdminViewModel();
-
             {
-                adminModel.users = _db.Users.ToList();
-                adminModel.missions = _db.Missions.ToList();
-                adminModel.cms = _db.CmsPages.ToList();
-                adminModel.missionApplications = _db.MissionApplications.ToList();  
-                adminModel.stories = _db.Stories.ToList();
+                adminModel.users = _db.Users.Where(x=>x.DeletedAt == null).ToList();
+                adminModel.missions = _db.Missions.Where(x => x.DeletedAt == null).ToList();
+                adminModel.cms = _db.CmsPages.Where(x => x.DeletedAt == null).ToList();
+                adminModel.missionApplications = _db.MissionApplications.Where(x => x.DeletedAt == null).ToList();  
+                adminModel.stories = _db.Stories.Where(x => x.DeletedAt == null && x.Status != "DRAFT").ToList();
+                adminModel.themes = _db.MissionThemes.Where(x => x.DeletedAt == null).ToList();
+                adminModel.skills = _db.Skills.Where(x => x.DeletedAt == null).ToList();
             }
-
             return adminModel;
         }
-
+        public List<Skill> searchSkill(String? obj)
+        {
+            if (obj != null)
+            {
+                obj = obj.ToLower();
+                List<Skill> skills = _db.Skills
+                    .Where(m => m.SkillName.ToLower().Contains(obj) && m.DeletedAt == null)
+                    .ToList();
+                return skills;
+            }
+            return _db.Skills.Where(x => x.DeletedAt == null).ToList();
+        }
+        public List<MissionTheme> searchTheme(String? obj)
+        {
+            if (obj != null)
+            {
+                obj = obj.ToLower();
+                List<MissionTheme> themes = _db.MissionThemes
+                    .Where(m => m.Title.ToLower().Contains(obj) && m.DeletedAt == null)
+                    .ToList();
+                return themes;
+            }
+            return _db.MissionThemes.Where(x => x.DeletedAt == null).ToList();
+        }
         public List<User> searchUser(String? obj)
         {
             if (obj != null)
             {
                 obj = obj.ToLower();
-                List<User> users = _db.Users.Where(m => m.FirstName.ToLower().Contains(obj) || m.LastName.ToLower().Contains(obj)).ToList();
-
+                List<User> users = _db.Users
+                    .Where(m => m.FirstName.ToLower().Contains(obj) || m.LastName.ToLower().Contains(obj) && m.DeletedAt == null)
+                    .ToList();
                 return users;
             }
-            return _db.Users.ToList();
+            return _db.Users.Where(x => x.DeletedAt == null).ToList();
         }
-
-      
 
         public List<CmsPage> searchCms(String? obj)
         {
             if (obj != null)
             {
                 obj = obj.ToLower();
-                List<CmsPage> cms = _db.CmsPages.Where(m => m.Title.ToLower().Contains(obj)).ToList();
-
+                List<CmsPage> cms = _db.CmsPages
+                    .Where(m => m.Title.ToLower().Contains(obj) && m.DeletedAt == null)
+                    .ToList();
                 return cms;
             }
-
-            return _db.CmsPages.ToList();
+            return _db.CmsPages.Where(x => x.DeletedAt == null).ToList();
         }
 
         public List<Mission> searchMission(String? obj)
@@ -70,12 +89,12 @@ namespace CI_Platform.Repository.Repository
             if (obj != null)
             {
                 obj = obj.ToLower();
-                List<Mission> missions = _db.Missions.Where(m => m.Title.ToLower().Contains(obj)).ToList();
-
+                List<Mission> missions = _db.Missions
+                    .Where(m => m.Title.ToLower().Contains(obj) && m.DeletedAt == null)
+                    .ToList();
                 return missions;
             }
-
-            return  _db.Missions.ToList();
+            return  _db.Missions.Where(x => x.DeletedAt == null).ToList();
         }
 
         public List<MissionApplication> searchMissionApplication(String? obj)
@@ -84,13 +103,12 @@ namespace CI_Platform.Repository.Repository
             {
                 obj = obj.ToLower();
                 List<MissionApplication> missionApplication = _db.MissionApplications.Include(m => m.Mission).Include(m => m.User)
-                    .Where(m => m.Mission.Title.ToLower().Contains(obj) || m.User.LastName.ToLower().Contains(obj) || m.User.FirstName.ToLower().Contains(obj))
+                    .Where(m => m.Mission.Title.ToLower().Contains(obj) || m.User.LastName.ToLower().Contains(obj) || m.User.FirstName.ToLower().Contains(obj) && m.DeletedAt == null)
                     .ToList();
 
                 return missionApplication;
             }
-
-            return _db.MissionApplications.Include(m => m.Mission).Include(m => m.User).ToList();
+            return _db.MissionApplications.Include(m => m.Mission).Include(m => m.User).Where(x => x.DeletedAt == null).ToList();
         }
         public List<Story> searchStory(String? obj)
         {
@@ -100,11 +118,10 @@ namespace CI_Platform.Repository.Repository
                 List<Story> story = _db.Stories.Include(m => m.Mission).Include(m => m.User)
                     .Where(m => m.Title.ToLower().Contains(obj) || m.Mission.Title.ToLower().Contains(obj) || m.User.LastName.ToLower().Contains(obj) || m.User.FirstName.ToLower().Contains(obj))
                     .ToList();
-
+                story = story.Where(m => m.DeletedAt == null && m.Status != "DRAFT").ToList();
                 return story;
             }
-
-            return _db.Stories.Include(m => m.Mission).Include(m => m.User).ToList();
+            return _db.Stories.Include(m => m.Mission).Include(m => m.User).Where(x => x.DeletedAt == null && x.Status != "DRAFT").ToList();
         }
 
         public AdminViewModel EditForm(int id,int page)
@@ -112,19 +129,229 @@ namespace CI_Platform.Repository.Repository
             AdminViewModel am = new AdminViewModel();
             if (page == 2)
             {
-                
                 {
-                    am.cmsPage = _db.CmsPages.FirstOrDefault(x => x.CmsPageId == id);
+                    am.cmsPage = _db.CmsPages.FirstOrDefault(x => x.CmsPageId == id && x.DeletedAt == null);
                 }
             }
             if (page == 3)
             {
-
                 {
-                    am.mission = _db.Missions.FirstOrDefault(x => x.MissionId == id);
+                    am.mission = _db.Missions.FirstOrDefault(x => x.MissionId == id && x.DeletedAt == null);
+                }
+            }
+            if (page == 6)
+            {
+                {
+                    am.missionTheme = _db.MissionThemes.FirstOrDefault(x => x.MissionThemeId == id && x.DeletedAt == null);
+                }
+            }
+            if (page == 7)
+            {
+                {
+                    am.skill = _db.Skills.FirstOrDefault(x => x.SkillId == id && x.DeletedAt == null);
                 }
             }
             return am;
         }
+
+        public bool ApplicationApproval(int id,int status)
+        {
+            MissionApplication ma = _db.MissionApplications.FirstOrDefault(x => x.MissionApplicationId == id && x.DeletedAt == null);
+            if(ma == null)
+            {
+                return false;
+            }
+            if(ma!=null && status == 1)
+            {
+                ma.ApprovalStatus = "Approve";
+            }
+            if (ma != null && status == 0)
+            {
+                ma.ApprovalStatus = "Decline";
+            }
+            _db.MissionApplications.Update(ma);
+            _db.SaveChanges();
+            return true;
+
+        }
+        public bool StoryApproval(int id, int status)
+        {
+            Story ma = _db.Stories.FirstOrDefault(x => x.StoryId == id && x.DeletedAt == null);
+            if (ma == null)
+            {
+                return false;
+            }
+            if (ma != null && status == 1)
+            {
+                ma.Status = "PUBLISHED";
+            }
+            if (ma != null && status == 0)
+            {
+                ma.Status = "DECLINED";
+            }
+            _db.Stories.Update(ma);
+            _db.SaveChanges();
+            return true;
+
+        }
+
+        public bool AddCms(AdminViewModel obj)
+        {
+            if (obj.cmsPage.CmsPageId == 0)
+            {
+                CmsPage cp = new CmsPage();
+                {
+                    cp.Title = obj.cmsPage.Title;
+                    cp.Description = obj.cmsPage.Description;
+                    cp.Slug = obj.cmsPage.Slug;
+                }
+                _db.CmsPages.Add(cp);
+                _db.SaveChanges();
+                return true;
+            }
+            if (obj.cmsPage.CmsPageId != 0)
+            {
+
+                CmsPage cp = _db.CmsPages.FirstOrDefault(x => x.CmsPageId == obj.cmsPage.CmsPageId && x.DeletedAt == null);
+                {
+                    cp.Title = obj.cmsPage.Title;
+                    cp.Description = obj.cmsPage.Description;
+                    cp.Slug = obj.cmsPage.Slug;
+                    cp.UpdatedAt = DateTime.Now;
+                }
+                _db.CmsPages.Update(cp);
+                _db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        public bool AddTheme(AdminViewModel obj)
+        {
+            if (obj.missionTheme.MissionThemeId == 0)
+            {
+                MissionTheme cp = new MissionTheme();
+                {
+                    cp.Title = obj.missionTheme.Title;
+                    cp.Status = obj.missionTheme.Status;
+                   
+                }
+                _db.MissionThemes.Add(cp);
+                _db.SaveChanges();
+                return true;
+            }
+            if (obj.missionTheme.MissionThemeId != 0)
+            {
+
+                MissionTheme cp = _db.MissionThemes.FirstOrDefault(x => x.MissionThemeId == obj.missionTheme.MissionThemeId && x.DeletedAt == null);
+                {
+                    cp.Title = obj.missionTheme.Title;
+                    cp.Status = obj.missionTheme.Status;
+                    cp.UpdatedAt = DateTime.Now;
+                }
+                _db.MissionThemes.Update(cp);
+                _db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        public bool AddSkill(AdminViewModel obj)
+        {
+            if (obj.skill.SkillId == 0)
+            {
+                Skill cp = new Skill();
+                {
+                    cp.SkillName = obj.skill.SkillName;
+                    cp.Status = obj.skill.Status;
+
+                }
+                _db.Skills.Add(cp);
+                _db.SaveChanges();
+                return true;
+            }
+            if (obj.skill.SkillId != 0)
+            {
+
+                Skill cp = _db.Skills.FirstOrDefault(x => x.SkillId == obj.skill.SkillId && x.DeletedAt == null);
+                {
+                    cp.SkillName = obj.skill.SkillName;
+                    cp.Status = obj.skill.Status;
+                    cp.UpdatedAt = DateTime.Now;
+                }
+                _db.Skills.Update(cp);
+                _db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+        public bool DeleteActivity(int id, int page)
+        {
+            if(page == 2)
+            {
+                CmsPage cmsPage = _db.CmsPages.FirstOrDefault(m => m.CmsPageId == id && m.DeletedAt == null);
+                if(cmsPage != null)
+                {
+                    cmsPage.DeletedAt = DateTime.Now;
+                    _db.Update(cmsPage);
+                    _db.SaveChanges();
+
+                    return true;
+                }
+                if(cmsPage == null)
+                {
+                    return false;
+                }
+            }
+            if (page == 5)
+            {
+                Story story = _db.Stories.FirstOrDefault(m => m.StoryId == id && m.DeletedAt == null);
+                if (story != null)
+                {
+                    story.DeletedAt = DateTime.Now;
+                    _db.Update(story);
+                    _db.SaveChanges();
+
+                    return true;
+                }
+                if (story == null)
+                {
+                    return false;
+                }
+            }
+            if (page == 6)
+            {
+                MissionTheme theme = _db.MissionThemes.FirstOrDefault(m => m.MissionThemeId == id && m.DeletedAt == null);
+                if (theme != null)
+                {
+                    theme.DeletedAt = DateTime.Now;
+                    _db.Update(theme);
+                    _db.SaveChanges();
+
+                    return true;
+                }
+                if (theme == null)
+                {
+                    return false;
+                }
+            }
+            if (page == 7)
+            {
+                Skill skill = _db.Skills.FirstOrDefault(m => m.SkillId == id && m.DeletedAt == null);
+                if (skill != null)
+                {
+                    skill.DeletedAt = DateTime.Now;
+                    _db.Update(skill);
+                    _db.SaveChanges();
+
+                    return true;
+                }
+                if (skill == null)
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+
     }
 }

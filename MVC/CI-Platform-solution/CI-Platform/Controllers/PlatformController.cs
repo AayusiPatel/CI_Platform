@@ -62,8 +62,9 @@ namespace CI_Platform.Controllers
         {
             List<Mission> cards = _platform.Filter(cityId, countryId, themeId, skillId, search, sort);
 
-
-            if(cards.Count == 0)
+            var UId = (int)HttpContext.Session.GetInt32("UId");
+            ViewBag.uid = UId;
+            if (cards.Count == 0)
             {
                 return PartialView("_NoMissionFound");
             }
@@ -116,16 +117,35 @@ namespace CI_Platform.Controllers
             {
                 var UId = (int)HttpContext.Session.GetInt32("UId");
                 ViewBag.uid = UId;
+
+
+                VolunteerModel volunteerModel = _volunteer.DisplayModel(mid, pageIndex);
+
+                var rating = volunteerModel.mission.MissionRatings.FirstOrDefault(x => x.UserId == UId && x.MissionId == mid);
+                if (rating != null)
+                {
+                    ViewBag.rating = rating.Rating;
+                }
+
+                int pageSize = 2;
+                volunteerModel.volunteres = _volunteer.recentVolunteers(mid);
+                volunteerModel.totalPage = (int)Math.Ceiling(volunteerModel.volunteres.Count() / (double)pageSize);
+                volunteerModel.volunteres = volunteerModel.volunteres.Skip((pageIndex - 1) * 2).Take(2).ToList();
+                return View(volunteerModel);
             }
-
-            VolunteerModel volunteerModel = _volunteer.DisplayModel(mid, pageIndex);
-
-
-
-
-            return View(volunteerModel);
+            return View();
         }
 
+        public IActionResult recentVolunteers(int mid, int pageIndex = 1)
+        {
+            int pageSize = 2;
+            VolunteerModel vm = _volunteer.DisplayModel(mid, pageIndex); ;
+            vm.volunteres = _volunteer.recentVolunteers(mid);
+            vm.totalPage = (int)Math.Ceiling(vm.volunteres.Count() / (double)pageSize);
+            vm.volunteres = vm.volunteres.Skip((pageIndex-1)*pageSize).Take(pageSize).ToList();
+
+            return PartialView("_RecentVolunteers",vm);
+        }
 
         public void AddComment(int obj, string comnt)
         {

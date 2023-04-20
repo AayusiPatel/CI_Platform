@@ -19,7 +19,6 @@ namespace CI_Platform.Repository.Repository
     {
         public readonly CiPlatformContext _db;
 
-
         public ProfileRepository(CiPlatformContext db)
         {
             _db = db;
@@ -27,15 +26,16 @@ namespace CI_Platform.Repository.Repository
 
         public ProfileViewModel getUser(int uid)
         {
-            User user = _db.Users.Include(user => user.UserSkills).FirstOrDefault(user => user.UserId == uid);
-            List<UserSkill> userSkills = _db.UserSkills.Include(uSkill => uSkill.Skill).Where(user => user.UserId == uid).ToList();
+            User user = _db.Users.Include(user => user.UserSkills).FirstOrDefault(user => user.UserId == uid && user.DeletedAt == null);
+            List<UserSkill> userSkills = _db.UserSkills
+                .Include(uSkill => uSkill.Skill)
+                .Where(user => user.UserId == uid).ToList();
 
             List<Skill> skills = _db.Skills.ToList();
             foreach (var userSkill in userSkills)
             {
-                skills = skills.Where(skill => skill.SkillId != userSkill.SkillId).ToList();
+                skills = skills.Where(skill => skill.SkillId != userSkill.SkillId && skill.DeletedAt == null).ToList();
             }
-
             ProfileViewModel profile = new ProfileViewModel();
             {
                 profile.FirstName = user.FirstName;
@@ -51,18 +51,13 @@ namespace CI_Platform.Repository.Repository
                 profile.LinkedInUrl = user.LinkedInUrl;
                 profile.skill = skills;
                 profile.userSkills = userSkills;
-
             }
-
             return profile;
         }
 
         public bool updateUser(ProfileViewModel user, int uid)
         {
-            User profile = _db.Users.Include(user => user.UserSkills).FirstOrDefault(user => user.UserId == uid);
-
-
-
+            User profile = _db.Users.Include(user => user.UserSkills).FirstOrDefault(user => user.UserId == uid && user.DeletedAt == null);
 
             {
                 profile.FirstName = user.FirstName;
@@ -95,44 +90,33 @@ namespace CI_Platform.Repository.Repository
                     _db.UserSkills.Add(addSkill);
                     _db.SaveChanges();
                 }
-
-
-                if (user.Password != null && user.OldPassword != profile.Password)
-                {
-                    return false;
-                }
-
-                if (user.Password != null && user.OldPassword == profile.Password)
-                {
-
-
-                    profile.Password = user.Password;
-
-                    _db.Users.Update(profile);
-                    _db.SaveChanges();
-
-                    PasswordReset pr = new PasswordReset();
-                    {
-                        pr.Email = profile.Email;
-                        pr.Token = "UPDATEDFROMPROFILE";
-                    }
-                    _db.PasswordResets.Add(pr);
-                    _db.SaveChanges();
-
-                    return true;
-                }
-
-
-
-
-                return true;
             }
 
+            if (user.Password != null && user.OldPassword != profile.Password)
+            {
+                return false;
+            }
+
+            if (user.Password != null && user.OldPassword == profile.Password)
+            {
+                profile.Password = user.Password;
+                _db.Users.Update(profile);
+                _db.SaveChanges();
+                PasswordReset pr = new PasswordReset();
+                {
+                    pr.Email = profile.Email;
+                    pr.Token = "UPDATEDFROMPROFILE";
+                }
+                _db.PasswordResets.Add(pr);
+                _db.SaveChanges();
+                return true;
+            }
+                return true;
+            
         }
 
         public bool ContactUs(ContactUsViewModel obj)
         {
-
             #region Send Mail
             var mailBody = "<h2>I hope this email finds you well. My name is " + obj.Name + " and I wanted to take a moment to you.</h1>" + "<h1>" + obj.Message + "</h1><br><h2>" + "</h2>";
 
@@ -154,21 +138,14 @@ namespace CI_Platform.Repository.Repository
 
             return true;
         }
-
-
-        //public bool PassRset(ProfilePassReset obj)
-        //{
-        //    if (obj == null)
-        //    {
-        //        return false;
-        //    }
-
-        //}
-
         public TimeSheetViewModel GetActivities(int uid)
         {
-            List<Timesheet> timeSheets = _db.Timesheets.Include(m => m.Mission).Where(t => t.UserId == uid  && t.DeletedAt == null).ToList();
-            List<Mission> mission = _db.Missions.Include(m => m.MissionApplications).Where(t => t.MissionApplications.Any(t => t.UserId == uid) && t.Status == 1).ToList();
+            List<Timesheet> timeSheets = _db.Timesheets
+                .Include(m => m.Mission)
+                .Where(t => t.UserId == uid  && t.DeletedAt == null).ToList();
+            List<Mission> mission = _db.Missions
+                .Include(m => m.MissionApplications)
+                .Where(t => t.MissionApplications.Any(t => t.UserId == uid) && t.Status == 1).ToList();
             TimeSheetViewModel tm = new TimeSheetViewModel();
 
             tm.timecards = timeSheets.Where(t=>t.Mission.MissionType == "Time").ToList();
@@ -188,13 +165,12 @@ namespace CI_Platform.Repository.Repository
         //}
         public TimeSheetViewModel GetActivity(int obj, int uid)
         {
-            Timesheet timesheet = _db.Timesheets.FirstOrDefault(entry => entry.TimesheetId == obj);
-            List<Mission> mission = _db.Missions.Include(m => m.MissionApplications).Where(t => t.MissionApplications.Any(t => t.UserId == uid) && t.Status == 1).ToList();
-
-
+            Timesheet timesheet = _db.Timesheets.FirstOrDefault(entry => entry.TimesheetId == obj && entry.DeletedAt == null);
+            List<Mission> mission = _db.Missions
+                .Include(m => m.MissionApplications)
+                .Where(t => t.MissionApplications.Any(t => t.UserId == uid) && t.Status == 1).ToList();
             TimeSheetViewModel tVModel = new TimeSheetViewModel();
             {
-
                 tVModel.Time = timesheet.Time;
                 tVModel.DateVolunteereed = timesheet.DateVolunteereed;
                 tVModel.Notes = timesheet.Notes;
@@ -205,9 +181,7 @@ namespace CI_Platform.Repository.Repository
                 tVModel.Minutes = timesheet.Time.Value.Minutes;
                 tVModel.timeMissions = mission.Where(t => t.MissionType == "Time").ToList();
                 tVModel.goalMissions = mission.Where(t => t.MissionType == "Time").ToList();
-
             }
-
             return tVModel;
         }
 
@@ -220,25 +194,21 @@ namespace CI_Platform.Repository.Repository
                 ts.Action = obj.Action;
                 ts.DateVolunteereed = obj.DateVolunteereed;
                 ts.Notes = obj.Notes;
+                ts.Status = "PENDING";
 
                 if (obj.Hours != 0 || obj.Minutes != 0)
                 {
                     ts.Time = new TimeSpan(obj.Hours, obj.Minutes, 0);
                 }
-
-
             }
-
             _db.Timesheets.Add(ts);
             _db.SaveChanges();
-
             return true;
-
         }
 
         public bool UpdateActivity(TimeSheetViewModel obj)
         {
-            Timesheet ts = _db.Timesheets.FirstOrDefault(t => t.TimesheetId == obj.TimesheetId);
+            Timesheet ts = _db.Timesheets.FirstOrDefault(t => t.TimesheetId == obj.TimesheetId && t.DeletedAt == null);
             {
 
                 ts.MissionId = obj.MissionId;
@@ -246,25 +216,20 @@ namespace CI_Platform.Repository.Repository
                 ts.Action = obj.Action;
                 ts.DateVolunteereed = obj.DateVolunteereed;
                 ts.Notes = obj.Notes;
+                ts.Status = "SUBMIT_FOR_APPROVAL";
                 if (obj.Hours != 0 || obj.Minutes != 0)
                 {
                     ts.Time = new TimeSpan(obj.Hours, obj.Minutes, 0);
                 }
-
             }
-
             _db.Timesheets.Update(ts);
             _db.SaveChanges();
-
             return true;
-
         }
         public bool DeleteActivity(int tid)
         {
             Timesheet ts = _db.Timesheets.FirstOrDefault(t => t.TimesheetId == tid);
-
             ts.DeletedAt = DateTime.Now;
-
             _db.Timesheets.Update(ts);
             _db.SaveChanges();
             return true;

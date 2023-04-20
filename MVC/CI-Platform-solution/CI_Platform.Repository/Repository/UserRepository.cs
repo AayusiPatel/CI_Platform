@@ -32,6 +32,12 @@ namespace CI_Platform.Repository.Repository
 
         }
 
+        public bool adminCheck(String email)
+        {
+            bool admin = _db.Admins.Any(u => u.Email == email);
+
+            return admin;
+        }
         public User Login(Login obj)
         {
             User user = new User();

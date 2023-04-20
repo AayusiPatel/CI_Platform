@@ -31,9 +31,7 @@
                                 }
                                    @if (item.FavoriteMissions.Any(x => x.UserId == @ViewBag.uid))
                                 {
-                                 
-                                       <i class="bi bi-suit-heart-fill fa-download-2 text-danger bg-dark " style="font-size: 2.5rem;" ></i> 
-                                    
+                                       <i class="bi bi-suit-heart-fill fa-download-2 text-danger bg-dark " style="font-size: 2.5rem;" ></i>  
                                 }
                                 else{
                                 <i class="bi bi-suit-heart fa-download-2 text-light bg-dark" style="font-size: 2.5rem;" ></i>
@@ -85,18 +83,63 @@
                             }
                             <div class="row">
                                 <div class="col-6">
-                                    <i class="bi bi-person-check-fill" style=""></i> 10<br>
-                                    <span class="small text-muted">&nbsp &nbsp Seats Left</span>
+                                     @{
+                                    <i class="bi bi-person-check-fill" style=""></i>
+                                        if (item.MissionType == "Goal")
+                                        {
+                                            int seates = @item.GoalMissions.FirstOrDefault().GoalValue;
+                                            int apply = @item.MissionApplications.Count();
+                                            int left = seates - apply;
+
+                                            <span>@left</span>
+                                            <br>
+                                            <span>seats left</span> 
+                                        }
+                                        else
+                                        {
+                                            int apply = @item.MissionApplications.Count();
+                                            <span>@apply</span>
+                                             <br>
+                                            <span>Already Volunteered</span> 
+                                        }
+                                    }
+                                   @* <i class="bi bi-person-check-fill" style=""></i> 10<br>
+                                    <span class="small text-muted">&nbsp &nbsp Seats Left</span>*@
                                 </div>
                                 <div class="col-6 ">
-                                    <i class="bi bi-clock"></i> @item.EndDate.ToString().Substring(0,10)<br>
-                                    <span class="small text-muted">&nbsp &nbsp Deadline</span>
+                                       @{
+                                        if (item.MissionType == "Goal")
+                                        {
+                                            int seates = @item.GoalMissions.FirstOrDefault().GoalValue;
+                                            int apply = @item.MissionApplications.Count();
+                                            float per = (((float)apply / (float)seates)*(float)(100));
+                                               <input type="range" class="mt-1" id="name="slider" min="0" max="100" value=@per>
+                                            <p>@apply Achieved</p>
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-clock"></i> @item.EndDate.ToString().Substring(0,10)
+                                            <br>
+                                            <span class="small text-muted">&nbsp &nbsp Deadline</span>
+                                        }
+                                    }
+                                   @* <i class="bi bi-clock"></i> @item.EndDate.ToString().Substring(0,10)<br>
+                                    <span class="small text-muted">&nbsp &nbsp Deadline</span>*@
                                 </div>
                             </div>
                         </div>
                         <hr class="my-0">
                         <div class="card-body  ms-md-auto me-md-auto mt-0">
-                            <a asp-controller="Platform" asp-action="Volunteering_Mission" asp-route-mid="@item.MissionId"> <button type="button" class="btn btn-outline-danger w-100  rounded-pill "> Apply <i class="bi bi-arrow-right text-danger"></i> </button></a>
+                            <a asp-controller="Platform" asp-action="Volunteering_Mission" asp-route-mid="@item.MissionId"> <button type="button" class="btn btn-outline-danger w-100  rounded-pill ">
+                                @if(item.MissionApplications.Any(m => m.UserId == ViewBag.uid))
+                                { 
+                                    <span>View Details </span><i class="bi bi-arrow-right text-danger"></i> 
+                                }
+                                else{
+                                    <span>Apply </span><i class="bi bi-arrow-right text-danger"></i> 
+                                }
+                              
+                                </button></a>
                         </div>
                     </div>
                 </div>

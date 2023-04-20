@@ -20,25 +20,21 @@ namespace CI_Platform.Repository.Repository
     {
         public readonly CiPlatformContext _db;
         public readonly IPlatformRepository _platform;
-
-
         public VolunteerRepository(CiPlatformContext db, IPlatformRepository platform)
         {
             _db = db;
             _platform = platform;
 
         }
-
-
         public List<MissionMedium> media(int mid)
         {
-            List<MissionMedium> photos = _db.MissionMedia.Where(x => x.MissionId == mid).ToList();
+            List<MissionMedium> photos = _db.MissionMedia.Where(x => x.MissionId == mid && x.DeletedAt == null).ToList();
             return photos;
         }
 
         public List<MissionDocument> document(int mid)
         {
-            List<MissionDocument> documents = _db.MissionDocuments.Where(x => x.MissionId == mid).ToList();
+            List<MissionDocument> documents = _db.MissionDocuments.Where(x => x.MissionId == mid && x.DeletedAt ==null).ToList();
             return documents;
         }
 
@@ -60,7 +56,6 @@ namespace CI_Platform.Repository.Repository
 
         //        return application_user;
         //}
-
 
         public int avgRating(int mid)
         {
@@ -91,9 +86,6 @@ namespace CI_Platform.Repository.Repository
 
         public bool addComment(int mid, int uid, string comnt)
         {
-
-
-
             Comment comment = new Comment();
             {
                 comment.MissionId = mid;
@@ -112,8 +104,6 @@ namespace CI_Platform.Repository.Repository
             MissionApplication application = new();
             application.MissionId = mid;
             application.UserId = uid;
-
-
 
             var applicable = _db.MissionApplications.FirstOrDefault(a => a.MissionId == mid && a.UserId == uid);
 
@@ -138,11 +128,7 @@ namespace CI_Platform.Repository.Repository
         {
             var fromUser = _db.Users.FirstOrDefault(u => u.UserId == FromUserId && u.DeletedAt == null);
             var fromEmailId = fromUser.Email;
-            //if (user1 == null)
-            //{
-            //    return null;
-            //}
-
+            
             foreach (var user in ToUserId)
             {
                 var toUser = _db.Users.FirstOrDefault(u => u.UserId == user && u.DeletedAt == null);
@@ -157,8 +143,6 @@ namespace CI_Platform.Repository.Repository
                 _db.Add(invite);
                 _db.SaveChanges();
 
-
-
                 #region Send Mail
                 var mailBody = "<h1></h1><br><h2><a href='" + "https://localhost:7228/Platform/Volunteering_Mission?mid=" + mid + "'>Check Out this Mission!</a></h2>";
 
@@ -166,7 +150,7 @@ namespace CI_Platform.Repository.Repository
                 var email = new MimeMessage();
                 email.From.Add(MailboxAddress.Parse(fromEmailId));
                 email.To.Add(MailboxAddress.Parse(toEmailId));
-                email.Subject = "Reset Your Password";
+                email.Subject = "Check Out this Mission!";
                 email.Body = new TextPart(TextFormat.Html) { Text = mailBody };
 
                 // send email
@@ -186,9 +170,6 @@ namespace CI_Platform.Repository.Repository
 
             if (ratingCheck != null)
             {
-                //MissionRating missionRating = new MissionRating();
-                //ratingCheck.UserId = userId;
-                //ratingCheck.MissionId = mid;
                 ratingCheck.Rating = rating;
                 ratingCheck.UpdatedAt = DateTime.Now;
 
@@ -229,13 +210,11 @@ namespace CI_Platform.Repository.Repository
 
             List<Comment> comments = _db.Comments.Include(m => m.User).Where(x => x.MissionId == mid).OrderByDescending(x => x.CreatedAt).ToList();
             int pageSize = 2;
-            List<MissionApplication> recentVolunteres = _db.MissionApplications.Include(m => m.User).Where(x => x.MissionId == mid).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            //List<MissionApplication> recentVolunteres = _db.MissionApplications.Include(m => m.User).Where(x => x.MissionId == mid).ToList();
+            //int totalPage = recentVolunteres.Count;
+            //recentVolunteres = _db.MissionApplications.Include(m => m.User).Where(x => x.MissionId == mid).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             List<User> users = _db.Users.ToList();
             List<FavoriteMission> favoriteMissions = _db.FavoriteMissions.ToList();
-
-            //int pagesize = 3;
-            //data.Users = data.Users.Skip((pageindex - 1) * pagesize).Take(pagesize).ToList();
-
 
             VolunteerModel volunteerModel = new VolunteerModel();
             {
@@ -249,9 +228,19 @@ namespace CI_Platform.Repository.Repository
                 volunteerModel.comments = comments;
                 volunteerModel.CoWorkers = users;
                 volunteerModel.favoriteMissions = favoriteMissions;
-                volunteerModel.volunteres = recentVolunteres;
+                //volunteerModel.volunteres = recentVolunteres;
+                //volunteerModel.totalPage = totalPage;
             }
             return volunteerModel;
+        }
+
+        public List<User> recentVolunteers(int mid)
+        {
+            List<User> volunteers = _db.Users
+                .Include(m => m.MissionApplications)
+                .Where(m => m.MissionApplications.Any(m=>m.MissionId == mid)).ToList();
+
+            return volunteers;
         }
 
 

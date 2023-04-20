@@ -25,18 +25,18 @@ namespace CI_Platform.Repository.Repository
         {
             _db = db;
         }
-
         public StoryModel stories(int PageIndex)
         {
             int PageSize = 3;
-            List<Story> stories = _db.Stories.Include(m => m.StoryMedia).Include(m => m.Mission.Theme).Include(m => m.User)
+            List<Story> stories = _db.Stories
+                .Include(m => m.StoryMedia)
+                .Include(m => m.Mission.Theme)
+                .Include(m => m.User)
+                .Where(m => m.DeletedAt == null /*&& m.Status == "PUBLISHED"*/)
                .ToList();
 
             List<Story> records = stories.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
-
             int TotalRecords = (int)Math.Ceiling(stories.Count() / (double)PageSize);
-            //int TotalRecords = (int)Math.Ceiling((decimal)((stories.Count) / PageSize) ;
-            //List<StoryMedium> storyMedia = _db.StoryMedia.ToList();
             StoryModel storyModel = new StoryModel();
             {
                 storyModel.stories = records;
@@ -44,14 +44,17 @@ namespace CI_Platform.Repository.Repository
             }
             return storyModel;
         }
-
         public StoryModel storyDetails(int sid, int uid)
         {
-            List<Story> stories = _db.Stories.Include(m => m.StoryMedia).Include(m => m.Mission.Theme).Include(m => m.User).ToList();
+            List<Story> stories = _db.Stories
+                .Include(m => m.StoryMedia)
+                .Include(m => m.Mission.Theme)
+                .Include(m => m.User)
+                .Where(m => m.DeletedAt == null /*&& m.Status == "PUBLISHED"*/)
+                .ToList();
             Story story = stories.FirstOrDefault(x => x.StoryId == sid);
-            List<StoryMedium> photos = _db.StoryMedia.Where(x => x.StoryId == sid).ToList();
-            List<User> coWorkers = _db.Users.Where(x => x.UserId != uid).ToList();
-            //List<StoryMedium> storyMedia = _db.StoryMedia.ToList();
+            List<StoryMedium> photos = _db.StoryMedia.Where(x => x.StoryId == sid && x.DeletedAt == null).ToList();
+            List<User> coWorkers = _db.Users.Where(x => x.UserId != uid && x.DeletedAt == null).ToList();
             StoryModel storyModel = new StoryModel();
             {
                 storyModel.Story = story;
@@ -60,55 +63,39 @@ namespace CI_Platform.Repository.Repository
             }
             return storyModel;
         }
-
-
         public List<Story> StoryFilter(string? search)
         {
             List<Story> cards = new List<Story>();
-            var missioncards = _db.Stories.Include(m => m.StoryMedia).Include(m => m.Mission).Include(m => m.Mission.Theme).Include(m => m.User).ToList();
+            List<Story> missioncards = _db.Stories
+                .Include(m => m.StoryMedia)
+                .Include(m => m.Mission)
+                .Include(m => m.Mission.Theme)
+                .Include(m => m.User)
+                .Where(m => m.DeletedAt == null).ToList();
             var Missionskills = _db.MissionSkills.Include(m => m.Skill).ToList();
             List<int> temp = new List<int>();
-
-
-
-            if (search != null)
+             if (search != null)
             {
-
-
-
                 foreach (var n in missioncards)
                 {
-
                     var title = n.Title.ToLower();
                     if (title.Contains(search.ToLower()))
                     {
                         cards.Add(n);
                     }
-
-
                 }
-
-
             }
             if (search == null)
             {
                 cards = missioncards;
             }
             return cards;
-
-
         }
-
 
         public void RecommandToCoWorker(int FromUserId, List<int> ToUserId, int sid)
         {
             var fromUser = _db.Users.FirstOrDefault(u => u.UserId == FromUserId && u.DeletedAt == null);
             var fromEmailId = fromUser.Email;
-            //if (user1 == null)
-            //{
-            //    return null;
-            //}
-
             foreach (var user in ToUserId)
             {
                 var toUser = _db.Users.FirstOrDefault(u => u.UserId == user && u.DeletedAt == null);
@@ -122,8 +109,6 @@ namespace CI_Platform.Repository.Repository
                 }
                 _db.Add(invite);
                 _db.SaveChanges();
-
-
 
                 #region Send Mail
                 var mailBody = "<h1></h1><br><h2><a href='" + "https://localhost:7228/Story/StoryDetail?sid=" + sid + "'>Check Out this Mission!</a></h2>";
@@ -145,15 +130,11 @@ namespace CI_Platform.Repository.Repository
                 #endregion Send Mail
             }
         }
-
-
         public List<MissionApplication> missionsSStory(int ud)
         {
             List<MissionApplication> missions = _db.MissionApplications.Include(x => x.Mission).Where(x => x.UserId == ud).ToList();
             return missions;
         }
-
-
         public bool saveStory(ShareStory obj, int status, int uid)
         {
             Story story = _db.Stories.FirstOrDefault(x => x.UserId == uid && x.MissionId == obj.MissionId);
@@ -202,9 +183,6 @@ namespace CI_Platform.Repository.Repository
             }
             return true;
         }
-
-
-
         public async Task<bool> saveImage(ShareStory obj, int uid)
         {
             int sid = (int)_db.Stories.FirstOrDefault(x => x.UserId == uid && x.MissionId == obj.MissionId).StoryId;
@@ -278,8 +256,6 @@ namespace CI_Platform.Repository.Repository
             ShareStory obj = new ShareStory();
             Story story = _db.Stories.FirstOrDefault(m => m.MissionId == mid && m.UserId == uid && m.Status == "DRAFT");
 
-          
-
             if (story != null)
             {
                 List<StoryMedium> images = _db.StoryMedia.Where(media => media.StoryId == story.StoryId && media.Type == "png").ToList();
@@ -293,10 +269,7 @@ namespace CI_Platform.Repository.Repository
 
                 StoryMedium? url = _db.StoryMedia.FirstOrDefault(media => media.StoryId == story.StoryId && media.Type == "video");
                 
-                
-
                 {
-
                     obj.Stitle = story.Title;
                     obj.Sdescription = story.Description;
                     obj.PublishedAt = story.PublishedAt;
@@ -313,17 +286,6 @@ namespace CI_Platform.Repository.Repository
 
             return null;
         }
-
-        //public List<string> getImages(int sid)
-        //{
-        //    List<StoryMedium> images = _db.StoryMedia.Where(media => media.StoryId == sid).ToList();
-        //    List<string> displayImage = new List<string>();
-        //    foreach(var image in images)
-        //    {
-        //        displayImage.Add(image.Path);
-        //    }
-        //    return displayImage;
-        //}
 
     }
 

@@ -1,7 +1,7 @@
 ﻿@using CI_Platform.Entities.ViewModels
 @model AdminViewModel
 
-<div id="cmspage3">
+<div id="cmspage">
    @* <h4>Mission</h4>
     <hr class="m-0">
     <div class="row mt-3 g-0">
@@ -49,7 +49,7 @@
             }
         </tbody>
     </table>
-     <nav aria-label="Page navigation example">
+    <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-end">
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">
@@ -57,7 +57,7 @@
                     <span class="sr-only"></span>
                 </a>
             </li>
-            @for(int i = 1; i <= @ViewBag.totalPages; i++){
+            @for(int i = 1; i <= Model.missinPages; i++){
             
                 <li class="page-item" onclick="AdminSearch(3,@i)"><a class="page-link" href="#">@i</a></li>
            }

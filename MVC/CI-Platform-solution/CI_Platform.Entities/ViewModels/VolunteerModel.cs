@@ -35,6 +35,8 @@ namespace CI_Platform.Entities.ViewModels
         public  List<FavoriteMission> favoriteMissions { get; set; }
 
 
-        public List<MissionApplication>? volunteres { get; set; }
+        public List<User>? volunteres { get; set; }
+
+        public int totalPage { get; set; } = new int();
     }
 }

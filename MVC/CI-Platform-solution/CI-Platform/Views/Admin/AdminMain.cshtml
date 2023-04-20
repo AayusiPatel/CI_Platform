@@ -24,8 +24,10 @@
     <script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-    <title>Admin</title>
+   @* <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+  *@  <title>Admin</title>
     <style>
         .has-search .form-control {
             padding-left: 2.375rem;
@@ -308,7 +310,7 @@
                                             <input type="text" class="form-control" id="search1" placeholder="Search" onkeyup="AdminSearch(1);">
                                         </div>
                                     </div>
-                                    <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-sm-end mt-3 mt-sm-0">
+                                    <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-end mt-3 mt-sm-0">
                                         <button type="button" class="btn btn-outline-warning rounded-pill" onclick="addform('nav-user',1);">
                                             <i class="bi bi-plus"></i>
                                             Add
@@ -316,9 +318,11 @@
                                     </div>
                                 </div>
                             </div>
-                            @{
-                                Html.RenderPartial("_UserAdmin");
-                            }
+                            <div id="cmspage1">
+                                @{
+                                    Html.RenderPartial("_UserAdmin");
+                                }
+                            </div>
                         </div>
 
                         <div class="tab-pane fade" id="nav-cms" role="tabpanel" aria-labelledby="nav-cms-tab">
@@ -333,7 +337,7 @@
                                             <input type="text" class="form-control" id="search2" placeholder="Search" onkeyup="AdminSearch(2);">
                                         </div>
                                     </div>
-                                    <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-sm-end mt-3 mt-sm-0">
+                                    <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-end mt-3 mt-sm-0">
                                         <button type="button" class="btn btn-outline-warning rounded-pill"
                                                 onclick="addform('nav-cms',2);">
                                             <i class="bi bi-plus"></i>
@@ -342,9 +346,11 @@
                                     </div>
                                 </div>
                             </div>
-                            @{
-                                Html.RenderPartial("_CmsAdmin");
-                            }
+                            <div id="cmspage2">
+                                @{
+                                    Html.RenderPartial("_CmsAdmin");
+                                }
+                            </div>
                         </div>
 
 
@@ -359,7 +365,7 @@
                                             <input type="text" class="form-control" id="search3" placeholder="Search" onkeyup="AdminSearch(3);">
                                         </div>
                                     </div>
-                                    <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-sm-end mt-3 mt-sm-0">
+                                    <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-end mt-3 mt-sm-0">
                                         <button type="button" class="btn btn-outline-warning rounded-pill" onclick="addform('nav-mission',3);">
                                             <i class="bi bi-plus"></i>
                                             Add
@@ -367,61 +373,109 @@
                                     </div>
                                 </div>
                             </div>
-                            @{
-                                Html.RenderPartial("_MissionAdmin");
-                            }
+                            <div id="cmspage3">
+                                @{
+                                    Html.RenderPartial("_MissionAdmin");
+                                }
+                            </div>
                         </div>
 
                         <div class="tab-pane fade" id="nav-theme" role="tabpanel" aria-labelledby="nav-theme-tab">
-                            <h4>Theme</h4>
-
+                             <div id="pageContent">
+                              <h4>Theme</h4>
+                                <hr class="m-0">
+                                <div class="row mt-3 g-0">
+                                    <div class="col-12 col-xl-3 col-lg-4 col-sm-6">
+                                        <div class="form-group has-search">
+                                            <span class="form-control-feedback"><i class="bi bi-search"></i></span>
+                                            <input type="text" class="form-control" id="search6" placeholder="Search" onkeyup="AdminSearch(6);">
+                                        </div>
+                                    </div>
+                                      <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-end mt-3 mt-sm-0">
+                                        <button type="button" class="btn btn-outline-warning rounded-pill" onclick="addform('nav-theme',6);">
+                                            <i class="bi bi-plus"></i>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="cmspage6">
+                                @{
+                                    Html.RenderPartial("_ThemeAdmin");
+                                }
+                            </div>
                         </div>
 
                         <div class="tab-pane fade" id="nav-skill" role="tabpanel" aria-labelledby="nav-skill-tab">
-                            <h4 class="pt-3 pb-2">Skills</h4>
+                               <div id="pageContent">
+                              <h4>Skill</h4>
+                                <hr class="m-0">
+                                <div class="row mt-3 g-0">
+                                    <div class="col-12 col-xl-3 col-lg-4 col-sm-6">
+                                        <div class="form-group has-search">
+                                            <span class="form-control-feedback"><i class="bi bi-search"></i></span>
+                                            <input type="text" class="form-control" id="search7" placeholder="Search" onkeyup="AdminSearch(7);">
+                                        </div>
+                                    </div>
+                                      <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-end mt-3 mt-sm-0">
+                                        <button type="button" class="btn btn-outline-warning rounded-pill" onclick="addform('nav-skill',6);">
+                                            <i class="bi bi-plus"></i>
+                                            Add
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="cmspage7">
+                                @{
+                                    Html.RenderPartial("_SkillAdmin");
+                                }
+                            </div>
                         </div>
+                      
 
                         <div class="tab-pane fade" id="nav-application" role="tabpanel" aria-labelledby="nav-application-tab">
                             <div id="pageContent">
-                                  <h4>Application</h4>
-                            <hr class="m-0">
-                            <div class="row mt-3 g-0">
-                                <div class="col-12 col-xl-3 col-lg-6 col-sm-8">
-                                    <div class="form-group has-search">
-                                        <span class="form-control-feedback"><i class="bi bi-search"></i></span>
-                                        <input type="text" class="form-control" id="search4" placeholder="Search" onkeyup="AdminSearch(4);">
+                                <h4>Application</h4>
+                                <hr class="m-0">
+                                <div class="row mt-3 g-0">
+                                    <div class="col-12 col-xl-3 col-lg-6 col-sm-8">
+                                        <div class="form-group has-search">
+                                            <span class="form-control-feedback"><i class="bi bi-search"></i></span>
+                                            <input type="text" class="form-control" id="search4" placeholder="Search" onkeyup="AdminSearch(4);">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xl-9 col-lg-6 col-sm-4">
                                     </div>
                                 </div>
-                                <div class="col-12 col-xl-9 col-lg-6 col-sm-4">
-
-                                </div>
                             </div>
+                            <div id="cmspage4">
+                                @{
+                                    Html.RenderPartial("_MissionApplicationAdmin");
+                                }
                             </div>
-                            @{
-                                Html.RenderPartial("_MissionApplicationAdmin");
-                            }
                         </div>
 
                         <div class="tab-pane fade" id="nav-story" role="tabpanel" aria-labelledby="nav-story-tab">
                             <div id="pageContent">
-                                
-      <h4>Story</h4>
-                            <hr class="m-0">
-                            <div class="row mt-3 g-0">
-                                <div class="col-12 col-xl-3 col-lg-6 col-sm-8">
-                                    <div class="form-group has-search">
-                                        <span class="form-control-feedback"><i class="bi bi-search"></i></span>
-                                        <input type="text" class="form-control" id="search5" placeholder="Search" onkeyup="AdminSearch(5);">
+
+                                <h4>Story</h4>
+                                <hr class="m-0">
+                                <div class="row mt-3 g-0">
+                                    <div class="col-12 col-xl-3 col-lg-6 col-sm-8">
+                                        <div class="form-group has-search">
+                                            <span class="form-control-feedback"><i class="bi bi-search"></i></span>
+                                            <input type="text" class="form-control" id="search5" placeholder="Search" onkeyup="AdminSearch(5);">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xl-9 col-lg-6 col-sm-4">
                                     </div>
                                 </div>
-                                <div class="col-12 col-xl-9 col-lg-6 col-sm-4">
-
-                                </div>
                             </div>
+                            <div id="cmspage5">
+                                @{
+                                    Html.RenderPartial("_StoryAdmin");
+                                }
                             </div>
-                            @{
-                                Html.RenderPartial("_StoryAdmin");
-                            }
                         </div>
 
                         <div class="tab-pane fade" id="nav-banner" role="tabpanel" aria-labelledby="nav-banner-tab">
@@ -433,47 +487,56 @@
         </div>
     </div>
     <script>
-        function addform(x,y) {
+        function addform(x) {
             var page = document.getElementById(x);
-            var cmsPage = page.querySelector("#cmspage"+y);
+            var cmsPage = page.querySelector("#cmspage");
             var addForm = page.querySelector("#add");
             var pageContent = page.querySelector("#pageContent");
             cmsPage.style.display = "none";
               pageContent.style.display = "none";
-            addForm.style.display = 'block';
+            addForm.style.display = "block";
         }
-        function addpage(x,y) {
+        function addpage(x) {
             var page = document.getElementById(x);
-            var cmsPage = page.querySelector("#cmspage"+y);
+            console.log(page);
+            var cmsPage = page.querySelector("#cmspage");
+            console.log(cmsPage);
             var addForm = page.querySelector("#add");
-              var pageContent = page.querySelector("#pageContent");
+            console.log(addForm);
+            var pageContent = page.querySelector("#pageContent");
+            console.log(pageContent);
+            addForm.style.display = "none"; 
             cmsPage.style.display = "block";
-              pageContent.style.display = "block";
-            addForm.style.display = 'none';
+            pageContent.style.display = "block";
+
         }
-        function editform(x,y) {
+        function editform(x) {
             var page = document.getElementById(x);
-            var cmsPage = page.querySelector("#cmspage"+y);
+            var cmsPage = page.querySelector("#cmspage");
             var addForm = page.querySelector("#edit");
               var pageContent = page.querySelector("#pageContent");
             cmsPage.style.display = "none";
              pageContent.style.display = "none";
-            addForm.style.display = 'block';
+            addForm.style.display = "block";
         }
-        function editpage(x,y) {
+        function editpage(x) {
             var page = document.getElementById(x);
-            var cmsPage = page.querySelector("#cmspage"+y);
+            var cmsPage = page.querySelector("#cmspage");
             var addForm = page.querySelector("#edit");
               var pageContent = page.querySelector("#pageContent");
             cmsPage.style.display = "block";
                pageContent.style.display = "block";
-            addForm.style.display = 'none';
+            addForm.style.display = "none";
         }
     </script>
 
 
-
-
+   @* <script>
+        $(document).ready(function () {
+    $('#table').DataTable();
+});
+    </script>
+*@
 
 
 

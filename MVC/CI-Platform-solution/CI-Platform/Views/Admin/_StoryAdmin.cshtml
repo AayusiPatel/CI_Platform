@@ -6,58 +6,100 @@
 @using CI_Platform.Entities.ViewModels
 @model AdminViewModel
 
-<div id="cmspage5">
-@*
-      <h4>Story</h4>
-                            <hr class="m-0">
-                            <div class="row mt-3 g-0">
-                                <div class="col-12 col-xl-3 col-lg-6 col-sm-8">
-                                    <div class="form-group has-search">
-                                        <span class="form-control-feedback"><i class="bi bi-search"></i></span>
-                                        <input type="text" class="form-control " placeholder="Search">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-xl-9 col-lg-6 col-sm-4">
+<div id="cmspage">
+    @*
+        <h4>Story</h4>
+        <hr class="m-0">
+        <div class="row mt-3 g-0">
+        <div class="col-12 col-xl-3 col-lg-6 col-sm-8">
+        <div class="form-group has-search">
+        <span class="form-control-feedback"><i class="bi bi-search"></i></span>
+        <input type="text" class="form-control " placeholder="Search">
+        </div>
+        </div>
+        <div class="col-12 col-xl-9 col-lg-6 col-sm-4">
 
-                                </div>
-                            </div>*@
-                            <table class="table mt-3">
-                                <tbody>
-                                    <tr style="background-color: #F8F9FC;">
-                                        <th scope="col">Story title</th>
-                                        <th scope="col">Full name</th>
-                                        <th scope="col">Mission title</th>
-                                        <th scope="col">Actions</th>
-                                    </tr>
-                                    @foreach (var item in Model.stories)
-                                    {
-                                        
-                                    
-                                    <tr>
-                                        <td>@item.Title</td>
-                                        <td>@item.User.FirstName  @item.User.LastName</td>
-                                        <td>@item.Mission.Title</td>
+        </div>
+        </div>*@
+    <table class="table mt-3">
+        <tbody>
+            <tr style="background-color: #F8F9FC;">
+                <th scope="col">Story title</th>
+                <th scope="col">Full name</th>
+                <th scope="col">Mission title</th>
+                <th scope="col">Actions</th>
+            </tr>
+            @foreach (var item in Model.stories)
+            {
 
 
-                                        <td>
-                                            <button type="button" class="btn btn-outline-warning rounded-pill me-3">
-                                                View
-                                            </button>
-                                            <button type="button" class="btn p-0 me-3">
-                                                <i class="bi bi-check-circle" style="color: green;"></i>
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.User.FirstName  @item.User.LastName</td>
+                    <td>@item.Mission.Title</td>
 
-                                            </button>
-                                            <button type="button" class="btn p-0 me-3">
-                                                <i class="bi bi-x-circle" style="color: red;"></i>
-                                            </button>
 
-                                            <button type="button" class="btn p-0">
-                                                <i class=" bi bi-trash"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
+                    <td>
+                        <button type="button" class="btn btn-outline-warning rounded-pill me-3" onclick="StoryPreview(@item.StoryId);">
+                            View
+                        </button>
+                        @if (item.Status == "PUBLISHED")
+                        {
+                            <button type="button" id="A5(@item.StoryId" class="btn p-0 me-3" onclick="approval(@item.StoryId,1,5)" disabled>
+                                <i class="bi bi-check-circle" style="color: green;"></i>
 
-                                    }
-                                </tbody>
-                            </table>
-    </div>
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" id="A5(@item.StoryId" class="btn p-0 me-3" onclick="approval(@item.StoryId,1,5)">
+                                <i class="bi bi-check-circle" style="color: green;"></i>
+
+                            </button>
+                        }
+                        @if (item.Status == "DECLINED")
+                        {
+                            <button type="button" id="D5(@item.StoryId" class="btn p-0 me-3" onclick="approval(@item.StoryId,0,5)" disabled>
+                                <i class="bi bi-x-circle" style="color: red;"></i>
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" id="D5(@item.StoryId" class="btn p-0 me-3" onclick="approval(@item.StoryId,0,5)">
+                                <i class="bi bi-x-circle" style="color: red;"></i>
+                            </button>
+                        }
+                        <button type="button" class="btn p-0" onclick=" if (confirm('Are you sure you want to delete?')) { return location.href=' @Url.Action("DeleteActivity", "Admin" ,new {id = @item.StoryId,page = 5})' } ">
+                            <i class=" bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only"></span>
+                </a>
+            </li>
+            @for (int i = 1; i <= Model.storyPages; i++)
+            {
+
+                <li class="page-item" onclick="AdminSearch(5,@i)"><a class="page-link" href="#">@i</a></li>
+            }
+            @*        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>*@
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only"></span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

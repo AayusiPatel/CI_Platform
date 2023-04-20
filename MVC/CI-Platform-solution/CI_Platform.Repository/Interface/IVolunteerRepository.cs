@@ -22,6 +22,7 @@ namespace CI_Platform.Repository.Interface
 
         public bool addComment(int mid, int uid, string comnt);
         public bool MissionRating(int userId, int mid, int rating);
+        public List<User> recentVolunteers(int mid);
         //public List<MissionApplication> volunteers(int mid);
     }
 }

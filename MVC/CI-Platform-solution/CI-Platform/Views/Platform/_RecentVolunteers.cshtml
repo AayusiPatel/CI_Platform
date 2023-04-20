@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using CI_Platform.Entities.ViewModels
+
+@model VolunteerModel
+
+ <div class="card-body">
+
+                            <h4 class="card-title">Recent Volunteers</h4>
+                            <hr>
+                            <div class="row row-cols-3">
+
+                                @foreach (var item in Model.volunteres)
+                                {
+                                    <div class="col text-center">
+                                        <img src="~/img/@item.Avatar" class="Volunteers" alt="" style="max-width:100% ;">
+                                        <p>@item.FirstName   @item.LastName</p>
+                                    </div>
+                                }
+
+
+                            </div>
+
+                            <nav aria-label="Page navigation example ">
+                                <ul class="pagination justify-content-center">
+
+                                    @{
+
+                                        for (int i = 1; i <= Model.totalPage; i++)
+                                        {
+
+                                            <li class="page-item ">
+                                                <a class="page-link active" onclick="PageIndex(@Model.mission.MissionId,(@i))">@i </a>
+
+                                            </li>
+
+
+
+                                        }
+                                    }
+                                </ul>
+                            </nav>
+                        </div>
+

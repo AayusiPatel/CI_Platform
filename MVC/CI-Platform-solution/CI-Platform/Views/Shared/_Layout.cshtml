@@ -56,8 +56,13 @@
                     <ul class="dropdown-menu me-5">
                         <li><a class="dropdown-item" asp-action="UserProfile" asp-controller="Profile">Profile</a></li>
                         <li><a class="dropdown-item" asp-action="TimeSheet" asp-controller="Profile">Volunteering Timesheet</a></li>
-                        <li><a class="dropdown-item" asp-action="AdminMain" asp-controller="Admin">Admin Acess</a></li>
-                       
+                       @{
+                            String role = @User.Claims.FirstOrDefault(m => m.Type == "role").Value;
+                        }
+                        @if (role == "Admin")
+                        {
+                            <li><a class="dropdown-item" asp-action="AdminMain" asp-controller="Admin">Admin Acess</a></li>
+                         }
                         <li>
                             <hr class="dropdown-divider">
                         </li>

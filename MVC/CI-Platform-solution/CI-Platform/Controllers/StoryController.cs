@@ -20,22 +20,10 @@ namespace CI_Platform.Controllers
 
         public StoryController(IPlatformRepository platform, IStoryRepository story)
         {
-
-            //_userRepository = userRepository;
             _platform = platform;
-
             _story = story;
-
         }
-
-
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-
-       
+   
         public IActionResult StoryListing(int PageIndex = 1)
         {
             string name = HttpContext.Session.GetString("Uname");
@@ -65,28 +53,8 @@ namespace CI_Platform.Controllers
             List<MissionSkill> Skills = _platform.GetSkills();
             ViewBag.Skills = Skills;
 
-            //if (name != null)
-            //{
-            //    int UserId = (int)HttpContext.Session.GetInt32("UId");
-
-            //}
-
             int UserId = (int)HttpContext.Session.GetInt32("UId");
-
-
-
-            //if (string.IsNullOrEmpty(Convert.ToString(UserId)))
-            //{
-            //    {
-            //        Response.Redirect(Page.ResolveUrl("~/default.aspx"));
-            //    }
-            //}
-
-
-
-            //StoryModel model = _story.storyDetails(sid, 19);
             StoryModel model = _story.storyDetails(sid, UserId);
-
             return View(model);
         }
 

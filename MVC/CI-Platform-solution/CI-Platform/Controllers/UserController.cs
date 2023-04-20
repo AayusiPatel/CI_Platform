@@ -74,7 +74,7 @@ namespace CI_Platform.Controllers
 
                 if (loguser != null)
                 {
-                    
+
 
                     //var options = new CookieOptions
                     //{
@@ -89,10 +89,17 @@ namespace CI_Platform.Controllers
                     //    Expires = DateTime.UtcNow.AddDays(7),
                     //    IsEssential = true // Optional, but recommended.
                     //});
+                    bool roleCheck = _userRepository.adminCheck(loguser.Email);
+                    String role = "User";
+                    if (roleCheck)
+                    {
+                         role = "Admin";
+                    }
+                   
 
                     var claims = new List<Claim>
                 {
-                        new Claim("role","member"),
+                        new Claim("role",role),
                          new Claim("Name", $"{loguser.FirstName} {loguser.LastName}"),
                         new Claim("Email", loguser.Email),
                         new Claim("Sid", loguser.UserId.ToString()),
