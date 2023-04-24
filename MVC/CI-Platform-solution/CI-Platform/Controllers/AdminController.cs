@@ -4,6 +4,7 @@ using CI_Platform.Repository.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace CI_Platform.Controllers
 {
     [Authorize]
@@ -38,10 +39,20 @@ namespace CI_Platform.Controllers
             vm.skills = vm.skills.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             return View(vm);
         }
+
         [HttpPost]
         public IActionResult AdminMain(AdminViewModel obj, int command)
         //public IActionResult AddCms(AdminViewModel obj, int command)
         {
+            if(command == 1)
+            {
+                bool status = _admin.AddUser(obj);
+            }
+            if (command == 3)
+            {
+                bool status = _admin.AddMission(obj);
+            }
+
             if (command == 2)
             {
                 bool status = _admin.AddCms(obj);
@@ -126,6 +137,10 @@ namespace CI_Platform.Controllers
             AdminViewModel am = new AdminViewModel();
 
             am = _admin.EditForm(id,page);
+            if(page == 1)
+            {
+                return PartialView("_UserAdmin", am);
+            }
 
             if (page == 2)
             {

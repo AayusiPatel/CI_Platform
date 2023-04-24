@@ -189,7 +189,7 @@ namespace CI_Platform.Repository.Repository
 
             if (obj.url != null)
             {
-                var checkUrl = _db.StoryMedia.Where(media => media.StoryId == sid && media.Type == "video").FirstOrDefault();
+                StoryMedium checkUrl = _db.StoryMedia.Where(media => media.StoryId == sid && media.Type == "video").FirstOrDefault();
 
 
                 if (checkUrl != null)
@@ -219,8 +219,6 @@ namespace CI_Platform.Repository.Repository
                 {
                     StoryMedium mediaobj = new StoryMedium();
                   
-
-
                     mediaobj.StoryId = sid;
                     mediaobj.Path = formFile.FileName;
                     mediaobj.Type = "PNG";

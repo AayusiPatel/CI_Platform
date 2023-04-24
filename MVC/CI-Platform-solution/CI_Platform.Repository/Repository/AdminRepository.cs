@@ -2,6 +2,7 @@
 using CI_Platform.Entities.Models;
 using CI_Platform.Entities.ViewModels;
 using CI_Platform.Repository.Interface;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -24,13 +25,15 @@ namespace CI_Platform.Repository.Repository
         {
             AdminViewModel adminModel = new AdminViewModel();
             {
-                adminModel.users = _db.Users.Where(x=>x.DeletedAt == null).ToList();
+                adminModel.users = _db.Users.Where(x => x.DeletedAt == null).ToList();
                 adminModel.missions = _db.Missions.Where(x => x.DeletedAt == null).ToList();
                 adminModel.cms = _db.CmsPages.Where(x => x.DeletedAt == null).ToList();
-                adminModel.missionApplications = _db.MissionApplications.Where(x => x.DeletedAt == null).ToList();  
+                adminModel.missionApplications = _db.MissionApplications.Where(x => x.DeletedAt == null).ToList();
                 adminModel.stories = _db.Stories.Where(x => x.DeletedAt == null && x.Status != "DRAFT").ToList();
                 adminModel.themes = _db.MissionThemes.Where(x => x.DeletedAt == null).ToList();
                 adminModel.skills = _db.Skills.Where(x => x.DeletedAt == null).ToList();
+                adminModel.Citys = _db.Cities.Where(x => x.DeletedAt == null).ToList();
+                adminModel.countries = _db.Countries.Where(x => x.DeletedAt == null).ToList();
             }
             return adminModel;
         }
@@ -94,7 +97,7 @@ namespace CI_Platform.Repository.Repository
                     .ToList();
                 return missions;
             }
-            return  _db.Missions.Where(x => x.DeletedAt == null).ToList();
+            return _db.Missions.Where(x => x.DeletedAt == null).ToList();
         }
 
         public List<MissionApplication> searchMissionApplication(String? obj)
@@ -124,9 +127,19 @@ namespace CI_Platform.Repository.Repository
             return _db.Stories.Include(m => m.Mission).Include(m => m.User).Where(x => x.DeletedAt == null && x.Status != "DRAFT").ToList();
         }
 
-        public AdminViewModel EditForm(int id,int page)
+        public AdminViewModel EditForm(int id, int page)
         {
             AdminViewModel am = new AdminViewModel();
+            am.Citys = _db.Cities.Where(x => x.DeletedAt == null).ToList();
+            am.countries = _db.Countries.Where(x => x.DeletedAt == null).ToList();
+            am.themes = _db.MissionThemes.Where(x => x.DeletedAt == null).ToList();
+            am.skills = _db.Skills.Where(x => x.DeletedAt == null).ToList();
+            if (page == 1)
+            {
+                {
+                    am.adminUser = _db.Users.FirstOrDefault(x => x.UserId == id && x.DeletedAt == null);
+                }
+            }
             if (page == 2)
             {
                 {
@@ -136,7 +149,25 @@ namespace CI_Platform.Repository.Repository
             if (page == 3)
             {
                 {
-                    am.mission = _db.Missions.FirstOrDefault(x => x.MissionId == id && x.DeletedAt == null);
+                    am.mission = _db.Missions.Include(x => x.MissionMedia).FirstOrDefault(x => x.MissionId == id && x.DeletedAt == null);
+                    //foreach (var item in am.mission.MissionMedia)
+                    //{
+                    //    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Story", item.MediaPath); //we are using Temp file name just for the example. Add your own file path.
+
+                    //    var fileStream = new FileStream(filePath, FileMode.Open);
+
+                    //    //Create an IFormFile object from the FileStream
+                    //    am.defaultImg = new FormFile(fileStream, 0, fileStream.Length, null, Path.GetFileName(fileStream.Name));
+
+                    //    //Close the file stream
+                    //    fileStream.Close();
+
+                    //    //using (var stream = new FileStream(filePath, FileMode.Create))
+                    //    //    {
+                    //    //        File.Copy(filePath, am.defaultImg);
+                    //    //    }
+
+                    //}
                 }
             }
             if (page == 6)
@@ -154,14 +185,14 @@ namespace CI_Platform.Repository.Repository
             return am;
         }
 
-        public bool ApplicationApproval(int id,int status)
+        public bool ApplicationApproval(int id, int status)
         {
             MissionApplication ma = _db.MissionApplications.FirstOrDefault(x => x.MissionApplicationId == id && x.DeletedAt == null);
-            if(ma == null)
+            if (ma == null)
             {
                 return false;
             }
-            if(ma!=null && status == 1)
+            if (ma != null && status == 1)
             {
                 ma.ApprovalStatus = "Approve";
             }
@@ -233,7 +264,7 @@ namespace CI_Platform.Repository.Repository
                 {
                     cp.Title = obj.missionTheme.Title;
                     cp.Status = obj.missionTheme.Status;
-                   
+
                 }
                 _db.MissionThemes.Add(cp);
                 _db.SaveChanges();
@@ -254,6 +285,72 @@ namespace CI_Platform.Repository.Repository
             }
             return false;
         }
+        public bool AddMission(AdminViewModel obj)
+        {
+            if (obj.mission.MissionId == 0)
+            {
+                Mission mis = new Mission();
+                {
+                    mis.Title = obj.mission.Title;
+                    mis.ShortDescription = obj.mission.ShortDescription;
+                    mis.Description = obj.mission.Description;
+                    mis.CountryId = obj.mission.CountryId;
+                    mis.CityId = obj.mission.CityId;
+                    mis.OrganizationName = obj.mission.OrganizationName;
+                    mis.OrganizationDetail = obj.mission.OrganizationDetail;
+                    mis.StartDate = obj.mission.StartDate;
+                    mis.EndDate = obj.mission.EndDate;
+                    mis.MissionType = obj.mission.MissionType;
+                    mis.CountryId = obj.mission.CountryId;
+                    mis.ThemeId = obj.mission.ThemeId;
+
+                    mis.Avaibility = obj.mission.Avaibility;
+
+                }
+                _db.Missions.Add(mis);
+                _db.SaveChanges();
+                //Mission mis = _db.Missions.FirstOrDefault(m => m.Title && )
+                foreach (var item in obj.missionSkills)
+                {
+                    MissionSkill misSkill = new MissionSkill();
+                    misSkill.MissionId = mis.MissionId;
+                    //misSkill.SkillId = item.SkillId;
+
+                    mis.MissionSkills.Add(misSkill);
+                }
+                return true;
+            }
+            if (obj.mission.MissionId != 0)
+            {
+
+                Mission mis = _db.Missions.FirstOrDefault(x => x.MissionId == obj.mission.MissionId && x.DeletedAt == null);
+
+                {
+                    mis.Title = obj.mission.Title;
+                    mis.ShortDescription = obj.mission.ShortDescription;
+                    mis.Description = obj.mission.Description;
+                    mis.CountryId = obj.mission.CountryId;
+                    mis.CityId = obj.mission.CityId;
+                    mis.OrganizationName = obj.mission.OrganizationName;
+                    mis.OrganizationDetail = obj.mission.OrganizationDetail;
+                    mis.StartDate = obj.mission.StartDate;
+                    mis.EndDate = obj.mission.EndDate;
+                    mis.MissionType = obj.mission.MissionType;
+                    mis.CountryId = obj.mission.CountryId;
+                    mis.ThemeId = obj.mission.ThemeId;
+
+                    mis.Avaibility = obj.mission.Avaibility;
+                    mis.UpdatedAt = DateTime.Now;
+
+
+                }
+                _db.Missions.Update(mis);
+                _db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
         public bool AddSkill(AdminViewModel obj)
         {
             if (obj.skill.SkillId == 0)
@@ -285,10 +382,26 @@ namespace CI_Platform.Repository.Repository
         }
         public bool DeleteActivity(int id, int page)
         {
-            if(page == 2)
+            if (page == 1)
+            {
+                User user = _db.Users.FirstOrDefault(m => m.UserId == id && m.DeletedAt == null);
+                if (user != null)
+                {
+                    user.DeletedAt = DateTime.Now;
+                    _db.Update(user);
+                    _db.SaveChanges();
+
+                    return true;
+                }
+                if (user == null)
+                {
+                    return false;
+                }
+            }
+            if (page == 2)
             {
                 CmsPage cmsPage = _db.CmsPages.FirstOrDefault(m => m.CmsPageId == id && m.DeletedAt == null);
-                if(cmsPage != null)
+                if (cmsPage != null)
                 {
                     cmsPage.DeletedAt = DateTime.Now;
                     _db.Update(cmsPage);
@@ -296,7 +409,7 @@ namespace CI_Platform.Repository.Repository
 
                     return true;
                 }
-                if(cmsPage == null)
+                if (cmsPage == null)
                 {
                     return false;
                 }
@@ -352,6 +465,70 @@ namespace CI_Platform.Repository.Repository
             return false;
         }
 
+        public bool AddUser(AdminViewModel obj)
+        {
+            if (obj.Avatarfile != null)
+            {
+                List<string> filePaths = new List<string>();
+                // full path to file in temp location
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Story", obj.Avatarfile.FileName); //we are using Temp file name just for the example. Add your own file path.
 
+                if (File.Exists(filePath) == false)
+                {
+
+                    filePaths.Add(filePath);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        obj.Avatarfile.CopyToAsync(stream);
+                    }
+                }
+
+            }
+            if (obj.adminUser.UserId == 0)
+            {
+                User profile = new User();
+                {
+                    profile.FirstName = obj.adminUser.FirstName;
+                    profile.LastName = obj.adminUser.LastName;
+                    profile.Email = obj.adminUser.Email;
+                    profile.Password = obj.adminUser.Password;
+                    profile.EmployeeId = obj.adminUser.EmployeeId;
+                    profile.Department = obj.adminUser.Department;
+                    profile.ProfileText = obj.adminUser.ProfileText;
+                    profile.CountryId = obj.adminUser.CountryId;
+                    profile.CityId = obj.adminUser.CityId;
+                    profile.Status = obj.adminUser.Status;
+                    if (obj.Avatarfile != null)
+                        profile.Avatar = obj.Avatarfile.FileName;
+                }
+                _db.Users.Add(profile);
+                _db.SaveChanges();
+                return true;
+            }
+            if (obj.adminUser.UserId != 0)
+            {
+
+                User profile = _db.Users.FirstOrDefault(x => x.UserId == obj.adminUser.UserId && x.DeletedAt == null);
+                {
+                    profile.FirstName = obj.adminUser.FirstName;
+                    profile.LastName = obj.adminUser.LastName;
+                    profile.Email = obj.adminUser.Email;
+                    profile.Password = obj.adminUser.Password;
+                    profile.EmployeeId = obj.adminUser.EmployeeId;
+                    profile.Department = obj.adminUser.Department;
+                    profile.ProfileText = obj.adminUser.ProfileText;
+                    profile.CountryId = obj.adminUser.CountryId;
+                    profile.CityId = obj.adminUser.CityId;
+                    profile.Status = obj.adminUser.Status;
+                    profile.UpdatedAt = DateTime.Now;
+                    if (obj.Avatarfile != null)
+                        profile.Avatar = obj.Avatarfile.FileName;
+                }
+                _db.Users.Update(profile);
+                _db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

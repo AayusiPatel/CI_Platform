@@ -45,7 +45,7 @@
 
 
                                 <button type="button" class="btn btn-outline-warning rounded-pill"
-                                        data-bs-toggle="modal" data-bs-target="#TimesheetTime" onclick="getActivity();" >
+                                        data-bs-toggle="modal" data-bs-target="#TimesheetTime" onclick="getActivity(1);" >
                                     <i class="bi bi-plus" ></i>
                                     Add
                                 </button>
@@ -83,7 +83,7 @@
                                     <td scope="col">@item.Time.Value.Minutes Min</td>
                                     <td scope="col">
                                         <button type="button" class="btn p-0" data-bs-toggle="modal"
-                                                data-bs-target="#TimesheetTime" onclick="getActivity(@item.TimesheetId);">
+                                                data-bs-target="#TimesheetTime" onclick="getActivity(1,@item.TimesheetId);">
                                             <i class="bi bi-pencil-square" style="color: coral;"></i>
                                         </button>
                                         <button type="button" class="btn p-0"  onclick=" if (confirm('Are you sure you want to delete?')) { return location.href=' @Url.Action("deleteActivity", "Profile" ,new {tid = @item.TimesheetId})' } ">
@@ -111,7 +111,7 @@
                                 </div>
                                 <div class="col-6 d-flex justify-content-end">
                                     <button type="button" class="btn btn-outline-warning rounded-pill"
-                                            data-bs-toggle="modal" data-bs-target="#TimeSheetModalGoal" onclick="getActivity();">
+                                            data-bs-toggle="modal" data-bs-target="#TimeSheetModalGoal" onclick="getActivity(2);">
                                         <i class="bi bi-plus"></i>
                                         Add
                                     </button>
@@ -151,7 +151,7 @@
 
                                         <td scope="col">
                                             <button type="button" class="btn p-0" data-bs-toggle="modal"
-                                                    data-bs-target="#TimeSheetModalGoal" onclick="getActivity(@item.TimesheetId);">
+                                                    data-bs-target="#TimeSheetModalGoal" onclick="getActivity(2,@item.TimesheetId);">
                                                 <i class="bi bi-pencil-square" style="color: coral;"></i>
                                             </button>
                                             <button type="button" class="btn p-0" onclick=" if (confirm('Are you sure you want to delete?')) { return location.href=' @Url.Action("deleteActivity", "Profile" ,new {tid = @item.TimesheetId})' } ">

@@ -89,6 +89,8 @@ namespace CI_Platform.Controllers
                     //    Expires = DateTime.UtcNow.AddDays(7),
                     //    IsEssential = true // Optional, but recommended.
                     //});
+
+
                     bool roleCheck = _userRepository.adminCheck(loguser.Email);
                     String role = "User";
                     if (roleCheck)
@@ -194,6 +196,12 @@ namespace CI_Platform.Controllers
             //}
             if (ModelState.IsValid)
             {
+                bool time = _userRepository.checktime(token);
+                if (!time)
+                {
+                    TempData["Message"] = " Your token is Expired ";
+                    return RedirectToAction("Index");
+                }
                 var validToken = _userRepository.reset(obj, token);
 
                 if (validToken != null)
@@ -202,7 +210,7 @@ namespace CI_Platform.Controllers
                     return RedirectToAction("Index");
                 }
                 TempData["Message"] = "Token not Found";
-                return RedirectToAction("Login");
+                return RedirectToAction("Index");
             }
             return View();
         }
@@ -212,7 +220,6 @@ namespace CI_Platform.Controllers
         {
             HttpContext.SignOutAsync().Wait();
             HttpContext.Session.Clear();
-
             return RedirectToAction("Index" , "User");
         }
 

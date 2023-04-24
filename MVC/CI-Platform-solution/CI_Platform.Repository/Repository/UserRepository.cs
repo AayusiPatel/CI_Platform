@@ -127,7 +127,7 @@ namespace CI_Platform.Repository.Repository
             // send email
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("payushi.tatva@gmail.com", "dvmiwwylvnkgdinq");
+            smtp.Authenticate("payushi.tatva@gmail.com", "qgtaopriiacrebdf");
             smtp.Send(email);
             smtp.Disconnect(true);
             #endregion Send Mail
@@ -157,6 +157,23 @@ namespace CI_Platform.Repository.Repository
             return validToken;
         }
 
+        public bool checktime(string token)
+        {
+            PasswordReset pr = _db.PasswordResets.FirstOrDefault(x => x.Token == token);
+            if (pr == null)
+            {
+                return true;
+            }
+            DateTime dateTimeVariable = pr.CreatedAt;
+            if (DateTime.Now.Subtract(dateTimeVariable).TotalHours > 2)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
     }
 }

@@ -54,6 +54,7 @@
                         @User.Claims.FirstOrDefault(m=>m.Type == "Name").Value
                     </a>
                     <ul class="dropdown-menu me-5">
+                        <li><a class="dropdown-item" asp-action="PlatformLandingPage" asp-controller="Platform">Home</a></li>
                         <li><a class="dropdown-item" asp-action="UserProfile" asp-controller="Profile">Profile</a></li>
                         <li><a class="dropdown-item" asp-action="TimeSheet" asp-controller="Profile">Volunteering Timesheet</a></li>
                        @{

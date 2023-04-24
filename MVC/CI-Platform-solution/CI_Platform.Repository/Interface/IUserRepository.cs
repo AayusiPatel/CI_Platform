@@ -16,5 +16,7 @@ namespace CI_Platform.Repository.Interface
         //public bool ResetPwd(User obj);
         public User forgot(ForgotPwd obj);
         public PasswordReset reset(ResetPwd obj, string token);
+
+        public bool checktime(string token);
     }
 }

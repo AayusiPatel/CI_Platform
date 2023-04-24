@@ -36,8 +36,8 @@ function GetCity() {
             'countryId': countryIds
         },
         success: function (data) {
-         
-            console.log(data);
+
+
             $("#selectCityList").empty();
             //    document.getElementById("selectCityList").innerHTML += `
             //<option value=${name}> City </option>
@@ -46,13 +46,15 @@ function GetCity() {
             document.getElementById("selectCityList").innerHTML += `
           <ul class="dropdown-menu">
         `;
+            data = JSON.parse(data);
+
             data.forEach((name) => {
                 //        document.getElementById("selectCityList").innerHTML += `
                 //<option value=${name.CityId} >${name.Name}</option>
                 //`;
 
                 document.getElementById("selectCityList").innerHTML += `
-                     <li><input type="checkbox" value="${name.CityId}" />${name.Name}</li>
+                     <li><input type="checkbox" class="city_${name.CityId}" name="city" id="${name.Name}" value="${name.CityId}" />${name.Name}</li>
                     `;
             })
             document.getElementById("selectCityList").innerHTML += `
@@ -68,10 +70,17 @@ function GetCity() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-function GetProfileCity() {
+function GetProfileCity(x) {
     debugger
-
-    var countryId = $('#countryId').find(":selected").val();
+    if (x != undefined) {
+        var countryId = $('#countryId' + x).find(":selected").val();
+        console.log($('#countryId' + x));
+        var cityDivId = "selectCityList" + x;
+    }
+    else {
+        var countryId = $('#countryId').find(":selected").val();
+        var cityDivId = "selectCityList";
+    }
     debugger
     $.ajax({
         url: "/Home/GetCitys",
@@ -80,13 +89,15 @@ function GetProfileCity() {
             'countryId': countryId
         },
         success: function (data) {
-            console.log(data);
-            $("#selectCityList").empty();
-            document.getElementById("selectCityList").innerHTML += `
+
+            $("#" + cityDivId).empty();
+            document.getElementById(cityDivId).innerHTML += `
             <option value=${name}> City </option>
             `;
+            data = JSON.parse(data);
+
             data.forEach((name) => {
-                document.getElementById("selectCityList").innerHTML += `
+                document.getElementById(cityDivId).innerHTML += `
                 <option value=${name.CityId} >${name.Name}</option>
                 `;
 
@@ -168,16 +179,16 @@ function temp(x) {
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
             debugger
+            var listDisplay = document.getElementById("list-view").style.display;
+            var gridDisplay = document.getElementById("grid-view").style.display;
+            console.log("Grid" + gridDisplay, "List" + listDisplay);
             $("#Filter").empty();
             console.log("grid Hii");
-            $("#Filter").html(data);
-            console.log(data.listView);
-            //$("#grid-view").empty();
-            //console.log("grid-view Hii");
-            //$("#grid-view").html(data);
-            //$("#list-view").empty();
-            //console.log("list Hii");
-            //$("#list-view").html(data);
+            var filterObject = document.createElement('div');
+            filterObject.innerHTML = data;
+            filterObject.querySelector("#list-view").style.display = listDisplay;
+            filterObject.querySelector("#grid-view").style.display = gridDisplay;
+            $("#Filter").html(filterObject);
         },
         error: function (e) {
             debugger
@@ -186,7 +197,96 @@ function temp(x) {
         },
     });
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function filterBadges() {
+    console.log(this);
+    $("#filter-button").empty();
+    $('input[name="country"]:checked').each(function () {
+        console.log("..Filter Badges..)Country:)" + this.className);
+        document.getElementById("filter-button").innerHTML += `
+<button class="filter rounded-pill border" id="${this.value}" >
+<div style="width:max-content">${this.id} <i onclick="removeFilter(${this.value},'country')" class="bi bi-x"></i></div>
+</button>
+`
+    });
+    debugger
+    $('input[name="city"]:checked').each(function () {
+        debugger
+        console.log("..Filter Badges..)City:)" + this.className);
 
+        document.getElementById("filter-button").innerHTML += `
+<button class="filter rounded-pill border" id="${this.value}" >
+<div style="width:max-content">${this.id} <i onclick="removeFilter(${this.value},'city')" class="bi bi-x"></i></div>
+</button>
+`
+    });
+    debugger
+    $('input[name="theme"]:checked').each(function () {
+
+        document.getElementById("filter-button").innerHTML += `
+<button class="filter rounded-pill border" id="${this.value}">
+<div style="width:max-content">${this.id} <i onclick="removeFilter(${this.value},'theme')" class="bi bi-x"></i></div>
+</button>
+`
+    });
+
+    $('input[name="skill"]:checked').each(function () {
+
+        document.getElementById("filter-button").innerHTML += `
+<button class="filter rounded-pill border" id="${this.value}">
+<div style="width:max-content">${this.id} <i onclick="removeFilter(${this.value},'skill')" class="bi bi-x"></i></div>
+</button>
+`
+    });
+
+    document.getElementById("filter-button").innerHTML += `
+<button class="clearall p-0 rounded-pill border" onclick="clearAll()">Clear all</button>
+`
+}
+
+function removeFilter(checkboxId, type) {
+    console.log("rm" + checkboxId);
+    if (type == 'country') {
+        $(".country_" + checkboxId).prop("checked", false);
+        GetCity();
+    }
+    if (type == 'city') {
+        $(".city_" + checkboxId).prop("checked", false);
+    }
+    if (type == 'theme') {
+        $(".theme_" + checkboxId).prop("checked", false);
+    }
+    if (type == 'skill') {
+        $(".skill_" + checkboxId).prop("checked", false);
+    }
+
+    temp();
+    filterBadges();
+
+}
+function clearAll() {
+
+    $('input[name="country"]:checked').each(function () {
+
+        $("." + this.className).prop("checked", false);
+    });
+    $('input[name="city"]:checked').each(function () {
+
+        $("." + this.className).prop("checked", false);
+    });
+    $('input[name="theme"]:checked').each(function () {
+
+        $("." + this.className).prop("checked", false);
+    });
+    $('input[name="skill"]:checked').each(function () {
+
+        $("." + this.className).prop("checked", false);
+    });
+
+    filterBadges();
+    temp();
+    $(".clearall").addClass("d-none");
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function story(x) {
@@ -221,7 +321,7 @@ function story(x) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function fav(x) {
+function fav(x, y) {
     var crd = document.getElementById("card");
     /*    var missionId = document.getElementsByClassName("mission_id").value;*/
     var missionId = x;
@@ -235,17 +335,27 @@ function fav(x) {
         success: function (missions) {
             debugger
             if (missions == "false") {
-
-                $('#favMission').removeClass();
-                $('#favMission').addClass("bi bi-heart");
-                document.getElementById("favMissionText").innerHTML = "Add to Favourite";
+                if (y == "landingPage") {
+                    $('#' + x).removeClass("bi-suit-heart-fill text-danger");
+                    $('#' + x).addClass("bi-suit-heart text-light");
+                }
+                else {
+                    $('#favMission').removeClass();
+                    $('#favMission').addClass("bi bi-heart");
+                    document.getElementById("favMissionText").innerHTML = "Add to Favourite";
+                }
                 toastr.success('Mission Removed from Favorites.');
             }
-            else
-            {
-                $('#favMission').removeClass();
-                $('#favMission').addClass("bi bi-heart-fill text-danger");
-                document.getElementById("favMissionText").innerHTML = "Remove from Favourite";
+            else {
+                if (y == "landingPage") {
+                    $('#' + x).removeClass("bi-suit-heart text-light");
+                    $('#' + x).addClass("bi-suit-heart-fill text-danger");
+                }
+                else {
+                    $('#favMission').removeClass();
+                    $('#favMission').addClass("bi bi-heart-fill text-danger");
+                    document.getElementById("favMissionText").innerHTML = "Remove from Favourite";
+                }
                 toastr.success('Mission Added to Favorites.');
             }
             //if (missions == true) {
@@ -382,7 +492,7 @@ function applyMission(missionId) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function PageIndex(x, y) {
-    console.log(x,y);
+    console.log(x, y);
     $.ajax({
         url: '/Platform/recentVolunteers',
         method: "POST",
@@ -398,7 +508,7 @@ function PageIndex(x, y) {
         },
         error: function (request, error) {
             console.log("Error in Pagination");
-           alert('Error in Pagination');
+            alert('Error in Pagination');
         },
     });
 }
@@ -496,7 +606,7 @@ function ContactUs() {
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function getActivity(x) {
+function getActivity(sheet, x) {
     console.log("TimeSheet!!!!!!!!");
     if (x > 0) {
         $.ajax({
@@ -508,11 +618,15 @@ function getActivity(x) {
             success: function (data) {
                 console.log(data);
                 debugger
-                $("#TimesheetTime").empty();
-                $("#TimesheetTime").html(data);
-                $("#TimeSheetModalGoal").empty();
-                $("#TimeSheetModalGoal").html(data);
-            } ,
+                if (sheet == 1) {
+                    $("#TimesheetTime").empty();
+                    $("#TimesheetTime").html(data);
+                }
+                if (sheet == 2) {
+                    $("#TimeSheetModalGoal").empty();
+                    $("#TimeSheetModalGoal").html(data);
+                }
+            },
             error: function (e) {
                 console.log("Bye");
                 alert('Error');
@@ -520,25 +634,30 @@ function getActivity(x) {
         });
     }
 
-    else
-    {
+    else {
         const timeForm = document.querySelector('#timesheetform');
         const goalForm = document.querySelector('#goalsheetform');
-        timeForm.querySelectorAll('.form-control').forEach((element, index) => {
-            element.value = null;
-            console.log(element.value);
-        });
 
-        goalForm.querySelectorAll('.form-control').forEach((element, index) => {
-            element.value = null;
-            console.log(element.value);
-        });
+        if (timeForm != undefined) {
+            timeForm.querySelectorAll('.form-control').forEach((element, index) => {
+                element.value = null;
+                console.log(element.value);
+            });
+        }
+
+
+        if (goalForm != undefined) {
+            goalForm.querySelectorAll('.form-control').forEach((element, index) => {
+                element.value = null;
+                console.log(element.value);
+            });
+        }
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function AdminSearch(x,y) {
+function AdminSearch(x, y) {
     var search = document.getElementById("search" + x).value;
     console.log(search);
     $.ajax({
@@ -547,7 +666,7 @@ function AdminSearch(x,y) {
         data: {
             "obj": search,
             "page": x,
-            "pageIndex" : y,
+            "pageIndex": y,
         },
         success: function (data) {
             console.log(data);
@@ -557,7 +676,7 @@ function AdminSearch(x,y) {
             //htmlObject.innerHTML = data;
             //var abc = htmlObject.querySelector("#add");
             //console.log(abc);
-        } ,
+        },
         error: function (e) {
             console.log("Bye");
             alert('Error');
@@ -586,9 +705,11 @@ function getData(x, y, id) {
             htmlObject.innerHTML = data;
             var abc = htmlObject.querySelector("#edit");
             abc.style.display = "block";
-            console.log(abc);
+
             console.log(addForm);
-            debugger
+            /*page.remove(addForm);*/
+            console.log(abc);
+            /*  page.addForm(abc);*/
             addForm.replaceWith(abc);
             if (y == 2) {
                 var cmsDescription = document.getElementById("cms2");
@@ -596,7 +717,61 @@ function getData(x, y, id) {
             }
             if (y == 3) {
                 var abc = document.getElementById("mission2");
-                CKEDITOR.replace(abc);}
+                CKEDITOR.replace(abc);
+            }
+            if (y == 1) {
+                $("#editInput").on('change', function () {
+                    readURL1(this);
+                });
+            }
+            if (y == 3) {
+
+                const inputDiv = document.querySelector(".input-div")
+                const input = document.querySelector("#imageupload")
+                const output = document.querySelector("#preview")
+                let imagesArray = []
+
+                input.addEventListener("change", () => {
+
+                    const files = input.files
+                    for (let i = 0; i < files.length; i++) {
+                        imagesArray.push(files[i])
+                    }
+                    console.log(files);
+                    displayImages()
+
+                })
+
+                inputDiv.addEventListener("drop", () => {
+                    e.preventDefault()
+                    const files = e.dataTransfer.files
+                    for (let i = 0; i < files.length; i++) {
+                        if (!files[i].type.match("image")) continue;
+
+                        if (imagesArray.every(image => image.name !== files[i].name))
+                            imagesArray.push(files[i])
+                    }
+                    console.log(files);
+                    displayImages()
+                })
+                function displayImages() {
+
+                    let images = ""
+                    imagesArray.forEach((image, index) => {
+                        images += `<div class="image storyimages">
+                                         <img src="${URL.createObjectURL(image)}" alt="image">
+                                         <span onclick="deleteImage(${index})">&times;</span>
+                                       </div>`
+                    })
+                    output.innerHTML = images
+                }
+
+                function deleteImage(index) {
+                    imagesArray.splice(index, 1)
+                    displayImages()
+                }
+
+            }
             debugger
         },
         error: function (e) {
@@ -609,7 +784,7 @@ function getData(x, y, id) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function approval(x,y,z){
+function approval(x, y, z) {
     $.ajax({
         url: "/Admin/Approval",
         method: "Post",
@@ -622,12 +797,11 @@ function approval(x,y,z){
         success: function (data) {
             debugger
             if (data) {
-                document.getElementById("A"+z+"(" + x).disabled = true;
+                document.getElementById("A" + z + "(" + x).disabled = true;
                 document.getElementById("D" + z + "(" + x).disabled = false;
                 toastr.success('Approved successfully!');
             }
-            else
-            {
+            else {
                 document.getElementById("A" + z + "(" + x).disabled = false;
                 document.getElementById("D" + z + "(" + x).disabled = true;
                 toastr.error('Decline successfully!');
@@ -667,7 +841,7 @@ $('#myForm').submit(function (event) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-function StoryPreview(id) {   
+function StoryPreview(id) {
 
     $.ajax({
         url: "/Story/StoryDetail",
@@ -677,7 +851,7 @@ function StoryPreview(id) {
             "sid": id,
         },
         success: function (data) {
-          
+
             console.log(data);
             //var page = document.getElementById("nav-story");
             //var content = page.getElementById("pageContent");
@@ -686,7 +860,7 @@ function StoryPreview(id) {
             $("#cmspage5").html(data);
             debugger
             //var button1 = document.createElement("button");
-           
+
             ////var btn = $('<button/>', {
             ////    text: 'Click me!',
             ////    /*class: 'my-button',*/
@@ -705,3 +879,22 @@ function StoryPreview(id) {
         },
     });
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//console.log("Edit form profile");
+//var readURL1 = function (input) {
+//    if (input.files && input.files[0]) {
+//        var reader1 = new FileReader();
+//        reader1.onload = function (e) {
+//            $('.editProfile').attr('src', e.target.result);
+//            console.log(e.target.result);
+//        }
+
+//        reader1.readAsDataURL(input.files[0]);
+//    }
+//}
+//$("#editInput").on('change', function () {
+//    console.log("EditForm");
+//    console.log(this);
+//    readURL1(this);
+
+//});

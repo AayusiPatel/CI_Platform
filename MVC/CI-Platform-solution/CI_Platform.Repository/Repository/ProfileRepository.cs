@@ -111,8 +111,8 @@ namespace CI_Platform.Repository.Repository
                 _db.SaveChanges();
                 return true;
             }
-                return true;
-            
+            return true;
+
         }
 
         public bool ContactUs(ContactUsViewModel obj)
@@ -142,16 +142,16 @@ namespace CI_Platform.Repository.Repository
         {
             List<Timesheet> timeSheets = _db.Timesheets
                 .Include(m => m.Mission)
-                .Where(t => t.UserId == uid  && t.DeletedAt == null).ToList();
+                .Where(t => t.UserId == uid && t.DeletedAt == null).ToList();
             List<Mission> mission = _db.Missions
                 .Include(m => m.MissionApplications)
                 .Where(t => t.MissionApplications.Any(t => t.UserId == uid) && t.Status == 1).ToList();
             TimeSheetViewModel tm = new TimeSheetViewModel();
 
-            tm.timecards = timeSheets.Where(t=>t.Mission.MissionType == "Time").ToList();
+            tm.timecards = timeSheets.Where(t => t.Mission.MissionType == "Time").ToList();
             tm.goalcards = timeSheets.Where(t => t.Mission.MissionType == "Goal").ToList(); ;
             tm.timeMissions = mission.Where(t => t.MissionType == "Time").ToList();
-            tm.goalMissions = mission.Where(t => t.MissionType == "Time").ToList();
+            tm.goalMissions = mission.Where(t => t.MissionType == "Goal").ToList();
             return tm;
         }
 
@@ -177,10 +177,13 @@ namespace CI_Platform.Repository.Repository
                 tVModel.MissionId = timesheet.MissionId;
                 tVModel.TimesheetId = timesheet.TimesheetId;
                 tVModel.Action = timesheet.Action;
-                tVModel.Hours = timesheet.Time.Value.Hours;
-                tVModel.Minutes = timesheet.Time.Value.Minutes;
+                if (timesheet.Time != null)
+                {
+                    tVModel.Hours = timesheet.Time.Value.Hours;
+                    tVModel.Minutes = timesheet.Time.Value.Minutes;
+                }
                 tVModel.timeMissions = mission.Where(t => t.MissionType == "Time").ToList();
-                tVModel.goalMissions = mission.Where(t => t.MissionType == "Time").ToList();
+                tVModel.goalMissions = mission.Where(t => t.MissionType == "Goal").ToList();
             }
             return tVModel;
         }

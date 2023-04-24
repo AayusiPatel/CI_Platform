@@ -1,11 +1,10 @@
-﻿
-@using CI_Platform.Entities.ViewModels
+﻿@using CI_Platform.Entities.ViewModels
 @model ShareStory
 
 @*<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">*@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">*@
 
 <script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
 
@@ -294,10 +293,6 @@
 
                                   data.PublishedAt = formattedDate;
                   }
-
-
-
-
                 // The data exists, so populate the form with the retrieved data
                 $("#formGroupExampleInput").val(data.story.Title);
 
@@ -306,7 +301,6 @@
                 console.log(data.displayImages);
                 const input = document.querySelector("#imageupload")
                        if(data.displayImages != null){
-
 
                        //    $("#preview").empty();
                        //    data.displayImages.forEach((image, index) => {
@@ -353,21 +347,15 @@
                                 xhr.responseType = 'blob';
                                 xhr.send();
                             }
-
-
-
-
                             const dT = new DataTransfer();
 
                             let image;
 
-                                 /////////////////////////////////////////////////////////////////////////////////////
                                    let images = ""
                                    let returnImage = ""
                                   data.displayImages.forEach((img, index) => {
 
                                        returnImage = img;
-                                      ///////////////////////////////////////////////////////
                                        img = "/img/" + img;
         toDataUrl(img,function(x){
             image = x;
@@ -379,12 +367,11 @@
             imagesArray.push(new File([image], returnImage, {
                 type: "image/png"
             }));
-       
+
 
         document.querySelector('#imageupload').files = dT.files;
         });
-      
-                                      //////////////////////////////////////////////////////
+
 
                                     images += `<div class="image">
                                                 <img src="${img}" alt="image">
@@ -397,7 +384,7 @@
                              imagesArray.splice(index, 1)
                                     displayImages()
                                           }
-                              
+
 
                              }
                              else{
@@ -406,7 +393,6 @@
 
 
                                CKEDITOR.instances.editor.setData(data.story.Description);
-                       
 
             }
             }

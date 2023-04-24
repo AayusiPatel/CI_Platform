@@ -1,4 +1,5 @@
 ﻿using CI_Platform.Entities.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,15 +30,18 @@ namespace CI_Platform.Entities.ViewModels
 
         public List<MissionTheme> themes = new List<MissionTheme>();
         public int ThemePages = 1;
-       
-
-
-
 
         public CmsPage cmsPage { get; set; } = new CmsPage();
         public Mission mission  { get; set; } = new Mission();
+        public IFormFile? defaultImg { get; set; }
+        public List<IFormFile>? missiondoc { get; set; }
+        public List<long> missionSkills { get; set; } =new List<long>();
         public MissionTheme missionTheme { get; set; } = new MissionTheme();
 
+        public User adminUser { get; set; } = new User();
+        public IFormFile? Avatarfile { get; set; }
+        public List<City> Citys = new List<City>();
+        public List<Country> countries = new List<Country>();
         public Skill skill { get; set; } = new Skill();
 
     }

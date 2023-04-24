@@ -8,9 +8,6 @@
 
 
 
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
 
     <div id="grid-view" class="grid">
         <div class="container-fluid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
@@ -31,16 +28,29 @@
                                 }
                                    @if (item.FavoriteMissions.Any(x => x.UserId == @ViewBag.uid))
                                 {
-                                       <i class="bi bi-suit-heart-fill fa-download-2 text-danger bg-dark " style="font-size: 2.5rem;" ></i>  
+                                       <i id="@item.MissionId" class="bi bi-suit-heart-fill fa-download-2 text-danger bg-dark " style="font-size: 2.5rem;" onclick="fav(@item.MissionId,'landingPage');" ></i>  
                                 }
                                 else{
-                                <i class="bi bi-suit-heart fa-download-2 text-light bg-dark" style="font-size: 2.5rem;" ></i>
+                                <i id="@item.MissionId" class="bi bi-suit-heart fa-download-2 text-light bg-dark" style="font-size: 2.5rem;" onclick="fav(@item.MissionId,'landingPage');" ></i>
                                 }
+                                
                             <span class="border-dark rounded-pill label"> &nbsp; &nbsp; @item.Theme.Title  &nbsp; &nbsp;</span>
                             </div>
                         </div>
                         <div class="card-img-overlay h-25">
+
                             <p class="text-end">
+                                 @{
+                                    if (item.MissionApplications.Any(m => m.UserId == @ViewBag.uid && m.ApprovalStatus == "Approve"))
+                                    {
+                                        
+                                            <button class="btn rounded-5 disabled" style="background-color: green ; opacity: 80%; border-radius:0px 20px 20px 0px; position:absolute; top:5%; left:0%;">
+
+                                                <span style="color: white ; ">Applied</span>
+                                            </button>
+                                        
+                                    }
+                                }
                                 <span class="border-dark rounded-pill text-white bg-dark ">&nbsp;<i class="bi bi-geo-alt fs-6">@item.City.Name &nbsp;</i></span>
 
                             </p>

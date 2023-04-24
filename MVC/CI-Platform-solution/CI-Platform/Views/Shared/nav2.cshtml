@@ -15,7 +15,7 @@
         </button>
 
         <div class="collapse d-md-flex " id="collapseExample">
-            <div class="form-select  border-white xyz" aria-label="Default select example" placeholder="Country" id="countryId" onchange="temp(1); GetCity();">
+            <div class="form-select  border-white xyz" aria-label="Default select example" placeholder="Country" id="countryId" onchange="temp(1); filterBadges(); GetCity();">
                 @*<option selected>Country</option>
                 @foreach (var item in @ViewBag.Countries)
                 {
@@ -31,11 +31,11 @@
                     @foreach (var item in @ViewBag.Countries)
                     {
 
-                        <li><input type="checkbox" value="@item.CountryId" /> @item.Name </li>
+                        <li><input type="checkbox" class="country_@item.CountryId" name="country" id="@item.Name" value="@item.CountryId" /> @item.Name </li>
                     }
                 </ul>
             </div>
-            <div class="form-select border-white xyz " aria-label="Default select example"  onchange="temp(1)">
+            <div class="form-select border-white xyz " aria-label="Default select example"  onchange="temp(1); filterBadges();">
 
                      <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     City
@@ -43,7 +43,7 @@
                   <ul class="dropdown-menu" id="selectCityList">
                     @foreach (var item in @ViewBag.Cities)
                     {
-                    <li><input type="checkbox" value="@item.CityId" />
+                    <li><input type="checkbox" class="city_@item.CityId" name="city" id="@item.Name" value="@item.CityId" />
                     @item.Name
                     </li>
                     }
@@ -58,7 +58,7 @@
                </select>*@
                 </ul>
             </div>
-            <div class="form-select border-white xyz" aria-label="Default select example" id="theme" onchange="temp(1)">
+            <div class="form-select border-white xyz" aria-label="Default select example" id="theme" onchange="temp(1); filterBadges();">
                 <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Themes
                 </a>
@@ -67,11 +67,11 @@
                     @foreach (var item in @ViewBag.Themes)
                     {
 
-                        <li><input type="checkbox" value="@item.MissionThemeId" /> @item.Title </li>
+                        <li><input type="checkbox" class="theme_@item.MissionThemeId" name="theme" id="@item.Title" value="@item.MissionThemeId" /> @item.Title </li>
                     }
                 </ul>
             </div>
-            <div class="form-select  border-white xyz" aria-label="Default select example" id="skill" onchange="temp(1)">
+            <div class="form-select  border-white xyz" aria-label="Default select example" id="skill" onchange="temp(1); filterBadges();">
 
                 <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Skills
@@ -81,7 +81,7 @@
                     @foreach (var item in @ViewBag.Skills)
                     {
 
-                        <li><input type="checkbox" value="@item.SkillId" /> @item.Skill.SkillName </li>
+                        <li><input type="checkbox" class="skill_@item.SkillId" id="@item.Skill.SkillName" name="skill" value="@item.SkillId" /> @item.Skill.SkillName </li>
                     }
                 </ul>
                 @*

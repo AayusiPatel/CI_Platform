@@ -285,12 +285,14 @@
                                     Evan Donohue
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Action1</a></li>
-                                    <li><a class="dropdown-item" href="#">Action1</a></li>
+                                   <li><a class="dropdown-item" asp-action="PlatformLandingPage" asp-controller="Platform">Home</a></li>
+                        <li><a class="dropdown-item" asp-action="UserProfile" asp-controller="Profile">Profile</a></li>
+                        <li><a class="dropdown-item" asp-action="TimeSheet" asp-controller="Profile">Volunteering Timesheet</a></li>
+                      
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#">Action1</a></li>
+                                     <li><a class="dropdown-item" asp-action="LogOut" asp-controller="User">Log out</a></li>
                                 </ul>
                             </li>
                         </form>

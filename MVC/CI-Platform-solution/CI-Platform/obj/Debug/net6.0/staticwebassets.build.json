@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Y+ZSLBPJUeGk3mUN/viatoRhRdWfVgTw+En6veu0wZA=",
+  "Hash": "ylHy3pi4860e8ZhRQGulxaZFQ1oFCfmBfc9gHLlL8cg=",
   "Source": "CI-Platform",
   "BasePath": "_content/CI-Platform",
   "Mode": "Default",
@@ -1615,6 +1615,23 @@
       "OriginalItemSpec": "wwwroot\\img\\Story\\404-Page-image.png"
     },
     {
+      "Identity": "C:\\Users\\pci116\\Downloads\\Ayushi\\CI-Platform\\CI-Platform\\MVC\\CI-Platform-solution\\CI-Platform\\wwwroot\\img\\Story\\achieved.png",
+      "SourceId": "CI-Platform",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci116\\Downloads\\Ayushi\\CI-Platform\\CI-Platform\\MVC\\CI-Platform-solution\\CI-Platform\\wwwroot\\",
+      "BasePath": "_content/CI-Platform",
+      "RelativePath": "img/Story/achieved.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\Story\\achieved.png"
+    },
+    {
       "Identity": "C:\\Users\\pci116\\Downloads\\Ayushi\\CI-Platform\\CI-Platform\\MVC\\CI-Platform-solution\\CI-Platform\\wwwroot\\img\\Story\\Animal-welfare-&-save-birds-campaign-1.png",
       "SourceId": "CI-Platform",
       "SourceType": "Discovered",
@@ -1715,6 +1732,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\Story\\image2.png"
+    },
+    {
+      "Identity": "C:\\Users\\pci116\\Downloads\\Ayushi\\CI-Platform\\CI-Platform\\MVC\\CI-Platform-solution\\CI-Platform\\wwwroot\\img\\Story\\organization.png",
+      "SourceId": "CI-Platform",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\pci116\\Downloads\\Ayushi\\CI-Platform\\CI-Platform\\MVC\\CI-Platform-solution\\CI-Platform\\wwwroot\\",
+      "BasePath": "_content/CI-Platform",
+      "RelativePath": "img/Story/organization.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\Story\\organization.png"
     },
     {
       "Identity": "C:\\Users\\pci116\\Downloads\\Ayushi\\CI-Platform\\CI-Platform\\MVC\\CI-Platform-solution\\CI-Platform\\wwwroot\\img\\Story\\Screenshot (1).png",
