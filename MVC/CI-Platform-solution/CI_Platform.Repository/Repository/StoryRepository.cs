@@ -32,7 +32,7 @@ namespace CI_Platform.Repository.Repository
                 .Include(m => m.StoryMedia)
                 .Include(m => m.Mission.Theme)
                 .Include(m => m.User)
-                .Where(m => m.DeletedAt == null /*&& m.Status == "PUBLISHED"*/)
+                .Where(m => m.DeletedAt == null && m.Status == "PUBLISHED")
                .ToList();
 
             List<Story> records = stories.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
@@ -71,7 +71,7 @@ namespace CI_Platform.Repository.Repository
                 .Include(m => m.Mission)
                 .Include(m => m.Mission.Theme)
                 .Include(m => m.User)
-                .Where(m => m.DeletedAt == null).ToList();
+                .Where(m => m.DeletedAt == null && m.Status == "PUBLISHED").ToList();
             var Missionskills = _db.MissionSkills.Include(m => m.Skill).ToList();
             List<int> temp = new List<int>();
              if (search != null)

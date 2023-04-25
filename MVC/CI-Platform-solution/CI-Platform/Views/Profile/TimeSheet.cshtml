@@ -1,4 +1,6 @@
-﻿@using CI_Platform.Entities.ViewModels
+﻿
+
+@using CI_Platform.Entities.ViewModels
 
     @model TimeSheetViewModel
 
@@ -29,7 +31,12 @@
 </head>
 
 <body>
-
+    @if (TempData["error"] != null)
+{
+<script type="text/javascript">
+toastr.error('@TempData["error"]')
+</script>
+}
     <div class="container">
         <h2 class="mb-4 mt-4">Volunteering Timesheet</h2>
         <div class="row">
@@ -170,8 +177,77 @@
     </div>
 
 
+<script>
+
+function Timevalidation(){
+
+var Mission = $("#Mission").val();
+var sDate = $("#sDate").val();
+var Hours = $("#Hours").val();
+var Minutes = $("#Minutes").val();
+var today = new Date();
+//console.log(Mission);
+console.log("TimeSheet Validation:)"+sDate);
+//console.log(Hours);
+//console.log(Minutes);
+
+document.getElementById('Submitbtn').disabled = true;
+
+console.log(sDate < today);
+if(Mission == 0){
+$("#MissionError").text("Plaease select the Mission First");
+}
+ 
+else if(sDate.length == 0 || sDate < today){
+    console.log(sDate > today);
+$("#DateError").text("Plaease enter the Valid Date");
+}
+else if(Hours == 0 && Minutes == 0){
+$("#TimeError").text("Plaease enter the Valid Time");
+}
 
 
+else{
+$("#MissionError").text("");
+$("#TimeError").text("");
+$("#DateError").text("");
+document.getElementById('Submitbtn').disabled = false;
+}
+}
+</script>
+
+<script>
+
+function Goalvalidation()
+{
+var Mission = $("#GMission").val();
+var sDate = $("#Gdate").val();
+var Goal = $("#Goal").val();
+
+console.log(Mission);
+console.log(sDate);
+console.log(Goal);
+document.getElementById('GSubmitbtn').disabled = true;
+$("#GMissionError").text("");
+$("#GDateError").text("");
+$("#GoalError").text("");
+if(Mission == 0){
+$("#GMissionError").text("Plaease select the Mission First");
+}
+else if(Goal == 0){
+$("#GoalError").text("Plaease enter the Valid Goal value");
+}
+else if(sDate.length == 0){
+$("#GDateError").text("Plaease enter the Valid Date");
+}
+else{
+$("#GMissionError").text("");
+$("#GDateError").text("");
+$("#GoalError").text("");
+document.getElementById('GSubmitbtn').disabled = false;
+}
+}
+</script>
 </body>
 
 </html>

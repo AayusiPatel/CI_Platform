@@ -23,24 +23,25 @@
                                                 <div class="modal-body">
                                                      <input type="hidden" asp-for="TimesheetId" class="form-control" value="@Model.TimesheetId" />
                                                     <label class="mb-1 ">Mission</label>
-                                                    <select type="text" asp-for="MissionId" class="form-control form-select"
-                                                            placeholder="Select your Mission">
-                                                              <option value="null">Select your Mission</option>
+                                                    <select type="text" id="GMission" asp-for="MissionId" class="form-control form-select"
+                                                            placeholder="Select your Mission" onchange="Goalvalidation()">
+                                                              <option value="">Select your Mission</option>
                                                         @foreach (var item in Model.goalMissions)
                                                         {
                                                            <option value="@item.MissionId">@item.Title</option> 
                                                         }
                                                     </select>
+                                                     <div class="text-danger" id="GMissionError"></div>
                                                     <label class="mb-1 mt-3">Actions</label>
-                                                    <input type="text" asp-for="Action" class="form-control" placeholder="Enter Actions">
-
+                                                    <input type="text" id="Goal"  asp-for="Action" class="form-control" placeholder="Enter Actions" onkeyup="Goalvalidation()">
+                                                    <div class="text-danger" id="GoalError" ></div>
                                                     <label class="mb-1 mt-3">
                                                         Date
                                                     </label>
 
                                                     <div class="form-group">
-                                                        <input type="date" asp-for="DateVolunteereed"  id="sDate"
-                                                               class="form-control">
+                                                        <input type="date" id="Gdate" asp-for="DateVolunteereed"  id="sDate" class="form-control" onchange="Goalvalidation()">
+                                                         <span class="text-danger" id="GDateError" ></span>
                                                     </div>
 
                                                     <label class="mb-1 mt-3"
@@ -54,7 +55,7 @@
                                                             data-bs-dismiss="modal">
                                                         Close
                                                     </button>
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <button type="submit" class="btn btn-primary" id="GSubmitbtn" disabled>Submit</button>
                                                 </div>
                                             </div>
                                         </div>

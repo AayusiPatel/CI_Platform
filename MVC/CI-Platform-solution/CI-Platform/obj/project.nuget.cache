@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ngDiZAg/qLwrmmryHGhRtW/oqAndPD/sRizw5z5nodOpSOIdRkxMSpWrS+Q0q5I54l5Yi1a6/37i0xcrzQK1Tg==",
+  "dgSpecHash": "H7YvVeR2sGbuO1jbDbuRJXwZpwhqLr75FV3HRaEK7rA/W8WD7ZK2srrH6gfZXbOtUbgNesi3uBoLdStIKY+l9w==",
   "success": true,
   "projectFilePath": "C:\\Users\\pci116\\Downloads\\Ayushi\\CI-Platform\\CI-Platform\\MVC\\CI-Platform-solution\\CI-Platform\\CI-Platform.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,8 @@
     "C:\\Users\\pci116\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",
+    "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.9\\microsoft.aspnet.razor.3.2.9.nupkg.sha512",
+    "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnet.webpages\\3.2.9\\microsoft.aspnet.webpages.3.2.9.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnet.webpages.data\\3.2.9\\microsoft.aspnet.webpages.data.3.2.9.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnet.webpages.webdata\\3.2.9\\microsoft.aspnet.webpages.webdata.3.2.9.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\2.2.0\\microsoft.aspnetcore.cryptography.internal.2.2.0.nupkg.sha512",
@@ -92,6 +94,7 @@
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.templating\\6.0.13\\microsoft.visualstudio.web.codegeneration.templating.6.0.13.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.utils\\6.0.13\\microsoft.visualstudio.web.codegeneration.utils.6.0.13.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.visualstudio.web.codegenerators.mvc\\6.0.13\\microsoft.visualstudio.web.codegenerators.mvc.6.0.13.nupkg.sha512",
+    "C:\\Users\\pci116\\.nuget\\packages\\microsoft.web.infrastructure\\1.0.0\\microsoft.web.infrastructure.1.0.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
@@ -220,6 +223,26 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Razor 3.2.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Razor",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.WebPages 3.2.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.WebPages",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
       "message": "Package 'Microsoft.AspNet.WebPages.Data 3.2.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
       "libraryId": "Microsoft.AspNet.WebPages.Data",
       "targetGraphs": [
@@ -232,6 +255,16 @@
       "warningLevel": 1,
       "message": "Package 'Microsoft.AspNet.WebPages.WebData 3.2.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
       "libraryId": "Microsoft.AspNet.WebPages.WebData",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.Web.Infrastructure 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.Web.Infrastructure",
       "targetGraphs": [
         "net6.0"
       ]

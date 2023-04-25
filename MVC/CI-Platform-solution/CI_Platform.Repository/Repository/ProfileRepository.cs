@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace CI_Platform.Repository.Repository
@@ -92,12 +93,12 @@ namespace CI_Platform.Repository.Repository
                 }
             }
 
-            if (user.Password != null && user.OldPassword != profile.Password)
+            if (user.Password != null && !Crypto.VerifyHashedPassword(user.OldPassword, profile.Password))
             {
                 return false;
             }
 
-            if (user.Password != null && user.OldPassword == profile.Password)
+            if (user.Password != null && Crypto.VerifyHashedPassword(user.OldPassword, profile.Password))
             {
                 profile.Password = user.Password;
                 _db.Users.Update(profile);
@@ -148,8 +149,8 @@ namespace CI_Platform.Repository.Repository
                 .Where(t => t.MissionApplications.Any(t => t.UserId == uid) && t.Status == 1).ToList();
             TimeSheetViewModel tm = new TimeSheetViewModel();
 
-            tm.timecards = timeSheets.Where(t => t.Mission.MissionType == "Time").ToList();
-            tm.goalcards = timeSheets.Where(t => t.Mission.MissionType == "Goal").ToList(); ;
+            tm.timecards = timeSheets.Where(t => t.Mission.MissionType == "Time" ).ToList();
+            tm.goalcards = timeSheets.Where(t => t.Mission.MissionType == "Goal" ).ToList(); ;
             tm.timeMissions = mission.Where(t => t.MissionType == "Time").ToList();
             tm.goalMissions = mission.Where(t => t.MissionType == "Goal").ToList();
             return tm;
@@ -197,7 +198,7 @@ namespace CI_Platform.Repository.Repository
                 ts.Action = obj.Action;
                 ts.DateVolunteereed = obj.DateVolunteereed;
                 ts.Notes = obj.Notes;
-                ts.Status = "PENDING";
+                ts.Status = "APPROVED";
 
                 if (obj.Hours != 0 || obj.Minutes != 0)
                 {
@@ -219,7 +220,7 @@ namespace CI_Platform.Repository.Repository
                 ts.Action = obj.Action;
                 ts.DateVolunteereed = obj.DateVolunteereed;
                 ts.Notes = obj.Notes;
-                ts.Status = "SUBMIT_FOR_APPROVAL";
+                ts.Status = "APPROVED";
                 if (obj.Hours != 0 || obj.Minutes != 0)
                 {
                     ts.Time = new TimeSpan(obj.Hours, obj.Minutes, 0);

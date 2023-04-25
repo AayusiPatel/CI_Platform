@@ -273,8 +273,11 @@
                 <nav class="navbar navbar-expand-lg navbar-light "
                      style=" background: #FFFFFF 0% 0% no-repeat padding-box; box-shadow: 3px 5px 10px #00000014; opacity: 1;">
                     <div class="container-fluid">
-
-                        <span>Thursday, November 3, 2022, 10:06 AM</span>
+                        @{
+    DateTime now = DateTime.Now;
+    string formattedDate = now.ToString("dddd, MMMM d, yyyy, h:mm tt");
+}
+                        <span>@formattedDate</span>
 
 
                         <form class="d-flex" class="collapse navbar-collapse" id="navbarSupportedContent">

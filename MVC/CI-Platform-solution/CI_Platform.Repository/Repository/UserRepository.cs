@@ -16,7 +16,7 @@ using CI_Platform.Entities.Data;
 using CI_Platform.Entities.Models;
 using CI_Platform.Repository.Interface;
 using CI_Platform.Entities.ViewModels;
-
+using System.Web.Helpers;
 
 namespace CI_Platform.Repository.Repository
 {
@@ -47,10 +47,12 @@ namespace CI_Platform.Repository.Repository
                 user.Password = obj.Password;
 
             }
-            var user1 = _db.Users.FirstOrDefault(u => u.Email == obj.Email && u.Password == obj.Password);
-
-
-            return user1;
+            User user1 = _db.Users.FirstOrDefault(u => u.Email == obj.Email);
+            if (user1 != null && Crypto.VerifyHashedPassword(user1.Password, obj.Password))
+            {
+                return user1;
+            }
+            return null;
         }
 
 
@@ -61,7 +63,7 @@ namespace CI_Platform.Repository.Repository
                 user.FirstName = obj.FirstName;
                 user.LastName = obj.LastName;
                 user.Email = obj.Email;
-                user.Password = obj.Password;
+                user.Password = Crypto.HashPassword(obj.Password);
                 user.PhoneNumber = obj.PhoneNumber;
             }
             if (_db.Users.Any(x => x.Email == obj.Email))
@@ -149,7 +151,7 @@ namespace CI_Platform.Repository.Repository
             if (validToken != null)
             {
                 var user1 = _db.Users.FirstOrDefault(x => x.Email == validToken.Email);
-                user1.Password = obj.Password;
+                user1.Password = Crypto.HashPassword(obj.Password);
                 _db.Users.Update(user1);
                 _db.SaveChanges();
 

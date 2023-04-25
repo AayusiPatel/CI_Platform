@@ -97,7 +97,27 @@
 
                         <div class="row ">
                             <div class="col-6 ps-5">
-                                <i class="bi bi-person-check-fill fs-5"></i><span>10 <br> &nbsp; &nbsp;  Seats left</span>
+                                  @{
+                                    <i class="bi bi-person-check-fill" style=""></i>
+                                        if (Model.mission.MissionType == "Goal")
+                                        {
+                                            int seates = @Model.mission.GoalMissions.FirstOrDefault().GoalValue;
+                                            int apply = @Model.mission.MissionApplications.Count();
+                                            int left = seates - apply;
+
+                                            <span>@left</span>
+                                            <br>
+                                            <span>seats left</span> 
+                                        }
+                                        else
+                                        {
+                                            int apply = @Model.mission.MissionApplications.Count();
+                                            <span>@apply</span>
+                                             <br>
+                                            <span>Already Volunteered</span> 
+                                        }
+                                    }
+                                @*<i class="bi bi-person-check-fill fs-5"></i><span>10 <br> &nbsp; &nbsp;  Seats left</span>*@
                             </div>
                             <div class="col-6 text-end pe-5">
                                  @{

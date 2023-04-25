@@ -33,7 +33,9 @@ namespace CI_Platform.Entities.ViewModels
 
         public CmsPage cmsPage { get; set; } = new CmsPage();
         public Mission mission  { get; set; } = new Mission();
+        public List<Skill> Dmissionskills = new List<Skill>();
         public IFormFile? defaultImg { get; set; }
+        public List<IFormFile>? missionMedia { get; set; }
         public List<IFormFile>? missiondoc { get; set; }
         public List<long> missionSkills { get; set; } =new List<long>();
         public MissionTheme missionTheme { get; set; } = new MissionTheme();

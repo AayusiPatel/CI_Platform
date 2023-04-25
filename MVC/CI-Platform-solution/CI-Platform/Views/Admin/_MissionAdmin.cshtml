@@ -156,59 +156,30 @@
 <div class="border" id="add" style="display: none;">
     <h3 class="p-3 m-0" style="background-color: #F8F9FC;"> Add mission</h3>
     <hr class="m-0">
-    <form action="" class="px-3">
-        <label for="select mission" class="mt-3"> Title </label>
-        <input type="text" class="form-control" id="formGroupExampleInput">
-        <label for="mission1" class="mt-3"> Description</label>
-        <textarea id="mission1" cols="172" rows="10"
-                  maxlength="40000"></textarea>
-        <script>
-            var abc = document.getElementById("mission1");
-            CKEDITOR.replace(abc);
-        </script>
-
-        <div class="row my-3">
-            <div class="col-10"></div>
-            <div class="col-2">
-                <button type="button" class="cancell rounded-pill btn btn-outline-dark"
-                        onclick="addpage('nav-mission',3);">
-                    Cancel
-                </button>
-                <button type="submit" class="threebt rounded-pill btn btn-outline-warning"
-                        value="2" name="command">
-                    Save
-                </button>
-            </div>
-        </div>
-    </form>
-</div>
-<div class="border" id="edit" style="display: none;">
-    <h3 class="p-3 m-0" style="background-color: #F8F9FC;"> Edit mission </h3>
-    <hr class="m-0">
-    <form action="" method="post" class="px-3">
+    <form action="" method="post" class="px-3" enctype="multipart/form-data">
         <input type="hidden" asp-for="mission.MissionId" value="@Model.mission.MissionId" />
         <label for="select mission" class="mt-3"> Title </label>
         <input type="text" asp-for="mission.Title" class="form-control" id="formGroupExampleInput">
         <label for="select mission" class="mt-3"> Short Description </label>
         <textarea type="text" asp-for="mission.ShortDescription" class="form-control" id="formGroupExampleInput"></textarea>
-        <label for="mission2" class="mt-3"> Description</label>
-        <textarea id="mission2" asp-for="mission.Description" cols="172" rows="10"
+        <label for="mission" class="mt-3"> Description</label>
+        <textarea id="mission" asp-for="mission.Description" cols="172" rows="10"
                   maxlength="40000"></textarea>
         <script>
-            var abc = document.getElementById("mission2");
-            CKEDITOR.replace(abc);
+            var mission = document.getElementById("mission");
+            CKEDITOR.replace(mission);
         </script>
         <div class="row mt-3">
-             <div class="col-12 col-sm-6">
+            <div class="col-12 col-sm-6">
                 <label>Country*</label>
                 <select id="countryIdME" asp-for="mission.CountryId" onchange="GetProfileCity('ME');" class="form-select" aria-label="Default select example"
-                                    aria-placeholder="Select your country">
-                                <option value="0">Select your country</option>
-                                @foreach (var obj in @Model.countries)
-                                {
-                                    <option value="@obj.CountryId">@obj.Name</option>
-                                }
-                            </select>
+                        aria-placeholder="Select your country">
+                    <option value="0">Select your country</option>
+                    @foreach (var obj in @Model.countries)
+                    {
+                        <option value="@obj.CountryId">@obj.Name</option>
+                    }
+                </select>
             </div>
             <div class="col-12 col-sm-6">
                 <label>City*</label>
@@ -245,7 +216,7 @@
         <div class="row mt-3">
             <div class="col-12 col-sm-6">
                 <label>Mission Theme</label>
-                <select  asp-for="mission.ThemeId"  class="form-select" aria-label="Default select example"
+                <select asp-for="mission.ThemeId" class="form-select" aria-label="Default select example"
                         aria-placeholder="Select your country">
                     <option value="0">Select your Mission Theme</option>
                     @foreach (var obj in @Model.themes)
@@ -256,29 +227,239 @@
             </div>
             <div class="col-12 col-sm-6">
                 <label>Mission Skills</label>
-                <select class="form-control" asp-for="missionSkills" size="9" id="selected_features" multiple="multiple">
-
-                                                @foreach (var item in @Model.skills)
-                                                {
-                                                    <option value="@(item.SkillId)">
-                                                        @item.SkillName
-                                                    </option>
-                                                }
-
-                                            </select>
-                @*<a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Skills
-                </a>
-                <ul class="dropdown-menu">
+                @*     <select class="form-control" asp-for="missionSkills" size="9" id="selected_features" multiple="multiple">
 
                     @foreach (var item in @Model.skills)
                     {
-
-                        <li><input asp-for="missionSkills" type="checkbox" /> @item.SkillName </li>
+                    <option value="@(item.SkillId)">
+                    @item.SkillName
+                    </option>
                     }
-                </ul>*@
+
+                    </select>*@
+                <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                    Skills
+                </a>
+                <ul class="dropdown-menu" id="missionSkill" >
+
+                    @foreach (var item in @Model.Dmissionskills)
+                    {
+
+                        <li><input class="check" id="@item.SkillId" type="checkbox" onchange="misSkills();" />@*<input type="hidden" asp-for="missionSkills" id="input_@item.SkillId" value="@item.SkillId"  />*@ @item.SkillName </li>
+                    }
+                </ul>
+                <div id="inputSkill" class="d-none"></div>
 
             </div>
+            <script>
+                            function misSkills(){
+                           var missionSkill = document.getElementById("missionSkill");
+                            
+                           var ck = missionSkill.getElementsByClassName("check");
+                            console.log(ck);
+                             $("#inputSkill").empty();
+                            for (i = 0; i < ck.length; i++) {
+                                if (ck[i].checked) {
+                                         document.getElementById("inputSkill").innerHTML +=`
+                                <input type="hidden" asp-for="missionSkills" name="missionSkills"  value="${ck[i].id}"  />
+                                        `;
+     
+                                   }
+                                 }
+
+                            }
+            </script>
+        </div>
+        <label class="mb-1 mt-3">Mission Availability</label>
+        <select asp-for="mission.Avaibility" type="text" class="form-select form-control">
+            <option value="0">Select your Availability</option>
+            <option value="monthly">monthly</option>
+            <option value="week-end">week-end</option>
+            <option value="weekly">weekly</option>
+            <option value="daily">daily</option>
+
+        </select>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="form-label">Upload Your Photos &Aacute; Documents</label>
+                    <div class="d-flex justify-content-center align-items-center border input-div1 position-relative" style="height:150px">
+
+
+                        <input asp-for="missionMedia" id="imageupload1" type="file" class="file" accept="image/*" multiple /><img src="~/img/drag-and-drop.png">
+
+                    </div>
+                </div>
+
+            </div>
+
+            <output class="mt-3" id="preview1"></output>
+
+        </div>
+         <input asp-for="missiondoc"  type="file"  accept="*" multiple />
+
+        @* <div class="row">
+            <div class="col-12">
+            <div class="form-group">
+            <label class="form-label">Upload Your Photos &Aacute; Documents</label>
+            <div class="d-flex justify-content-center align-items-center border input-div position-relative" style="height:150px">
+
+
+            <input id="imageupload1" type="file" class="file" accept="*" multiple /><img src="~/img/drag-and-drop.png">
+
+            </div>
+            </div>
+
+            </div>
+
+            <output class="mt-3" id="preview1"></output>
+
+            </div>*@
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label>Enter your url</label>
+                <input type="text" class="form-control" id="sUrl" placeholder="Enter your url">
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col-10"></div>
+            <div class="col-2">
+                <button type="button" class="cancell rounded-pill btn btn-outline-dark"
+                        onclick="addpage('nav-mission',3);">
+                    Cancel
+                </button>
+                <button type="submit" class="threebt rounded-pill btn btn-outline-warning"
+                        value="3" name="command">
+                    Save
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="border" id="edit" style="display: none;">
+    <h3 class="p-3 m-0" style="background-color: #F8F9FC;"> Edit mission </h3>
+    <hr class="m-0">
+    <form action="" method="post" class="px-3" enctype="multipart/form-data">
+        <input type="hidden" asp-for="mission.MissionId" value="@Model.mission.MissionId" />
+        <label for="select mission" class="mt-3"> Title </label>
+        <input type="text" asp-for="mission.Title" class="form-control" id="formGroupExampleInput">
+        <label for="select mission" class="mt-3"> Short Description </label>
+        <textarea type="text" asp-for="mission.ShortDescription" class="form-control" id="formGroupExampleInput"></textarea>
+        <label for="mission2" class="mt-3"> Description</label>
+        <textarea id="mission2" asp-for="mission.Description" cols="172" rows="10"
+                  maxlength="40000"></textarea>
+        <script>
+            var abc = document.getElementById("mission2");
+            CKEDITOR.replace(abc);
+        </script>
+        <div class="row mt-3">
+            <div class="col-12 col-sm-6">
+                <label>Country*</label>
+                <select id="countryIdME" asp-for="mission.CountryId" onchange="GetProfileCity('ME');" class="form-select" aria-label="Default select example"
+                        aria-placeholder="Select your country">
+                    <option value="0">Select your country</option>
+                    @foreach (var obj in @Model.countries)
+                    {
+                        <option value="@obj.CountryId">@obj.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="col-12 col-sm-6">
+                <label>City*</label>
+                <select class="form-select" asp-for="mission.CityId" aria-label="Default select example"
+                        aria-placeholder="Select your City" id="selectCityListME">
+                    <option value="0">Select your City</option>
+                    @foreach (var item in @Model.Citys)
+                    {
+
+                        <option value="@item.CityId"> @item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <label for="select mission" class="mt-3"> Organisation Name </label>
+        <input type="text" asp-for="mission.OrganizationName" class="form-control" id="formGroupExampleInput">
+        <label for="select mission" class="mt-3"> Organisation Detail </label>
+        <textarea type="text" asp-for="mission.OrganizationDetail" class="form-control" id="formGroupExampleInput"></textarea>
+        <label for="select mission" class="mt-3"> Start Date </label>
+        <input type="date" asp-for="mission.StartDate" class="form-control" id="formGroupExampleInput">
+        <label for="select mission" class="mt-3"> End Date </label>
+        <input type="date" asp-for="mission.EndDate" class="form-control" id="formGroupExampleInput">
+        <label class="mb-1 mt-3">Mission Type</label>
+        <select asp-for="mission.MissionType" type="text" class="form-select form-control">
+            <option value="0">Select your mission type</option>
+            <option value="Time">Time</option>
+            <option value="Goal">Goal</option>
+
+        </select>
+        <label for="select mission" class="mt-3">Total Seats</label>
+        <input type="text" class="form-control" id="formGroupExampleInput">
+        <label for="select mission" class="mt-3"> Mission registration deadline </label>
+        <input type="date" asp-for="mission.EndDate" class="form-control" id="formGroupExampleInput">
+        <div class="row mt-3">
+            <div class="col-12 col-sm-6">
+                <label>Mission Theme</label>
+                <select asp-for="mission.ThemeId" class="form-select" aria-label="Default select example"
+                        aria-placeholder="Select your country">
+                    <option value="0">Select your Mission Theme</option>
+                    @foreach (var obj in @Model.themes)
+                    {
+                        <option value="@obj.MissionThemeId">@obj.Title</option>
+                    }
+                </select>
+            </div>
+            <div class="col-12 col-sm-6">
+                <label>Mission Skills</label>
+               @* <select class="form-control" asp-for="missionSkills" size="9" id="selected_features" multiple="multiple">
+
+                    @foreach (var item in @Model.skills)
+                    {
+                        <option value="@(item.SkillId)">
+                            @item.SkillName
+                        </option>
+                    }
+
+                </select>*@
+            <a class="nav-link  text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                    Skills
+                </a>
+                <ul class="dropdown-menu" id="missionSkillE" >
+
+                    @foreach (var item in @Model.Dmissionskills)
+                    {
+                        @if (Model.mission.MissionSkills.Any(x=>x.SkillId == item.SkillId))
+                       {
+                           <li><input class="check" id="@item.SkillId" type="checkbox" onchange="misSkills();" checked />@item.SkillName </li>
+                       }
+                       else{
+                        
+                           <li><input class="check" id="@item.SkillId" type="checkbox" onchange="misSkills();" />@item.SkillName </li>
+                        }
+                               
+                    }
+                </ul>
+                <div id="inputSkillE" class="d-none"></div>
+
+            </div>
+            <script>
+                            function misSkills(){
+                           var missionSkill = document.getElementById("missionSkillE");
+                            
+                           var ck = missionSkill.getElementsByClassName("check");
+                            console.log(ck);
+                             $("#inputSkillE").empty();
+                            for (i = 0; i < ck.length; i++) {
+                                if (ck[i].checked) {
+                                         document.getElementById("inputSkillE").innerHTML +=`
+                                <input type="hidden" asp-for="missionSkills" name="missionSkills"  value="${ck[i].id}"  />
+                                        `;
+     
+                                   }
+                                 }
+
+                            }
+            </script>
         </div>
         <label class="mb-1 mt-3">Mission Availability</label>
         <select asp-for="mission.Avaibility" type="text" class="form-select form-control">
@@ -296,7 +477,7 @@
                     <div class="d-flex justify-content-center align-items-center border input-div position-relative" style="height:150px">
 
 
-                        <input asp-for="missiondoc" id="imageupload" type="file" class="file" accept="*" multiple /><img src="~/img/drag-and-drop.png">
+                        <input asp-for="missionMedia" id="imageupload" type="file" class="file" accept="*" multiple /><img src="~/img/drag-and-drop.png">
 
                     </div>
                 </div>
@@ -306,28 +487,38 @@
             <output class="mt-3" id="preview"></output>
 
         </div>
-       @* <div class="row">
+         <input asp-for="missiondoc"  type="file"  accept="*" multiple />
+        @* <div class="row">
             <div class="col-12">
-                <div class="form-group">
-                    <label class="form-label">Upload Your Photos &Aacute; Documents</label>
-                    <div class="d-flex justify-content-center align-items-center border input-div position-relative" style="height:150px">
+            <div class="form-group">
+            <label class="form-label">Upload Your Photos &Aacute; Documents</label>
+            <div class="d-flex justify-content-center align-items-center border input-div position-relative" style="height:150px">
 
 
-                        <input id="imageupload1" type="file" class="file" accept="*" multiple /><img src="~/img/drag-and-drop.png">
+            <input id="imageupload1" type="file" class="file" accept="*" multiple /><img src="~/img/drag-and-drop.png">
 
-                    </div>
-                </div>
+            </div>
+            </div>
 
             </div>
 
             <output class="mt-3" id="preview1"></output>
 
-        </div>*@
+            </div>*@
         <div class="col-lg-12">
             <div class="form-group">
                 <input type="text" class="form-control" id="sUrl" placeholder="Enter your url">
             </div>
         </div>
+         <div id="photos" class="d-none">
+        @if (Model.mission.MissionMedia.Count > 0)
+        {
+            @foreach (var item in @Model.mission.MissionMedia)
+            {
+                <input type="hidden" class="Dimg" value="@item.MediaPath" />
+            }
+        }
+    </div>
         <div class="row my-3">
             <div class="col-10"></div>
             <div class="col-2">
@@ -342,6 +533,7 @@
             </div>
         </div>
     </form>
+   
 </div>
 
 <script>
@@ -380,63 +572,63 @@
          imagesArray.forEach((image, index) => {
              images += `<div class="image storyimages">
                                          <img src="${URL.createObjectURL(image)}" alt="image">
-                                         <span onclick="deleteImage(${index})">&times;</span>
+                                         <span onclick="deleteImg(${index})">&times;</span>
                                        </div>`
          })
          output.innerHTML = images
      }
 
-     function deleteImage(index) {
+     function deleteImg(index) {
          imagesArray.splice(index, 1)
          displayImages()
      }
 
 </script>
-@*<script>
+<script>
 
-    const inputDiv = document.querySelector(".input-div")
-     const input = document.querySelector("#imageupload1")
-     const output = document.querySelector("#preview1")
-     let imagesArray = []
+    const inputDiv1 = document.querySelector(".input-div1")
+    const input1 = document.querySelector("#imageupload1")
+    const output1 = document.querySelector("#preview1")
+    let imagesArray1 = []
 
-     input.addEventListener("change", () => {
+    input1.addEventListener("change", () => {
 
-         const files = input.files
-         for (let i = 0; i < files.length; i++) {
-             imagesArray.push(files[i])
-         }
-           console.log(files);
-         displayImages()
+    const files1 = input1.files
+    for (let i = 0; i < files1.length; i++) {
+    imagesArray1.push(files1[i])
+    }
+    
+    displayImages1()
 
-     })
+    })
 
-     inputDiv.addEventListener("drop", () => {
-         e.preventDefault()
-         const files = e.dataTransfer.files
-         for (let i = 0; i < files.length; i++) {
-             if (!files[i].type.match("image")) continue;
+    inputDiv1.addEventListener("drop", () => {
+    e.preventDefault()
+    const files1 = e.dataTransfer.files
+    for (let i = 0; i < files1.length; i++) {
+    if (!files1[i].type.match("image")) continue;
 
-             if (imagesArray.every(image => image.name !== files[i].name))
-                 imagesArray.push(files[i])
-         }
-           console.log(files);
-         displayImages()
-     })
-      function displayImages() {
+    if (imagesArray1.every(image => image.name !== files1[i].name))
+    imagesArray1.push(files1[i])
+    }
+    console.log(files);
+    displayImages1()
+    })
+    function displayImages1() {
 
-         let images = ""
-         imagesArray.forEach((image, index) => {
-             images += `<div class="image storyimages">
-                                         <img src="${URL.createObjectURL(image)}" alt="image">
-                                         <span onclick="deleteImage(${index})">&times;</span>
-                                       </div>`
-         })
-         output.innerHTML = images
-     }
+    let images1 = ""
+    imagesArray1.forEach((image, index) => {
+    images1 += `<div class="image storyimages">
+    <img src="${URL.createObjectURL(image)}" alt="image">
+    <span onclick="deleteImage1(${index})">&times;</span>
+    </div>`
+    })
+    output1.innerHTML = images1
+    }
 
-     function deleteImage(index) {
-         imagesArray.splice(index, 1)
-         displayImages()
-     }
+    function deleteImage1(index) {
+    imagesArray1.splice(index, 1)
+    displayImages1()
+    }
 
-</script>*@
+    </script>

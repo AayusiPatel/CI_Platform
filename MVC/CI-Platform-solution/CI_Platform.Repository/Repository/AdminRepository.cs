@@ -2,6 +2,7 @@
 using CI_Platform.Entities.Models;
 using CI_Platform.Entities.ViewModels;
 using CI_Platform.Repository.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 
 namespace CI_Platform.Repository.Repository
 {
@@ -34,6 +36,7 @@ namespace CI_Platform.Repository.Repository
                 adminModel.skills = _db.Skills.Where(x => x.DeletedAt == null).ToList();
                 adminModel.Citys = _db.Cities.Where(x => x.DeletedAt == null).ToList();
                 adminModel.countries = _db.Countries.Where(x => x.DeletedAt == null).ToList();
+                adminModel.Dmissionskills = adminModel.skills;
             }
             return adminModel;
         }
@@ -133,11 +136,13 @@ namespace CI_Platform.Repository.Repository
             am.Citys = _db.Cities.Where(x => x.DeletedAt == null).ToList();
             am.countries = _db.Countries.Where(x => x.DeletedAt == null).ToList();
             am.themes = _db.MissionThemes.Where(x => x.DeletedAt == null).ToList();
-            am.skills = _db.Skills.Where(x => x.DeletedAt == null).ToList();
+            am.Dmissionskills = _db.Skills.Where(x => x.DeletedAt == null).ToList();
             if (page == 1)
             {
                 {
                     am.adminUser = _db.Users.FirstOrDefault(x => x.UserId == id && x.DeletedAt == null);
+                   if(am.adminUser != null)
+                    am.adminUser.Password = null;
                 }
             }
             if (page == 2)
@@ -149,25 +154,8 @@ namespace CI_Platform.Repository.Repository
             if (page == 3)
             {
                 {
-                    am.mission = _db.Missions.Include(x => x.MissionMedia).FirstOrDefault(x => x.MissionId == id && x.DeletedAt == null);
-                    //foreach (var item in am.mission.MissionMedia)
-                    //{
-                    //    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Story", item.MediaPath); //we are using Temp file name just for the example. Add your own file path.
-
-                    //    var fileStream = new FileStream(filePath, FileMode.Open);
-
-                    //    //Create an IFormFile object from the FileStream
-                    //    am.defaultImg = new FormFile(fileStream, 0, fileStream.Length, null, Path.GetFileName(fileStream.Name));
-
-                    //    //Close the file stream
-                    //    fileStream.Close();
-
-                    //    //using (var stream = new FileStream(filePath, FileMode.Create))
-                    //    //    {
-                    //    //        File.Copy(filePath, am.defaultImg);
-                    //    //    }
-
-                    //}
+                    am.mission = _db.Missions.Include(x => x.MissionSkills).Include(x => x.MissionMedia).FirstOrDefault(x => x.MissionId == id && x.DeletedAt == null);
+                   
                 }
             }
             if (page == 6)
@@ -312,11 +300,67 @@ namespace CI_Platform.Repository.Repository
                 //Mission mis = _db.Missions.FirstOrDefault(m => m.Title && )
                 foreach (var item in obj.missionSkills)
                 {
+
                     MissionSkill misSkill = new MissionSkill();
                     misSkill.MissionId = mis.MissionId;
-                    //misSkill.SkillId = item.SkillId;
+                    misSkill.SkillId = item;
 
-                    mis.MissionSkills.Add(misSkill);
+                    _db.MissionSkills.Add(misSkill);
+                    _db.SaveChanges();
+                }
+                if (obj.missiondoc != null)
+                {
+                    foreach (var item in obj.missiondoc)
+                    {
+                        MissionDocument md = new MissionDocument();
+                        {
+                            md.MissionId = mis.MissionId;
+                            md.DocumentName = item.Name;
+                            md.DocumentType = item.ContentType;
+                            md.DocumentPath = item.FileName;
+
+                        }
+                        _db.MissionDocuments.Add(md);
+                        _db.SaveChanges();
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Story", item.FileName); //we are using Temp file name just for the example. Add your own file path.
+
+                        if (File.Exists(filePath) == false)
+                        {
+
+
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                item.CopyToAsync(stream);
+                            }
+                        }
+                    }
+                }
+                if (obj.missionMedia != null)
+                {
+                    foreach (var item in obj.missionMedia)
+                    {
+                        MissionMedium md = new MissionMedium();
+                        {
+                            md.MissionId = mis.MissionId;
+                            md.MediaName = item.Name;
+                            md.MediaType = item.ContentType;
+                            md.MediaPath = item.FileName;
+
+                        }
+                        _db.MissionMedia.Add(md);
+                        _db.SaveChanges();
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Story", item.FileName); //we are using Temp file name just for the example. Add your own file path.
+
+                        if (File.Exists(filePath) == false)
+                        {
+
+
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                item.CopyToAsync(stream);
+                            }
+                        }
+                    }
                 }
                 return true;
             }
@@ -346,6 +390,97 @@ namespace CI_Platform.Repository.Repository
                 }
                 _db.Missions.Update(mis);
                 _db.SaveChanges();
+               
+
+                List<MissionSkill> skills = _db.MissionSkills.Where(x => x.MissionId == mis.MissionId && x.DeletedAt == null).ToList();
+                _db.RemoveRange(skills);
+                if (obj.missionSkills.Count > 0)
+                {
+                    foreach (var item in obj.missionSkills)
+                    {
+
+                        MissionSkill misSkill = new MissionSkill();
+                        misSkill.MissionId = mis.MissionId;
+                        misSkill.SkillId = item;
+
+                        _db.MissionSkills.Add(misSkill);
+                        _db.SaveChanges();
+                    }
+                }
+                List<MissionDocument> docs = _db.MissionDocuments.Where(x => x.MissionId == mis.MissionId && x.DeletedAt == null).ToList();
+                if (docs.Count > 0)
+                {
+                    foreach (var doc in docs)
+                    {
+                        doc.DeletedAt = DateTime.Now;
+                    }
+                    _db.UpdateRange(docs);
+                    _db.SaveChanges();
+                }
+                if (obj.missiondoc != null)
+                {
+                    foreach (var item in obj.missiondoc)
+                    {
+                        MissionDocument md = new MissionDocument();
+                        {
+                            md.MissionId = mis.MissionId;
+                            md.DocumentName = item.Name;
+                            md.DocumentType = item.ContentType;
+                            md.DocumentPath = item.FileName;
+
+                        }
+                        _db.MissionDocuments.Add(md);
+                        _db.SaveChanges();
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Story", item.FileName); //we are using Temp file name just for the example. Add your own file path.
+
+                        if (File.Exists(filePath) == false)
+                        {
+
+
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                item.CopyToAsync(stream);
+                            }
+                        }
+                    }
+                }
+                List<MissionMedium> mism = _db.MissionMedia.Where(x => x.MissionId == mis.MissionId && x.DeletedAt == null).ToList();
+                if (mism != null)
+                {
+                    foreach (var media in mism)
+                    {
+                        media.DeletedAt = DateTime.Now;
+                    }
+                    _db.UpdateRange(mism);
+                    _db.SaveChanges();
+                }
+                if (obj.missionMedia.Count > 0)
+                {
+                    foreach (var item in obj.missionMedia)
+                    {
+                        MissionMedium md = new MissionMedium();
+                        {
+                            md.MissionId = mis.MissionId;
+                            md.MediaName = item.Name;
+                            md.MediaType = "img";
+                            md.MediaPath = item.FileName;
+
+                        }
+                        _db.MissionMedia.Add(md);
+                        _db.SaveChanges();
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Story", item.FileName); //we are using Temp file name just for the example. Add your own file path.
+
+                        if (File.Exists(filePath) == false)
+                        {
+
+
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                item.CopyToAsync(stream);
+                            }
+                        }
+                    }
+                }
                 return true;
             }
             return false;
@@ -469,14 +604,14 @@ namespace CI_Platform.Repository.Repository
         {
             if (obj.Avatarfile != null)
             {
-                List<string> filePaths = new List<string>();
+                
                 // full path to file in temp location
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Story", obj.Avatarfile.FileName); //we are using Temp file name just for the example. Add your own file path.
 
                 if (File.Exists(filePath) == false)
                 {
 
-                    filePaths.Add(filePath);
+                    
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         obj.Avatarfile.CopyToAsync(stream);
@@ -491,7 +626,7 @@ namespace CI_Platform.Repository.Repository
                     profile.FirstName = obj.adminUser.FirstName;
                     profile.LastName = obj.adminUser.LastName;
                     profile.Email = obj.adminUser.Email;
-                    profile.Password = obj.adminUser.Password;
+                    profile.Password = Crypto.HashPassword(obj.adminUser.Password);
                     profile.EmployeeId = obj.adminUser.EmployeeId;
                     profile.Department = obj.adminUser.Department;
                     profile.ProfileText = obj.adminUser.ProfileText;
@@ -513,7 +648,7 @@ namespace CI_Platform.Repository.Repository
                     profile.FirstName = obj.adminUser.FirstName;
                     profile.LastName = obj.adminUser.LastName;
                     profile.Email = obj.adminUser.Email;
-                    profile.Password = obj.adminUser.Password;
+                    profile.Password = Crypto.HashPassword(obj.adminUser.Password);
                     profile.EmployeeId = obj.adminUser.EmployeeId;
                     profile.Department = obj.adminUser.Department;
                     profile.ProfileText = obj.adminUser.ProfileText;

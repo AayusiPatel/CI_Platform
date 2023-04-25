@@ -29,7 +29,7 @@ namespace CI_Platform.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+     
         public IActionResult Registration(UserModel obj)
         {
 

@@ -903,3 +903,9 @@ C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solutio
 C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\System.Web.Razor.dll
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\System.Web.Helpers.dll
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\System.Web.WebPages.dll
+C:\Users\pci116\Downloads\Ayushi\CI-Platform\CI-Platform\MVC\CI-Platform-solution\CI-Platform\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll

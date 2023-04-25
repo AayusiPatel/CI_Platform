@@ -142,7 +142,7 @@ namespace CI_Platform.Controllers
             }
             if (command == 3)
             {
-                return RedirectToAction("StoryListing", "Story");
+                return RedirectToAction("StoryApply", "Story");
             }
 
             return View(obj);

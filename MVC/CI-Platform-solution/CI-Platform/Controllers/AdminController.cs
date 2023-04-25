@@ -3,7 +3,8 @@ using CI_Platform.Entities.ViewModels;
 using CI_Platform.Repository.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Http;
+//using Microsoft.AspNetCore.Http.Internal;
 
 namespace CI_Platform.Controllers
 {
@@ -95,7 +96,7 @@ namespace CI_Platform.Controllers
             if (page == 3)
             {
                 am.missions = _admin.searchMission(obj);
-                ViewBag.totalPages = (int)Math.Ceiling(am.missions.Count() / (double)pageSize);
+                //ViewBag.totalPages = (int)Math.Ceiling(am.missions.Count() / (double)pageSize);
                 am.missinPages = (int)Math.Ceiling(am.missions.Count() / (double)pageSize);
                 am.missions = am.missions.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
                 return PartialView("_MissionAdmin", am);

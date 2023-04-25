@@ -91,6 +91,7 @@ namespace CI_Platform.Repository.Repository
                 comment.MissionId = mid;
                 comment.UserId = uid;
                 comment.CommentDescription = comnt;
+          
             }
             _db.Comments.Add(comment);
             _db.SaveChanges();
@@ -208,7 +209,7 @@ namespace CI_Platform.Repository.Repository
             //List <MissionApplication> apps = volunteers(mid);
             List<MissionApplication> apps = _db.MissionApplications.Include(m => m.User).Where(x => x.MissionId == mid).ToList();
 
-            List<Comment> comments = _db.Comments.Include(m => m.User).Where(x => x.MissionId == mid).OrderByDescending(x => x.CreatedAt).ToList();
+            List<Comment> comments = _db.Comments.Include(m => m.User).Where(x => x.MissionId == mid && x.ApprovalStatus== "Published").OrderByDescending(x => x.CreatedAt).ToList();
             int pageSize = 2;
             //List<MissionApplication> recentVolunteres = _db.MissionApplications.Include(m => m.User).Where(x => x.MissionId == mid).ToList();
             //int totalPage = recentVolunteres.Count;

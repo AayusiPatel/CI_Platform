@@ -7,11 +7,44 @@
 }
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/CI_Platform.styles.css" asp-append-version="true" />
+    
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1" shrink-to-fit="no">
+  
 
 </head>
+@if (TempData["Message"] != null)
+    {
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script type="text/javascript">
+
+              
+            toastr.error('@TempData["Message"]')
+
+        </script>
+    } 
+    @if (TempData["LoginError"] != null)
+    {
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script type="text/javascript">
+
+            toastr.error('@TempData["LoginError"]')
+
+        </script>
+    } 
+    @if (TempData["Registered"] != null)
+    {
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <script type="text/javascript">
+        
+            toastr.success('@TempData["Registered"]')
+
+        </script>
+    } 
 <div class="row g-0">
     <div class="col-md col-sm-12 ">
         <div id="carouselExampleRide" class="carousel slide " data-bs-ride="true">
@@ -122,4 +155,5 @@
         
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js " integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN " crossorigin="anonymous"></script>

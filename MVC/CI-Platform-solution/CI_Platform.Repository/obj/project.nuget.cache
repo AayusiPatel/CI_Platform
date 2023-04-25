@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "egl91AIRNpOowCUhj2OM5tWnRWwnHO0PTgtQ2lgElZxH1Eca8/CdL7B/GQS5vqXojAUhNFWsM63bMjC/4V0CQg==",
+  "dgSpecHash": "mLTA1PWwtBadnbc+eXfq65Yev2cCK9ZoChoKk6+52lCRIE60yddEkNVsx6khCRLZBl3qo72gERqdr/+pPWiVvA==",
   "success": true,
   "projectFilePath": "C:\\Users\\pci116\\Downloads\\Ayushi\\CI-Platform\\CI-Platform\\MVC\\CI-Platform-solution\\CI_Platform.Repository\\CI_Platform.Repository.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,8 @@
     "C:\\Users\\pci116\\.nuget\\packages\\cloudinarydotnet\\1.20.0\\cloudinarydotnet.1.20.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\mailkit\\3.6.0\\mailkit.3.6.0.nupkg.sha512",
+    "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnet.razor\\3.2.9\\microsoft.aspnet.razor.3.2.9.nupkg.sha512",
+    "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnet.webpages\\3.2.9\\microsoft.aspnet.webpages.3.2.9.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\2.2.0\\microsoft.aspnetcore.cryptography.internal.2.2.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnetcore.dataprotection\\2.2.0\\microsoft.aspnetcore.dataprotection.2.2.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.aspnetcore.dataprotection.abstractions\\2.2.0\\microsoft.aspnetcore.dataprotection.abstractions.2.2.0.nupkg.sha512",
@@ -56,6 +58,7 @@
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
+    "C:\\Users\\pci116\\.nuget\\packages\\microsoft.web.infrastructure\\1.0.0\\microsoft.web.infrastructure.1.0.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\mimekit\\3.6.1\\mimekit.3.6.1.nupkg.sha512",
@@ -133,5 +136,36 @@
     "C:\\Users\\pci116\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\pci116\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Razor 3.2.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Razor",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.WebPages 3.2.9' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.WebPages",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.Web.Infrastructure 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.Web.Infrastructure",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

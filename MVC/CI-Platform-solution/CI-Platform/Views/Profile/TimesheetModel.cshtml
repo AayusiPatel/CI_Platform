@@ -21,41 +21,40 @@
                                             <div class="modal-body">
                                                 <input type="hidden" asp-for="TimesheetId" class="form-control" value="@Model.TimesheetId" />
                                                 <label class="mb-1 ">Mission</label>
-                                                <select type="text" asp-for="MissionId" class="form-control form-select"
-                                                            placeholder="Select your Mission">
-                                                                <option value="null">Select your Mission</option>
+                                                <select type="text" id="Mission" asp-for="MissionId" class="form-control form-select" placeholder="Select your Mission" onchange="Timevalidation();">
+                                                                <option value="">Select your Mission</option>
                                                         @foreach (var item in Model.timeMissions)
                                                         {
                                                            <option value="@item.MissionId">@item.Title</option> 
                                                         }
                                                     </select>
+                                                    <div class="text-danger" id="MissionError"></div>
                                                 <label class="mb-1 mt-3">
                                                     Date
                                                 </label>
 
                                                 <div class="form-group">
-                                                    <input type="date" asp-for="DateVolunteereed" id="sDate"
-                                                           class="form-control">
+                                                    <input type="date" asp-for="DateVolunteereed" id="sDate" class="form-control" onchange="Timevalidation();">
+                                                           <span class="text-danger" id="DateError" ></span>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <label class="mb-1 mt-3">Hours</label>
-                                                        <input type="text" asp-for="Hours" class="form-control"
-                                                               placeholder="Enter Spent Hours">
+                                                        <input type="number" min="0" max="23" id="Hours" asp-for="Hours" class="form-control" placeholder="Enter Spent Hours" onkeyup="Timevalidation();">
+                                                        <span class="text-danger" id="TimeError"></span>
                                                     </div>
                                                     <div class="col-6">
                                                         <label class="mb-1 mt-3">
                                                             Minute
                                                         </label>
-                                                        <input type="text" asp-for="Minutes" class="form-control"
-                                                               placeholder="Enter Spent Minutes">
+                                                        <input type="number" min="0" max="59" id="Minutes" asp-for="Minutes" class="form-control" placeholder="Enter Spent Minutes" onkeyup="Timevalidation();">
+                                                        <span class="text-danger" id="TimeError"></span>
                                                     </div>
                                                 </div>
 
                                                 <label class="mb-1 mt-3"
                                                        for="exampleFormControlTextarea1">Message</label>
-                                                <textarea asp-for="Notes" class="form-control" id="exampleFormControlTextarea1"
-                                                          rows="4" placeholder="Enter your message..."></textarea>
+                                                <textarea asp-for="Notes" class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Enter your message..."></textarea>
 
                                             </div>
                                             <div class="modal-footer">
@@ -63,8 +62,12 @@
                                                         data-bs-dismiss="modal">
                                                     Close
                                                 </button>
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                <button type="submit" id="Submitbtn" class="btn btn-primary" disabled>Submit</button>
                                             </div>
                                         </div>
                                     </div>
                            </form>
+
+
+
+

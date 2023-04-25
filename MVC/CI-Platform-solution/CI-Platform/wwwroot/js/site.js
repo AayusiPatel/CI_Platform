@@ -71,7 +71,7 @@ function GetCity() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function GetProfileCity(x) {
-    debugger
+ /*   debugger*/
     if (x != undefined) {
         var countryId = $('#countryId' + x).find(":selected").val();
         console.log($('#countryId' + x));
@@ -81,7 +81,7 @@ function GetProfileCity(x) {
         var countryId = $('#countryId').find(":selected").val();
         var cityDivId = "selectCityList";
     }
-    debugger
+    /*debugger*/
     $.ajax({
         url: "/Home/GetCitys",
         method: "POST",
@@ -178,7 +178,7 @@ function temp(x) {
 
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
-            debugger
+          /*  debugger*/
             var listDisplay = document.getElementById("list-view").style.display;
             var gridDisplay = document.getElementById("grid-view").style.display;
             console.log("Grid" + gridDisplay, "List" + listDisplay);
@@ -301,7 +301,7 @@ function story(x) {
         },
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
-            debugger
+        /*    debugger*/
             console.log(data);
             $("#StoryFilter").empty();
             $("#StoryFilter").html(data);
@@ -333,7 +333,7 @@ function fav(x, y) {
         },
         dataType: "html", // return datatype like JSON and HTML
         success: function (missions) {
-            debugger
+      /*      debugger*/
             if (missions == "false") {
                 if (y == "landingPage") {
                     $('#' + x).removeClass("bi-suit-heart-fill text-danger");
@@ -617,7 +617,7 @@ function getActivity(sheet, x) {
             },
             success: function (data) {
                 console.log(data);
-                debugger
+           /*     debugger*/
                 if (sheet == 1) {
                     $("#TimesheetTime").empty();
                     $("#TimesheetTime").html(data);
@@ -640,7 +640,7 @@ function getActivity(sheet, x) {
 
         if (timeForm != undefined) {
             timeForm.querySelectorAll('.form-control').forEach((element, index) => {
-                element.value = null;
+                element.value = "";
                 console.log(element.value);
             });
         }
@@ -648,7 +648,7 @@ function getActivity(sheet, x) {
 
         if (goalForm != undefined) {
             goalForm.querySelectorAll('.form-control').forEach((element, index) => {
-                element.value = null;
+                element.value = "";
                 console.log(element.value);
             });
         }
@@ -689,7 +689,7 @@ function AdminSearch(x, y) {
 function getData(x, y, id) {
     var page = document.getElementById(x);
     var addForm = page.querySelector("#edit");
-    debugger
+  /*  debugger*/
     $.ajax({
         url: "/Admin/EditForm",
         method: "Post",
@@ -699,13 +699,21 @@ function getData(x, y, id) {
             "page": y,
         },
         success: function (data) {
-            debugger
+       /*     debugger*/
             console.log(data);
             var htmlObject = document.createElement('div');
             htmlObject.innerHTML = data;
             var abc = htmlObject.querySelector("#edit");
             abc.style.display = "block";
-
+            if (y == 3) {
+                var missionSkill = abc.querySelector("#photos");
+                console.log(missionSkill);
+                var ck = [];
+                missionSkill.querySelectorAll(".Dimg").forEach((element) => {
+                    ck.push(element.value);
+                });
+                console.log(ck);
+            }
             console.log(addForm);
             /*page.remove(addForm);*/
             console.log(abc);
@@ -760,19 +768,70 @@ function getData(x, y, id) {
                     imagesArray.forEach((image, index) => {
                         images += `<div class="image storyimages">
                                          <img src="${URL.createObjectURL(image)}" alt="image">
-                                         <span onclick="deleteImage(${index})">&times;</span>
+                                         <span onclick="deleteImg(${index})">&times;</span>
                                        </div>`
                     })
                     output.innerHTML = images
                 }
 
-                function deleteImage(index) {
+                function deleteImg(index) {
+                    console.log("Hii");
                     imagesArray.splice(index, 1)
                     displayImages()
                 }
 
+               
+               
+             
+             /*   debugger*/
+                if (ck.length > 0) {
+
+                    function toDataUrl(url, callback) {
+                        console.log(url);
+                        var newUrl = url;
+                        var xhr = new XMLHttpRequest();
+                        xhr.onload = function () {
+                            callback(xhr.response);
+
+                        };
+                        xhr.open('GET', newUrl);
+                        xhr.responseType = 'blob';
+                        xhr.send();
+                    }
+                    const dT = new DataTransfer();
+                    let image;
+                    let images = ""
+                    let returnImage = ""
+                    ck.forEach((img, index) => {
+                        returnImage = img;
+                        img = "/img/" + img;
+                        toDataUrl(img, function (x) {
+                            image = x;
+                            dT.items.add(new File([image], returnImage, {
+                                type: "image/png"
+                            }));
+                            imagesArray.push(new File([image], returnImage, {
+                                type: "image/png"
+                            }));
+                            document.querySelector('#imageupload').files = dT.files;
+                        });
+
+
+                        images += `<div class="image">
+                                                <img src="${img}" alt="image">
+                                                <span onclick="deleteImg(${index})">&times;</span>
+                                              </div>`
+
+                    });
+                    
+                    output.innerHTML = images;
+                   
+                }
+                else {
+                    output.innerHTML = "No Images Are Choosen";
+                }
             }
-            debugger
+         /*   debugger*/
         },
         error: function (e) {
             debugger
@@ -795,7 +854,7 @@ function approval(x, y, z) {
             "page": z,
         },
         success: function (data) {
-            debugger
+         /*   debugger*/
             if (data) {
                 document.getElementById("A" + z + "(" + x).disabled = true;
                 document.getElementById("D" + z + "(" + x).disabled = false;
@@ -806,7 +865,7 @@ function approval(x, y, z) {
                 document.getElementById("D" + z + "(" + x).disabled = true;
                 toastr.error('Decline successfully!');
             }
-            debugger
+          /*  debugger*/
         },
         error: function (e) {
             debugger

@@ -115,16 +115,23 @@ namespace CI_Platform.Controllers
         {
           
             int UserId = (int)HttpContext.Session.GetInt32("UId");
-
-            if (obj.TimesheetId == 0)
+            DateTime today = DateTime.Today;
+            if (obj.DateVolunteereed > today)
             {
-
-                _profile.AddActivity(obj, UserId);
+                TempData["error"] = "Date is invalid";
             }
-            if (obj.TimesheetId != 0)
+            else
             {
-                _profile.UpdateActivity(obj);
+                if (obj.TimesheetId == 0)
+                {
 
+                    _profile.AddActivity(obj, UserId);
+                }
+                if (obj.TimesheetId != 0)
+                {
+                    _profile.UpdateActivity(obj);
+
+                }
             }
             TimeSheetViewModel tm = _profile.GetActivities(UserId);
 
