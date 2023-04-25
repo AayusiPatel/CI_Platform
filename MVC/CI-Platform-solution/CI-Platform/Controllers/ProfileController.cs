@@ -61,13 +61,26 @@ namespace CI_Platform.Controllers
                 int UserId = (int)HttpContext.Session.GetInt32("UId");
 
                 bool pm = _profile.updateUser(obj, UserId);
+               
+                //HttpContext.Session.SetString("Uname", obj.FirstName + " " + obj.LastName);
+                //HttpContext.Session.SetInt32("UId", (int)obj.UserId);
+               
+                if (obj.Avatar != null)
+                {
+                    HttpContext.Session.SetString("Avtar", obj.Avatar);
+                }
+                else
+                {
+                    HttpContext.Session.SetString("Avtar", "");
+                }
+
                 if (pm == false && resetPass == 1)
                 {
                     TempData["error"] = "Old Password is Worng!";
                 }
-                obj = _profile.getUser(UserId);
+                //obj = _profile.getUser(UserId);
 
-                return View(obj);
+                return RedirectToAction("UserProfile","Profile");
             }
 
 

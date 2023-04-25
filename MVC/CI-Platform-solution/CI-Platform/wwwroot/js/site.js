@@ -17,7 +17,7 @@
 
 
 function GetCity() {
-    debugger
+ /*   debugger*/
     var countryIds = [];
     var countrydiv = document.getElementById("countryId");
     var list = countrydiv.getElementsByTagName("input");
@@ -28,7 +28,7 @@ function GetCity() {
     }
     console.log("countryids:" + countryIds);
     /* var countryId = $('#countryId').find(":selected").val();*/
-    debugger
+  /*  debugger*/
     $.ajax({
         url: "/Home/GetCitys",
         method: "POST",
@@ -209,9 +209,9 @@ function filterBadges() {
 </button>
 `
     });
-    debugger
+  /*  debugger*/
     $('input[name="city"]:checked').each(function () {
-        debugger
+       /* debugger*/
         console.log("..Filter Badges..)City:)" + this.className);
 
         document.getElementById("filter-button").innerHTML += `
@@ -220,7 +220,7 @@ function filterBadges() {
 </button>
 `
     });
-    debugger
+  /*  debugger*/
     $('input[name="theme"]:checked').each(function () {
 
         document.getElementById("filter-button").innerHTML += `
@@ -917,7 +917,7 @@ function StoryPreview(id) {
             //content.style.display = "none";
             $("#cmspage5").empty();
             $("#cmspage5").html(data);
-            debugger
+       /*     debugger*/
             //var button1 = document.createElement("button");
 
             ////var btn = $('<button/>', {

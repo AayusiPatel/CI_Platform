@@ -362,6 +362,20 @@ namespace CI_Platform.Repository.Repository
                         }
                     }
                 }
+                if(obj.url != null)
+                {
+                    MissionMedium md = new MissionMedium();
+                    {
+                        md.MissionId = mis.MissionId;
+                        md.MediaName = "missionUrl";
+                        md.MediaType = "Url";
+                        md.MediaPath = obj.url;
+
+                    }
+                    _db.MissionMedia.Add(md);
+                    _db.SaveChanges();
+
+                }
                 return true;
             }
             if (obj.mission.MissionId != 0)
@@ -481,6 +495,20 @@ namespace CI_Platform.Repository.Repository
                         }
                     }
                 }
+                //if (obj.url != null)
+                //{
+                //    MissionMedium md = _db.MissionMedia.Where(x=>x.);
+                //    {
+                //        md.MissionId = mis.MissionId;
+                //        md.MediaName = "missionUrl";
+                //        md.MediaType = "Url";
+                //        md.MediaPath = obj.url;
+
+                //    }
+                //    _db.MissionMedia.Add(md);
+                //    _db.SaveChanges();
+
+                //}
                 return true;
             }
             return false;

@@ -38,6 +38,8 @@ namespace CI_Platform.Controllers
             vm.themes = vm.themes.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             vm.skillPages = (int)Math.Ceiling(vm.skills.Count() / (double)pageSize);
             vm.skills = vm.skills.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            string name = HttpContext.Session.GetString("Uname");
+            ViewBag.Uname = name;
             return View(vm);
         }
 

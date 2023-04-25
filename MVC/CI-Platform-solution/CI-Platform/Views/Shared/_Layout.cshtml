@@ -50,8 +50,11 @@
                 </div>
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="~/img/user-img.png" class="profile-nav" alt=""> @*@ViewBag.Uname*@
-                        @User.Claims.FirstOrDefault(m=>m.Type == "Name").Value
+                        @{
+                            String avtar = @User.Claims.FirstOrDefault(m => m.Type == "Avtar").Value;
+                        }
+                        <img src="~/img/@avtar" class="profile-nav" alt=""> @ViewBag.Uname
+                       @* @User.Claims.FirstOrDefault(m=>m.Type == "Name").Value*@
                     </a>
                     <ul class="dropdown-menu me-5">
                         <li><a class="dropdown-item" asp-action="PlatformLandingPage" asp-controller="Platform">Home</a></li>

@@ -72,7 +72,7 @@ namespace CI_Platform.Controllers
             int PageSize = 3;
 
             int TotalRecords = (int)Math.Ceiling(cards.Count() / (double)PageSize);
-
+            ViewBag.cont = cards.Count;
             List<Mission> records = cards.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
 
 
@@ -83,8 +83,8 @@ namespace CI_Platform.Controllers
                 platformModel.totalcount = TotalRecords;
             }
 
-           
 
+            
             return PartialView("_FilterMissionPartial", platformModel);
 
 
