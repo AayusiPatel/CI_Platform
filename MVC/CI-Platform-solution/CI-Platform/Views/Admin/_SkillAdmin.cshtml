@@ -82,8 +82,8 @@
     <form method="post" class="px-3">
 
         <label for="select mission" class="mt-3"> Theme Name </label>
-        <input asp-for="skill.SkillName" type="text" class="form-control" id="formGroupExampleInput">
-
+        <input asp-for="skill.SkillName" id="sTitleA" onkeyup="skillValidation('A');" type="text" class="form-control" id="formGroupExampleInput">
+         <div id="sTitleErrorA" class="text-danger">This filed is required.</div>
 
 
         <label class="mb-1 mt-3">Status</label>
@@ -99,8 +99,8 @@
                         onclick="addpage('nav-skill');">
                     Cancel
                 </button>
-                <button type="submit" class="threebt rounded-pill btn btn-outline-warning"
-                        value="7" name="command">
+                <button type="submit" id="sA" class="threebt rounded-pill btn btn-outline-warning"
+                        value="7" name="command" disabled>
                     Save
                 </button>
             </div>
@@ -112,9 +112,9 @@
     <hr class="m-0">
     <form method="post" class="px-3">
         <label for="select mission" class="mt-3"> Theme Name </label>
-        <input asp-for="skill.SkillName" type="text" class="form-control" id="formGroupExampleInput">
+        <input asp-for="skill.SkillName" id="sTitleE" onkeyup="skillValidation('E');" type="text" class="form-control" id="formGroupExampleInput">
       <input type="hidden" asp-for="skill.SkillId" />
-
+      <div id="sTitleErrorE" class="text-danger">This filed is required.</div>
 
         <label class="mb-1 mt-3">Status</label>
         <select type="text" asp-for="skill.Status" class="form-select form-control">
@@ -130,11 +130,24 @@
                         onclick="editpage('nav-skill');">
                     Cancel
                 </button>
-                <button type="submit" class="threebt rounded-pill btn btn-outline-warning"
-                        value="7" name="command">
+                <button type="submit" id="sE" class="threebt rounded-pill btn btn-outline-warning" value="7" name="command" disabled>
                     Save
                 </button>
             </div>
         </div>
     </form>
 </div>
+<script>
+    function skillValidation(x){
+        var title= $("#sTitle"+x).val();
+        if(title.length == 0){
+            $("#sTitleError"+x).text("Plaeas Enter Theme Title");
+            document.querySelector('#s'+x).disabled = true;
+            
+        }
+        else{
+             $("#sTitleError"+x).text("");
+            document.querySelector('#s'+x).disabled = false;
+        }
+    }
+</script>

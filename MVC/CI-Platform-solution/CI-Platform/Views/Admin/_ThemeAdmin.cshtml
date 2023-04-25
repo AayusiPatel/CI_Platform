@@ -79,7 +79,7 @@
 
         <label for="select mission" class="mt-3"> Theme Name </label>
         <input asp-for="missionTheme.Title" id="tTitleA" type="text" onkeyup="themeValidation('A');" class="form-control" id="formGroupExampleInput">
-        <div id="tTitleErrorA" class="alert-danger"></div>
+        <div id="tTitleErrorA" class="alert-danger">This filed is required.</div>
 
 
         <label class="mb-1 mt-3">Status</label>
@@ -110,7 +110,7 @@
         <label for="select mission" class="mt-3"> Theme Name </label>
         <input type="hidden" asp-for="missionTheme.MissionThemeId" />
         <input asp-for="missionTheme.Title" id="tTitleE" onkeyup="themeValidation('E');" type="text" class="form-control" id="formGroupExampleInput">
-        <div id="tTitleErrorE" class="alert-danger"></div>
+        <div id="tTitleErrorE" class="alert-danger">This filed is required.</div>
         <label class="mb-1 mt-3">Status</label>
         <select type="text" asp-for="missionTheme.Status" class="form-select form-control">
 
@@ -136,7 +136,7 @@
     function themeValidation(x){
         var title= $("#tTitle"+x).val();
         if(title.length == 0){
-            $("#tTitleErrorA").text("Plaease Theme Title");
+            $("#tTitleErrorA").text("Plaeas Enter Theme Title");
             document.querySelector('#t'+x).disabled = true;
             
         }
