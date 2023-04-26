@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CI_Platform.Entities.ViewModels;
 
-public partial class UserModel
+public  class UserModel
 {
  
 
@@ -18,11 +18,12 @@ public partial class UserModel
     [DataType(DataType.EmailAddress, ErrorMessage = "Please Enter valid EmailId")]
     public string Email { get; set; } = null!;
 
-
     [Required(ErrorMessage = "Phone Number is Required")]
-    [MaxLength(10)]
+    //[MaxLength(10, ErrorMessage = "Please Enter valid short PhoneNumber")]
+    //[MinLength(10, ErrorMessage = "Please Enter valid long PhoneNumber")]
+
     //[MinLength(10, ErrorMessage = "Please Enter valid PhoneNumber")]
-    [DataType(DataType.PhoneNumber, ErrorMessage = "Please Enter valid PhoneNumber")]
+    //[DataType( ErrorMessage = "Please Enter valid PhoneNumber")]
     public long PhoneNumber { get; set; }
 
     [Required(ErrorMessage = "Password is Required")]

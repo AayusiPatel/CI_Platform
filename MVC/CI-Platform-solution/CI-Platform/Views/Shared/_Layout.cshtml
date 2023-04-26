@@ -51,22 +51,22 @@
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         @{
-                            String avtar = @User.Claims.FirstOrDefault(m => m.Type == "Avtar").Value;
+                            //String avtar = @User.Claims.FirstOrDefault(m => m.Type == "Avtar").Value;
                         }
-                        <img src="~/img/@avtar" class="profile-nav" alt=""> @ViewBag.Uname
+                      @*  <img src="~/img/@avtar" class="profile-nav" alt=""> @ViewBag.Uname*@
                        @* @User.Claims.FirstOrDefault(m=>m.Type == "Name").Value*@
                     </a>
                     <ul class="dropdown-menu me-5">
                         <li><a class="dropdown-item" asp-action="PlatformLandingPage" asp-controller="Platform">Home</a></li>
                         <li><a class="dropdown-item" asp-action="UserProfile" asp-controller="Profile">Profile</a></li>
                         <li><a class="dropdown-item" asp-action="TimeSheet" asp-controller="Profile">Volunteering Timesheet</a></li>
-                       @{
+                      @* @{
                             String role = @User.Claims.FirstOrDefault(m => m.Type == "role").Value;
                         }
                         @if (role == "Admin")
                         {
                             <li><a class="dropdown-item" asp-action="AdminMain" asp-controller="Admin">Admin Acess</a></li>
-                         }
+                         }*@
                         <li>
                             <hr class="dropdown-divider">
                         </li>

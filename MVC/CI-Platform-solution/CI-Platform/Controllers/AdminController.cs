@@ -78,13 +78,13 @@ namespace CI_Platform.Controllers
             {
                 bool status = _admin.AddBanner(obj);
             }
-            return RedirectToAction("AdminMain",command);
+            return RedirectToAction("AdminMain","Admin", new { command = command });
         }
 
         public IActionResult DeleteActivity(int id,int page)
         {
             bool status = _admin.DeleteActivity(id,page);
-            return RedirectToAction("AdminMain","Admin");
+            return RedirectToAction("AdminMain","Admin", new { command = page });
         }
 
         public IActionResult SearchAdmin(string obj , int page , int pageIndex = 1)

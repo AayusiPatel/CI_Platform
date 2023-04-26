@@ -200,7 +200,7 @@
                         </li>
 
                         <li>
-                            <a href="#" class="nav-link align-middle active" id="nav-user-tab" data-bs-toggle="tab"
+                            <a href="#" class="nav-link align-middle" id="nav-user-tab" data-bs-toggle="tab"
                                data-bs-target="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">
                                 <i class="bi bi-person mr-3" style="font-size: 18px;"></i>
                                 <span class="ms-1 d-none d-sm-inline">User</span>
@@ -304,7 +304,7 @@
                 <div class="p-4">
                     <div class="tab-content" id="nav-tabContent">
 
-                        <div class="tab-pane fade show active" id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
+                        <div class="tab-pane fade " id="nav-user" role="tabpanel" aria-labelledby="nav-user-tab">
                             <div id="pageContent">
                                 <h4>User</h4>
                                 <hr class="m-0">
@@ -522,15 +522,38 @@
         console.log("...........Tab Panel.........")
        
         var tabs = document.querySelectorAll(".tab-pane");
-        var show = document.getElementsByClassName("activeTab");
+        var show = document.querySelector(".activeTab");
+        var tab = show.id;
+         console.log(tab);
         console.log(show);
         console.log(tabs);
      
-        tabs.forEach(function (element) {
-                 console.log(element)
-           
-            element.addClass("fade");
-             });
+        if(tab == 1){
+            $("#nav-user").addClass("show active");
+            $("#nav-user-tab").addClass("active");
+        }if(tab == 2){
+            $("#nav-cms").addClass("show active");
+            $("#nav-cms-tab").addClass("active");
+        }if(tab == 3){
+            $("#nav-mission").addClass("show active");
+            $("#nav-mission-tab").addClass("active");
+        }if(tab == 4){
+            $("#nav-application").addClass("show active");
+            $("#nav-application-tab").addClass("active");
+        }if(tab == 5){
+            $("#nav-story").addClass("show active");
+            $("#nav-story-tab").addClass("active");
+        }if(tab == 6){
+            $("#nav-theme").addClass("show active");
+            $("#nav-theme-tab").addClass("active");
+        }if(tab == 7){
+            $("#nav-skill").addClass("show active");
+            $("#nav-skill-tab").addClass("active");
+        }
+        if(tab == 8){
+            $("#nav-banner").addClass("show active");
+            $("#nav-banner-tab").addClass("active");
+        }
     </script>
     <script>
         function addform(x) {

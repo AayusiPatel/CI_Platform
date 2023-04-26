@@ -43,16 +43,21 @@ namespace CI_Platform.Controllers
             //}
             if (ModelState.IsValid)
             {
-                if (_userRepository.Registration(obj))
+                var chk = _userRepository.Registration(obj);
+                if (chk)
                 {
                     TempData["Registered"] = "Registration Succesfull!";
                     return RedirectToAction("Index");
                 }
+                else { 
                 TempData["UserExist"] = "This Email is already Registered.";
+            }
             }
 
             return View();
         }
+
+        [AllowAnonymous]
         public IActionResult Index(String returnUrl="")
         {
             Login login = new Login();
@@ -95,9 +100,9 @@ namespace CI_Platform.Controllers
                     String role = "User";
                     if (roleCheck)
                     {
-                         role = "Admin";
+                        role = "Admin";
                     }
-                   
+
 
                     var claims = new List<Claim>
                 {
@@ -117,7 +122,7 @@ namespace CI_Platform.Controllers
 
                     var abc = HttpContext.SignInAsync(Principle);
 
-             
+
 
 
 

@@ -117,7 +117,7 @@ namespace CI_Platform.Repository.Repository
             #endregion Update Password Reset Table
 
             #region Send Mail
-            var mailBody = "<h1>Click link to reset password</h1><br><h2><a href='" + "https://localhost:7228/User/ResetPwd?token=" + finalString + "'>Reset Password</a></h2>";
+            var mailBody = "<h1>Click link to reset password</h1><br><h2><a href='" + "https://localhost:7228/User/ResetPwd?token1=" + finalString + "'>Reset Password</a></h2>";
 
             // create email message
             var email = new MimeMessage();

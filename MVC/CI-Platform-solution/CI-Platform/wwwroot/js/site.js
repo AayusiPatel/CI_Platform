@@ -777,7 +777,7 @@ function getData(x, y, id) {
                     output.innerHTML = images
                 }
 
-                function deleteImg(index) {
+                function deletImg(index) {
                     console.log("Hii");
                     imagesArray.splice(index, 1)
                     displayImages()
