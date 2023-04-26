@@ -356,8 +356,7 @@
         <div class="row mt-3">
             <div class="col-12 col-sm-6">
                 <label>Country*</label>
-                <select id="countryIdME" asp-for="mission.CountryId" onchange="GetProfileCity('ME');" class="form-select" aria-label="Default select example"
-                        aria-placeholder="Select your country">
+                <select id="countryIdME" asp-for="mission.CountryId" onchange="GetProfileCity('ME');" class="form-select" aria-label="Default select example" aria-placeholder="Select your country">
                     <option value="0">Select your country</option>
                     @foreach (var obj in @Model.countries)
                     {
@@ -400,8 +399,7 @@
         <div class="row mt-3">
             <div class="col-12 col-sm-6">
                 <label>Mission Theme</label>
-                <select asp-for="mission.ThemeId" class="form-select" aria-label="Default select example"
-                        aria-placeholder="Select your country">
+                <select asp-for="mission.ThemeId" class="form-select" aria-label="Default select example" aria-placeholder="Select your country">
                     <option value="0">Select your Mission Theme</option>
                     @foreach (var obj in @Model.themes)
                     {
@@ -430,11 +428,11 @@
                     {
                         @if (Model.mission.MissionSkills.Any(x=>x.SkillId == item.SkillId))
                        {
-                           <li><input class="check" id="@item.SkillId" type="checkbox" onchange="misSkills();" checked />@item.SkillName </li>
+                           <li><input class="check" id="@item.SkillId" type="checkbox" onchange="misSkillsE();" checked />@item.SkillName </li>
                        }
                        else{
                         
-                           <li><input class="check" id="@item.SkillId" type="checkbox" onchange="misSkills();" />@item.SkillName </li>
+                           <li><input class="check" id="@item.SkillId" type="checkbox" onchange="misSkillsE();" />@item.SkillName </li>
                         }
                                
                     }
@@ -443,7 +441,7 @@
 
             </div>
             <script>
-                            function misSkills(){
+                            function misSkillsE(){
                            var missionSkill = document.getElementById("missionSkillE");
                             
                            var ck = missionSkill.getElementsByClassName("check");

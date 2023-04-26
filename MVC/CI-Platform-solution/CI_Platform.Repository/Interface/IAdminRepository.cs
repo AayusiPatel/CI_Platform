@@ -34,5 +34,7 @@ namespace CI_Platform.Repository.Interface
         public bool AddTheme(AdminViewModel obj);
         public bool AddUser(AdminViewModel obj);
         public bool AddMission(AdminViewModel obj);
+        public List<Banner> searchBanner(String? obj);
+        public bool AddBanner(AdminViewModel obj);
     }
 }

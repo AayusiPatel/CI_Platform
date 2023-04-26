@@ -73,7 +73,7 @@
                         <h1 class="card-title">@Model.mission.Title</h1>
                         <p class="card-text">@Model.mission.ShortDescription</p>
 
-                        @if (@Model.mission.MissionType == "Goal")
+                        @if (Model.mission.MissionType == "Goal" && Model.mission.GoalMissions.Count > 0)
                         {
                             <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">@(Model.mission.GoalMissions.FirstOrDefault()?.GoalValue) @(Model.mission.GoalMissions.FirstOrDefault()?.GoalObjectiveText) </span></h6>
                         }
@@ -99,7 +99,7 @@
                             <div class="col-6 ps-5">
                                   @{
                                     <i class="bi bi-person-check-fill" style=""></i>
-                                        if (Model.mission.MissionType == "Goal")
+                                        if (Model.mission.MissionType == "Goal" && Model.mission.GoalMissions.Count > 0)
                                         {
                                             int seates = @Model.mission.GoalMissions.FirstOrDefault().GoalValue;
                                             int apply = @Model.mission.MissionApplications.Count();
@@ -121,12 +121,12 @@
                             </div>
                             <div class="col-6 text-end pe-5">
                                  @{
-                                        if (Model.mission.MissionType == "Goal")
+                                        if (Model.mission.MissionType == "Goal"&& Model.mission.GoalMissions.Count > 0 )
                                         {
                                             int seates = @Model.mission.GoalMissions.FirstOrDefault().GoalValue;
                                             int apply = @Model.mission.MissionApplications.Count();
                                             float per = (((float)apply / (float)seates)*(float)(100));
-                                               <input type="range" class="mt-1" id="name="slider" min="0" max="100" value=@per>
+                                               <input type="range" class="mt-1" id="name="slider" min="0" max="100" value=@per disabled>
                                             <p>@apply Achieved</p>
                                         }
                                         else
@@ -160,6 +160,33 @@
                                 }
 
                             </div>
+                             <!-- Button trigger modal -->
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Recommand this Story to Co-workers</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" >
+
+                                        <ul id="recommand">
+                                            @foreach (var item in Model.CoWorkers)
+                                            {
+
+                                                <li><input type="checkbox" value="@item.UserId" /> @item.FirstName @item.LastName </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>@*
+                                        <button type="button" class="btn btn-primary" onclick="recommandStory(@Model.Story.StoryId)">Save changes</button>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                             <div class="col-6 text-end" id="recommand" onchange="recommandToCoWorker(@Model.mission.MissionId)">
                                 <button type="button" class="btn btn-outline-dark w-100 rounded-pill" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="bi bi-person-plus"></i> <span style="font-size: 0.8em;"> Recommend to co-worker</span>

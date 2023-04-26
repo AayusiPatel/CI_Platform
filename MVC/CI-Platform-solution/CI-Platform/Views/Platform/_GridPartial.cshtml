@@ -92,9 +92,9 @@
                             <div class="col-6">
                                 @{
                                     <i class="bi bi-person-check-fill" style=""></i>
-                                        if (item.MissionType == "Goal")
+                                        if (item.MissionType == "Goal" && item.GoalMissions != null)
                                         {
-                                            int seates = @item.GoalMissions.FirstOrDefault().GoalValue;
+                                            int seates =@item.GoalMissions.FirstOrDefault().GoalValue;
                                             int apply = @item.MissionApplications.Count();
                                             int left = seates - apply;
 

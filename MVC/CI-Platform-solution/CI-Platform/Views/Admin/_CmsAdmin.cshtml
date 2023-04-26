@@ -90,14 +90,14 @@
     <form method="post" class="px-3">
 
         <label for="select mission" class="mt-3"> Title </label>
-        <input asp-for="cmsPage.Title" type="text" class="form-control" id="formGroupExampleInput">
+        <input asp-for="cmsPage.Title" type="text" class="form-control" id="CMSTitleA" onkeyup="CMSvalidation('A');">
+        <div id="CMSTitleErrorA" class="text-danger"></div>
         <label for="cms1" class="mt-3"> Description</label>
-        <textarea id="cms1" asp-for="cmsPage.Description" cols="172" rows="10"
-                  maxlength="40000"></textarea>
+        <textarea id="cms1" asp-for="cmsPage.Description" cols="172" rows="10" maxlength="40000"></textarea>
 
         <label for="select mission" class="mt-3"> Slug </label>
-        <input type="text" asp-for="cmsPage.Slug" class="form-control" id="formGroupExampleInput">
-
+        <input type="text" asp-for="cmsPage.Slug" class="form-control" id="CMSSlugA" onkeyup="CMSvalidation('A');">
+        <div id="CMSSlugErrorA" class="text-danger"></div>
         <div class="row my-3">
             <div class="col-10"></div>
             <div class="col-2">
@@ -105,8 +105,7 @@
                         onclick="addpage('nav-cms',2);">
                     Cancel
                 </button>
-                <button type="submit" class="threebt rounded-pill btn btn-outline-warning"
-                        value="2" name="command">
+                <button id="CMSubmitbtnA" type="submit" class="threebt rounded-pill btn btn-outline-warning" value="2" name="command" disabled>
                     Save
                 </button>
             </div>
@@ -119,23 +118,21 @@
     <form method="post" class="px-3">
         <input type="hidden" asp-for="cmsPage.CmsPageId" />
         <label for="select mission" class="mt-3"> Title </label>
-        <input asp-for="cmsPage.Title" type="text" class="form-control" id="formGroupExampleInput">
+        <div id="CMSTitleErrorE" class="text-danger"></div>
+        <input asp-for="cmsPage.Title" type="text" class="form-control" id="CMSTitleE" onkeyup="CMSvalidation('E');">
         <label for="cms2" class="mt-3"> Description</label>
-        <textarea id="cms2" asp-for="cmsPage.Description" cols="172" rows="10"
-                  maxlength="40000"></textarea>
+        <textarea id="cms2" asp-for="cmsPage.Description" cols="172" rows="10" maxlength="40000"></textarea>
 
         <label for="select mission" class="mt-3"> Slug </label>
-        <input type="text" asp-for="cmsPage.Slug" class="form-control" id="formGroupExampleInput">
-
+        <input type="text" asp-for="cmsPage.Slug" class="form-control" id="CMSSlugE" onkeyup="CMSvalidation('E');">
+        <div id="CMSSlugError" class="text-danger"></div>
         <div class="row my-3">
             <div class="col-10"></div>
             <div class="col-2">
-                <button type="button" class="cancell rounded-pill btn btn-outline-dark"
-                        onclick="editpage('nav-cms',2);">
+                <button type="button" class="cancell rounded-pill btn btn-outline-dark" onclick="editpage('nav-cms',2);">
                     Cancel
                 </button>
-                <button type="submit" class="threebt rounded-pill btn btn-outline-warning"
-                        value="2" name="command">
+                <button type="submit" id="CMSubmitbtnE" class="threebt rounded-pill btn btn-outline-warning" value="2" name="command" disabled>
                     Save
                 </button>
             </div>
@@ -150,4 +147,29 @@
 <script>
     var abc = document.getElementById("cms1");
     CKEDITOR.replace(abc);
+</script>
+<script>
+  
+function CMSvalidation(x)
+{
+var Title = $("#CMSTitle"+x).val();
+var Slug = $("#CMSSlug"+x).val();
+
+console.log(Title);
+console.log(Slug);
+document.getElementById('CMSubmitbtn'+x).disabled = true;
+
+if(Title.length == 0){
+$("#CMSTitleError"+x).text("Plaease enter the title First");
+}
+else if(Slug.length == 0){
+$("#CMSSlugError"+x).text("Plaease enter the slug First");
+}
+else{
+$("#CMSTitleError"+x).text("");
+$("#CMSSlugError"+x).text("");
+document.getElementById('CMSubmitbtn'+x).disabled = false;
+}
+}
+
 </script>

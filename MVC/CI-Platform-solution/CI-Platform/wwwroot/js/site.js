@@ -76,11 +76,14 @@ function GetProfileCity(x) {
         var countryId = $('#countryId' + x).find(":selected").val();
         console.log($('#countryId' + x));
         var cityDivId = "selectCityList" + x;
+        
     }
     else {
         var countryId = $('#countryId').find(":selected").val();
         var cityDivId = "selectCityList";
     }
+    console.log(x);
+    console.log(cityDivId);
     /*debugger*/
     $.ajax({
         url: "/Home/GetCitys",
@@ -191,7 +194,7 @@ function temp(x) {
             $("#Filter").html(filterObject);
         },
         error: function (e) {
-            debugger
+           /* debugger*/
             console.log("Bye");
             alert('Error');
         },
@@ -461,7 +464,7 @@ function recommandToCoWorker(x) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function applyMission(missionId) {
-    debugger
+ /*   debugger*/
     $.ajax({
         url: '/Platform/applyMission',
         method: "POST",
@@ -469,7 +472,7 @@ function applyMission(missionId) {
             'missionId': missionId,
         },
         success: function (missions) {
-            debugger
+        /*    debugger*/
             if (missions == true) {
                 console.log("done");
                 //$('#applyMission').prop('disabled', true);

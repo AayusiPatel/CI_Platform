@@ -37,6 +37,7 @@ namespace CI_Platform.Repository.Repository
                 adminModel.Citys = _db.Cities.Where(x => x.DeletedAt == null).ToList();
                 adminModel.countries = _db.Countries.Where(x => x.DeletedAt == null).ToList();
                 adminModel.Dmissionskills = adminModel.skills;
+                adminModel.banners = _db.Banners.Where(x => x.DeletedAt == null).ToList();
             }
             return adminModel;
         }
@@ -88,6 +89,18 @@ namespace CI_Platform.Repository.Repository
                 return cms;
             }
             return _db.CmsPages.Where(x => x.DeletedAt == null).ToList();
+        }
+        public List<Banner> searchBanner(String? obj)
+        {
+            //if (obj != null)
+            //{
+            //    obj = obj.ToLower();
+            //    List<Banner> banner = _db.Banners
+            //        .Where(m => m.Text.ToString().Contains(obj) && m.DeletedAt == null)
+            //        .ToList();
+            //    return banner;
+            //}
+            return _db.Banners.Where(x => x.DeletedAt == null).ToList();
         }
 
         public List<Mission> searchMission(String? obj)
@@ -170,6 +183,12 @@ namespace CI_Platform.Repository.Repository
                     am.skill = _db.Skills.FirstOrDefault(x => x.SkillId == id && x.DeletedAt == null);
                 }
             }
+            if (page == 8)
+            {
+                {
+                    am.banner = _db.Banners.FirstOrDefault(x => x.BannerId == id && x.DeletedAt == null);
+                }
+            }
             return am;
         }
 
@@ -244,6 +263,33 @@ namespace CI_Platform.Repository.Repository
             }
             return false;
         }
+        public bool AddBanner(AdminViewModel obj)
+        {
+            if (obj.banner.BannerId == 0)
+            {
+                Banner banner = new Banner();
+                {
+                    banner.Text = obj.banner.Text;
+                    banner.Image = "DCBJHBEFVEWUB.png";
+                }
+                _db.Banners.Add(banner);
+                _db.SaveChanges();
+                return true;
+            }
+            if (obj.banner.BannerId != 0)
+            {
+
+                Banner banner = _db.Banners.FirstOrDefault(x => x.BannerId == obj.banner.BannerId && x.DeletedAt == null);
+                {
+                    banner.Text = obj.banner.Text;
+                    banner.UpdatedAt = DateTime.Now;
+                }
+                _db.Banners.Update(banner);
+                _db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
         public bool AddTheme(AdminViewModel obj)
         {
             if (obj.missionTheme.MissionThemeId == 0)
@@ -288,10 +334,8 @@ namespace CI_Platform.Repository.Repository
                     mis.OrganizationDetail = obj.mission.OrganizationDetail;
                     mis.StartDate = obj.mission.StartDate;
                     mis.EndDate = obj.mission.EndDate;
-                    mis.MissionType = obj.mission.MissionType;
-                    mis.CountryId = obj.mission.CountryId;
+                    mis.MissionType = obj.mission.MissionType;                    
                     mis.ThemeId = obj.mission.ThemeId;
-
                     mis.Avaibility = obj.mission.Avaibility;
 
                 }
@@ -393,10 +437,8 @@ namespace CI_Platform.Repository.Repository
                     mis.OrganizationDetail = obj.mission.OrganizationDetail;
                     mis.StartDate = obj.mission.StartDate;
                     mis.EndDate = obj.mission.EndDate;
-                    mis.MissionType = obj.mission.MissionType;
-                    mis.CountryId = obj.mission.CountryId;
+                    mis.MissionType = obj.mission.MissionType;                
                     mis.ThemeId = obj.mission.ThemeId;
-
                     mis.Avaibility = obj.mission.Avaibility;
                     mis.UpdatedAt = DateTime.Now;
 
@@ -406,10 +448,11 @@ namespace CI_Platform.Repository.Repository
                 _db.SaveChanges();
                
 
-                List<MissionSkill> skills = _db.MissionSkills.Where(x => x.MissionId == mis.MissionId && x.DeletedAt == null).ToList();
-                _db.RemoveRange(skills);
+              
                 if (obj.missionSkills.Count > 0)
                 {
+                    List<MissionSkill> skills = _db.MissionSkills.Where(x => x.MissionId == mis.MissionId && x.DeletedAt == null).ToList();
+                    _db.RemoveRange(skills);
                     foreach (var item in obj.missionSkills)
                     {
 
@@ -458,7 +501,7 @@ namespace CI_Platform.Repository.Repository
                         }
                     }
                 }
-                List<MissionMedium> mism = _db.MissionMedia.Where(x => x.MissionId == mis.MissionId && x.DeletedAt == null).ToList();
+                List<MissionMedium> mism = _db.MissionMedia.Where(x => x.MissionId == mis.MissionId && x.DeletedAt == null ).ToList();
                 if (mism != null)
                 {
                     foreach (var media in mism)
@@ -495,20 +538,26 @@ namespace CI_Platform.Repository.Repository
                         }
                     }
                 }
-                //if (obj.url != null)
-                //{
-                //    MissionMedium md = _db.MissionMedia.Where(x=>x.);
-                //    {
-                //        md.MissionId = mis.MissionId;
-                //        md.MediaName = "missionUrl";
-                //        md.MediaType = "Url";
-                //        md.MediaPath = obj.url;
+                if (obj.url != null)
+                {
+                    MissionMedium md = _db.MissionMedia.FirstOrDefault(x => x.MissionId== mis.MissionId && x.MediaType == "Url");
+                    //_db.MissionMedia.Remove(md);
+                        if(md == null)
+                    {
+                        md= new MissionMedium();
+                    }
+                    {
+                        md.MissionId = mis.MissionId;
+                        md.MediaName = "missionUrl";
+                        md.MediaType = "Url";
+                        md.MediaPath = obj.url;
+                        md.UpdatedAt = DateTime.Now;
 
-                //    }
-                //    _db.MissionMedia.Add(md);
-                //    _db.SaveChanges();
+                    }
+                    _db.MissionMedia.Update(md);
+                    _db.SaveChanges();
 
-                //}
+                }
                 return true;
             }
             return false;
@@ -621,6 +670,22 @@ namespace CI_Platform.Repository.Repository
                     return true;
                 }
                 if (skill == null)
+                {
+                    return false;
+                }
+            }
+            if (page == 8)
+            {
+                Banner banner = _db.Banners.FirstOrDefault(m => m.BannerId == id && m.DeletedAt == null);
+                if (banner != null)
+                {
+                    banner.DeletedAt = DateTime.Now;
+                    _db.Update(banner);
+                    _db.SaveChanges();
+
+                    return true;
+                }
+                if (banner == null)
                 {
                     return false;
                 }

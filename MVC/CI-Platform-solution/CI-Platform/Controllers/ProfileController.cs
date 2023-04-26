@@ -61,26 +61,19 @@ namespace CI_Platform.Controllers
                 int UserId = (int)HttpContext.Session.GetInt32("UId");
 
                 bool pm = _profile.updateUser(obj, UserId);
-               
-                //HttpContext.Session.SetString("Uname", obj.FirstName + " " + obj.LastName);
-                //HttpContext.Session.SetInt32("UId", (int)obj.UserId);
-               
-                if (obj.Avatar != null)
-                {
-                    HttpContext.Session.SetString("Avtar", obj.Avatar);
-                }
-                else
-                {
-                    HttpContext.Session.SetString("Avtar", "");
-                }
 
+              
                 if (pm == false && resetPass == 1)
                 {
                     TempData["error"] = "Old Password is Worng!";
                 }
-                //obj = _profile.getUser(UserId);
 
-                return RedirectToAction("UserProfile","Profile");
+                obj = _profile.getUser(UserId);
+                ViewBag.Uname = obj.FirstName + " " + obj.LastName;
+                ViewBag.Avatar = obj.Avatar;
+                return View(obj);
+
+                //return RedirectToAction("UserProfile","Profile");
             }
 
 
@@ -126,7 +119,10 @@ namespace CI_Platform.Controllers
         [HttpPost]
         public IActionResult TimeSheet(TimeSheetViewModel obj)
         {
-          
+            string name = HttpContext.Session.GetString("Uname");
+            ViewBag.Uname = name;
+            string avatar = HttpContext.Session.GetString("Avatar");
+            ViewBag.Avatar = avatar;
             int UserId = (int)HttpContext.Session.GetInt32("UId");
             DateTime today = DateTime.Today;
             if (obj.DateVolunteereed > today)

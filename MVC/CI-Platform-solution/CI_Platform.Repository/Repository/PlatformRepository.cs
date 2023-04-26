@@ -113,7 +113,6 @@ namespace CI_Platform.Repository.Repository
             if (countryId.Count > 0)
             {
                 cards = cards.Where(x => countryId.Contains((int)x.CountryId)).ToList();
-               
             }
             if (cityId.Count > 0)
             {

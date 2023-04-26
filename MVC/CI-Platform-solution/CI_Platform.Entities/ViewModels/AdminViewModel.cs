@@ -31,9 +31,14 @@ namespace CI_Platform.Entities.ViewModels
         public List<MissionTheme> themes = new List<MissionTheme>();
         public int ThemePages = 1;
 
+        public List<Banner> banners = new List<Banner>();
+        public int BannerPage = 1;
+
+        public Banner banner { get; set; } = new Banner();
         public CmsPage cmsPage { get; set; } = new CmsPage();
 
         public Mission mission  { get; set; } = new Mission();
+
         public List<Skill> Dmissionskills = new List<Skill>();
         public IFormFile? defaultImg { get; set; }
         public List<IFormFile>? missionMedia { get; set; }
@@ -49,5 +54,6 @@ namespace CI_Platform.Entities.ViewModels
         public List<Country> countries = new List<Country>();
         public Skill skill { get; set; } = new Skill();
 
+        public int activeTab { get; set; }
     }
 }

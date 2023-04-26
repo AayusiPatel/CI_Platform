@@ -60,7 +60,11 @@ namespace CI_Platform.Repository.Repository
         public int avgRating(int mid)
         {
             List<MissionRating> ratings = _db.MissionRatings.Where(x => x.MissionId == mid).ToList();
-            int abc = (int)ratings.Average(x => x.Rating);
+            int abc = 0;
+            if (ratings.Count > 0)
+            {
+                 abc = (int)ratings.Average(x => x.Rating);
+            }
             return abc;
         }
 

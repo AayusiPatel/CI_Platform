@@ -19,7 +19,7 @@ namespace CI_Platform.Controllers
             _admin = admin;
           
         }
-        public IActionResult AdminMain()
+        public IActionResult AdminMain(int command = 1)
         {
             int pageIndex = 1;
             int pageSize = 5;
@@ -38,8 +38,13 @@ namespace CI_Platform.Controllers
             vm.themes = vm.themes.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             vm.skillPages = (int)Math.Ceiling(vm.skills.Count() / (double)pageSize);
             vm.skills = vm.skills.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            vm.BannerPage = (int)Math.Ceiling(vm.banners.Count() / (double)pageSize);
+            vm.banners = vm.banners.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+
             string name = HttpContext.Session.GetString("Uname");
             ViewBag.Uname = name;
+
+            vm.activeTab = command;
             return View(vm);
         }
 
@@ -68,7 +73,12 @@ namespace CI_Platform.Controllers
             {
                 bool status = _admin.AddSkill(obj);
             }
-            return RedirectToAction("AdminMain");
+          
+            if (command == 8)
+            {
+                bool status = _admin.AddBanner(obj);
+            }
+            return RedirectToAction("AdminMain",command);
         }
 
         public IActionResult DeleteActivity(int id,int page)
@@ -130,6 +140,13 @@ namespace CI_Platform.Controllers
                 am.skillPages = (int)Math.Ceiling(am.skills.Count() / (double)pageSize);
                 am.skills = am.skills.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
                 return PartialView("_SkillAdmin", am);
+            }
+            if (page == 8)
+            {
+                am.banners = _admin.searchBanner(obj);
+                am.BannerPage = (int)Math.Ceiling(am.banners.Count() / (double)pageSize);
+                am.banners = am.banners.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+                return PartialView("_BannerAdmin", am);
             }
             return RedirectToAction("Error");
         }

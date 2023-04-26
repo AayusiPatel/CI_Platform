@@ -120,21 +120,25 @@
         <div class="row mt-3">
             <div class="col-12 col-sm-6">
                 <label>Name</label>
-                <input type="text" asp-for="adminUser.FirstName" class="form-control" placeholder="Enter your name">
+                <input type="text" id="UserNameA" onkeyup="Uservalidation('A');" asp-for="adminUser.FirstName" class="form-control" placeholder="Enter your name">
+                <div id="UNameErrorA" class="text-danger"></div>
             </div>
             <div class="col-12 col-sm-6">
                 <label>Surname</label>
-                <input type="text" asp-for="adminUser.LastName" class="form-control" placeholder="Enter your surname">
+                <input type="text" id="USNameA" onkeyup="Uservalidation('A');" asp-for="adminUser.LastName" class="form-control" placeholder="Enter your surname">
+               <div id="USNameErrorA" class="text-danger"></div>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-12 col-sm-6">
                 <label>Email</label>
-                <input type="text" asp-for="adminUser.Email" class="form-control" placeholder="Enter Email">
+                <input type="text" id="UserEmailA" onkeyup="Uservalidation('A');" asp-for="adminUser.Email" class="form-control" placeholder="Enter Email">
+              <div id="UEmailErrorA" class="text-danger"></div>
             </div>
             <div class="col-12 col-sm-6">
                 <label>Password</label>
-                <input type="text" asp-for="adminUser.Password" class="form-control" placeholder="Enter Password">
+                <input type="text" id="UserPassA" onkeyup="Uservalidation('A');" asp-for="adminUser.Password" class="form-control" placeholder="Enter Password">
+               <div id="UPassErrorA" class="text-danger"></div>
             </div>
         </div>
         <div class="row mt-3">
@@ -150,7 +154,7 @@
         <div class="row mt-3">
             <div class="col-12 col-sm-6">
                 <label>Country*</label>
-                <select id="countryIdA" asp-for="adminUser.CountryId" onchange="GetProfileCity('A');" class="form-select" aria-label="Default select example"
+                <select id="countryIdUA" asp-for="adminUser.CountryId" onchange="GetProfileCity('UA'); Uservalidation('A');" class="form-select" aria-label="Default select example"
                                     aria-placeholder="Select your country">
                                 <option value="0">Select your country</option>
                                 @foreach (var obj in @Model.countries)
@@ -158,11 +162,11 @@
                                     <option value="@obj.CountryId">@obj.Name</option>
                                 }
                             </select>
+                               <div id="UCountryErrorA" class="text-danger"></div>
             </div>
             <div class="col-12 col-sm-6">
                 <label>City*</label>
-                <select class="form-select" asp-for="adminUser.CityId" aria-label="Default select example"
-                                    aria-placeholder="Select your City" id="selectCityListA" >
+                <select class="form-select" asp-for="adminUser.CityId" aria-label="Default select example" aria-placeholder="Select your City" id="selectCityListUA" onchange="Uservalidation('A');" >
                                 <option value="0">Select your City</option>
                                 @foreach (var item in @Model.Citys)
                                 {
@@ -170,6 +174,7 @@
                                     <option value="@item.CityId"> @item.Name</option>
                                 }
                             </select>
+                               <div id="UCityErrorA" class="text-danger"></div>
             </div>
         </div>
         <div class="form-group mt-3">
@@ -194,7 +199,7 @@
                 </button>
             </div>
             <div class="col-1">
-                <button type="submit" name="command" value="1"  class=" btn btn-outline-warning rounded-pill ">
+                <button type="submit" id="UserSubmitbtnA" name="command" value="1"  class=" btn btn-outline-warning rounded-pill" disabled>
                     Save
                 </button>
             </div>
@@ -218,21 +223,25 @@
             <input type="hidden" asp-for="adminUser.UserId" />
             <div class="col-12 col-sm-6">
                 <label>Name</label>
-                <input type="text" asp-for="adminUser.FirstName" class="form-control" placeholder="Enter your name">
+                <input type="text" id="UserNameE" onkeyup="Uservalidation('E');" asp-for="adminUser.FirstName" class="form-control" placeholder="Enter your name">
+               <div id="UNameErrorE" class="text-danger"></div>
             </div>
             <div class="col-12 col-sm-6">
                 <label>Surname</label>
-                <input type="text" asp-for="adminUser.LastName" class="form-control" placeholder="Enter your surname">
+                <input type="text" id="USNameE" onkeyup="Uservalidation('E');" asp-for="adminUser.LastName" class="form-control" placeholder="Enter your surname">
+               <div id="USNameErrorE" class="text-danger"></div>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-12 col-sm-6">
                 <label>Email</label>
-                <input type="text" asp-for="adminUser.Email" class="form-control" placeholder="Enter Email">
+                <input type="text" id="UserEmailE" onkeyup="Uservalidation('E');" asp-for="adminUser.Email" class="form-control" placeholder="Enter Email">
+              <div id="UEmailErrorE" class="text-danger"></div>
             </div>
             <div class="col-12 col-sm-6">
                 <label>Password</label>
-                <input type="text" asp-for="adminUser.Password" class="form-control" placeholder="Enter Password">
+                <input type="text" id="UserPassE" onkeyup="Uservalidation('E');" asp-for="adminUser.Password" class="form-control" placeholder="Enter Password">
+              <div id="UPassErrorE" class="text-danger"></div>
             </div>
         </div>
         <div class="row mt-3">
@@ -248,7 +257,7 @@
         <div class="row mt-3">
             <div class="col-12 col-sm-6">
                 <label>Country*</label>
-                <select id="countryIdE" asp-for="adminUser.CountryId" onchange="GetProfileCity('E');" class="form-select" aria-label="Default select example"
+                <select id="countryIdUE"  asp-for="adminUser.CountryId" onchange="GetProfileCity('UE'); Uservalidation('E');" class="form-select" aria-label="Default select example"
                                     aria-placeholder="Select your country">
                                 <option value="0">Select your country</option>
                                 @foreach (var obj in @Model.countries)
@@ -256,11 +265,11 @@
                                     <option value="@obj.CountryId">@obj.Name</option>
                                 }
                             </select>
+                               <div id="UCountryErrorE" class="text-danger"></div>
             </div>
             <div class="col-12 col-sm-6">
                 <label>City*</label>
-                <select class="form-select" asp-for="adminUser.CityId" aria-label="Default select example"
-                                    aria-placeholder="Select your City" id="selectCityListE" >
+                <select class="form-select" onchange="Uservalidation('E');" asp-for="adminUser.CityId" aria-label="Default select example" aria-placeholder="Select your City" id="selectCityListUE" >
                                 <option value="0">Select your City</option>
                                 @foreach (var item in @Model.Citys)
                                 {
@@ -268,6 +277,7 @@
                                     <option value="@item.CityId"> @item.Name</option>
                                 }
                             </select>
+                               <div id="UCityErrorE" class="text-danger"></div>
             </div>
         </div>
         <div class="form-group mt-3">
@@ -292,7 +302,7 @@
                 </button>
             </div>
             <div class="col-1">
-                <button type="submit" name="command" value="1" class=" btn btn-outline-warning rounded-pill ">
+                <button type="submit" id="UserSubmitbtnE" name="command" value="1" class=" btn btn-outline-warning rounded-pill " disabled>
                     Save
                 </button>
             </div>
@@ -309,8 +319,8 @@ var Email = $("#UserEmail"+x).val();
 if(x == 'x'){
 var Pass = $("#UserPass"+x).val();
 }
-var City = $("#selectCityList"+x).val();
-var Country = $("#countryId"+x).val();
+var City = $("#selectCityListU"+x).val();
+var Country = $("#countryIdU"+x).val();
 console.log(City);
 console.log(Country);
 console.log(Name);
