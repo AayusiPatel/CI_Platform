@@ -122,6 +122,11 @@ namespace CI_Platform.Controllers
                 else
                 {
                     bool abc = _story.saveStory(obj, command, UserId);
+                    if (!abc)
+                    {
+                        TempData["error"] = "Same Title is taken for story in this mission.Try New Title!";
+                        return View(obj);
+                    }
                     _story.saveImage(obj, UserId);
                     return View(obj);
                 }
@@ -154,7 +159,7 @@ namespace CI_Platform.Controllers
 
             List<Story> cards = _story.StoryFilter(search);
             int PageSize = 3;
-            int TotalRecords = (cards.Count) / PageSize;
+            int TotalRecords = (int)Math.Ceiling(cards.Count() / (double)PageSize); 
             List<Story> records = cards.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToList();
 
             StoryModel sModel = new StoryModel();

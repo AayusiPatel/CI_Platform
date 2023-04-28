@@ -38,6 +38,11 @@ namespace CI_Platform.Repository.Repository
 
             return admin;
         }
+
+        public List<Banner> banners()
+        {
+            return _db.Banners.Where(x => x.DeletedAt == null).OrderBy(x => x.SortOrder).ToList();
+        }
         public User Login(Login obj)
         {
             User user = new User();
@@ -117,7 +122,7 @@ namespace CI_Platform.Repository.Repository
             #endregion Update Password Reset Table
 
             #region Send Mail
-            var mailBody = "<h1>Click link to reset password</h1><br><h2><a href='" + "https://localhost:7228/User/ResetPwd?token1=" + finalString + "'>Reset Password</a></h2>";
+            var mailBody = "<h1>Click link to reset password</h1><br><h2><a href='" + "https://localhost:7228/User/ResetPwd?token=" + finalString + "'>Reset Password</a></h2>";
 
             // create email message
             var email = new MimeMessage();
@@ -129,7 +134,7 @@ namespace CI_Platform.Repository.Repository
             // send email
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("payushi.tatva@gmail.com", "qgtaopriiacrebdf");
+            smtp.Authenticate("payushi.tatva@gmail.com", "leipwwhwrkqbemqk");
             smtp.Send(email);
             smtp.Disconnect(true);
             #endregion Send Mail

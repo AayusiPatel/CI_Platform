@@ -10,14 +10,15 @@
     
       <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/css/style.css">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" shrink-to-fit="no">
   
 
 </head>
 @if (TempData["Message"] != null)
     {
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        
         <script type="text/javascript">
 
               
@@ -27,8 +28,7 @@
     } 
     @if (TempData["LoginError"] != null)
     {
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+   
         <script type="text/javascript">
 
             toastr.error('@TempData["LoginError"]')
@@ -37,8 +37,7 @@
     } 
     @if (TempData["Registered"] != null)
     {
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
         <script type="text/javascript">
         
             toastr.success('@TempData["Registered"]')
@@ -49,11 +48,45 @@
     <div class="col-md col-sm-12 ">
         <div id="carouselExampleRide" class="carousel slide " data-bs-ride="true">
             <div class="carousel-inner">
-                <div class="carousel-item active">
+                @foreach (var item in @ViewBag.banners)
+                {
+                    if (item.SortOrder == 1)
+                    {
+                       <div class="carousel-item active"> 
+                            <img src="~/img/@item.Image" class="img-fluid abc" alt="...">
+                    <div class="carousel-caption d-none d-md-block ">
+                        <h3>Sed ut perspiciatis unde omnis iste natus voluptatem.</h3>
+                        <p>
+                            
+                            <small>
+                                @item.Text
+                            </small>
+                        </p>
+                    </div>
+                </div>
+                    }
+                    else{
+                     <div class="carousel-item">
+                         <img src="~/img/@item.Image" class="img-fluid abc" alt="...">
+                    <div class=" carousel-caption d-none d-md-block ">
+                        <h3>Sed ut perspiciatis unde omnis iste natus voluptatem.</h3>
+                        <p>
+                            
+                            <small>
+                                @item.Text
+                            </small>
+                        </p>
+                    </div>
+                </div>
+                    }
+                    
+                }
+               @* <div class="carousel-item active">
                     <img src="~/img/Grow-Trees-On-the-path-to-environment-sustainability-login.png" class="img-fluid abc" alt="...">
                     <div class=" carousel-caption d-none d-md-block ">
                         <h3>Sed ut perspiciatis unde omnis iste natus voluptatem.</h3>
                         <p>
+                          
                             <small>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                                 consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
@@ -88,7 +121,7 @@
                                 </small>
                             </p>
                     </div>
-                </div>
+                </div>*@
             </div>
             <button class="carousel-control-prev " type="button" data-bs-target="#carouselExampleRide " data-bs-slide="prev ">
                 <span class="carousel-control-prev-icon " aria-hidden="true"></span>

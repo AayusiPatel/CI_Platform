@@ -14,7 +14,7 @@
     <div class="col">
         <div class="card ">
             <div class="bg">
-                <img src="~/img/Story/@item.StoryMedia.FirstOrDefault()?.Path" id="@item.StoryId" class="card-img-top banner1" style="width: 100%;" alt="..."  onmouseover="showStory(@item.StoryId);">
+                <img src="~/img/Story/@item.StoryMedia.FirstOrDefault(x=>x.Type == "png")?.Path" id="@item.StoryId" class="card-img-top banner1" style="width: 100%;" alt="..."  onmouseover="showStory(@item.StoryId);">
 
 
                 <div class="banner-header d-flex justify-content-center ">
@@ -113,7 +113,7 @@
 
 }
 
-
+@*
 <div class="container" id="paginationFilter" style="display: none;">
        
                         <nav aria-label="Page navigation example ">
@@ -135,4 +135,4 @@
                                 }
                             </ul>
                         </nav>
-</div>
+</div>*@

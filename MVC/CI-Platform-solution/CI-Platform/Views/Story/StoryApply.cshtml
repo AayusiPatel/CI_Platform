@@ -91,7 +91,13 @@
 
 <title>Share your Story</title>
 
-
+ @if (TempData["error"] != null)
+    {
+  
+        <script type="text/javascript">
+            toastr.error('@TempData["error"]')
+        </script>
+    }
 <div class="container">
 
     <div class="row">
@@ -212,17 +218,21 @@
     const inputDiv = document.querySelector(".input-div")
      const input = document.querySelector("#imageupload")
      const output = document.querySelector("#preview")
+     var his = []
      let imagesArray = []
 
      input.addEventListener("change", () => {
-
+         
          const files = input.files
+        imagesArray = []
+        console.log("Before:"+imagesArray)
          for (let i = 0; i < files.length; i++) {
              imagesArray.push(files[i])
+            dT.items.add(files[i])    
          }
-           console.log(files);
+       console.log("After:"+imagesArray)
          displayImages()
-
+         //input.files = dT.files;
      })
 
      inputDiv.addEventListener("drop", () => {
@@ -230,11 +240,10 @@
          const files = e.dataTransfer.files
          for (let i = 0; i < files.length; i++) {
              if (!files[i].type.match("image")) continue;
-
              if (imagesArray.every(image => image.name !== files[i].name))
                  imagesArray.push(files[i])
          }
-           console.log(files);
+           //console.log(files);
          displayImages()
      })
       function displayImages() {
@@ -250,20 +259,22 @@
      }
 
      function deleteImage(index) {
-         imagesArray.splice(index, 1)
+         imagesArray.splice(index, 1)        
          displayImages()
+
      }
 
 </script>
 
 
 <script>
+    const dT = new DataTransfer();
     function Sdata(){
       var div1 = document.getElementById("getData");
          var selectedOption = div1.options[div1.selectedIndex];
     var selectedValue = selectedOption.value;
 
-     console.log(selectedValue);
+     //console.log(selectedValue);
 
 
     $.ajax({
@@ -276,11 +287,11 @@
 
         success: function (data) {
 
-             console.log(data);
+             //console.log(data);
 
               data = JSON.parse(data);
 
-             console.log(data);
+             //console.log(data);
              if(data != null){
               {
                   if(data.story.PublishedAt != null)
@@ -298,44 +309,12 @@
 
                 $("#sDate").val(data.PublishedAt);
                  $("#sUrl").val(data.url);
-                console.log(data.displayImages);
+                //console.log(data.displayImages);
                 const input = document.querySelector("#imageupload")
                        if(data.displayImages != null){
 
-                       //    $("#preview").empty();
-                       //    data.displayImages.forEach((image, index) => {
-
-                       //       var imageDiv = document.createElement('div');
-                       //       imageDiv.className = 'image storyimages';
-                       //       var imageContainer = document.getElementById('preview');
-                       //        imageContainer.appendChild(imageDiv);
-
-                       //           var img = document.createElement('img');
-                       //           img.src = "/img/" + image ;
-
-                       //            imageDiv.appendChild(img);
-
-                       //            //var mySpan = document.createElement('span');
-                       //            // mySpan.addEventListener('click', deleteImage(index));
-                       //            //     imageDiv.appendChild(mySpan);
-
-                       //           });
-
-
-
-                                 //imagesArray = [];
-                                 //for (var i = 0; i < data.displayImages; i++){
-                                 //    debugger
-                                 // imagesArray.push(data.displayImages[i]);
-                                 // debugger
-                                 // console.log(data.displayImages[i]);
-                                 // debugger
-                                 // }
-                                 // console.log(imagesArray);
-
-                                 /////////////////////////////////////////////////////////////////////////////////////////
                                   function toDataUrl(url, callback) {
-                                    console.log(url);
+                                    //console.log(url);
                                 var newUrl = url;
                                 var xhr = new XMLHttpRequest();
                                 xhr.onload = function() {
@@ -346,35 +325,50 @@
 
                                 xhr.responseType = 'blob';
                                 xhr.send();
+                                //console.log(xhr);
                             }
-                            const dT = new DataTransfer();
+                          
 
                             let image;
 
                                    let images = ""
                                    let returnImage = ""
+                                   imagesArray = []
+                                   dT.items.clear();
                                   data.displayImages.forEach((img, index) => {
 
-                                       returnImage = img;
-                                       img = "/img/" + img;
-        toDataUrl(img,function(x){
-            image = x;
+                                       //returnImage = img;
+                                       returnImage = "/img/" + img;
+                                     toDataUrl(returnImage,function(x){
+                                         //console.log(x);
+                                     image = x;
+                                      //console.log(returnImage);
+                                      //console.log(img);
+                                     dT.items.add(new File([image], img, {
+                                         
+                                         type: "image/png" 
+                                         
+                                     
+                                           }));
+                                         imagesArray.push(new File([image], img, {
+                                              
+                                              type: "image/png" 
+                                            
+                                         
+                                             }));
+                                             //console.log(dT.items);
+                                             //console.log(dT.files);
+                                             //console.log(document.querySelector('#imageupload').files);
 
-
-            dT.items.add(new File([image], returnImage, {
-                type: "image/png"
-            }));
-            imagesArray.push(new File([image], returnImage, {
-                type: "image/png"
-            }));
-
-
-        document.querySelector('#imageupload').files = dT.files;
-        });
-
+                                             document.querySelector('#imageupload').files = dT.files;
+                                            
+                                             his = dT.files;
+                                           //console.log(document.querySelector('#imageupload').files);
+                                             });
+                                             
 
                                     images += `<div class="image">
-                                                <img src="${img}" alt="image">
+                                                <img src="${returnImage}" alt="image">
                                                 <span onclick="deleteImage(${index})">&times;</span>
                                               </div>`
 
@@ -397,12 +391,21 @@
             }
             }
             else{
+
                  $("#formGroupExampleInput").val("");
 
                 $("#sDate").val("");
                  $("#sUrl").val("");
                   output.innerHTML = "";
                  CKEDITOR.instances.editor.setData("");
+                 console.log("Before dt.Files:"+$("#imageupload").files);
+                input.files = []
+              
+                 console.log("After dt.Files:"+$("#imageupload").files);
+                 //$("#imageupload").files = dT.files;
+              
+                
+                  output.innerHTML = "No Images Are Choosen";
             }
 
         },

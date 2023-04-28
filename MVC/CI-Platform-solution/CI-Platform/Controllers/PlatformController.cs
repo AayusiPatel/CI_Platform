@@ -64,6 +64,7 @@ namespace CI_Platform.Controllers
 
             var UId = (int)HttpContext.Session.GetInt32("UId");
             ViewBag.uid = UId;
+
             if (cards.Count == 0)
             {
                 return PartialView("_NoMissionFound");
@@ -122,11 +123,12 @@ namespace CI_Platform.Controllers
                 VolunteerModel volunteerModel = _volunteer.DisplayModel(mid, pageIndex);
 
                 var rating = volunteerModel.mission.MissionRatings.FirstOrDefault(x => x.UserId == UId && x.MissionId == mid);
+               
                 if (rating != null)
                 {
                     ViewBag.rating = rating.Rating;
                 }
-
+                ViewBag.rating = 0;
                 int pageSize = 2;
                 volunteerModel.volunteres = _volunteer.recentVolunteers(mid);
                 volunteerModel.totalPage = (int)Math.Ceiling(volunteerModel.volunteres.Count() / (double)pageSize);

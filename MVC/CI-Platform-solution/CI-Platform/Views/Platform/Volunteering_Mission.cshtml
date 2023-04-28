@@ -28,7 +28,8 @@
                     <!-- ............................................................................................................................................. -->
                     <div class="container p-0 pb-5" style="width: 100%; height: 100%;">
 
-
+                        @if(Model.missionMedias.Count >0)
+                        {
                         @for (int i = 1; i <= Model.missionMedias.Count; i++)
                         {
                             <div class="mySlides">
@@ -36,7 +37,7 @@
                                 <img src="~/img/@(Model.missionMedias[i-1].MediaPath)" style="width:100%; ">
                             </div>
                         }
-
+                        }
 
                         <!-- Next and previous buttons -->
                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -47,13 +48,14 @@
                         <!-- Thumbnail img -->
                         <div class="row g-1">
 
-
-                            @for (int i = 1; i <= Model.missionMedias.Count; i++)
-                            {
-                                <div class="col">
-                                    <img class="demo cursor" src="~/img/@(Model.missionMedias[i-1].MediaPath)" style="width:100%" onclick="currentSlide(@i)">
-                                </div>
-
+                             @if(Model.missionMedias.Count >0)
+                        {
+                                @for (int i = 1; i <= Model.missionMedias.Count; i++)
+                                {
+                                    <div class="col">
+                                        <img class="demo cursor" src="~/img/@(Model.missionMedias[i-1].MediaPath)" style="width:100%" onclick="currentSlide(@i)">
+                                    </div>
+                                }
 
                             }
 
@@ -86,7 +88,20 @@
                         }
                         else
                         {
-                            <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">@Model.mission.StartDate.ToString().Substring(0,10)  until @Model.mission.EndDate.ToString().Substring(0,10) </span></h6>
+                            <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">
+                                    @if(Model.mission.StartDate != null)
+                                    {
+                                        @Model.mission.StartDate.ToString().Substring(0,10) 
+                                    }
+
+                                until 
+                                    @if(Model.mission.EndDate != null)
+                                    {
+                                        @Model.mission.EndDate.ToString().Substring(0,10) 
+                                    }
+                                   
+                                </span>
+                                </h6>
 
                         }
 
@@ -131,7 +146,11 @@
                                         }
                                         else
                                         {
-                                            <i class="bi bi-clock"></i> @Model.mission.EndDate.ToString().Substring(0,10)
+                                            <i class="bi bi-clock"></i> 
+                                            @if(Model.mission.EndDate != null)
+                                    {
+                                        @Model.mission.EndDate.ToString().Substring(0,10) 
+                                    }
                                             <br>
                                             <span class="small text-muted">&nbsp &nbsp Deadline</span>
                                         }
@@ -162,44 +181,44 @@
                             </div>
                              <!-- Button trigger modal -->
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="RecommandModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Recommand this Story to Co-workers</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Recommand this Mission to Co-workers</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body" >
 
                                         <ul id="recommand">
                                             @foreach (var item in Model.CoWorkers)
-                                            {
+                                    {
 
-                                                <li><input type="checkbox" value="@item.UserId" /> @item.FirstName @item.LastName </li>
-                                            }
+                                        <li><input type="checkbox" value="@item.UserId" /> @item.FirstName @item.LastName </li>
+                                    }
                                         </ul>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>@*
-                                        <button type="button" class="btn btn-primary" onclick="recommandStory(@Model.Story.StoryId)">Save changes</button>*@
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" onclick="recommandToCoWorker(@Model.mission.MissionId)">Save changes</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                             <div class="col-6 text-end" id="recommand" onchange="recommandToCoWorker(@Model.mission.MissionId)">
-                                <button type="button" class="btn btn-outline-dark w-100 rounded-pill" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button type="button" class="btn btn-outline-dark w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#RecommandModal" @*data-bs-toggle="dropdown" aria-expanded="false"*@>
                                     <i class="bi bi-person-plus"></i> <span style="font-size: 0.8em;"> Recommend to co-worker</span>
                                 </button>
 
-                                <ul class="dropdown-menu">
+                               @* <ul class="dropdown-menu">
 
                                     @foreach (var item in Model.CoWorkers)
                                     {
 
                                         <li><input type="checkbox" value="@item.UserId" /> @item.FirstName @item.LastName </li>
                                     }
-                                </ul>
+                                </ul>*@
                             </div>
                         </div>
                         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -391,7 +410,21 @@
                                     <p class="card-text small">
                                         Date: <br>
 
-                                        <span> @Model.mission.StartDate.ToString().Substring(0,10) <br> until @Model.mission.EndDate.ToString().Substring(0,10)  </span>
+                                        <span> 
+                                             @if(Model.mission.StartDate != null)
+                                    {
+                                        @Model.mission.StartDate.ToString().Substring(0,10) 
+                                    }
+
+                                         <br> until 
+                                    @if(Model.mission.EndDate != null)
+                                    {
+                                        @Model.mission.EndDate.ToString().Substring(0,10) 
+                                    }
+                                          @*  @Model.mission.StartDate.ToString().Substring(0,10)
+                                            <br> until 
+                                            @Model.mission.EndDate.ToString().Substring(0,10) *@
+                                        </span>
 
 
                                     </p>
@@ -691,8 +724,8 @@
                             <div class="content">
                                 <img src=~/img/@(Model.relatedMissions[i].MissionMedia.FirstOrDefault()?.MediaPath) class="card-img-top" alt="..." style="width: 100%;">
 
-                                <img src="~/img/add1.png" class="card-img-top bg-dark fa-download-1" alt="..." onclick="">
-                                @{
+                          @*      <img src="~/img/add1.png" class="card-img-top bg-dark fa-download-1" alt="..." onclick="">*@
+                                @*@{
                                     bool a = Model.relatedMissions[i].FavoriteMissions.Any(x => x.UserId == @ViewBag.uid);
                                 }
                                 @if (Model.relatedMissions[i].FavoriteMissions.Any(x => x.UserId == @ViewBag.uid))
@@ -702,7 +735,7 @@
                                 else
                                 {
                                     <i class="bi bi-suit-heart fa-download-2 text-light bg-dark" style="font-size: 2.5rem;"></i>
-                                }
+                                }*@
                                 <!-- <i class="bi bi-suit-heart bg-dark fa-download-2 "></i> -->
                             <span class="border-dark rounded-pill label"> &nbsp; &nbsp; @Model.relatedMissions[i].Theme.Title  &nbsp; &nbsp;</span>
                             </div>
@@ -728,7 +761,7 @@
 
                             </div>
 
-                            @if (@Model.relatedMissions[i].MissionType == "Goal")
+                            @if (@Model.relatedMissions[i].MissionType == "Goal" && @Model.relatedMissions[i].GoalMissions.Count>0)
                             {
                                 <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">@(Model.relatedMissions[i].GoalMissions.FirstOrDefault()?.GoalValue) @(Model.relatedMissions[i].GoalMissions.FirstOrDefault()?.GoalObjectiveText) </span></h6>
                             }
@@ -741,7 +774,19 @@
                             }
                             else
                             {
-                                <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">@Model.relatedMissions[i].StartDate.ToString().Substring(0,10)  until @Model.relatedMissions[i].EndDate.ToString().Substring(0,10) </span></h6>
+                                <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">
+                                        @if (Model.relatedMissions[i].StartDate != null)
+                                        {
+                                            @Model.relatedMissions[i].StartDate.ToString().Substring(0,10)
+                                        }
+                                        until
+                                        @if (Model.relatedMissions[i].EndDate != null)
+                                        {
+                                            @Model.relatedMissions[i].EndDate.ToString().Substring(0,10)
+                                        }
+
+                                </span>
+                                </h6>
 
                             }
 
@@ -752,7 +797,12 @@
                                     <span class="small text-muted">&nbsp &nbsp Seats Left</span>
                                 </div>
                                 <div class="col-6 ">
-                                    <i class="bi bi-clock"></i> @Model.relatedMissions[i].EndDate.ToString().Substring(0,10)<br>
+                                    <i class="bi bi-clock"></i>
+                                    @if (Model.relatedMissions[i].EndDate != null)
+                                    {
+                                        @Model.relatedMissions[i].EndDate.ToString().Substring(0,10)
+               }
+                 <br>
                                     <span class="small text-muted">&nbsp &nbsp Deadline</span>
                                 </div>
                             </div>

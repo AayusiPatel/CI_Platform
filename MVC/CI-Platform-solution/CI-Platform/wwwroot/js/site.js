@@ -311,8 +311,8 @@ function story(x) {
             //$("#StoriesId").empty();
             //console.log("Filtered Story");
             //$("#StoriesId").html(data);
-            var paginatoinPage = document.getElementById("paginationPage").style.display = 'none';
-            var paginationFilter = document.getElementById("paginationFilter").style.display = 'block';
+            //var paginatoinPage = document.getElementById("paginationPage").style.display = 'none';
+            //var paginationFilter = document.getElementById("paginationFilter").style.display = 'block';
         },
         error: function (e) {
             debugger
@@ -570,6 +570,7 @@ function StoryPage(x) {
         success: function (data) {
             console.log("Pagination");
             $("body").html(data);
+
         },
         error: function (request, error) {
             console.log("Error in Pagination");
@@ -737,18 +738,20 @@ function getData(x, y, id) {
             }
             if (y == 3) {
 
+                const dT = new DataTransfer();
+              
                 const inputDiv = document.querySelector(".input-div")
                 const input = document.querySelector("#imageupload")
                 const output = document.querySelector("#preview")
-                let imagesArray = []
-
+                let imagesArray2 = []
                 input.addEventListener("change", () => {
-
+                    imagesArray2 = []
+                    console.log("Change1:" + imagesArray2);
                     const files = input.files
                     for (let i = 0; i < files.length; i++) {
-                        imagesArray.push(files[i])
+                        imagesArray2.push(files[i])
                     }
-                    console.log(files);
+                    console.log("Change1: After" + imagesArray2);
                     displayImages()
 
                 })
@@ -758,33 +761,12 @@ function getData(x, y, id) {
                     const files = e.dataTransfer.files
                     for (let i = 0; i < files.length; i++) {
                         if (!files[i].type.match("image")) continue;
-
-                        if (imagesArray.every(image => image.name !== files[i].name))
-                            imagesArray.push(files[i])
+                        if (imagesArray2.every(image => image.name !== files[i].name))
+                            imagesArray2.push(files[i])
                     }
-                    console.log(files);
+                    //console.log(files);
                     displayImages()
                 })
-                function displayImages() {
-
-                    let images = ""
-                    imagesArray.forEach((image, index) => {
-                        images += `<div class="image storyimages">
-                                         <img src="${URL.createObjectURL(image)}" alt="image">
-                                         <span onclick="deleteImg(${index})">&times;</span>
-                                       </div>`
-                    })
-                    output.innerHTML = images
-                }
-
-                function deletImg(index) {
-                    console.log("Hii");
-                    imagesArray.splice(index, 1)
-                    displayImages()
-                }
-
-               
-               
              
              /*   debugger*/
                 if (ck.length > 0) {
@@ -798,39 +780,54 @@ function getData(x, y, id) {
 
                         };
                         xhr.open('GET', newUrl);
+
                         xhr.responseType = 'blob';
                         xhr.send();
+                        console.log(xhr);
                     }
-                    const dT = new DataTransfer();
+                 
+
                     let image;
+
                     let images = ""
                     let returnImage = ""
                     ck.forEach((img, index) => {
-                        returnImage = img;
-                        img = "/img/" + img;
-                        toDataUrl(img, function (x) {
+
+                        //returnImage = img;
+                        returnImage = "/img/" + img;
+                        toDataUrl(returnImage, function (x) {
+                            console.log(x);
                             image = x;
-                            dT.items.add(new File([image], returnImage, {
-                                type: "image/png"
+                            console.log(returnImage);
+                            console.log(img);
+                            dT.items.add(new File([image], img, {
+
+                                type: "image/png",
+                              
+
                             }));
-                            imagesArray.push(new File([image], returnImage, {
-                                type: "image/png"
+                            imagesArray2.push(new File([image], img, {
+
+                                type: "image/png",                               
                             }));
+                           
                             document.querySelector('#imageupload').files = dT.files;
+                           
                         });
 
 
                         images += `<div class="image">
-                                                <img src="${img}" alt="image">
-                                                <span onclick="deleteImg(${index})">&times;</span>
+                                                <img src="${returnImage}" alt="image">
+                                                <span onclick="deleteImage(${index})">&times;</span>
                                               </div>`
 
-                    });
+                    })
                     
                     output.innerHTML = images;
-                   
+                  
                 }
                 else {
+              
                     output.innerHTML = "No Images Are Choosen";
                 }
             }
@@ -915,23 +912,25 @@ function StoryPreview(id) {
         success: function (data) {
 
             console.log(data);
-            //var page = document.getElementById("nav-story");
-            //var content = page.getElementById("pageContent");
-            //content.style.display = "none";
-            $("#cmspage5").empty();
-            $("#cmspage5").html(data);
-       /*     debugger*/
-            //var button1 = document.createElement("button");
+            var page = document.getElementById("nav-story");
+            var content = page.querySelector("#pageContent");
+            content.style.display = "none";
+            var table = page.querySelector("#cmspage5");
+            table.style.display = "none";
+       
+         
+            $("#storyDisplay").empty();
+           
+            $("#storyDisplay").html(data);
+           
+            var story = page.querySelector("#storyDisplay");
+            story.style.display = "block";
+            var btn = page.querySelector(".cancleBtn");
 
-            ////var btn = $('<button/>', {
-            ////    text: 'Click me!',
-            ////    /*class: 'my-button',*/
-            ////    click: AdminSearch(5),
-            ////});
-            //$("#cmspage5").append(button1);
-            //button1.innerHTML = "Do Something";
-            //button1.onclick = AdminSearch(5);
-            //button1.id = "bhbch";
+            btn.style.display = "block";
+           
+           
+     
 
         },
         error: function (e) {

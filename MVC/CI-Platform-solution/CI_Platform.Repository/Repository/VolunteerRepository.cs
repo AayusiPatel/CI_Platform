@@ -161,7 +161,7 @@ namespace CI_Platform.Repository.Repository
                 // send email
                 using var smtp = new SmtpClient();
                 smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-                smtp.Authenticate("payushi.tatva@gmail.com", "qgtaopriiacrebdf");
+                smtp.Authenticate("payushi.tatva@gmail.com", "leipwwhwrkqbemqk");
                 smtp.Send(email);
                 smtp.Disconnect(true);
                 #endregion Send Mail

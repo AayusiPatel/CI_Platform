@@ -24,10 +24,11 @@
     <script src="https://cdn.ckeditor.com/4.20.2/standard/ckeditor.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-   @* <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
-  *@  <title>Admin</title>
+    @* <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+    *@
+    <title>Admin</title>
     <style>
         .has-search .form-control {
             padding-left: 2.375rem;
@@ -185,6 +186,24 @@
 </head>
 
 <body>
+    @if (TempData["Error"] != null)
+    {
+
+        <script type="text/javascript">
+
+
+            toastr.error('@TempData["Error"]')
+        </script>
+    }
+    @if (TempData["Success"] != null)
+    {
+
+        <script type="text/javascript">
+
+
+            toastr.success('@TempData["Success"]')
+        </script>
+    }
     <div class="container-fluid p-0">
         <div class="row flex-nowrap g-0">
 
@@ -274,9 +293,9 @@
                      style=" background: #FFFFFF 0% 0% no-repeat padding-box; box-shadow: 3px 5px 10px #00000014; opacity: 1;">
                     <div class="container-fluid">
                         @{
-    DateTime now = DateTime.Now;
-    string formattedDate = now.ToString("dddd, MMMM d, yyyy, h:mm tt");
-}
+                            DateTime now = DateTime.Now;
+                            string formattedDate = now.ToString("dddd, MMMM d, yyyy, h:mm tt");
+                        }
                         <span>@formattedDate</span>
 
 
@@ -288,14 +307,14 @@
                                     @ViewBag.Uname
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                   <li><a class="dropdown-item" asp-action="PlatformLandingPage" asp-controller="Platform">Home</a></li>
-                        <li><a class="dropdown-item" asp-action="UserProfile" asp-controller="Profile">Profile</a></li>
-                        <li><a class="dropdown-item" asp-action="TimeSheet" asp-controller="Profile">Volunteering Timesheet</a></li>
-                      
+                                    <li><a class="dropdown-item" asp-action="PlatformLandingPage" asp-controller="Platform">Home</a></li>
+                                    <li><a class="dropdown-item" asp-action="UserProfile" asp-controller="Profile">Profile</a></li>
+                                    <li><a class="dropdown-item" asp-action="TimeSheet" asp-controller="Profile">Volunteering Timesheet</a></li>
+
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                     <li><a class="dropdown-item" asp-action="LogOut" asp-controller="User">Log out</a></li>
+                                    <li><a class="dropdown-item" asp-action="LogOut" asp-controller="User">Log out</a></li>
                                 </ul>
                             </li>
                         </form>
@@ -386,8 +405,8 @@
                         </div>
 
                         <div class="tab-pane fade" id="nav-theme" role="tabpanel" aria-labelledby="nav-theme-tab">
-                             <div id="pageContent">
-                              <h4>Theme</h4>
+                            <div id="pageContent">
+                                <h4>Theme</h4>
                                 <hr class="m-0">
                                 <div class="row mt-3 g-0">
                                     <div class="col-12 col-xl-3 col-lg-4 col-sm-6">
@@ -396,7 +415,7 @@
                                             <input type="text" class="form-control" id="search6" placeholder="Search" onkeyup="AdminSearch(6);">
                                         </div>
                                     </div>
-                                      <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-end mt-3 mt-sm-0">
+                                    <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-end mt-3 mt-sm-0">
                                         <button type="button" class="btn btn-outline-warning rounded-pill" onclick="addform('nav-theme',6);">
                                             <i class="bi bi-plus"></i>
                                             Add
@@ -412,8 +431,8 @@
                         </div>
 
                         <div class="tab-pane fade" id="nav-skill" role="tabpanel" aria-labelledby="nav-skill-tab">
-                               <div id="pageContent">
-                              <h4>Skill</h4>
+                            <div id="pageContent">
+                                <h4>Skill</h4>
                                 <hr class="m-0">
                                 <div class="row mt-3 g-0">
                                     <div class="col-12 col-xl-3 col-lg-4 col-sm-6">
@@ -422,7 +441,7 @@
                                             <input type="text" class="form-control" id="search7" placeholder="Search" onkeyup="AdminSearch(7);">
                                         </div>
                                     </div>
-                                      <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-end mt-3 mt-sm-0">
+                                    <div class="col-12 col-sm-6 col-lg-8 col-xl-9 text-end mt-3 mt-sm-0">
                                         <button type="button" class="btn btn-outline-warning rounded-pill" onclick="addform('nav-skill',6);">
                                             <i class="bi bi-plus"></i>
                                             Add
@@ -436,7 +455,7 @@
                                 }
                             </div>
                         </div>
-                      
+
 
                         <div class="tab-pane fade" id="nav-application" role="tabpanel" aria-labelledby="nav-application-tab">
                             <div id="pageContent">
@@ -481,32 +500,39 @@
                                     Html.RenderPartial("_StoryAdmin");
                                 }
                             </div>
+                            <div id="storyDisplay" style="display: none;"></div>
+                            <div class="cancleBtn" style="display: none;">
+
+                                <button class="btn btn-outline-warning rounded-pill me-3" onclick="returnStoryAdmin();"> Cancle </button>
+
+
+                            </div>
                         </div>
 
                         <div class="tab-pane fade" id="nav-banner" role="tabpanel" aria-labelledby="nav-banner-tab">
-                            
-                             <div id="pageContent">
+
+                            <div id="pageContent">
 
                                 <h4>Banner</h4>
                                 <hr class="m-0">
                                 <div class="row mt-3 g-0">
                                     @*<div class="col-12 col-xl-3 col-lg-6 col-sm-8">
                                         <div class="form-group has-search">
-                                            <span class="form-control-feedback"><i class="bi bi-search"></i></span>
-                                            <input type="text" class="form-control" id="search8" placeholder="Search" onkeyup="AdminSearch(8);">
+                                        <span class="form-control-feedback"><i class="bi bi-search"></i></span>
+                                        <input type="text" class="form-control" id="search8" placeholder="Search" onkeyup="AdminSearch(8);">
                                         </div>
-                                    </div>*@
+                                        </div>*@
                                     @*col-xl-9 col-lg-6 col-sm-4 *@
 
                                     <div class="col-12 text-end">
-                                         <button type="button" class="btn btn-outline-warning rounded-pill" onclick="addform('nav-banner',8);">
+                                        <button type="button" class="btn btn-outline-warning rounded-pill" onclick="addform('nav-banner',8);">
                                             <i class="bi bi-plus"></i>
                                             Add
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                             <div id="cmspage8">
+                            <div id="cmspage8">
                                 @{
                                     Html.RenderPartial("_BannerAdmin");
                                 }
@@ -520,14 +546,14 @@
     <div class="d-none activeTab" id="@Model.activeTab">@Model.activeTab</div>
     <script>
         console.log("...........Tab Panel.........")
-       
+
         var tabs = document.querySelectorAll(".tab-pane");
         var show = document.querySelector(".activeTab");
         var tab = show.id;
          console.log(tab);
         console.log(show);
         console.log(tabs);
-     
+
         if(tab == 1){
             $("#nav-user").addClass("show active");
             $("#nav-user-tab").addClass("active");
@@ -574,7 +600,7 @@
             console.log(addForm);
             var pageContent = page.querySelector("#pageContent");
             console.log(pageContent);
-            addForm.style.display = "none"; 
+            addForm.style.display = "none";
             cmsPage.style.display = "block";
             pageContent.style.display = "block";
 
@@ -597,18 +623,128 @@
                pageContent.style.display = "block";
             addForm.style.display = "none";
         }
+
+        function returnStoryAdmin(){
+             var page = document.getElementById("nav-story");
+            var content = page.querySelector("#pageContent");
+            content.style.display = "block";
+            var table = page.querySelector("#cmspage5");
+            table.style.display = "block";
+            $("#storyDisplay").empty();
+            var story = page.querySelector("#storyDisplay");
+            story.style.display = "none";
+            var btn = page.querySelector(".cancleBtn");
+            btn.style.display = "none";
+        }
     </script>
 
 
-   @* <script>
+    @* <script>
         $(document).ready(function () {
-    $('#table').DataTable();
-});
+        $('#table').DataTable();
+        });
+        </script>
+    *@
+
+    <script>
+        const inputDiv1 = document.querySelector(".input-div1")
+        const input1 = document.querySelector("#imageupload1")
+        const output1 = document.querySelector("#preview1")
+        let imagesArray1 = []
+
+        input1.addEventListener("change", () => {
+         imagesArray1 = []
+        const files1 = input1.files
+        console.log("Change1:"+imagesArray1);
+        for (let i = 0; i < files1.length; i++) {
+        imagesArray1.push(files1[i])
+        }
+        console.log("Change1: After"+imagesArray1);
+        displayImages1()
+
+        })
+
+        inputDiv1.addEventListener("drop", () => {
+        e.preventDefault()
+        const files1 = e.dataTransfer.files
+        for (let i = 0; i < files1.length; i++) {
+        if (!files1[i].type.match("image")) continue;
+
+        if (imagesArray1.every(image => image.name !== files1[i].name))
+        imagesArray1.push(files1[i])
+        }
+        console.log(files);
+        displayImages1()
+        })
+        function displayImages1() {
+        console.log("DisplayImages1:"+imagesArray1);
+        let images1 = ""
+        imagesArray1.forEach((image, index) => {
+        images1 += `<div class="image storyimages">
+        <img src="${URL.createObjectURL(image)}" alt="image">
+        <span onclick="deleteImage1(${index})">&times;</span>
+        </div>`
+        })
+        output1.innerHTML = images1
+        }
+
+        function deleteImage1(index) {
+        imagesArray1.splice(index, 1)
+        displayImages1()
+        }
+
     </script>
-*@
 
+    <script>
+         const dT = new DataTransfer();
 
+         const inputDiv = document.querySelector(".input-div")
+          const input = document.querySelector("#imageupload")
+          const output = document.querySelector("#preview")
 
+          //let imagesArray = []
+        console.log(input.files);
+          input.addEventListener("change", () => {
+          imagesArray=[]
+          console.log("Change1:"+imagesArray);
+              const files = input.files
+              for (let i = 0; i < files.length; i++) {
+                  imagesArray.push(files[i])
+              }
+            console.log("Change1: After"+imagesArray);
+              displayImages()
+
+          })
+
+          inputDiv.addEventListener("drop", () => {
+              e.preventDefault()
+              const files = e.dataTransfer.files
+              for (let i = 0; i < files.length; i++) {
+                  if (!files[i].type.match("image")) continue;
+                  if (imagesArray.every(image => image.name !== files[i].name))
+                      imagesArray.push(files[i])
+              }
+                //console.log(files);
+              displayImages()
+          })
+           function displayImages() {
+                console.log("Page:DisplayImag:::::::::::::" + imagesArray);
+              let images = ""
+              imagesArray.forEach((image, index) => {
+                  images += `<div class="image storyimages">
+                                              <img src="${URL.createObjectURL(image)}" alt="image">
+                                              <span onclick="deleteImage(${index})">&times;</span>
+                                            </div>`
+              })
+              output.innerHTML = images
+          }
+
+          function deleteImage(index) {
+              console.log("Page:" + imagesArray);
+              imagesArray.splice(index, 1)
+              displayImages()
+          }
+    </script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 

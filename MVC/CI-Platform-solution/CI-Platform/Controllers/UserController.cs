@@ -14,17 +14,18 @@ namespace CI_Platform.Controllers
     {
 
         public readonly IUserRepository _userRepository;
-        public readonly CiPlatformContext _db;
+        
 
-        public UserController(IUserRepository userRepository, CiPlatformContext db)
+        public UserController(IUserRepository userRepository)
         {
 
             _userRepository = userRepository;
-            _db = db;
+            
         }
 
         public IActionResult Registration()
         {
+            ViewBag.banners = _userRepository.banners();
             return View();
         }
 
@@ -32,6 +33,7 @@ namespace CI_Platform.Controllers
      
         public IActionResult Registration(UserModel obj)
         {
+            ViewBag.banners = _userRepository.banners();
 
             //User user = new User();
             //{
@@ -64,14 +66,16 @@ namespace CI_Platform.Controllers
             {
                 login.returnUrl = returnUrl;
             }
+            ViewBag.banners = _userRepository.banners();
+            
             return View(login);
         }
 
         [HttpPost]
         public IActionResult Index(Login obj)
         {
-           
-          
+
+            ViewBag.banners = _userRepository.banners();
 
             if (ModelState.IsValid)
             {
@@ -103,14 +107,17 @@ namespace CI_Platform.Controllers
                         role = "Admin";
                     }
 
-
+                    if(loguser.Avatar == null)
+                    {
+                        loguser.Avatar = "user1.png";
+                    }
                     var claims = new List<Claim>
                 {
                         new Claim("role",role),
                          new Claim("Name", $"{loguser.FirstName} {loguser.LastName}"),
                         new Claim("Email", loguser.Email),
                         new Claim("Sid", loguser.UserId.ToString()),
-
+                       
                         new Claim("Avtar", loguser.Avatar),
 
                 };
@@ -151,6 +158,7 @@ namespace CI_Platform.Controllers
         }
         public IActionResult ForgotPwd()
         {
+            ViewBag.banners = _userRepository.banners();
             return View();
         }
 
@@ -160,6 +168,7 @@ namespace CI_Platform.Controllers
         [HttpPost]
         public IActionResult ForgotPwd(ForgotPwd obj)
         {
+            ViewBag.banners = _userRepository.banners();
             //User user = new User();
             //{
             //    user.FirstName = obj.FirstName;
@@ -186,12 +195,14 @@ namespace CI_Platform.Controllers
 
         public IActionResult ResetPwd()
         {
+            ViewBag.banners = _userRepository.banners();
             return View();
         }
 
         [HttpPost]
         public IActionResult ResetPwd(ResetPwd obj, string token)
         {
+            ViewBag.banners = _userRepository.banners();
             //User user = new User();
             //{
             //    user.FirstName = obj.FirstName;
@@ -219,7 +230,7 @@ namespace CI_Platform.Controllers
                 TempData["Message"] = "Token not Found";
                 return RedirectToAction("Index");
             }
-            return View();
+            return View(obj);
         }
 
 

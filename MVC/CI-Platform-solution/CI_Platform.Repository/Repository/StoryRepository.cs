@@ -50,7 +50,7 @@ namespace CI_Platform.Repository.Repository
                 .Include(m => m.StoryMedia)
                 .Include(m => m.Mission.Theme)
                 .Include(m => m.User)
-                .Where(m => m.DeletedAt == null /*&& m.Status == "PUBLISHED"*/)
+                .Where(m => m.DeletedAt == null && m.Status == "PUBLISHED")
                 .ToList();
             Story story = stories.FirstOrDefault(x => x.StoryId == sid);
             List<StoryMedium> photos = _db.StoryMedia.Where(x => x.StoryId == sid && x.DeletedAt == null).ToList();
@@ -123,7 +123,7 @@ namespace CI_Platform.Repository.Repository
                 // send email
                 using var smtp = new SmtpClient();
                 smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-                smtp.Authenticate("hetshah2207@gmail.com", "lpoqtojvkcgkwdms");
+                smtp.Authenticate("payushi.tatva@gmail.com", "leipwwhwrkqbemqk");
                 //smtp.Authenticate("payushi.tatva@gmail.com", "jatwiurqnjgeceeg");
                 smtp.Send(email);
                 smtp.Disconnect(true);
@@ -137,9 +137,13 @@ namespace CI_Platform.Repository.Repository
         }
         public bool saveStory(ShareStory obj, int status, int uid)
         {
-            Story story = _db.Stories.FirstOrDefault(x => x.UserId == uid && x.MissionId == obj.MissionId);
+            Story story = _db.Stories.FirstOrDefault(x => x.UserId == uid && x.MissionId == obj.MissionId && x.Status == "DRAFT") ;
             if (story == null)
             {
+                if (_db.Stories.Any(x => x.UserId == uid && x.MissionId == obj.MissionId && x.Title == obj.Stitle))
+                {
+                    return false;
+                }
                 Story str = new Story();
                 {
                     str.Title = obj.Stitle;
@@ -185,7 +189,7 @@ namespace CI_Platform.Repository.Repository
         }
         public async Task<bool> saveImage(ShareStory obj, int uid)
         {
-            int sid = (int)_db.Stories.FirstOrDefault(x => x.UserId == uid && x.MissionId == obj.MissionId).StoryId;
+            int sid = (int)_db.Stories.FirstOrDefault(x => x.UserId == uid && x.MissionId == obj.MissionId && x.Title == obj.Stitle).StoryId;
 
             if (obj.url != null)
             {
@@ -214,6 +218,8 @@ namespace CI_Platform.Repository.Repository
 
             if (obj.file != null)
             {
+                List<StoryMedium> check = _db.StoryMedia.Where(media => media.StoryId == sid && media.Type == "png").ToList();
+                _db.RemoveRange(check);
                 var filePaths = new List<string>();
                 foreach (var formFile in obj.file)
                 {
@@ -221,7 +227,7 @@ namespace CI_Platform.Repository.Repository
                   
                     mediaobj.StoryId = sid;
                     mediaobj.Path = formFile.FileName;
-                    mediaobj.Type = "PNG";
+                    mediaobj.Type = "png";
                     //subview.StorySend.StoryMedia.Add(mediaobj);
 
                     _db.StoryMedia.Add(mediaobj);

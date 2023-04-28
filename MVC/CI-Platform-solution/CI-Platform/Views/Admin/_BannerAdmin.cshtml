@@ -27,9 +27,9 @@
 
 
                     <td style="text-align: center;">
-                        <button type="button" class="btn p-0" onclick="editform('nav-skill');getData('nav-banner',8, @obj.BannerId);">
+                       @* <button type="button" class="btn p-0" onclick="editform('nav-skill');getData('nav-banner',8, @obj.BannerId);">
                             <i class="bi bi-pencil-square" style="color: coral;"></i>
-                        </button>
+                        </button>*@
                         <button type="button" class="btn p-0" onclick=" if (confirm('Are you sure you want to delete?')) { return location.href=' @Url.Action("DeleteActivity", "Admin" ,new {id = @obj.BannerId ,page = 8})' } ">
                             <i class=" bi bi-trash ms-3"></i>
                         </button>
@@ -67,17 +67,17 @@
 <div class="border" id="add" style="display: none;">
     <h3 class="p-3 m-0" style="background-color: #F8F9FC;"> Add </h3>
     <hr class="m-0">
-    <form method="post" class="px-3">
+    <form method="post" class="px-3" enctype="multipart/form-data">
 
         <label for="select mission" class="mt-3"> Banner Text </label>
-        <textarea asp-for="banner.Text"  type="text" class="form-control" id="CMSTitleA" onkeyup="CMSvalidation('A');"></textarea>
+        <textarea asp-for="banner.Text"  type="text" class="form-control" id="CMSTitleA" onkeyup="CMSvalidation('A');" required></textarea>
         <div id="CMSTitleErrorA" class="text-danger"></div>
         <label for="cms1" class="mt-3"> Banner Image</label>
         <div>
-        <textarea id="cms1" asp-for="banner.Image" cols="172" rows="10" maxlength="40000"></textarea>
+              <input asp-for="bannerImg"   type="file"  accept="*"   required />
         </div>
         <label for="sortOrder" class="mt-3">Sort Order </label>
-        <select asp-for="banner.SortOrder" placeholder="Sort Order">
+        <select asp-for="banner.SortOrder" placeholder="Sort Order" required>
             <option value="">Select order</option>
             <option value="1">1</option>
             <option value="2">2</option>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CI_Platform.Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,7 +8,6 @@ namespace CI_Platform.Entities.ViewModels;
 public  class UserModel
 {
  
-
     [Required(ErrorMessage ="FirstName is Required")]
     public string? FirstName { get; set; }
 
@@ -26,6 +26,8 @@ public  class UserModel
     //[DataType( ErrorMessage = "Please Enter valid PhoneNumber")]
     public long PhoneNumber { get; set; }
 
+    [RegularExpression(@"^(?=.*[A-Z])(?=.*\d).+$", ErrorMessage = "Password must contain at least one uppercase letter and one digit")]
+    [StringLength(20, MinimumLength = 8, ErrorMessage = "Password must be between 8 and 20 characters long")]
     [Required(ErrorMessage = "Password is Required")]
     [DataType(DataType.Password)]
     public string Password { get; set; } = null!;
@@ -43,11 +45,15 @@ public  class Login
     [DataType(DataType.EmailAddress, ErrorMessage = "Please Enter valid EmailId")]
     public string Email { get; set; } = null!;
 
+    [RegularExpression(@"^(?=.*[A-Z])(?=.*\d).+$", ErrorMessage = "Password must contain at least one uppercase letter and one digit")]
+    [StringLength(20, MinimumLength = 8, ErrorMessage = "Password must be between 8 and 20 characters long")]
     [Required(ErrorMessage = "Password is Required")]
     [DataType(DataType.Password)]
     public string Password { get; set; } = null!;
 
     public string? returnUrl { get; set; }
+
+  
 }
 
 public class ForgotPwd
@@ -62,10 +68,13 @@ public class ForgotPwd
 public class ResetPwd
 {
 
-
+    [RegularExpression(@"^(?=.*[A-Z])(?=.*\d).+$", ErrorMessage = "Password must contain at least one uppercase letter and one digit")]
+    [StringLength(20, MinimumLength = 8, ErrorMessage = "Password must be between 8 and 20 characters long")]
     [Required(ErrorMessage = "Password is Required")]
     [DataType(DataType.Password)]
     public string Password { get; set; } = null!;
+
+    //public string token { get; set; }
 
     [DataType(DataType.Password)]
     [Compare("Password", ErrorMessage = "Password must match")]

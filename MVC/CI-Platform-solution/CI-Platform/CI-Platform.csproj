@@ -34,4 +34,11 @@
     <Folder Include="wwwroot\img\Story\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\img\Story\Animal-welfare-&amp;-save-birds-campaign-1.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

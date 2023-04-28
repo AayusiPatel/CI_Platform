@@ -6,7 +6,19 @@
 }
 <!DOCTYPE html>
 <html>
+<style>
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>
 <head>
     <title>Registration</title>
 
@@ -22,7 +34,40 @@
         <div class="col-md col-sm-12 ">
             <div id="carouselExampleRide" class="carousel slide " data-bs-ride="true">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
+                     @foreach (var item in @ViewBag.banners)
+                {
+                    if (item.SortOrder == 1)
+                    {
+                       <div class="carousel-item active"> 
+                            <img src="~/img/@item.Image" class="img-fluid abc" alt="...">
+                    <div class="carousel-caption d-none d-md-block ">
+                        <h3>Sed ut perspiciatis unde omnis iste natus voluptatem.</h3>
+                        <p>
+                            
+                            <small>
+                                @item.Text
+                            </small>
+                        </p>
+                    </div>
+                </div>
+                    }
+                    else{
+                     <div class="carousel-item">
+                         <img src="~/img/@item.Image" class="img-fluid abc" alt="...">
+                    <div class=" carousel-caption d-none d-md-block ">
+                        <h3>Sed ut perspiciatis unde omnis iste natus voluptatem.</h3>
+                        <p>
+                            
+                            <small>
+                                @item.Text
+                            </small>
+                        </p>
+                    </div>
+                </div>
+                    }
+                    
+                }
+                   @* <div class="carousel-item active">
                         <img src="~/img/Grow-Trees-On-the-path-to-environment-sustainability-login.png" class="img-fluid abc" alt="...">
                         <div class=" carousel-caption  d-none d-md-block ">
                             <h3>Sed ut perspiciatis unde omnis iste natus voluptatem.</h3>
@@ -57,7 +102,7 @@
                                 </small>
                             </p>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
                 <button class="carousel-control-prev " type="button" data-bs-target="#carouselExampleRide " data-bs-slide="prev ">
                     <span class="carousel-control-prev-icon " aria-hidden="true"></span>
@@ -87,7 +132,7 @@
                 </div>
                 <div class="form-group ">
                     <label asp-for="PhoneNumber" for="exampleFormControlInput1 ">Phone Number</label>
-                    <input asp-for="PhoneNumber" type="number" min="10" max="10" class="form-control " id="phone " placeholder="1234567890"  >
+                    <input asp-for="PhoneNumber" type="number" min="1111111111" max="9999999999" class="form-control " id="phone " placeholder="1234567890"  >
                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                 </div>
                 <div class="form-group ">

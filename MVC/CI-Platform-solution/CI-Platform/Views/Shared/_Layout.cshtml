@@ -51,22 +51,22 @@
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         @{
-                            //String avtar = @User.Claims.FirstOrDefault(m => m.Type == "Avtar").Value;
+                            String avtar = @User.Claims.FirstOrDefault(m => m.Type == "Avtar").Value;
                         }
-                      @*  <img src="~/img/@avtar" class="profile-nav" alt=""> @ViewBag.Uname*@
+                        <img src="~/img/@avtar" class="profile-nav" alt=""> @ViewBag.Uname
                        @* @User.Claims.FirstOrDefault(m=>m.Type == "Name").Value*@
                     </a>
                     <ul class="dropdown-menu me-5">
                         <li><a class="dropdown-item" asp-action="PlatformLandingPage" asp-controller="Platform">Home</a></li>
                         <li><a class="dropdown-item" asp-action="UserProfile" asp-controller="Profile">Profile</a></li>
                         <li><a class="dropdown-item" asp-action="TimeSheet" asp-controller="Profile">Volunteering Timesheet</a></li>
-                      @* @{
+                       @{
                             String role = @User.Claims.FirstOrDefault(m => m.Type == "role").Value;
                         }
                         @if (role == "Admin")
                         {
                             <li><a class="dropdown-item" asp-action="AdminMain" asp-controller="Admin">Admin Acess</a></li>
-                         }*@
+                         }
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -171,6 +171,40 @@
         <div class="container">
             &copy; 2023 - CI_Platform - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
 
+             <button class="border-0 p-0 btn btn-primary" style="background-color: white;"
+                            data-toggle="modal" data-target="#exampleModal1">
+                        <span><a href="#" style="color: #333333;">Contact Us</a></span>
+                    </button>
+                    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Contact Us</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    @*   <form>*@
+                                    <label>Name*</label>
+                                    <input type="text" id="Name" class="form-control" placeholder="Enter your name">
+                                    <label class="mt-3">Email Address*</label>
+                                    <input type="text" id="Email" class="form-control" placeholder="Enter your Email Address">
+                                    <label class="mt-3">Subject*</label>
+                                    <input type="text" id="Subject" class="form-control" placeholder="Enter your Subject">
+                                    <label class="mt-3" for="exampleFormControlTextarea1">Message*</label>
+                                    <textarea class="form-control" id="Message" rows="4"
+                                              placeholder="Enter your message..."></textarea>
+                                    @*      </form>*@
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" onclick="ContactUs()">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
         </div>
     </footer>

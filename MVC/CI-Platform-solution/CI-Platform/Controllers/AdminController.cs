@@ -55,28 +55,76 @@ namespace CI_Platform.Controllers
             if(command == 1)
             {
                 bool status = _admin.AddUser(obj);
+                if (!status)
+                {
+                    TempData["Error"] = "Please Try Again";
+                }
+                if (status)
+                {
+                    TempData["Success"] = "Succesfull!";
+                }
             }
             if (command == 3)
             {
                 bool status = _admin.AddMission(obj);
+                if (!status)
+                {
+                    TempData["Error"] = "Please Try Again";
+                }
+                if (status)
+                {
+                    TempData["Success"] = "Succesfull!";
+                }
             }
 
             if (command == 2)
             {
                 bool status = _admin.AddCms(obj);
+                if (!status)
+                {
+                    TempData["Error"] = "Please Try Again";
+                }
+                if (status)
+                {
+                    TempData["Success"] = "Succesfull!";
+                }
             }
             if (command == 6)
             {
                 bool status = _admin.AddTheme(obj);
+                if (!status)
+                {
+                    TempData["Error"] = "Please Try Again";
+                }
+                if (status)
+                {
+                    TempData["Success"] = "Succesfull!";
+                }
             }
             if (command == 7)
             {
                 bool status = _admin.AddSkill(obj);
+                if (!status)
+                {
+                    TempData["Error"] = "Please Try Again";
+                }
+                if (status)
+                {
+                    TempData["Success"] = "Succesfull!";
+                }
             }
           
             if (command == 8)
             {
                 bool status = _admin.AddBanner(obj);
+                if (!status)
+                {
+                    TempData["Error"] = "Please Try Again";
+                }
+                if(status)
+                {
+                    TempData["Success"] = "Succesfull!";
+                }
             }
             return RedirectToAction("AdminMain","Admin", new { command = command });
         }
@@ -84,6 +132,14 @@ namespace CI_Platform.Controllers
         public IActionResult DeleteActivity(int id,int page)
         {
             bool status = _admin.DeleteActivity(id,page);
+            if (!status)
+            {
+                TempData["Error"] = "Please Try Again";
+            }
+            if (status)
+            {
+                TempData["Success"] = "Deleted Successfully!";
+            }
             return RedirectToAction("AdminMain","Admin", new { command = page });
         }
 

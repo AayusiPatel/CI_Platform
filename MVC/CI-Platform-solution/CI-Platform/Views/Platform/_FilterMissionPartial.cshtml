@@ -59,6 +59,7 @@
                         </div>
                         <div class="card-body mb-0">
                             <h5 class="card-title">@item.Title</h5>
+                            
                             <p class="card-text">@item.ShortDescription</p>
                             <div class="card-text  ">
                                 <span>@item.OrganizationName</span>
@@ -93,12 +94,16 @@
 
 
                             }
-                            else
+                            else if(item.StartDate != null && item.EndDate != null)
                             {
-                                <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">@item.StartDate.ToString().Substring(0,10)  until @item.EndDate.ToString().Substring(0,10) </span></h6>
+                            <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;">@item.StartDate.ToString().Substring(0,10)  until @item.EndDate.ToString().Substring(0,10) </span></h6>
 
-                            }
-                            <div class="row">
+                        }
+                        else
+                        {
+                             <h6 class="sideline mt-4"><span class="textline" style="border :1px solid #757575;"> Ongoing </span></h6>
+                        }
+                        <div class="row">
                                 <div class="col-6">
                                      @{
                                     <i class="bi bi-person-check-fill" style=""></i>
@@ -135,7 +140,11 @@
                                         }
                                         else
                                         {
-                                            <i class="bi bi-clock"></i> @item.EndDate.ToString().Substring(0,10)
+                                            
+                                            <i class="bi bi-clock"></i>
+                                            @if(item.EndDate !=null){
+                                                @item.EndDate.ToString().Substring(0,10)
+                                                        } 
                                             <br>
                                             <span class="small text-muted">&nbsp &nbsp Deadline</span>
                                         }
@@ -178,7 +187,17 @@
                     <div class="row no-gutters">
                         <div class="col-md-4">
                             <img src=~/img/@(item.MissionMedia.FirstOrDefault()?.MediaPath) style="height:100% " class="card-img" alt="...">
+                              @{
+                                    if (item.MissionApplications.Any(m => m.UserId == @ViewBag.uid && m.ApprovalStatus == "Approve"))
+                                    {
+                                        
+                                            <button class="btn rounded-5 disabled" style="background-color: green ; opacity: 80%; border-radius:0px 20px 20px 0px; position:absolute; top:5%; left:0%;">
 
+                                                <span style="color: white ; ">Applied</span>
+                                            </button>
+                                        
+                                    }
+                                }
                         </div>
 
                         <div class="col-md-8">
@@ -210,12 +229,43 @@
 
 
                                 <i class="bi bi-person-check-fill" style="">397  Seats left</i> &nbsp;
-                                <i class="bi bi-clock">@item.EndDate.ToString().Substring(0,10) Registration Deadline</i> &nbsp;
-                                <i class="bi bi-calendar3">@item.StartDate.ToString().Substring(0,10)  until @item.EndDate.ToString().Substring(0,10)</i> &nbsp;
-                                <i class="bi bi-square">Skills @(item.MissionSkills.FirstOrDefault()?.Skill.SkillName)</i>
+                            @if (item.EndDate != null)
+                            {
+                                <i class="bi bi-clock">@item.EndDate.ToString().Substring(0,10) Registration Deadline</i>
+                               
+                            }
+
+                            else
+                            {
+                            
+                                    <i class="bi bi-clock"> Registration Deadline</i>
+                            }
+                            &nbsp;
+                            <i class="bi bi-calendar3">
+                                @if (item.EndDate != null){
+
+                                @item.StartDate.ToString().Substring(0,10) 
+
+                                }
+                                until 
+                                @if (item.EndDate != null){
+
+                                @item.EndDate.ToString().Substring(0,10) 
+
+                                }
+                                </i>
+                                &nbsp;
+                            @if (item.MissionSkills.Count > 0)
+                            {
+                                   <i class="bi bi-square">Skills @(item.MissionSkills.FirstOrDefault()?.Skill.SkillName)</i>
+                            }
+                            else{
+                                   <i class="bi bi-square">Skills </i>
+                                }
+                                
 
                                 <div class="card-body  text-end ">
-                                    <a asp-controller="Home" asp-action="Volunteering_Mission" asp-route-mid="@item.MissionId">  <button type="submit" class="btn btn-outline-danger   rounded-pill "> View Details <i class="bi bi-arrow-right text-danger"></i> </button> </a>
+                                    <a asp-controller="Platform" asp-action="Volunteering_Mission" asp-route-mid="@item.MissionId">  <button type="submit" class="btn btn-outline-danger   rounded-pill "> View Details <i class="bi bi-arrow-right text-danger"></i> </button> </a>
                                 </div>
                             </div>
                         </div>

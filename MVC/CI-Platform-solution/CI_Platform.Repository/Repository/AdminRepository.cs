@@ -167,8 +167,12 @@ namespace CI_Platform.Repository.Repository
             if (page == 3)
             {
                 {
-                    am.mission = _db.Missions.Include(x => x.MissionSkills).Include(x => x.MissionMedia).FirstOrDefault(x => x.MissionId == id && x.DeletedAt == null);
-                   
+                    am.mission = _db.Missions.Include(x => x.GoalMissions).Include(x => x.MissionSkills).Include(x => x.MissionMedia).FirstOrDefault(x => x.MissionId == id && x.DeletedAt == null);
+                    if (am.mission!=null && am.mission.GoalMissions.Count > 0)
+                    {
+                        am.GoalValue = (int)am.mission.GoalMissions.FirstOrDefault()?.GoalValue;
+                        am.GoalText = am.mission.GoalMissions.FirstOrDefault()?.GoalObjectiveText;
+                    }
                 }
             }
             if (page == 6)
@@ -265,29 +269,34 @@ namespace CI_Platform.Repository.Repository
         }
         public bool AddBanner(AdminViewModel obj)
         {
+            if (_db.Banners.Any(x => x.SortOrder == obj.banner.SortOrder && x.DeletedAt == null))
+            {
+                return false;
+            }
             if (obj.banner.BannerId == 0)
             {
                 Banner banner = new Banner();
                 {
                     banner.Text = obj.banner.Text;
-                    banner.Image = "DCBJHBEFVEWUB.png";
+                    banner.Image = obj.bannerImg.FileName;
+                    banner.SortOrder = obj.banner.SortOrder;
                 }
                 _db.Banners.Add(banner);
                 _db.SaveChanges();
                 return true;
             }
-            if (obj.banner.BannerId != 0)
-            {
+            //if (obj.banner.BannerId != 0)
+            //{
 
-                Banner banner = _db.Banners.FirstOrDefault(x => x.BannerId == obj.banner.BannerId && x.DeletedAt == null);
-                {
-                    banner.Text = obj.banner.Text;
-                    banner.UpdatedAt = DateTime.Now;
-                }
-                _db.Banners.Update(banner);
-                _db.SaveChanges();
-                return true;
-            }
+            //    Banner banner = _db.Banners.FirstOrDefault(x => x.BannerId == obj.banner.BannerId && x.DeletedAt == null);
+            //    {
+            //        banner.Text = obj.banner.Text;
+            //        banner.UpdatedAt = DateTime.Now;
+            //    }
+            //    _db.Banners.Update(banner);
+            //    _db.SaveChanges();
+            //    return true;
+            //}
             return false;
         }
         public bool AddTheme(AdminViewModel obj)
@@ -337,10 +346,21 @@ namespace CI_Platform.Repository.Repository
                     mis.MissionType = obj.mission.MissionType;                    
                     mis.ThemeId = obj.mission.ThemeId;
                     mis.Avaibility = obj.mission.Avaibility;
-
+                    
                 }
-                _db.Missions.Add(mis);
+                _db.Add(mis);
                 _db.SaveChanges();
+                if (mis.MissionType == "Goal")
+                {
+                    GoalMission gm = new GoalMission();
+                    {
+                        gm.MissionId = mis.MissionId;
+                        gm.GoalValue = obj.GoalValue;
+                        gm.GoalObjectiveText = obj.GoalText;
+                    }
+                    _db.GoalMissions.Add(gm);
+                    _db.SaveChanges();
+                }
                 //Mission mis = _db.Missions.FirstOrDefault(m => m.Title && )
                 foreach (var item in obj.missionSkills)
                 {
@@ -444,11 +464,25 @@ namespace CI_Platform.Repository.Repository
 
 
                 }
-                _db.Missions.Update(mis);
+                _db.Update(mis);
                 _db.SaveChanges();
-               
 
-              
+                if (mis.MissionType == "Goal")
+                {
+                    GoalMission gm = _db.GoalMissions.FirstOrDefault(x=> x.MissionId == mis.MissionId);
+                    if(gm == null)
+                    {
+                        gm = new GoalMission();
+                    }
+                    {
+                        gm.MissionId = mis.MissionId;
+                        gm.GoalValue = obj.GoalValue;
+                        gm.GoalObjectiveText = obj.GoalText;
+                    }
+                    _db.GoalMissions.Update(gm);
+                    _db.SaveChanges();
+                }
+
                 if (obj.missionSkills.Count > 0)
                 {
                     List<MissionSkill> skills = _db.MissionSkills.Where(x => x.MissionId == mis.MissionId && x.DeletedAt == null).ToList();
@@ -467,11 +501,7 @@ namespace CI_Platform.Repository.Repository
                 List<MissionDocument> docs = _db.MissionDocuments.Where(x => x.MissionId == mis.MissionId && x.DeletedAt == null).ToList();
                 if (docs.Count > 0)
                 {
-                    foreach (var doc in docs)
-                    {
-                        doc.DeletedAt = DateTime.Now;
-                    }
-                    _db.UpdateRange(docs);
+                    _db.RemoveRange(docs);
                     _db.SaveChanges();
                 }
                 if (obj.missiondoc != null)
@@ -504,11 +534,7 @@ namespace CI_Platform.Repository.Repository
                 List<MissionMedium> mism = _db.MissionMedia.Where(x => x.MissionId == mis.MissionId && x.DeletedAt == null ).ToList();
                 if (mism != null)
                 {
-                    foreach (var media in mism)
-                    {
-                        media.DeletedAt = DateTime.Now;
-                    }
-                    _db.UpdateRange(mism);
+                    _db.RemoveRange(mism);
                     _db.SaveChanges();
                 }
                 if (obj.missionMedia.Count > 0)
@@ -654,6 +680,22 @@ namespace CI_Platform.Repository.Repository
                     return true;
                 }
                 if (theme == null)
+                {
+                    return false;
+                }
+            }
+            if (page == 3)
+            {
+                Mission mission = _db.Missions.FirstOrDefault(m => m.MissionId == id && m.DeletedAt == null);
+                if (mission != null)
+                {
+                    mission.DeletedAt = DateTime.Now;
+                    _db.Update(mission);
+                    _db.SaveChanges();
+
+                    return true;
+                }
+                if (mission == null)
                 {
                     return false;
                 }
