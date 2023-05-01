@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Http;
 
 namespace CI_Platform.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         public readonly IAdminRepository _admin;

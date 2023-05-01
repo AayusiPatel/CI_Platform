@@ -117,12 +117,12 @@ namespace CI_Platform.Controllers
                          new Claim("Name", $"{loguser.FirstName} {loguser.LastName}"),
                         new Claim("Email", loguser.Email),
                         new Claim("Sid", loguser.UserId.ToString()),
-                       
+                       new Claim(ClaimTypes.Role,role),
                         new Claim("Avtar", loguser.Avatar),
 
                 };
 
-                    var identity = new ClaimsIdentity(claims, "AuthCookie");
+                    var identity = new ClaimsIdentity(claims, "Cookie");
                     var Principle = new ClaimsPrincipal(identity);
 
                     HttpContext.User = Principle;

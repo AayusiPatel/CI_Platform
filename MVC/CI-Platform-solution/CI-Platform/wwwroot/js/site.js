@@ -181,7 +181,11 @@ function temp(x) {
 
         dataType: "html", // return datatype like JSON and HTML
         success: function (data) {
-          /*  debugger*/
+            /*  debugger*/
+
+
+            $("#Filter").empty();
+            $("#Filter").html(data);
             var listDisplay = document.getElementById("list-view").style.display;
             var gridDisplay = document.getElementById("grid-view").style.display;
             console.log("Grid" + gridDisplay, "List" + listDisplay);
@@ -399,7 +403,6 @@ function openlist() {
     console.log("Done");
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -704,24 +707,24 @@ function getData(x, y, id) {
         },
         success: function (data) {
        /*     debugger*/
-            console.log(data);
+          /*  console.log(data);*/
             var htmlObject = document.createElement('div');
             htmlObject.innerHTML = data;
             var abc = htmlObject.querySelector("#edit");
             abc.style.display = "block";
             if (y == 3) {
                 var missionSkill = abc.querySelector("#photos");
-                console.log(missionSkill);
+                /*console.log(missionSkill);*/
                 var ck = [];
                 missionSkill.querySelectorAll(".Dimg").forEach((element) => {
                     ck.push(element.value);
                 });
-                console.log(ck);
+                /*console.log(ck);*/
             }
-            console.log(addForm);
-            /*page.remove(addForm);*/
-            console.log(abc);
-            /*  page.addForm(abc);*/
+            //console.log(addForm);
+            ///*page.remove(addForm);*/
+            //console.log(abc);
+            ///*  page.addForm(abc);*/
             addForm.replaceWith(abc);
             if (y == 2) {
                 var cmsDescription = document.getElementById("cms2");
@@ -736,75 +739,57 @@ function getData(x, y, id) {
                     readURL1(this);
                 });
             }
+           
             if (y == 3) {
-
                 const dT = new DataTransfer();
-              
                 const inputDiv = document.querySelector(".input-div")
                 const input = document.querySelector("#imageupload")
                 const output = document.querySelector("#preview")
+
                 let imagesArray2 = []
-                input.addEventListener("change", () => {
-                    imagesArray2 = []
-                    console.log("Change1:" + imagesArray2);
-                    const files = input.files
-                    for (let i = 0; i < files.length; i++) {
-                        imagesArray2.push(files[i])
-                    }
-                    console.log("Change1: After" + imagesArray2);
+                function deleteImg(index) {
+                    console.log("Page:" + imagesArray2);
+                    imagesArray2.splice(index, 1)
                     displayImages()
+                }
+                function displayImages() {
+                    console.log("Page:DisplayImag:::::::::::::" + imagesArray2);
+                    let images = ""
+                    imagesArray2.forEach((image, index) => {
+                        images += `<div class="image storyimages">
+                                              <img src="${URL.createObjectURL(image)}" alt="image">
+                                              <span onclick="deleteImg(${index})">&times;</span>
+                                            </div>`
+                    })
+                   
+                    output.innerHTML = images
+                    console.log(output.innerHTML);
+                }
 
-                })
-
-                inputDiv.addEventListener("drop", () => {
-                    e.preventDefault()
-                    const files = e.dataTransfer.files
-                    for (let i = 0; i < files.length; i++) {
-                        if (!files[i].type.match("image")) continue;
-                        if (imagesArray2.every(image => image.name !== files[i].name))
-                            imagesArray2.push(files[i])
-                    }
-                    //console.log(files);
-                    displayImages()
-                })
              
              /*   debugger*/
                 if (ck.length > 0) {
 
-                    function toDataUrl(url, callback) {
-                        console.log(url);
+                    function toDataUrl(url, callback) {                   
                         var newUrl = url;
                         var xhr = new XMLHttpRequest();
                         xhr.onload = function () {
                             callback(xhr.response);
-
                         };
                         xhr.open('GET', newUrl);
-
                         xhr.responseType = 'blob';
-                        xhr.send();
-                        console.log(xhr);
-                    }
-                 
-
+                        xhr.send();                        
+                    }               
                     let image;
-
                     let images = ""
                     let returnImage = ""
                     ck.forEach((img, index) => {
-
                         //returnImage = img;
                         returnImage = "/img/" + img;
-                        toDataUrl(returnImage, function (x) {
-                            console.log(x);
-                            image = x;
-                            console.log(returnImage);
-                            console.log(img);
+                        toDataUrl(returnImage, function (x) {                           
+                            image = x;                            
                             dT.items.add(new File([image], img, {
-
                                 type: "image/png",
-                              
-
                             }));
                             imagesArray2.push(new File([image], img, {
 
@@ -812,17 +797,14 @@ function getData(x, y, id) {
                             }));
                            
                             document.querySelector('#imageupload').files = dT.files;
-                           
                         });
-
-
-                        images += `<div class="image">
+                       images += `<div class="image">
                                                 <img src="${returnImage}" alt="image">
-                                                <span onclick="deleteImage(${index})">&times;</span>
+                                                <span onclick="deleteImg(${index})">&times;</span>
                                               </div>`
 
                     })
-                    
+                  
                     output.innerHTML = images;
                   
                 }
@@ -830,8 +812,37 @@ function getData(x, y, id) {
               
                     output.innerHTML = "No Images Are Choosen";
                 }
+                
+
+         
+
+          input.addEventListener("change", () => {
+              imagesArray2=[]
+          console.log("Change1:"+imagesArray2);
+              const files = input.files
+              for (let i = 0; i < files.length; i++) {
+                  imagesArray2.push(files[i])
+              }
+            console.log("Change1: After"+imagesArray2);
+              displayImages()
+
+          })
+
+          inputDiv.addEventListener("drop", () => {
+              e.preventDefault()
+              const files = e.dataTransfer.files
+              for (let i = 0; i < files.length; i++) {
+                  if (!files[i].type.match("image")) continue;
+                  if (imagesArray2.every(image => image.name !== files[i].name))
+                      imagesArray2.push(files[i])
+              }
+                //console.log(files);
+              displayImages()
+          })
+              
             }
-         /*   debugger*/
+            /*   debugger*/
+           
         },
         error: function (e) {
             debugger

@@ -100,6 +100,7 @@ namespace CI_Platform.Repository.Repository
                 .Include(m => m.MissionSkills)
                 .Include(m => m.MissionRatings)
                 .Include(m => m.MissionApplications)
+                .Include(m => m.FavoriteMissions)
                 .Where(m => m.DeletedAt == null)
                 .ToList();
             return missionDetails;
@@ -148,6 +149,14 @@ namespace CI_Platform.Repository.Repository
                 if (sort == 3)
                 {
                     cards = cards.OrderBy(x => x.EndDate).ToList();
+                }
+                if (sort == 4)
+                {
+                    cards = cards.Where(x => x.MissionType == "Goal").OrderBy(x => x.GoalMissions.FirstOrDefault().GoalValue).ToList();
+                }
+                if (sort == 5)
+                {
+                    cards = cards.Where(x => x.MissionType == "Goal").OrderByDescending(x => x.GoalMissions.FirstOrDefault().GoalValue).ToList();
                 }
                 //if (sort == 4)
                 //{

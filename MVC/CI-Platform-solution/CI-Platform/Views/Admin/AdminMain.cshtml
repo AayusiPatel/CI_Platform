@@ -696,54 +696,55 @@
     </script>
 
     <script>
-         const dT = new DataTransfer();
+         //const dT = new DataTransfer();
 
-         const inputDiv = document.querySelector(".input-div")
-          const input = document.querySelector("#imageupload")
-          const output = document.querySelector("#preview")
+         //const inputDiv = document.querySelector(".input-div")
+         // const input = document.querySelector("#imageupload")
+         // const output = document.querySelector("#preview")
 
-          //let imagesArray = []
-        console.log(input.files);
-          input.addEventListener("change", () => {
-          imagesArray=[]
-          console.log("Change1:"+imagesArray);
-              const files = input.files
-              for (let i = 0; i < files.length; i++) {
-                  imagesArray.push(files[i])
-              }
-            console.log("Change1: After"+imagesArray);
-              displayImages()
+         // let imagesArray2 = []
+       
+         // //input.addEventListener("change", () => {
+         // //imagesArray=[]
+         // //console.log("Change1:"+imagesArray2);
+         // //    const files = input.files
+         // //    for (let i = 0; i < files.length; i++) {
+         // //        imagesArray.push(files[i])
+         // //    }
+         // //  console.log("Change1: After"+imagesArray2);
+         // //    displayImages()
 
-          })
+         // //})
 
-          inputDiv.addEventListener("drop", () => {
-              e.preventDefault()
-              const files = e.dataTransfer.files
-              for (let i = 0; i < files.length; i++) {
-                  if (!files[i].type.match("image")) continue;
-                  if (imagesArray.every(image => image.name !== files[i].name))
-                      imagesArray.push(files[i])
-              }
-                //console.log(files);
-              displayImages()
-          })
-           function displayImages() {
-                console.log("Page:DisplayImag:::::::::::::" + imagesArray);
-              let images = ""
-              imagesArray.forEach((image, index) => {
-                  images += `<div class="image storyimages">
-                                              <img src="${URL.createObjectURL(image)}" alt="image">
-                                              <span onclick="deleteImage(${index})">&times;</span>
-                                            </div>`
-              })
-              output.innerHTML = images
-          }
+         // //inputDiv.addEventListener("drop", () => {
+         // //    e.preventDefault()
+         // //    const files = e.dataTransfer.files
+         // //    for (let i = 0; i < files.length; i++) {
+         // //        if (!files[i].type.match("image")) continue;
+         // //        if (imagesArray.every(image => image.name !== files[i].name))
+         // //            imagesArray.push(files[i])
+         // //    }
+         // //      //console.log(files);
+         // //    displayImages()
+         // //})
+         //  function displayImages() {
+         //       console.log("Page:DisplayImag:::::::::::::" + imagesArray2);
+         //     let images = ""
+         //     imagesArray2.forEach((image, index) => {
+         //         images += `<div class="image storyimages">
+         //                                     <img src="${URL.createObjectURL(image)}" alt="image">
+         //                                     <span onclick="deleteImage(${index})">&times;</span>
+         //                                   </div>`
+         //     })
+         //     output.innerHTML = images
+         //       console.log(output.innerHTML);
+         // }
 
-          function deleteImage(index) {
-              console.log("Page:" + imagesArray);
-              imagesArray.splice(index, 1)
-              displayImages()
-          }
+          //function deleteImg(index) {
+          //    console.log("Page:" + imagesArray2);
+          //    imagesArray2.splice(index, 1)
+          //    displayImages()
+          //}
     </script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

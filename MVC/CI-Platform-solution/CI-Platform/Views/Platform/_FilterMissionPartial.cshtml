@@ -25,14 +25,16 @@
                                 <img src="~/img/add1.png" class="card-img-top bg-dark fa-download-1" alt="...">
                              @*   <img src="~/img/heart.png" class="card-img-top bg-dark fa-download-2 " alt="..." style="">*@
                               @*  <i class="bi bi-suit-heart bg-dark fa-download-2 text-light"></i>*@
-                                @{
-                                    bool a = item.FavoriteMissions.Any(x => x.UserId == @ViewBag.uid);
-                                }
-                                   @if (item.FavoriteMissions.Any(x => x.UserId == @ViewBag.uid))
+                            @{
+                                bool a = item.FavoriteMissions.Any(x => x.UserId == @ViewBag.uid);
+                                int uid = @ViewBag.uid;
+                            }
+                                   @if (item.FavoriteMissions.Any(x => x.UserId == uid))
                                 {
                                        <i id="@item.MissionId" class="bi bi-suit-heart-fill fa-download-2 text-danger bg-dark " style="font-size: 2.5rem;" onclick="fav(@item.MissionId,'landingPage');" ></i>  
                                 }
-                                else{
+                                else
+                                {
                                 <i id="@item.MissionId" class="bi bi-suit-heart fa-download-2 text-light bg-dark" style="font-size: 2.5rem;" onclick="fav(@item.MissionId,'landingPage');" ></i>
                                 }
                                 
@@ -186,7 +188,7 @@
                 <div class="card mb-3" style="max-width: 100%;">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src=~/img/@(item.MissionMedia.FirstOrDefault()?.MediaPath) style="height:100% " class="card-img" alt="...">
+                            <img src=~/img/@(item.MissionMedia.FirstOrDefault(x => x.DeletedAt == null && x.MediaType != "Url")?.MediaPath) style="max-height:100%" class="card-img" alt="...">
                               @{
                                     if (item.MissionApplications.Any(m => m.UserId == @ViewBag.uid && m.ApprovalStatus == "Approve"))
                                     {
@@ -227,8 +229,31 @@
                                 <p class="card-text">@item.ShortDescription</p>
                                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
 
+                                  @{
+                                    <i class="bi bi-person-check-fill" style="">
+                                    @if (item.MissionType == "Goal" && item.GoalMissions.Count > 0)
+                                    {      
+                                            int seates = @item.GoalMissions.FirstOrDefault().GoalValue;                                       
+                                        int apply = @item.MissionApplications.Count();
+                                            int left = seates - apply;
 
-                                <i class="bi bi-person-check-fill" style="">397  Seats left</i> &nbsp;
+                                            <span>@left</span>
+                                          
+                                            <span>seats left</span> 
+                                        }
+                                        else
+                                        {
+                                            int apply = @item.MissionApplications.Count();
+                                            <span>@apply</span>
+                                        
+                                            <span>Already Volunteered</span> 
+                                        }
+                                        </i> 
+                                    }
+                                @*<i class="bi bi-person-check-fill" style="">397  Seats left*@
+                                    &nbsp;
+                                
+
                             @if (item.EndDate != null)
                             {
                                 <i class="bi bi-clock">@item.EndDate.ToString().Substring(0,10) Registration Deadline</i>

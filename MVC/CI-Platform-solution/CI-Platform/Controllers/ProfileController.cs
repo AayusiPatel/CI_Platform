@@ -1,11 +1,13 @@
 ﻿using CI_Platform.Entities.Models;
 using CI_Platform.Entities.ViewModels;
 using CI_Platform.Repository.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace CI_Platform.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
 

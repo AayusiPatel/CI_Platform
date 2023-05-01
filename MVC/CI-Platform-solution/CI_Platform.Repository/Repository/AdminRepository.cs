@@ -269,9 +269,26 @@ namespace CI_Platform.Repository.Repository
         }
         public bool AddBanner(AdminViewModel obj)
         {
+
             if (_db.Banners.Any(x => x.SortOrder == obj.banner.SortOrder && x.DeletedAt == null))
             {
                 return false;
+            }
+            if (obj.bannerImg != null)
+            {
+
+                // full path to file in temp location
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/Story", obj.bannerImg.FileName); 
+
+                if (File.Exists(filePath) == false)
+                {
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        obj.bannerImg.CopyToAsync(stream);
+                    }
+                }
+
             }
             if (obj.banner.BannerId == 0)
             {
@@ -531,7 +548,7 @@ namespace CI_Platform.Repository.Repository
                         }
                     }
                 }
-                List<MissionMedium> mism = _db.MissionMedia.Where(x => x.MissionId == mis.MissionId && x.DeletedAt == null ).ToList();
+                List<MissionMedium> mism = _db.MissionMedia.Where(x => x.MissionId == mis.MissionId).ToList();
                 if (mism != null)
                 {
                     _db.RemoveRange(mism);
